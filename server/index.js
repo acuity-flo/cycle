@@ -62,5 +62,5 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(PORT, () =>
-  console.log(`Mixing it up on port ${PORT}`)
+  console.log(`🐕 Doggo says let's go to port ${PORT}`)
 )
