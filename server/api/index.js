@@ -1,16 +1,16 @@
-const router = require('express').Router()
+const User = require('../db/models/User');
+const router = require('express').Router();
 
-module.exports = router
-
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    const data = [
-      {date: new Date(2020, 4, 13),
-        typeOfFlow: "heavy"},
-      {date: new Date(2020, 5, 12),
-        typeOfFlow: "light"}]
-    res.json(data)
+    console.log('in the get');
+    const myUser = await User.find({});
+    console.log('user', myUser);
+    res.json(myUser);
   } catch (e) {
-    next(e)
+    console.log('in the catch');
+    next(e);
   }
-})
+});
+
+module.exports = router;
