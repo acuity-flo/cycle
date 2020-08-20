@@ -1,0 +1,19 @@
+{
+  "_model": "User",
+  "dummyPerson": {
+    "basicInfo": {
+      "name": "cherise",
+      "email": "cherise@dummy.com",
+      "username": "cherisecycles",
+      "pronouns": "she/her/hers"
+    },
+    "period": [
+      { "date": "2020-06-05", "typeOfFlow": "light" },
+      { "date": "2020-06-06", "typeOfFlow": "light" },
+      { "date": "2020-06-07", "typeOfFlow": "heavy" },
+      { "date": "2020-06-08", "typeOfFlow": "medium" },
+      { "date": "2020-06-09", "typeOfFlow": "heavy" },
+      { "date": "2020-06-010", "typeOfFlow": "spotting" }
+    ]
+  }
+}
