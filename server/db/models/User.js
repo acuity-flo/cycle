@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const validator = require('validator');
 
 const user = new Schema({
+  username: { type: String, required: true, unique: true },
   basicInfo: {
     name: { type: String, required: true, trim: true },
     email: {
@@ -13,7 +14,6 @@ const user = new Schema({
       validate: [validator.isEmail, 'Invalid Email Address'],
       require: 'Please Supply An Email Address',
     },
-    username: { type: String, required: true, unique: true },
     password: {}, //pasport
     pronouns: {
       type: String,

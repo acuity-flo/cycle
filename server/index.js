@@ -32,13 +32,15 @@ mongoose.connection.on('error', (err) => {
 mongoose.connection.on('connected', () => {
   console.log('Mongoose connection is running boo ya');
 
-  mongoose.connection.db.listCollections().toArray(function (err, names) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(names);
-    }
-  });
+  // to see a list of the collections we are connected to in our db
+
+  // mongoose.connection.db.listCollections().toArray(function (err, names) {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     console.log(names);
+  //   }
+  // });
 });
 
 mongoose.connection.on('disconnected', () => {

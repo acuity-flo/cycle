@@ -1,10 +1,11 @@
 {
   "_model": "User",
   "dummyPerson": {
+    "username": "cherisecycles",
     "basicInfo": {
       "name": "cherise",
       "email": "cherise@dummy.com",
-      "username": "cherisecycles",
+
       "pronouns": "she/her/hers"
     },
     "period": [

@@ -1,16 +1,12 @@
 const User = require('../db/models/User');
 const router = require('express').Router();
+const userController = require('../controllers/user');
 
-router.get('/', async (req, res, next) => {
-  try {
-    console.log('in the get');
-    const myUser = await User.find({});
-    console.log('user', myUser);
-    res.json(myUser);
-  } catch (e) {
-    console.log('in the catch');
-    next(e);
-  }
-});
+router
+  .route('/:username')
+  .get(userController.findOneUser)
+  .put(userController.updateUser);
+
+router.route('/').get(userController.findUsers);
 
 module.exports = router;
