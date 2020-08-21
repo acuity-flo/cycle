@@ -1,12 +1,12 @@
 import React, {useEffect,useRef} from 'react';
 import * as d3 from "d3"
-// import axios from "axios"
+
 
 export default function BubbleChart(props) {
     const d3Contatiner = useRef(null) 
 
 
-    //util function - flow weight
+    //util function - flow weight and mongoDB date string to date object conversion
     const flow = (element) => {
         if(element.typeOfFlow === 'spotting') {
             element.typeOfFlow = 1
@@ -33,7 +33,9 @@ export default function BubbleChart(props) {
             const periodMin = d3.min(flowArr.map(el=> (new Date (el.date))))
             const periodMax = d3.min(flowArr.map(el=> (new Date (el.date))))
 
+            // makes new date that is a copy of the perionMin date (avoids altering the original arr)
            let newDate = new Date(periodMin.getTime())
+           //adds week to periodMin copy date (above)
            newDate.setDate(periodMin.getDate()+7)
 
 
@@ -44,7 +46,7 @@ export default function BubbleChart(props) {
             //X AXIS
             let xScale = d3.scaleTime()
                         .domain([periodMin,newDate]) 
-                        .range([0,canvasWidth -60])
+                        .range([0,canvasWidth +15]) 
 
                         
             let xAxis = d3.axisBottom()
@@ -68,7 +70,7 @@ export default function BubbleChart(props) {
                 .enter()
                 .append('circle')
                     .attr("class", "circles")
-                    .attr("cx", value => 60+ (canvasWidth/( (newDate-periodMin) / (1000*60*60*24))) * Math.round( (value.date-periodMin)/(1000*60*60*24) ) )
+                    .attr("cx", value => 60 +(canvasWidth/( (newDate-periodMin) / (1000*60*60*24))) * Math.round( (value.date-periodMin)/(1000*60*60*24) ) )
                     .attr("cy", 250)
                     .attr("r", value => value.typeOfFlow*10)
                     .attr("fill", "red")
