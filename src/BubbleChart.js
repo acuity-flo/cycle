@@ -20,39 +20,30 @@ export default function BubbleChart(props) {
 
         const stringDate = new Date(element.date).toLocaleDateString()
         element.date = new Date(stringDate)
-        return element
+         return element
     }
 
 
-    // function add_weeks(dt, n){ 
-        
-    //    let newDate = new Date(dt.setDate(dt.getDate() + (n * 7))) 
-    
-    //    return newDate
-    // }
-    
  
     useEffect( ()=> {
-        console.log('PROPS IN BUBBLECHART', props.user)
         if(props.user && d3Contatiner.current){
 
-           
 
             const flowArr = props.user.map(el => flow(el))
-            const periodMin = d3.min(flowArr.map(el=>el.date))
-            const periodMax = d3.max(flowArr.map(el=>el.date))
-            console.log('FLOW ARR',flowArr)
-            // console.log("test",add_weeks(periodMin,1))
+            const periodMin = d3.min(flowArr.map(el=> (new Date (el.date))))
+            const periodMax = d3.min(flowArr.map(el=> (new Date (el.date))))
+
+           let newDate = new Date(periodMin.getTime())
+           newDate.setDate(periodMin.getDate()+7)
+
 
             const canvasHeight = 400
             const canvasWidth = 1000
 
-
-            let date1= new Date(2020,5,4)
-            let date2= new Date(2020,5,11)
+   
             //X AXIS
             let xScale = d3.scaleTime()
-                        .domain([date1,date2]) 
+                        .domain([periodMin,newDate]) 
                         .range([0,canvasWidth -60])
 
                         
@@ -77,15 +68,11 @@ export default function BubbleChart(props) {
                 .enter()
                 .append('circle')
                     .attr("class", "circles")
-                    .attr("cx", value => 60+ (canvasWidth/( (date2-date1) / (1000*60*60*24))) * Math.round( (value.date-date1)/(1000*60*60*24) ) )
+                    .attr("cx", value => 60+ (canvasWidth/( (newDate-periodMin) / (1000*60*60*24))) * Math.round( (value.date-periodMin)/(1000*60*60*24) ) )
                     .attr("cy", 250)
                     .attr("r", value => value.typeOfFlow*10)
                     .attr("fill", "red")
 
-
-            // svg.append("g")
-            //     .attr("transform",'translate(50,10)')
-            //     .call(yAxis)    
         }
     },[props.user])
 
