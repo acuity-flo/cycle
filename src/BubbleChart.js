@@ -23,41 +23,42 @@ export default function BubbleChart(props) {
         return element
     }
 
+
+    // function add_weeks(dt, n){ 
+        
+    //    let newDate = new Date(dt.setDate(dt.getDate() + (n * 7))) 
+    
+    //    return newDate
+    // }
     
  
     useEffect( ()=> {
         console.log('PROPS IN BUBBLECHART', props.user)
         if(props.user && d3Contatiner.current){
 
-            // const periodMin = new Date(d3.min(props.user.map(el=>el.date)))
-            // const periodMax = new Date(d3.max(props.user.map(el=>el.date)))
-            // console.log("TEST", Math.round( (periodMax-periodMin)/(1000*60*60*24) ) ) 
+           
 
             const flowArr = props.user.map(el => flow(el))
             const periodMin = d3.min(flowArr.map(el=>el.date))
             const periodMax = d3.max(flowArr.map(el=>el.date))
             console.log('FLOW ARR',flowArr)
+            // console.log("test",add_weeks(periodMin,1))
 
             const canvasHeight = 400
             const canvasWidth = 1000
 
-            // let yScale = d3.scaleLinear()
-            //                 .domain([0,10])
-            //                 .range([canvasHeight,0])
 
-            // let yAxis = d3.axisLeft()
-            //                 .scale(yScale)
-
+            let date1= new Date(2020,5,4)
+            let date2= new Date(2020,5,11)
             //X AXIS
             let xScale = d3.scaleTime()
-                        .domain([periodMin,periodMax]) 
-                        .range([0,canvasWidth])
-                        
-            // xScale.ticks(d3.timeDays(0,3))
+                        .domain([date1,date2]) 
+                        .range([0,canvasWidth -60])
 
                         
             let xAxis = d3.axisBottom()
                         .scale(xScale)
+                        .ticks(flowArr.length)
         
             const svg = d3.select(d3Contatiner.current)
                 .attr("width", canvasWidth)
@@ -76,7 +77,7 @@ export default function BubbleChart(props) {
                 .enter()
                 .append('circle')
                     .attr("class", "circles")
-                    .attr("cx", value => 50+ (canvasWidth/flowArr.length) * Math.round( (value.date-periodMin)/(1000*60*60*24) ) )
+                    .attr("cx", value => 60+ (canvasWidth/( (date2-date1) / (1000*60*60*24))) * Math.round( (value.date-date1)/(1000*60*60*24) ) )
                     .attr("cy", 250)
                     .attr("r", value => value.typeOfFlow*10)
                     .attr("fill", "red")
