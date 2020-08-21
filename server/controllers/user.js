@@ -1,4 +1,5 @@
 const User = require('../db/models/User');
+const Bcrypt = require('bcryptjs');
 
 module.exports = {
   findUsers: async (req, res, next) => {
@@ -39,20 +40,32 @@ module.exports = {
   loginUser: async (req, res, next) => {
     try {
       const authUser = await User.findOne({
-        email: req.body.email
-      })
-      console.log('authUser',authUser)
-      req.login(authUser, err => (err ? next(err) : res.json(authUser)))
+        email: req.body.email,
+      });
+      console.log('authUser', authUser);
+      req.login(authUser, (err) => (err ? next(err) : res.json(authUser)));
     } catch (err) {
       next(err);
     }
   },
   //signup?
   signUpUser: async (req, res, next) => {
+    const { name, email, username, password, pronouns } = req.body;
+    const hash = Bcrypt.hashSync(password, 10);
+    const newUser = new User({
+      name,
+      email,
+      username,
+      hash,
+      pronouns,
+    });
+
     try {
-
-    } catch (e) {
-
+      await newUser.save();
+      console.log('new user', newUser);
+      res.json(newUser);
+    } catch (err) {
+      next(err);
     }
-  }
+  },
 };

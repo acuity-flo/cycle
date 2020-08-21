@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const crypto = require('crypto');
 const Schema = mongoose.Schema;
 const validator = require('validator');
-const passportLocalMongoose = require('passport-local-mongoose')
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new Schema({
   username: { type: String, required: true, unique: true },
@@ -15,7 +15,7 @@ const userSchema = new Schema({
     validate: [validator.isEmail, 'Invalid Email Address'],
     require: 'Please Supply An Email Address',
   },
-  password: {}, //pasport
+  // password: {}, //pasport
   pronouns: {
     type: String,
     enum: ['she/her/hers', 'they/them/theirs', 'he/him/his'],
@@ -84,10 +84,9 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.plugin(passportLocalMongoose, {usernameField: 'username'})
+userSchema.plugin(passportLocalMongoose, { usernameField: 'username' });
 
 const User = mongoose.model('User', userSchema);
-
 
 // User.prototype.correctPassword = function(candidatePwd) {
 //   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
