@@ -1,12 +1,25 @@
 {
   "_model": "User",
+  "dummyPerson": {
+    "username": "cherisecycles",
+    "name": "cherise",
+    "email": "cherise@dummy.com",
+    "password": "password",
+    "pronouns": "she/her/hers",
+    "period": [
+      { "date": "2020-06-05", "typeOfFlow": "light" },
+      { "date": "2020-06-06", "typeOfFlow": "light" },
+      { "date": "2020-06-07", "typeOfFlow": "heavy" },
+      { "date": "2020-06-08", "typeOfFlow": "medium" },
+      { "date": "2020-06-09", "typeOfFlow": "heavy" },
+      { "date": "2020-06-010", "typeOfFlow": "spotting" }
+    ]
+  },
   "dummyPerson2": {
     "username": "flaviaflows",
-    "basicInfo": {
-      "name": "flavia",
-      "email": "flavia@dummy.com",
-      "pronouns": "she/her/hers"
-    },
+    "name": "flavia",
+    "email": "flavia@dummy.com",
+    "pronouns": "she/her/hers",
     "period": [
       { "date": "2020-06-05", "typeOfFlow": "light" },
       { "date": "2020-06-06", "typeOfFlow": "medium" },
@@ -20,21 +33,7 @@
       { "date": "2020-07-10", "typeOfFlow": "spotting" },
       { "date": "2020-07-11", "typeOfFlow": "spotting" }
     ]
-  },
-  "dummyPerson": {
-    "username": "cherisecycles",
-    "basicInfo": {
-      "name": "cherise",
-      "email": "cherise@dummy.com",
-      "pronouns": "she/her/hers"
-    },
-    "period": [
-      { "date": "2020-06-05", "typeOfFlow": "light" },
-      { "date": "2020-06-06", "typeOfFlow": "light" },
-      { "date": "2020-06-07", "typeOfFlow": "heavy" },
-      { "date": "2020-06-08", "typeOfFlow": "medium" },
-      { "date": "2020-06-09", "typeOfFlow": "heavy" },
-      { "date": "2020-06-010", "typeOfFlow": "spotting" }
-    ]
   }
 }
+
+

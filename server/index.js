@@ -3,7 +3,10 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const passport = require('passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session)
 const PORT = process.env.PORT || 4000;
+const User = require('./db/models/User')
 
 const mongoose = require('mongoose');
 if (process.env.NODE_ENV !== 'production') require('../secrets.js');
@@ -63,6 +66,14 @@ module.exports = app;
 //   }
 // })
 
+// use static authenticate method of model in LocalStrategy
+passport.use(User.createStrategy());
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 // logging middleware
 app.use(morgan('dev'));
 
@@ -70,7 +81,21 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//express session
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+    store: new MongoStore({mongooseConnection: mongoose.connection}),
+    resave: false,
+    saveUninitialized: false
+  })
+)
+
+
+//initialize passport
 app.use(passport.initialize());
+app.use(passport.session());
 
 // auth and api routes
 app.use('/auth', require('./auth'));

@@ -7,10 +7,14 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
+    "connect-mongo": "^3.2.0",
     "d3": "^5.16.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "mongoose": "^5.10.0",
     "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
@@ -25,9 +29,7 @@
     "eject": "react-scripts eject",
     "start-server": "nodemon server"
   },
-  
   "proxy": "http://localhost:4000",
-
   "eslintConfig": {
     "extends": "react-app"
   },

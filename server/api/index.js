@@ -7,6 +7,8 @@ router
   .get(userController.findOneUser)
   .put(userController.updateUser);
 
-router.route('/').get(userController.findUsers).put(userController.updateUser);
+router
+  .route('/')
+  .get(userController.findUsers)
 
 module.exports = router;

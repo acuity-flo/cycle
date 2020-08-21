@@ -35,4 +35,24 @@ module.exports = {
       next(err);
     }
   },
+  //login?
+  loginUser: async (req, res, next) => {
+    try {
+      const authUser = await User.findOne({
+        email: req.body.email
+      })
+      console.log('authUser',authUser)
+      req.login(authUser, err => (err ? next(err) : res.json(authUser)))
+    } catch (err) {
+      next(err);
+    }
+  },
+  //signup?
+  signUpUser: async (req, res, next) => {
+    try {
+
+    } catch (e) {
+
+    }
+  }
 };
