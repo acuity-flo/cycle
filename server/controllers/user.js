@@ -24,7 +24,11 @@ module.exports = {
     try {
       const foundUser = await User.findOneAndUpdate(
         { username: req.params.username },
-        req.body
+        req.body,
+        {
+          new: true,
+          upsert: true,
+        }
       );
       res.json(foundUser);
     } catch (err) {
