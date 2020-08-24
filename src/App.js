@@ -1,29 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import BubbleChart from "./BubbleChart"
-import axios from "axios"
-import { Auth } from './Auth'
-
-function App() {
-  const [user,setUser] = useState()
+import BubbleChart from "./components/BubbleChart"
+import { useDispatch, connect } from 'react-redux'
+import { Route, Switch } from 'react-router-dom'
 
 
-  useEffect(()=>{
-    const getUser = async () => {
-      const res =  await axios.get("/api/")
-      console.log('AXIOS CALL',res.data[0].period)
-      setUser(res.data[0].period)
-    }
-    getUser()
+import Homepage from './components/Homepage'
+import { Auth } from './components/Auth'
+import { authMe, logout } from './store'
+
+function App(props) {
+  const user = props.authUser
+  const dispatch = useDispatch()
+  useEffect(()=> {
+    dispatch(authMe())
   }, [])
 
-
-
+  console.log(user)
   return (
-    <BubbleChart user={user} />
-    // <Auth />
+    // <Switch>
+    //   <Route exact path="/" component={Homepage} />
+
+    // </Switch>
+    <Fragment>
+      <button onClick={() => dispatch(logout())}>Logout</button>
+      {user._id && <BubbleChart user={user} />}
+      <Auth />
+    </Fragment>
+
   )
 }
 
-export default App;
+const mapState = state => {
+  return {
+    authUser: state,
+    isLoggedIn: !!state.id
+  }
+}
+
+export default connect(mapState)(App);

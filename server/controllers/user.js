@@ -74,6 +74,14 @@ module.exports = {
       next(err);
     }
   },
+  authMe: async (req, res, next) => {
+    res.json(req.user)
+  },
+  logoutUser: async (req, res) => {
+    req.logout()
+    req.session.destroy()
+    res.redirect('/')
+  }
 };
 
 // date validation within arrays - map through array, and combine objects if date appears multiple times

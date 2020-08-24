@@ -98,6 +98,7 @@ const userSchema = new Schema({
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'username' });
 
+
 const User = mongoose.model('User', userSchema);
 
 // User.path('symptom')
@@ -109,6 +110,38 @@ const User = mongoose.model('User', userSchema);
 //     //   return false;
 //     // }
 //   }, 'please select one of the moods');
+
+// User.prototype.correctPassword = function(candidatePwd) {
+//   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
+// }
+
+// User.generateSalt = function() {
+//   return crypto.randomBytes(16).toString('base64')
+// }
+
+// User.encryptPassword = function(plainText, salt) {
+//   return crypto
+//     .createHash('RSA-SHA256')
+//     .update(plainText)
+//     .update(salt)
+//     .digest('hex')
+// }
+
+// const setSaltAndPassword = user => {
+//   if (user.changed('password')) {
+//     user.salt = User.generateSalt()
+//     user.password = User.encryptPassword(user.password(), user.salt())
+//   }
+// }
+
+// userSchema.pre('save', setSaltAndPassword)
+
+// userSchema.pre('updateOne', { document: true, query: false }, setSaltAndPassword)
+
+// userSchema.pre('updateMany', setSaltAndPassword)
+
+// userSchema.pre('insertMany', setSaltAndPassword)
+
 
 // User.prototype.correctPassword = function(candidatePwd) {
 //   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
