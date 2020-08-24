@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import BubbleChart from "./BubbleChart"
 import axios from "axios"
+import { Auth } from './Auth'
 
 function App() {
   const [user,setUser] = useState()
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <BubbleChart user={user} />
+    // <Auth />
   )
 }
 
