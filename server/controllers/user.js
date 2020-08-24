@@ -26,13 +26,14 @@ module.exports = {
       const foundUser = await User.findOneAndUpdate(
         { username: req.params.username },
         req.body,
-
+        
         {
           new: true,
           upsert: true,
           runValidators: true,
         }
       );
+  
       res.json(foundUser);
     } catch (err) {
       next(err);

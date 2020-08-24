@@ -23,11 +23,13 @@ const userSchema = new Schema({
   financial: [
     {
       date: { type: Date, default: Date.now },
-      item: {
-        type: String,
-        enum: ['prescription', 'sanitary products', 'doctor', 'other'],
-      }, // selectable list of strings to store into an array to be able to choose multiple
-      cost: { type: Number },
+      typeOfPurchase: [
+        {
+          type: String,
+          enum: ['prescription', 'sanitary products', 'doctor', 'other'],
+          cost: { type: Number }
+        },
+      ],
     },
   ],
   period: [
@@ -48,12 +50,6 @@ const userSchema = new Schema({
           {
             type: String,
             enum: ['stressed', 'motivated', 'calm', 'unmotivated'],
-            // required: function () {
-            //   console.log(this.typeOfMood);
-            //   return .includes(
-            //     this.typeOfMood
-            //   );
-            // },
           },
         ],
       }, // selectable list of strings to store into an array to be able to choose multiple
@@ -61,32 +57,40 @@ const userSchema = new Schema({
     emotion: [
       {
         date: { type: Date, default: Date.now },
-        typeOfEmotion: {
-          type: String,
-          enum: ['happy', 'sad', 'angry', 'frustrated', 'anxious'],
-        },
+        typeOfEmotion: [
+          {
+            type: String,
+            enum: ['happy', 'sad', 'angry', 'frustrated', 'anxious'],
+          },
+        ],
       },
     ], // selectable list of strings to store into an array to be able to choose multiple
     pain: [
       {
         date: { type: Date, default: Date.now },
-        typeOfPain: { type: String, enum: ['cramp', 'headache', 'back'] },
+        typeOfPain: [
+          {
+            type: String,
+            enum: ['cramp', 'headache', 'back'],
+          },
+        ],
       },
     ], // selectable list of strings to store into an array to be able to choose multiple
     other: [
       {
         date: { type: Date, default: Date.now },
-        typeOther: {
-          type: String,
-          enum: [
+        typeOther: [
+          {
+            type: String,
+            enum: [            
             'nausea',
             'bloating',
             'indigestion',
             'fatigue',
             'snacky',
-            'PMS',
-          ], // selectable list of strings to store into an array to be able to choose multiple
-        },
+            'PMS'],
+          },
+        ]
       },
     ],
   },
