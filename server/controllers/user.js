@@ -26,9 +26,11 @@ module.exports = {
       const foundUser = await User.findOneAndUpdate(
         { username: req.params.username },
         req.body,
+
         {
           new: true,
           upsert: true,
+          runValidators: true,
         }
       );
       res.json(foundUser);
@@ -69,3 +71,5 @@ module.exports = {
     }
   },
 };
+
+// date validation within arrays - map through array, and combine objects if date appears multiple times

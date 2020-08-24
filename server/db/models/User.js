@@ -44,10 +44,18 @@ const userSchema = new Schema({
     mood: [
       {
         date: { type: Date, default: Date.now },
-        typeOfMood: {
-          type: String,
-          enum: ['stressed', 'motivated', 'calm', 'unmotivated'],
-        },
+        typeOfMood: [
+          {
+            type: String,
+            enum: ['stressed', 'motivated', 'calm', 'unmotivated'],
+            // required: function () {
+            //   console.log(this.typeOfMood);
+            //   return .includes(
+            //     this.typeOfMood
+            //   );
+            // },
+          },
+        ],
       }, // selectable list of strings to store into an array to be able to choose multiple
     ], //dropdown?
     emotion: [
@@ -87,6 +95,16 @@ const userSchema = new Schema({
 userSchema.plugin(passportLocalMongoose, { usernameField: 'username' });
 
 const User = mongoose.model('User', userSchema);
+
+// User.path('symptom')
+//   .schema.path('mood')
+//   .validate((moodInput) => {
+//     const moodsArr = ['stressed', 'motivated', 'calm', 'unmotivated'];
+//     console.log('moodInput in validator', moodInput);
+//     // if (!moodsArr.includes(moodInput.typeOfMood)) {
+//     //   return false;
+//     // }
+//   }, 'please select one of the moods');
 
 // User.prototype.correctPassword = function(candidatePwd) {
 //   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
