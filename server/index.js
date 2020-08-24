@@ -103,9 +103,14 @@ app.use('/api', require('./api'));
 
 // static file-serving middleware
 // likely not needed because react scripts serves files from client src and build is what is served otherwise
-// app.use(express.static(path.join(__dirname, '..', 'public')))
+app.use(express.static(path.join(__dirname, '..', 'build')))
 
 // any remaining requests with an extension (.js, .css, etc.) send 404
+
+app.use('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'build/index.html'))
+})
+
 app.use((req, res, next) => {
   if (path.extname(req.path).length) {
     const err = new Error('Not found');
@@ -115,10 +120,6 @@ app.use((req, res, next) => {
     next();
   }
 });
-
-// app.use('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
-// })
 
 // error handling endware
 app.use((err, req, res, next) => {
