@@ -1,14 +1,9 @@
 import React, { useState, Fragment } from 'react'
-import { authUserThunk } from './store'
+import { authUserThunk } from '../store'
 import { connect } from 'react-redux'
 import { Form, Button } from 'react-bootstrap'
 
 const AuthForm = (props) => {
-  // const [name, setName] = useState('')
-  // const [username, setUsername] = useState('')
-  // const [email, setEmail] = useState('')
-  // const [password, setPassword] = useState('')
-  // const [pronouns, setPronouns] = useState('')
   const [type, setType] = useState('login')
   const { handleSubmit } = props
 
@@ -35,7 +30,6 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(event) {
       event.preventDefault()
-      console.log('event.target.name in mapD', event.target.name)
       const formName = event.target.name
       const user = {
         email: event.target.email.value,

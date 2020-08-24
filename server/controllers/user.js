@@ -68,4 +68,12 @@ module.exports = {
       next(err);
     }
   },
+  authMe: async (req, res, next) => {
+    res.json(req.user)
+  },
+  logoutUser: async (req, res) => {
+    req.logout()
+    req.session.destroy()
+    res.redirect('/')
+  }
 };

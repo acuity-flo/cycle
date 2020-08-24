@@ -3,7 +3,7 @@ import * as d3 from "d3"
 
 
 export default function BubbleChart(props) {
-    const d3Contatiner = useRef(null) 
+    const d3Contatiner = useRef(null)
 
 
     //util function - flow weight and mongoDB date string to date object conversion
@@ -24,14 +24,18 @@ export default function BubbleChart(props) {
     }
 
 
- 
+
     useEffect( ()=> {
         if(props.user && d3Contatiner.current){
 
+            //period data from user
+            const periodData = props.user.period
 
-            const flowArr = props.user.map(el => flow(el))
+            //map over array with flow util fxn
+            const flowArr = periodData.map(el => flow(el))
+
+            //periodMin is lowest date
             const periodMin = d3.min(flowArr.map(el=> (new Date (el.date))))
-            const periodMax = d3.min(flowArr.map(el=> (new Date (el.date))))
 
             // makes new date that is a copy of the perionMin date (avoids altering the original arr)
            let newDate = new Date(periodMin.getTime())
@@ -42,22 +46,22 @@ export default function BubbleChart(props) {
             const canvasHeight = 400
             const canvasWidth = 1000
 
-   
+
             //X AXIS
             let xScale = d3.scaleTime()
-                        .domain([periodMin,newDate]) 
-                        .range([0,canvasWidth +15]) 
+                        .domain([periodMin,newDate])
+                        .range([0,canvasWidth +15])
 
-                        
+
             let xAxis = d3.axisBottom()
                         .scale(xScale)
                         .ticks(flowArr.length)
-        
+
             const svg = d3.select(d3Contatiner.current)
                 .attr("width", canvasWidth)
                 .attr("height", canvasHeight)
                 .style("border", "2px solid pink")
-            
+
             svg.append("g")
                 .attr("transform",`translate(50,${canvasHeight-40})`)
                 .call(xAxis)
@@ -78,16 +82,16 @@ export default function BubbleChart(props) {
         }
     },[props.user])
 
- 
+
     return (
        <div> <h1>hi</h1>
-        <svg 
-            className = "d3Component" 
+        <svg
+            className = "d3Component"
             width = {400}
             height = {200}
             ref = {d3Contatiner}
         />
 
-        </div> 
+        </div>
     )
 }
