@@ -23,15 +23,11 @@ module.exports = {
   // can update but seems to replace fields
   updateUser: async (req, res, next) => {
     try {
+      console.log("IM THE REQ.BODY", req.body)
       const { period, symptom, finance } = req.body;
       const foundUser = await User.findOneAndUpdate(
         { username: req.params.username },
-<<<<<<< HEAD
-        req.body,
-        
-=======
         { period, symptom, finance },
->>>>>>> f30e49558e1c9f22e49c7089165631aee576a92a
         {
           runValidators: true,
         }
@@ -44,25 +40,34 @@ module.exports = {
   },
   //login?
   loginUser: async (req, res, next) => {
+    console.log(req.body)
     try {
       const authUser = await User.findOne({
-        email: req.body.email,
-      });
+        email: req.body.email
+      }) // .exec() ? 
       console.log('authUser', authUser);
-      req.login(authUser, (err) => (err ? next(err) : res.json(authUser)));
+
+      if(!Bcrypt.compareSync(req.body.password, authUser.password)){
+        res.sendStatus(400)
+      } else {
+        req.login(authUser, (err) => (err ? next(err) : res.json(authUser)));  //works without BCrypt
+      }
+
+      // console.log('authUser', authUser);
+      
     } catch (err) {
       next(err);
     }
   },
   //signup?
   signUpUser: async (req, res, next) => {
-    const { name, email, username, password, pronouns } = req.body;
-    const hash = Bcrypt.hashSync(password, 10);
+    let { name, email, username, password, pronouns } = req.body;
+    password = Bcrypt.hashSync(password, 10);
     const newUser = new User({
       name,
       email,
       username,
-      hash,
+      password,
       pronouns,
     });
 

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
+const Bcrypt = require('bcryptjs')
 const Schema = mongoose.Schema;
 const validator = require('validator');
 const passportLocalMongoose = require('passport-local-mongoose');
@@ -15,7 +16,14 @@ const userSchema = new Schema({
     validate: [validator.isEmail, 'Invalid Email Address'],
     require: 'Please Supply An Email Address',
   },
-  // password: {}, //pasport
+  password: {  
+    type: String, 
+    // required: true
+  }, 
+  // salt: {     //password tests
+  //   type: String,
+  //   required: true
+  // },
   pronouns: {
     type: String,
     enum: ['she/her/hers', 'they/them/theirs', 'he/him/his'],
@@ -99,7 +107,7 @@ const userSchema = new Schema({
 userSchema.plugin(passportLocalMongoose, { usernameField: 'username' });
 
 
-const User = mongoose.model('User', userSchema);
+// const User = mongoose.model('User', userSchema);
 
 // User.path('symptom')
 //   .schema.path('mood')
@@ -111,15 +119,15 @@ const User = mongoose.model('User', userSchema);
 //     // }
 //   }, 'please select one of the moods');
 
-// User.prototype.correctPassword = function(candidatePwd) {
+// userSchema.methods.correctPassword = function(candidatePwd) {
 //   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 // }
 
-// User.generateSalt = function() {
+// userSchema.methods.generateSalt = function() {
 //   return crypto.randomBytes(16).toString('base64')
 // }
 
-// User.encryptPassword = function(plainText, salt) {
+// userSchema.methods.encryptPassword = function(plainText, salt) {
 //   return crypto
 //     .createHash('RSA-SHA256')
 //     .update(plainText)
@@ -127,6 +135,7 @@ const User = mongoose.model('User', userSchema);
 //     .digest('hex')
 // }
 
+// //util function 
 // const setSaltAndPassword = user => {
 //   if (user.changed('password')) {
 //     user.salt = User.generateSalt()
@@ -134,6 +143,7 @@ const User = mongoose.model('User', userSchema);
 //   }
 // }
 
+// //Mongoose Middlewares 
 // userSchema.pre('save', setSaltAndPassword)
 
 // userSchema.pre('updateOne', { document: true, query: false }, setSaltAndPassword)
@@ -146,6 +156,8 @@ const User = mongoose.model('User', userSchema);
 // User.prototype.correctPassword = function(candidatePwd) {
 //   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 // }
+
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;
 
