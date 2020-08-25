@@ -1,12 +1,11 @@
 import React, {useEffect,useRef} from 'react';
 import * as d3 from "d3"
-
+import moment from 'moment'
 
 export default function BubbleChart(props) {
     const d3Contatiner = useRef(null)
 
-
-    //util function - flow weight and mongoDB date string to date object conversion
+    //utility function for changing date format and adding weight to period level
     const flow = (element) => {
         if(element.typeOfFlow === 'spotting') {
             element.typeOfFlow = 1
@@ -17,81 +16,77 @@ export default function BubbleChart(props) {
         } else if (element.typeOfFlow === 'heavy'){
             element.typeOfFlow = 4
         }
-
-        const stringDate = new Date(element.date).toLocaleDateString()
-        element.date = new Date(stringDate)
-         return element
+        element.date = moment(element.date).format("MM DD YYYY")
+        return element
     }
 
-
-
-    useEffect( ()=> {
+    //useEffect depends on period date to be called
+    useEffect(()=> {
         if(props.user && d3Contatiner.current){
-
             //period data from user
             const periodData = props.user.period
 
             //map over array with flow util fxn
             const flowArr = periodData.map(el => flow(el))
 
-            //periodMin is lowest date
-            const periodMin = d3.min(flowArr.map(el=> (new Date (el.date))))
+            //periodMin is lowest date, periodMax is largest
+            const periodMin = moment(d3.min(flowArr.map(el=> el.date)))
+            const periodMax = moment(d3.max(flowArr.map(el=> el.date)))
 
-            // makes new date that is a copy of the perionMin date (avoids altering the original arr)
-           let newDate = new Date(periodMin.getTime())
-           //adds week to periodMin copy date (above)
-           newDate.setDate(periodMin.getDate()+7)
+            //find the range of the min and max
+            const periodRange = periodMax.diff(periodMin, 'days') + 1
 
-
+            //set height and width of the canvas
             const canvasHeight = 400
             const canvasWidth = 1000
+            // set the width between ticks in xAxis
+            //minus 100 to account for x axis shift 50 width value to the left, then have it end 50 from right
+            const tickWidth = ((canvasWidth - 100) / (periodRange-1))
 
-
-            //X AXIS
+            //X AXIS && SCALE
             let xScale = d3.scaleTime()
-                        .domain([periodMin,newDate])
-                        .range([0,canvasWidth +15])
-
+                        .domain([periodMin, periodMax])
+                        .range([0,(canvasWidth - 100)])
 
             let xAxis = d3.axisBottom()
                         .scale(xScale)
-                        .ticks(flowArr.length)
+                        .ticks(periodRange)
 
             const svg = d3.select(d3Contatiner.current)
                 .attr("width", canvasWidth)
                 .attr("height", canvasHeight)
                 .style("border", "2px solid pink")
 
+            //moves axis 50 to left of canvas start and 40 from bottom and adds the axis
             svg.append("g")
                 .attr("transform",`translate(50,${canvasHeight-40})`)
                 .call(xAxis)
 
-
             //CIRCLES
+            //cx uses the 50 width value from above x axis shift then multiplies value.date-periodMin (0,1,2,etc) by the tickWidth above
             svg.append("g")
                 .selectAll('circle')
                 .data(flowArr)
                 .enter()
                 .append('circle')
                     .attr("class", "circles")
-                    .attr("cx", value => 60 +(canvasWidth/( (newDate-periodMin) / (1000*60*60*24))) * Math.round( (value.date-periodMin)/(1000*60*60*24) ) )
+                    .attr("cx", value => {
+                        return 50 + tickWidth* moment(value.date).diff(periodMin, 'days')})
                     .attr("cy", 250)
                     .attr("r", value => value.typeOfFlow*10)
                     .attr("fill", "red")
 
         }
+        //below is dependency for useEffect, depends on user data
     },[props.user])
 
 
     return (
-       <div> <h1>hi</h1>
         <svg
             className = "d3Component"
             width = {400}
             height = {200}
             ref = {d3Contatiner}
         />
-
-        </div>
     )
 }
