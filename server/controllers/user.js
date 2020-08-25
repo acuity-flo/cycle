@@ -27,24 +27,25 @@ module.exports = {
       const { period, symptom, finance } = req.body;
       const foundUser = await User.findOneAndUpdate(
         { username: req.params.username },
-        { period, symptom, finance },
+        { period, symptom, finance},
         {
+          upsert: true,
           runValidators: true,
         }
       );
-  
-      res.json(foundUser);
+      const updatedUser = await foundUser.save()
+      res.json(updatedUser);
     } catch (err) {
       next(err);
     }
   },
   //login?
   loginUser: async (req, res, next) => {
-    console.log(req.body)
+    console.log('req.body in route',req.body)
     try {
       const authUser = await User.findOne({
         email: req.body.email
-      }) // .exec() ? 
+      }) // .exec() ?
       console.log('authUser', authUser);
 
       if(!Bcrypt.compareSync(req.body.password, authUser.password)){
@@ -54,7 +55,7 @@ module.exports = {
       }
 
       // console.log('authUser', authUser);
-      
+
     } catch (err) {
       next(err);
     }

@@ -25,6 +25,7 @@ const logoutUser = () => ({
 export const authUserThunk = (user, type) => async dispatch => {
   let post
   console.log('type in thunk', type)
+  console.log('user in login', user)
   if (type === 'signup') {
     const {email, password, username, name, pronouns} = user
     post = {
@@ -44,6 +45,7 @@ export const authUserThunk = (user, type) => async dispatch => {
   }
   try {
     const { data } = await axios.post(`/auth/${type}`, post)
+    console.log('data', data)
     const action = authUserAction(data)
     dispatch(action)
   } catch (e) {
