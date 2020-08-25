@@ -18,12 +18,7 @@ const userSchema = new Schema({
   },
   password: {  
     type: String, 
-    // required: true
   }, 
-  // salt: {     //password tests
-  //   type: String,
-  //   required: true
-  // },
   pronouns: {
     type: String,
     enum: ['she/her/hers', 'they/them/theirs', 'he/him/his'],
@@ -31,10 +26,12 @@ const userSchema = new Schema({
   financial: [
     {
       date: { type: Date, default: Date.now },
-      typeOfPurchase: [
+      purchases: [
         {
-          type: String,
-          enum: ['prescription', 'sanitary products', 'doctor', 'other'],
+          typeOfPurchase: {
+            type: String,
+            enum: ['prescription', 'sanitary products', 'doctor', 'other']
+          },
           cost: { type: Number }
         },
       ],
@@ -106,56 +103,6 @@ const userSchema = new Schema({
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'username' });
 
-
-// const User = mongoose.model('User', userSchema);
-
-// User.path('symptom')
-//   .schema.path('mood')
-//   .validate((moodInput) => {
-//     const moodsArr = ['stressed', 'motivated', 'calm', 'unmotivated'];
-//     console.log('moodInput in validator', moodInput);
-//     // if (!moodsArr.includes(moodInput.typeOfMood)) {
-//     //   return false;
-//     // }
-//   }, 'please select one of the moods');
-
-// userSchema.methods.correctPassword = function(candidatePwd) {
-//   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
-// }
-
-// userSchema.methods.generateSalt = function() {
-//   return crypto.randomBytes(16).toString('base64')
-// }
-
-// userSchema.methods.encryptPassword = function(plainText, salt) {
-//   return crypto
-//     .createHash('RSA-SHA256')
-//     .update(plainText)
-//     .update(salt)
-//     .digest('hex')
-// }
-
-// //util function 
-// const setSaltAndPassword = user => {
-//   if (user.changed('password')) {
-//     user.salt = User.generateSalt()
-//     user.password = User.encryptPassword(user.password(), user.salt())
-//   }
-// }
-
-// //Mongoose Middlewares 
-// userSchema.pre('save', setSaltAndPassword)
-
-// userSchema.pre('updateOne', { document: true, query: false }, setSaltAndPassword)
-
-// userSchema.pre('updateMany', setSaltAndPassword)
-
-// userSchema.pre('insertMany', setSaltAndPassword)
-
-
-// User.prototype.correctPassword = function(candidatePwd) {
-//   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
-// }
 
 const User = mongoose.model('User', userSchema);
 
