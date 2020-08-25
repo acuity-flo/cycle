@@ -4,6 +4,7 @@ const app = express();
 const morgan = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
+const bodyParser = require('body-parser')
 const MongoStore = require('connect-mongo')(session)
 const PORT = process.env.PORT || 4000;
 const User = require('./db/models/User')
@@ -15,6 +16,13 @@ const mongoDbUsername = process.env.MONGO_DB_USERNAME;
 const mongoDbPassword = process.env.MONGO_DB_PASSWORD;
 
 const MONGODB_URI = `mongodb+srv://${mongoDbUsername}:${mongoDbPassword}@cluster0.ts2fv.mongodb.net/test?retryWrites=true&w=majority`;
+
+// body parsing middleware
+app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(bodyParser.json())
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
 
 mongoose.connect(process.env.MONGODB_URI || MONGODB_URI);
 
@@ -77,9 +85,12 @@ passport.deserializeUser(User.deserializeUser());
 // logging middleware
 app.use(morgan('dev'));
 
-// body parsing middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// // body parsing middleware
+// app.use(bodyParser.urlencoded({ extended: false })); 
+// app.use(bodyParser.json())
+// // app.use(express.json());
+// // app.use(express.urlencoded({ extended: true }));
+
 
 //express session
 
