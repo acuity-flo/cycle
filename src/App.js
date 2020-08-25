@@ -10,6 +10,8 @@ import Homepage from './components/Homepage'
 import { Auth } from './components/Auth'
 import { authMe, logout } from './store'
 
+import CalendarView from "./components/Calendar"
+
 function App(props) {
   const user = props.authUser
   const dispatch = useDispatch()
@@ -25,7 +27,8 @@ function App(props) {
     // </Switch>
     <Fragment>
       <button onClick={() => dispatch(logout())}>Logout</button>
-      {user._id && <BubbleChart user={user} />}
+      {/* {user._id && <BubbleChart user={user} />} */}
+      {user._id && <CalendarView />}
       <Auth />
     </Fragment>
 

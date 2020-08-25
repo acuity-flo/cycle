@@ -16,6 +16,8 @@ export default function BubbleChart(props) {
         } else if (element.typeOfFlow === 'heavy'){
             element.typeOfFlow = 4
         }
+
+        //manipulates period arr on state
         element.date = moment(element.date).format("MM DD YYYY")
         return element
     }

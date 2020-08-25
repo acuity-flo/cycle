@@ -24,10 +24,10 @@ module.exports = {
   updateUser: async (req, res, next) => {
     try {
       console.log("IM THE REQ.BODY", req.body)
-      const { period, symptom, finance } = req.body;
+      const { period, symptom, financial } = req.body;
       const foundUser = await User.findOneAndUpdate(
         { username: req.params.username },
-        { period, symptom, finance},
+        { period, symptom, financial},
         {
           upsert: true,
           runValidators: true,
