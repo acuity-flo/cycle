@@ -11,37 +11,45 @@ import Homepage from './components/Homepage'
 import UserProfile from './components/UserProfile'
 import ChartHome from './components/ChartHome'
 import NavBar from './components/NavBar'
+import Auth from "./forms/Auth"
 
 //DataVis Imports
 import PeriodChart from "./dataVis/PeriodChart"
-
+import financeUpdate from "./forms/FinanceUpdate"
 
 
 
 function App(props) {
   const user = props.authUser
+  const isLoggedIn = props.isLoggedIn
   const dispatch = useDispatch()
   useEffect(()=> {
     dispatch(authMe())
   }, [])
 
   console.log(user)
+
+  //Need to figure out Auth form loads before route path
   return (
     <Router>
       <NavBar />
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <Route exact path = "/me" component={UserProfile}/>
-        <Route exact path = "/calendar" component={CalendarView}/>
-        <Route exact path = "/charts" component={ChartHome}/>
+
+        {isLoggedIn && (
+          <Switch> 
+            <Route exact path = "/me" component={UserProfile}/>
+            <Route exact path = "/calendar" component={CalendarView}/>
+            <Route exact path = "/charts" component={ChartHome}/>
+            <Route path = '/' component={financeUpdate} />  
+          </Switch>
+        )}
+
+
+        {/* Default component */}
+        <Route component={Auth} />
       </Switch>
     </Router>
-    // <Fragment>
-    //   <button onClick={() => dispatch(logout())}>Logout</button>
-    //   {/* {user._id && <PeriodChart user={user} />} */}
-    //   {user._id && <CalendarView />}
-    //   <Auth />
-    // </Fragment>
 
   )
 }
@@ -49,7 +57,7 @@ function App(props) {
 const mapState = state => {
   return {
     authUser: state,
-    isLoggedIn: !!state.id
+    isLoggedIn: !!state._id
   }
 }
 

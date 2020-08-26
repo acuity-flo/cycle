@@ -1,17 +1,39 @@
 import React, { useState, Fragment } from 'react'
 import { authUserThunk } from '../store'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Button, FormControl, FormLabel, Input, InputLabel, Select, MenuItem } from '@material-ui/core'
 import { set } from 'mongoose'
+import {withRouter} from 'react-router'
 
 const AuthForm = (props) => {
   const [type, setType] = useState('login')
   const [pronouns, setPronouns] = useState('')
-  const { handleSubmit } = props
+  // const { handleSubmit } = props
+  const dispatch = useDispatch()
 
   const handleChange = (event) => {
     setPronouns(event.target.value)
   }
+
+      const handleSubmit = async (event) => {
+      event.preventDefault()
+      const formName = event.target.name
+      const user = {
+        email: event.target.email.value,
+        password: event.target.password.value
+      }
+      if (formName === 'signup') {
+        user.username = event.target.username.value
+        user.name = event.target.fullName.value
+        user.pronouns = event.target.pronouns.value
+        user.avgLengthOfCycle = event.target.cyclelength.value
+      }
+      // const reply = await dispatch(authUserThunk(user, formName))
+      // console.log('REPLY',reply)
+      dispatch(authUserThunk(user, formName))
+      props.history.push('/me')
+    }
+  
 
   return (
     <form onSubmit={handleSubmit} name={type} >
@@ -50,24 +72,26 @@ const AuthForm = (props) => {
   )
 }
 
-const mapDispatch = dispatch => {
-  return {
-    handleSubmit(event) {
-      event.preventDefault()
-      const formName = event.target.name
-      const user = {
-        email: event.target.email.value,
-        password: event.target.password.value
-      }
-      if (formName === 'signup') {
-        user.username = event.target.username.value
-        user.name = event.target.fullName.value
-        user.pronouns = event.target.pronouns.value
-        user.avgLengthOfCycle = event.target.cyclelength.value
-      }
-      dispatch(authUserThunk(user, formName))
-    }
-  }
-}
+// const mapDispatch = dispatch => {
+//   return {
+//     handleSubmit(event) {
+//       event.preventDefault()
+//       const formName = event.target.name
+//       const user = {
+//         email: event.target.email.value,
+//         password: event.target.password.value
+//       }
+//       if (formName === 'signup') {
+//         user.username = event.target.username.value
+//         user.name = event.target.fullName.value
+//         user.pronouns = event.target.pronouns.value
+//         user.avgLengthOfCycle = event.target.cyclelength.value
+//       }
+//       dispatch(authUserThunk(user, formName))
+//     }
+//   }
+// }
 
-export const Auth = connect(null, mapDispatch)(AuthForm)
+
+
+export default withRouter(AuthForm)
