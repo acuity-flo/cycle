@@ -1,5 +1,5 @@
 import React from 'react'
-import { Auth } from '../forms/Auth'
+import  Auth  from '../forms/Auth'
 
 export default function Homepage () {
 

@@ -2,6 +2,7 @@ import axios from 'axios'
 import { createStore, applyMiddleware } from 'redux'
 import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
+import {createBrowserHistory} from 'history'
 
 //initial state will be an empty object, state will always be a user
 const authUser = {}
@@ -9,6 +10,7 @@ const authUser = {}
 //action
 const AUTH_USER = 'AUTH_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
+const history = createBrowserHistory()
 
 //action creator
 const authUserAction = (user) => ({
@@ -47,6 +49,7 @@ export const authUserThunk = (user, type) => async dispatch => {
     console.log('data', data)
     const action = authUserAction(data)
     dispatch(action)
+    // history.push('/me')
   } catch (e) {
     console.log(e)
   }
