@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment'
 import { connect } from 'react-redux'
@@ -8,18 +8,20 @@ import { connect } from 'react-redux'
   const user = props.authUser
   const period = user.period
   const finance = user.financial
-  console.log(finance)
-  const classes = ({date,view}) => {
+  
+
+  
+  const classesFunc = ({date,view}) => {
       let classesStr = ""
     //   //period - colors days of periods
-    //   if(view==="month" && period.some(el => moment(el.date).format("MM DD YYYY") ===moment(date).format("MM DD YYYY"))) {
-    //     classesStr+="period"
-    //   }
+      if(period && view==="month" && period.some(el => moment(el.date).format("MM DD YYYY") ===moment(date).format("MM DD YYYY"))) {
+        classesStr+="period"
+      }
 
     //   finance - colors days of finance
-      if(view==="month" && finance.some(el => moment(el.date).format("MM DD YYYY") ===moment(date).format("MM DD YYYY"))) {
-        classesStr+="finance"
-      }
+      // if(finance && view==="month" && finance.some(el => moment(el.date).format("MM DD YYYY") ===moment(date).format("MM DD YYYY"))) {
+      //   classesStr+="finance"
+      // }
       return classesStr
     }
 
@@ -27,11 +29,12 @@ import { connect } from 'react-redux'
 
   return (
     <div>
+      <h1>CALENDAR</h1>
       <Calendar
         onChange={onChange}
         value={value}
         onClickDay = {(value, event) => console.log('Clicked day: ', moment(value))}
-        tileClassName = {classes}
+        tileClassName = {classesFunc}
       />
     </div>
   );

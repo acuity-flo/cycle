@@ -1,8 +1,9 @@
 import React, {useEffect,useRef} from 'react';
 import * as d3 from "d3"
 import moment from 'moment'
+import {connect} from 'react-redux'
 
-export default function BubbleChart(props) {
+function PeriodChart(props) {
     const d3Contatiner = useRef(null)
 
     //utility function for changing date format and adding weight to period level
@@ -24,7 +25,7 @@ export default function BubbleChart(props) {
 
     //useEffect depends on period date to be called
     useEffect(()=> {
-        if(props.user && d3Contatiner.current){
+        if(props.user.username && d3Contatiner.current){
             //period data from user
             const periodData = props.user.period
 
@@ -84,11 +85,25 @@ export default function BubbleChart(props) {
 
 
     return (
-        <svg
-            className = "d3Component"
-            width = {400}
-            height = {200}
-            ref = {d3Contatiner}
-        />
+        <div>
+            <h1>PERIOD</h1>
+            <svg
+                className = "d3Component"
+                width = {400}
+                height = {200}
+                ref = {d3Contatiner}
+            />
+
+        </div>
     )
 }
+
+
+const mapState = state => {
+    return {
+      user: state,
+      isLoggedIn: !!state.id
+    }
+  }
+  
+  export default connect(mapState)(PeriodChart);

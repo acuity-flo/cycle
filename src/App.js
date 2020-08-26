@@ -1,16 +1,23 @@
 import React, { Fragment, useEffect } from 'react';
-// import logo from './logo.svg';
 import './App.css';
-import BubbleChart from "./components/BubbleChart"
 import { useDispatch, connect } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, BrowserRouter as Router} from 'react-router-dom'
 
-
-import Homepage from './components/Homepage'
-import { Auth } from './components/Auth'
+//Thunks
 import { authMe, logout } from './store'
 
-import CalendarView from "./components/Calendar"
+//Component Imports
+import CalendarView from './components/Calendar'
+import Homepage from './components/Homepage'
+import UserProfile from './components/UserProfile'
+import ChartHome from './components/ChartHome'
+import NavBar from './components/NavBar'
+
+//DataVis Imports
+import PeriodChart from "./dataVis/PeriodChart"
+
+
+
 
 function App(props) {
   const user = props.authUser
@@ -21,16 +28,21 @@ function App(props) {
 
   console.log(user)
   return (
-    // <Switch>
-    //   <Route exact path="/" component={Homepage} />
-
-    // </Switch>
-    <Fragment>
-      <button onClick={() => dispatch(logout())}>Logout</button>
-      {/* {user._id && <BubbleChart user={user} />} */}
-      {user._id && <CalendarView />}
-      <Auth />
-    </Fragment>
+    <Router>
+      <NavBar />
+        <Switch>
+          <Route exact path="/" component={Homepage} />
+          <Route exact path = "/me" component={UserProfile}/>
+          <Route exact path = "/calendar" component={CalendarView}/>
+          <Route exact path = "/charts" component={ChartHome}/>
+        </Switch>
+    </Router>
+    // <Fragment>
+    //   <button onClick={() => dispatch(logout())}>Logout</button>
+    //   {/* {user._id && <PeriodChart user={user} />} */}
+    //   {user._id && <CalendarView />}
+    //   <Auth />
+    // </Fragment>
 
   )
 }
