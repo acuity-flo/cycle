@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect } from 'react';
-import './App.css';
 import { useDispatch, connect } from 'react-redux'
 import { Route, Switch, BrowserRouter as Router} from 'react-router-dom'
 
