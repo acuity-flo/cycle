@@ -62,7 +62,7 @@ module.exports = {
   },
   //signup?
   signUpUser: async (req, res, next) => {
-    let { name, email, username, password, pronouns } = req.body;
+    let { name, email, username, password, pronouns, avgLengthOfCycle } = req.body;
     password = Bcrypt.hashSync(password, 10);
     const newUser = new User({
       name,
@@ -70,6 +70,7 @@ module.exports = {
       username,
       password,
       pronouns,
+      avgLengthOfCycle
     });
 
     try {

@@ -24,16 +24,15 @@ const logoutUser = () => ({
 //auth user thunk for login or signup
 export const authUserThunk = (user, type) => async dispatch => {
   let post
-  console.log('type in thunk', type)
-  console.log('user in login', user)
   if (type === 'signup') {
-    const {email, password, username, name, pronouns} = user
+    const {email, password, username, name, pronouns, avgLengthOfCycle} = user
     post = {
       email,
       password,
       username,
       name,
-      pronouns
+      pronouns,
+      avgLengthOfCycle: avgLengthOfCycle ? avgLengthOfCycle : 28
     }
   }
   if (type === 'login') {

@@ -16,12 +16,16 @@ const userSchema = new Schema({
     validate: [validator.isEmail, 'Invalid Email Address'],
     require: 'Please Supply An Email Address',
   },
-  password: {  
-    type: String, 
-  }, 
+  password: {
+    type: String,
+  },
   pronouns: {
     type: String,
     enum: ['she/her/hers', 'they/them/theirs', 'he/him/his'],
+  },
+  avgLengthOfCycle: {
+    type: Number,
+    default: 28
   },
   financial: [
     {
@@ -87,7 +91,7 @@ const userSchema = new Schema({
         typeOther: [
           {
             type: String,
-            enum: [            
+            enum: [
             'nausea',
             'bloating',
             'indigestion',
