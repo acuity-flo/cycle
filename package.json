@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "start-server": "nodemon server"
   },
   "author": "",
   "license": "ISC",
@@ -21,5 +22,7 @@
     "passport-local-mongoose": "^6.0.1",
     "validator": "^13.1.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
