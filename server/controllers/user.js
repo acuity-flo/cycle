@@ -20,7 +20,6 @@ module.exports = {
       next(err);
     }
   },
-  // can update but seems to replace fields
   updateUser: async (req, res, next) => {
     try {
       const { period, symptom, financial } = req.body;
@@ -28,6 +27,7 @@ module.exports = {
       if (period) update.period = period
       if (symptom) update.symptom = symptom
       if (financial) update.financial = financial
+      
       const foundUser = await User.findOneAndUpdate(
         { username: req.params.username },
         update,
