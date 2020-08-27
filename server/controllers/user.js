@@ -37,9 +37,11 @@ module.exports = {
         }
       );
 
-      // THIS IS NOT ACTUALLY THE UPDATED USER
-      const updatedUser = await foundUser.save()
-      res.json(updatedUser);
+      await foundUser.save()
+      const updatedUser = await User.findOne({
+        username: req.params.username,
+      });
+      res.json(updatedUser)
     } catch (err) {
       next(err);
     }
