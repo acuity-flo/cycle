@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import DayModal from '../forms/CalendarDayModal';
+// import DayModal from '../forms/CalendarDayModal';
 import { Modal, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -10,7 +10,7 @@ function CalendarView(props) {
   const [value, onChange] = useState(new Date());
   const user = props.authUser;
   const period = user.period;
-  const finance = user.financial;
+  // const finance = user.financial;
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
   // const handleOpen = () => {setOpen(true)}
