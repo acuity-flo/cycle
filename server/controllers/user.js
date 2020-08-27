@@ -23,16 +23,21 @@ module.exports = {
   // can update but seems to replace fields
   updateUser: async (req, res, next) => {
     try {
-      console.log("IM THE REQ.BODY", req.body)
       const { period, symptom, financial } = req.body;
+      const update = {}
+      if (period) update.period = period
+      if (symptom) update.symptom = symptom
+      if (financial) update.financial = financial
       const foundUser = await User.findOneAndUpdate(
         { username: req.params.username },
-        { period, symptom, financial},
+        update,
         {
           upsert: true,
           runValidators: true,
         }
       );
+
+      // THIS IS NOT ACTUALLY THE UPDATED USER
       const updatedUser = await foundUser.save()
       res.json(updatedUser);
     } catch (err) {
