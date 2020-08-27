@@ -1,8 +1,21 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
 
-export default function UserProfile () {
+const UserProfile = (props) => {
+  const user = props.authUser;
+  return (
+    <div>
+      <h1>PROFILE</h1>
+      <h5>Welcome, {user.username}</h5>
+    </div>
+  );
+};
 
-    return (
-        <h1>PROFILE</h1>
-    )
-}
+const mapState = (state) => {
+  return {
+    authUser: state,
+    isLoggedIn: !!state.id,
+  };
+};
+
+export default connect(mapState)(UserProfile);
