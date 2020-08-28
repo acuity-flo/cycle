@@ -9,8 +9,7 @@ const authUser = {};
 //action
 const AUTH_USER = 'AUTH_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
-const UPDATE_PERIOD = 'UPDATE_PERIOD'
-const UPDATE_FINANCE = 'UPDATE_FINANCE'
+const UPDATE_USER = 'UPDATE_USER'
 
 //action creator
 const authUserAction = (user) => ({
@@ -22,13 +21,8 @@ const logoutUser = () => ({
   type: LOGOUT_USER,
 });
 
-const updatePeriod = (user) => ({
-  type: UPDATE_PERIOD,
-  user
-})
-
-const updateFinance = (user) => ({
-  type: UPDATE_FINANCE,
+const updateUser = (user) => ({
+  type: UPDATE_USER,
   user
 })
 
@@ -76,18 +70,32 @@ export const addPeriodData = (username, periodArr) => {
   return async (dispatch) => {
     try {
       const res = await axios.put(`/api/${username}`, {period: periodArr})
-      dispatch(updatePeriod(res.data))
+      dispatch(updateUser(res.data))
     } catch (e) {
       console.log(e)
     }
   }
 }
 
-export const addFiannceData = (username, financeArr) => {
+export const addFinanceData = (username, financeArr) => {
   return async (dispatch) => {
     try {
       const res = await axios.put(`/api/${username}`, {financial: financeArr})
-      dispatch(updateFinance(res.data))
+      dispatch(updateUser(res.data))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}
+
+export const addSymptomData = (username, symptomArr) => {
+  console.log("symptoms arr in thunk", symptomArr)
+  return async (dispatch) => {
+    try {
+      console.log('i hit the symptom data thunk')
+      const res = await axios.put(`/api/${username}`, {symptomTags: symptomArr})
+      console.log('res.data', res.data)
+      dispatch(updateUser(res.data))
     } catch (e) {
       console.log(e)
     }
@@ -121,9 +129,7 @@ const reducer = (state = authUser, action) => {
       return action.user;
     case LOGOUT_USER:
       return authUser;
-    case UPDATE_PERIOD:
-      return action.user
-    case UPDATE_FINANCE:
+    case UPDATE_USER:
       return action.user
     default:
       return state;

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Button, FormControl, MenuItem, Input, InputLabel, Select } from '@material-ui/core'
+import { Button, FormControl, MenuItem, Input, InputLabel, Select, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 
-import { addFiannceData } from '../store'
+import { addFinanceData } from '../store'
 
 export default function FinanceUpdate (props) {
     const user = props.user
@@ -33,11 +33,14 @@ export default function FinanceUpdate (props) {
             const updatedPurchases = [...user.financial, financeObj]
             console.log('fiannceObj', financeObj)
             console.log('updated purchases', updatedPurchases)
-            dispatch(addFiannceData(user.username, updatedPurchases))
+            dispatch(addFinanceData(user.username, updatedPurchases))
         }
     }
     return (
-        <form className={classes.root}>
+        <div className={classes.root}>
+            <Typography id="discrete-slider-restrict" gutterBottom>
+            Finances
+            </Typography>
             {purchases.map((el, index) =>{
                 console.log("el", el)
                 console.log("index", index)
@@ -57,8 +60,8 @@ export default function FinanceUpdate (props) {
                 </FormControl>
             </div>)})}
             <Button onClick={handleAddRow}>+</Button>
-            <Button onClick={handleSubmit}>Add Finances</Button>
-        </form>
+            <Button onClick={handleSubmit}>Update Finances</Button>
+        </div>
     )
 }
 

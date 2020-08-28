@@ -22,12 +22,13 @@ module.exports = {
   },
   updateUser: async (req, res, next) => {
     try {
-      const { period, symptom, financial } = req.body;
+      console.log('req.body', req.body)
+      const { period, symptomTags, financial } = req.body;
       const update = {}
       if (period) update.period = period
-      if (symptom) update.symptom = symptom
+      if (symptomTags) update.symptomTags = symptomTags
       if (financial) update.financial = financial
-      
+
       const foundUser = await User.findOneAndUpdate(
         { username: req.params.username },
         update,
@@ -41,6 +42,7 @@ module.exports = {
       const updatedUser = await User.findOne({
         username: req.params.username,
       });
+      console.log('updated USer', updatedUser)
       res.json(updatedUser)
     } catch (err) {
       next(err);

@@ -69,7 +69,7 @@ export default function PeriodForm(props) {
 
       console.log(updatedPeriod , "Updated Period")
       dispatch(addPeriodData(props.user.username, updatedPeriod))
-    }  
+    }
 
   }
 
