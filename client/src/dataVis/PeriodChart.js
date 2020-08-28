@@ -66,8 +66,16 @@ function PeriodChart(props) {
 
       let xAxis = d3.axisBottom().scale(xScale).ticks(periodRange);
 
+      console.log('D3 current', d3Contatiner.current)
+      console.log('d3contatiner', d3Contatiner)
       const svg = d3
         .select(d3Contatiner.current)
+      
+
+      svg.selectAll('g')
+        .remove()
+
+      svg
         .attr('width', canvasWidth)
         .attr('height', canvasHeight)
         .style('border', '2px solid pink');
@@ -78,8 +86,9 @@ function PeriodChart(props) {
         .attr('transform', `translate(50,${canvasHeight - 40})`)
         .call(xAxis);
 
-      //CIRCLES
-      //cx uses the 50 width value from above x axis shift then multiplies value.date-periodMin (0,1,2,etc) by the tickWidth above
+      // //CIRCLES
+      // //cx uses the 50 width value from above x axis shift then multiplies value.date-periodMin (0,1,2,etc) by the tickWidth above
+      // // -----WORKING BELOW-----
       svg
         .append('g')
         .selectAll('circle')
@@ -100,6 +109,9 @@ function PeriodChart(props) {
               .attr('fill', 'red'),
           (exit) => exit.remove()
         );
+
+
+
       // .enter()
       // .append('circle')
       // .attr('class', 'circles')
