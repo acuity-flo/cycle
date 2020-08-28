@@ -9,6 +9,7 @@ const authUser = {};
 //action
 const AUTH_USER = 'AUTH_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
+const UPDATE_PERIOD = 'UPDATE_PERIOD' 
 
 //action creator
 const authUserAction = (user) => ({
@@ -19,6 +20,11 @@ const authUserAction = (user) => ({
 const logoutUser = () => ({
   type: LOGOUT_USER,
 });
+
+const updatePeriod = (user) => ({
+  type: UPDATE_PERIOD, 
+  user
+})
 
 //thunks
 //auth user thunk for login or signup
@@ -60,6 +66,18 @@ export const authUserThunk = (user, type) => async (dispatch) => {
   }
 };
 
+export const addPeriodData = (username, periodArr) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.put(`/api/${username}`, {period: periodArr})
+      dispatch(updatePeriod(res.data))
+    } catch (e) {
+      console.log(e)
+    }  
+  }
+}
+
+
 //get user if req.user
 export const authMe = () => async (dispatch) => {
   try {
@@ -86,6 +104,8 @@ const reducer = (state = authUser, action) => {
       return action.user;
     case LOGOUT_USER:
       return authUser;
+    case UPDATE_PERIOD: 
+      return action.user  
     default:
       return state;
   }
