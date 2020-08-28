@@ -9,7 +9,8 @@ const authUser = {};
 //action
 const AUTH_USER = 'AUTH_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
-const UPDATE_PERIOD = 'UPDATE_PERIOD' 
+const UPDATE_PERIOD = 'UPDATE_PERIOD'
+const UPDATE_FINANCE = 'UPDATE_FINANCE'
 
 //action creator
 const authUserAction = (user) => ({
@@ -22,7 +23,12 @@ const logoutUser = () => ({
 });
 
 const updatePeriod = (user) => ({
-  type: UPDATE_PERIOD, 
+  type: UPDATE_PERIOD,
+  user
+})
+
+const updateFinance = (user) => ({
+  type: UPDATE_FINANCE,
   user
 })
 
@@ -73,7 +79,18 @@ export const addPeriodData = (username, periodArr) => {
       dispatch(updatePeriod(res.data))
     } catch (e) {
       console.log(e)
-    }  
+    }
+  }
+}
+
+export const addFiannceData = (username, financeArr) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.put(`/api/${username}`, {financial: financeArr})
+      dispatch(updateFinance(res.data))
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 
@@ -104,8 +121,10 @@ const reducer = (state = authUser, action) => {
       return action.user;
     case LOGOUT_USER:
       return authUser;
-    case UPDATE_PERIOD: 
-      return action.user  
+    case UPDATE_PERIOD:
+      return action.user
+    case UPDATE_FINANCE:
+      return action.user
     default:
       return state;
   }

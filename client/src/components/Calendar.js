@@ -8,12 +8,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 //TEST
 import PeriodUpdate from '../forms/PeriodUpdate';
+import FinanceUpdate from '../forms/FinanceUpdate'
 
 function CalendarView(props) {
   const [value, onChange] = useState(new Date());
   const user = props.authUser;
   const period = user.period;
-  // const finance = user.financial;
+  const finance = user.financial;
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
 
@@ -39,9 +40,9 @@ function CalendarView(props) {
     }
 
     //   finance - colors days of finance
-    // if(finance && view==="month" && finance.some(el => moment(el.date).format("MM DD YYYY") ===moment(date).format("MM DD YYYY"))) {
-    //   classesStr+="finance"
-    // }
+    if(finance && view==="month" && finance.some(el => moment(el.date).format("MM DD YYYY") ===moment(date).format("MM DD YYYY"))) {
+      classesStr+=" finance"
+    }
     return classesStr;
   };
 
@@ -77,7 +78,7 @@ function CalendarView(props) {
           <br />
           <br />
           <p>option to add symptoms</p>
-          <p>option to add finance</p>
+          <FinanceUpdate date={date} user={user} />
         </div>
       </Modal>
     </div>
