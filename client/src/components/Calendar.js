@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 //TEST
 import PeriodUpdate from '../forms/PeriodUpdate';
 import FinanceUpdate from '../forms/FinanceUpdate'
+import SymptomUpdate from '../forms/SymptomUpdate'
 
 function CalendarView(props) {
   const [value, onChange] = useState(new Date());
@@ -77,7 +78,9 @@ function CalendarView(props) {
           <PeriodUpdate date={date} user={user} />
           <br />
           <br />
-          <p>option to add symptoms</p>
+          <SymptomUpdate date={date} user={user} />
+          <br />
+          <br />
           <FinanceUpdate date={date} user={user} />
         </div>
       </Modal>

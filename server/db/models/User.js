@@ -57,10 +57,13 @@ const userSchema = new Schema({
   symptomTags: [
     {
       date: { type: Date, default: Date.now },
-      symptom: [
-        {
-          type: String,
+      symptoms: [
+          {
+          symptomName: {
+            type: String
+          },
           category: {
+            type: String,
             enum: ['mood', 'emotion', 'pain', 'physical', 'custom'],
             default: 'custom',
           },
