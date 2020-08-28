@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { useDispatch, connect } from 'react-redux'
-import { withRouter } from 'react-router'
+import React, { useState } from 'react';
+import { useDispatch, connect } from 'react-redux';
+import { withRouter } from 'react-router';
 //material UI imports
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -12,24 +12,24 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
 //thunk
-import { logout } from '../store'
+import { logout } from '../store';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }));
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
 function Navbar(props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const auth = props.isLoggedIn
+  const auth = props.isLoggedIn;
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -42,21 +42,26 @@ function Navbar(props) {
   };
 
   const handleRedirect = (name) => {
-    props.history.push(`/${name}`)
-    handleClose()
-  }
+    props.history.push(`/${name}`);
+    handleClose();
+  };
 
   const handleLogout = () => {
-    dispatch(logout())
-    props.history.push('/')
-    handleClose()
-  }
+    dispatch(logout());
+    props.history.push('/');
+    handleClose();
+  };
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
             <MenuIcon />
           </IconButton>
           {auth && (
@@ -85,9 +90,15 @@ function Navbar(props) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={() => handleRedirect('me')}>Profile</MenuItem>
-                <MenuItem onClick={() => handleRedirect('charts')}>My Charts</MenuItem>
-                <MenuItem onClick={() => handleRedirect('calendar')}>Calendar</MenuItem>
+                <MenuItem onClick={() => handleRedirect('me')}>
+                  Profile
+                </MenuItem>
+                <MenuItem onClick={() => handleRedirect('charts')}>
+                  My Charts
+                </MenuItem>
+                <MenuItem onClick={() => handleRedirect('calendar')}>
+                  Calendar
+                </MenuItem>
                 <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
               </Menu>
             </div>
@@ -98,9 +109,9 @@ function Navbar(props) {
   );
 }
 
-const mapState = state => ({
+const mapState = (state) => ({
   authUser: state,
-  isLoggedIn: !!state._id
-})
+  isLoggedIn: !!state._id,
+});
 
-export default withRouter(connect(mapState)(Navbar))
+export default withRouter(connect(mapState)(Navbar));

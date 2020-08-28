@@ -7,7 +7,7 @@ import { Modal, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 //TEST
-import PeriodUpdate from '../forms/PeriodUpdate'
+import PeriodUpdate from '../forms/PeriodUpdate';
 
 function CalendarView(props) {
   const [value, onChange] = useState(new Date());
@@ -20,7 +20,6 @@ function CalendarView(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
 
   const classes = useStyles();
 
@@ -58,6 +57,11 @@ function CalendarView(props) {
         }}
         tileClassName={classesFunc}
       ></Calendar>
+      <br />
+      <p>
+        (note: period/symptom/finance data will be displayed on the calendar in
+        diff colors)
+      </p>
       <Modal
         open={open}
         onClose={handleClose}
@@ -67,10 +71,15 @@ function CalendarView(props) {
       >
         <div className={classes.paper}>
           <div>Date: {moment(date).format('MM DD YYYY')}</div>
-          <PeriodUpdate date={date} user={user}/> 
+          <p>(if you have data for this day, it will be displayed here)</p>
+          <br />
+          <PeriodUpdate date={date} user={user} />
+          <br />
+          <br />
+          <p>option to add symptoms</p>
+          <p>option to add finance</p>
         </div>
       </Modal>
-
     </div>
   );
 }

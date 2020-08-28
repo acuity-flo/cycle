@@ -6,7 +6,11 @@ const UserProfile = (props) => {
   return (
     <div>
       <h1>PROFILE</h1>
-      <h5>Welcome, {user.username}</h5>
+      <h5>Welcome, {user.name}</h5>
+      <p>
+        you can view some of your average stats here and make some edits to your
+        profile
+      </p>
     </div>
   );
 };
