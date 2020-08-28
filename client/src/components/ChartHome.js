@@ -1,19 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PeriodChart from '../dataVis/PeriodChart';
-import 'react-dates/initialize'
-import { DateRangePicker} from 'react-dates';
+import 'react-dates/initialize';
+import { DateRangePicker } from 'react-dates';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import omit from 'lodash/omit';
 import 'react-dates/lib/css/_datepicker.css';
+import Button from '@material-ui/core/Button';
 
-
-
-export default function ChartHome() { 
-  const [start, setStart] = useState(moment())
-  const [end, setEnd] = useState(moment())
-  const [focus, setFocus] = useState(null)
-  // console.log(start)
+export default function ChartHome() {
+  const [start, setStart] = useState(moment());
+  const [end, setEnd] = useState(moment());
+  const [focus, setFocus] = useState(null);
+  const [choseDate, setDate] = useState(false);
 
   const defaultProps = {
     //from example
@@ -21,37 +20,46 @@ export default function ChartHome() {
     autoFocusEndDate: false,
     initialStartDate: null,
     initialEndDate: null,
-    numberOfMonths:2, 
+    numberOfMonths: 2,
     startDatePlaceholderText: 'Start Date',
     endDatePlaceholderText: 'End Date',
-  }
+  };
 
-  const onDatesChange = ({startDate, endDate}) => {
-    setStart(startDate)
-    setEnd(endDate)
-  }
+  const onDatesChange = ({ startDate, endDate }) => {
+    setStart(startDate);
+    setEnd(endDate);
+  };
 
   const onFocusChange = (focusedInput) => {
-    setFocus(focusedInput)
-  }
-  
+    setFocus(focusedInput);
+  };
+
+  // after render need to make false again
+  const onClick = () => {
+    setDate(true);
+    // setTimeout(setDate(false), 1000);
+    // return <PeriodChart start={start} end={end} />;
+  };
 
   return (
     <div>
       <h2>HOME OF CHARTS</h2>
       <DateRangePicker
-          startDate={start} 
-          startDateId={"start date"}
-          endDate={end}
-          endDateId={"end date"}
-          onDatesChange={onDatesChange} 
-          focusedInput={focus} 
-          onFocusChange={onFocusChange} 
-          {...defaultProps}
+        startDate={start}
+        startDateId={'start date'}
+        endDate={end}
+        endDateId={'end date'}
+        onDatesChange={onDatesChange}
+        focusedInput={focus}
+        onFocusChange={onFocusChange}
+        {...defaultProps}
+        isOutsideRange={() => false}
       />
+      <Button onClick={onClick}>set</Button>
       <br />
       <br />
-      <PeriodChart />
+      {choseDate ? <PeriodChart start={start} end={end} /> : ''}
+      {/* <PeriodChart start={start} end={end} /> */}
       <br />
       <p>click here to see your period data</p>
       <br />
@@ -66,5 +74,3 @@ export default function ChartHome() {
     </div>
   );
 }
-
-
