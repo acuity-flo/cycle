@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, Fragment } from 'react'
 import { authUserThunk } from '../store'
 import { useDispatch } from 'react-redux'
@@ -15,30 +12,29 @@ const AuthForm = (props) => {
   const classes = useStyles()
   const dispatch = useDispatch()
 
-
   const handleChange = (event) => {
-    setPronouns(event.target.value);
-  };
+    setPronouns(event.target.value)
+  }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formName = event.target.name;
-    const user = {
-      email: event.target.email.value,
-      password: event.target.password.value,
-    };
-    if (formName === 'signup') {
-      user.username = event.target.username.value;
-      user.name = event.target.fullName.value;
-      user.pronouns = event.target.pronouns.value;
-      user.avgLengthOfCycle = event.target.cyclelength.value;
+      const handleSubmit = async (event) => {
+      event.preventDefault()
+      const formName = event.target.name
+      const user = {
+        email: event.target.email.value,
+        password: event.target.password.value
+      }
+      if (formName === 'signup') {
+        user.username = event.target.username.value
+        user.name = event.target.fullName.value
+        user.pronouns = event.target.pronouns.value
+        user.avgLengthOfCycle = event.target.cyclelength.value
+      }
+      // const reply = await dispatch(authUserThunk(user, formName))
+      // console.log('REPLY',reply)
+      dispatch(authUserThunk(user, formName))
+      props.history.push('/me')
     }
 
-    // const reply = await dispatch(authUserThunk(user, formName))
-    // console.log('REPLY',reply)
-    dispatch(authUserThunk(user, formName));
-    props.history.push('/me');
-  };
 
   return (
     <div className={classes.container}>
@@ -48,7 +44,6 @@ const AuthForm = (props) => {
         <Input id="email" />
       </FormControl>
       <FormControl name="password" className={classes.inputItem}>
-
         <InputLabel htmlFor="password">Enter Password </InputLabel>
         <Input id="password" type="password" />
       </FormControl>
@@ -84,7 +79,6 @@ const AuthForm = (props) => {
   )
 }
 
-
 // const mapDispatch = dispatch => {
 //   return {
 //     handleSubmit(event) {
@@ -104,9 +98,6 @@ const AuthForm = (props) => {
 //     }
 //   }
 // }
-
-
-
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -139,4 +130,3 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default withRouter(AuthForm)
-
