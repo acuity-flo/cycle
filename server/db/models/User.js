@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-const Bcrypt = require('bcryptjs')
+const Bcrypt = require('bcryptjs');
 const Schema = mongoose.Schema;
 const validator = require('validator');
 const passportLocalMongoose = require('passport-local-mongoose');
@@ -25,8 +25,11 @@ const userSchema = new Schema({
   },
   avgLengthOfCycle: {
     type: Number,
-    default: 28
+    default: 28,
   },
+  periodTracking: { type: Boolean, default: false },
+  symptomTracking: { type: Boolean, default: false },
+  financialTracking: { type: Boolean, default: false },
   financial: [
     {
       date: { type: Date, default: Date.now },
@@ -34,9 +37,9 @@ const userSchema = new Schema({
         {
           typeOfPurchase: {
             type: String,
-            enum: ['prescription', 'sanitary products', 'doctor', 'other']
+            enum: ['prescription', 'sanitary products', 'doctor', 'other'],
           },
-          cost: { type: Number }
+          cost: { type: Number },
         },
       ],
     },
@@ -49,6 +52,20 @@ const userSchema = new Schema({
         enum: ['light', 'medium', 'heavy', 'spotting'],
         default: null,
       },
+    },
+  ],
+  symptomTags: [
+    {
+      date: { type: Date, default: Date.now },
+      symptom: [
+        {
+          type: String,
+          tag: {
+            enum: ['mood', 'emotion', 'pain', 'other', 'custom'],
+            default: custom,
+          },
+        },
+      ],
     },
   ],
   symptom: {
@@ -92,21 +109,21 @@ const userSchema = new Schema({
           {
             type: String,
             enum: [
-            'nausea',
-            'bloating',
-            'indigestion',
-            'fatigue',
-            'snacky',
-            'PMS'],
+              'nausea',
+              'bloating',
+              'indigestion',
+              'fatigue',
+              'snacky',
+              'PMS',
+            ],
           },
-        ]
+        ],
       },
     ],
   },
 });
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'username' });
-
 
 const User = mongoose.model('User', userSchema);
 
