@@ -10,13 +10,23 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Icon from '@material-ui/core/Icon';
 
 //thunk
 import { logout } from '../store';
+import SvgIcon from '@material-ui/icons/Menu';
+import LogoSVG from '../images/Logo_Update.svg'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+  },
+  imgContainer: {
+    width: "3%",
+    width: "3%",
+  },
+  img: {
+    objectFit: "cover"
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -24,7 +34,19 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  imageIcon: {
+    width: '100%',
+    heigth: '100%'
+  },
 }));
+
+const CycleIcon = () => {
+  const classes = useStyles()
+  return (
+    <Icon><img className={classes.imageIcon} src={LogoSVG}/></Icon>
+  )
+}
+
 
 function Navbar(props) {
   const dispatch = useDispatch();
@@ -54,7 +76,7 @@ function Navbar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar>
           <IconButton
             edge="start"
@@ -62,7 +84,7 @@ function Navbar(props) {
             color="inherit"
             aria-label="menu"
           >
-            <MenuIcon />
+            <SvgIcon component={CycleIcon} viewBox="0 0 600 476.6"/>
           </IconButton>
           {auth && (
             <div>

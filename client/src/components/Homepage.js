@@ -6,7 +6,7 @@ export default function Homepage () {
     const classes = useStyles()
     return (
         <div className={classes.container}>
-            <img src={require('../images/Logo.png')} className={classes.image} />
+            <img src={require('../images/Logo_Update.svg')} className={classes.image} />
             <Auth />
         </div>
     )
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
     image: {
       marginTop: "5vh",
-      width: "20vw",
+      width: "30vw",
       alignSelf: "center"
     },
     root: {

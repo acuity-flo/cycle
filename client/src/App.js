@@ -39,7 +39,7 @@ function App(props) {
             <Route exact path="/me" component={UserProfile} />
             <Route exact path="/calendar" component={CalendarView} />
             <Route exact path="/charts" component={ChartHome} />
-            <Route path="/" component={financeUpdate} />
+            {/* <Route path="/" component={Homepage} /> // need thisto be a 404 */}
           </Switch>
         )}
 
