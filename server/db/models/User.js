@@ -62,7 +62,7 @@ const userSchema = new Schema({
           type: String,
           tag: {
             enum: ['mood', 'emotion', 'pain', 'other', 'custom'],
-            default: custom,
+            default: 'custom',
           },
         },
       ],
