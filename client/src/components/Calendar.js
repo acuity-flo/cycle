@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 import { Modal, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+//TEST
+import PeriodUpdate from '../forms/PeriodUpdate'
+
 function CalendarView(props) {
   const [value, onChange] = useState(new Date());
   const user = props.authUser;
@@ -13,10 +16,11 @@ function CalendarView(props) {
   // const finance = user.financial;
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
-  // const handleOpen = () => {setOpen(true)}
+
   const handleClose = () => {
     setOpen(false);
   };
+
 
   const classes = useStyles();
 
@@ -62,10 +66,11 @@ function CalendarView(props) {
         className={classes.modal}
       >
         <div className={classes.paper}>
-          <div>in modal {moment(date).format('MM DD YYYY')}</div>
-          <Button>add period stuff</Button>
+          <div>Date: {moment(date).format('MM DD YYYY')}</div>
+          <PeriodUpdate date={date} user={user}/> 
         </div>
       </Modal>
+
     </div>
   );
 }
