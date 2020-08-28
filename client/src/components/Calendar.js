@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import { connect } from 'react-redux';
 // import DayModal from '../forms/CalendarDayModal';
-import { Modal, Button } from '@material-ui/core';
+import { Modal, Button, Dialog, DialogTitle, DialogContent, DialogContentText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 //TEST
@@ -13,6 +13,7 @@ import SymptomUpdate from '../forms/SymptomUpdate'
 
 function CalendarView(props) {
   const [value, onChange] = useState(new Date());
+  const [scroll, setScroll] = React.useState('paper');
   const user = props.authUser;
   const period = user.period;
   const finance = user.financial;
@@ -64,12 +65,13 @@ function CalendarView(props) {
         (note: period/symptom/finance data will be displayed on the calendar in
         diff colors)
       </p>
-      <Modal
+      {/* <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         className={classes.modal}
+        disableScrollLock="true"
       >
         <div className={classes.paper}>
           <div>Date: {moment(date).format('MM DD YYYY')}</div>
@@ -83,7 +85,31 @@ function CalendarView(props) {
           <br />
           <FinanceUpdate date={date} user={user} />
         </div>
-      </Modal>
+      </Modal> */}
+        <Dialog
+        open={open}
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        <DialogTitle id="scroll-dialog-title">Form</DialogTitle>
+        <DialogContent className={classes.paper}>
+          <DialogContentText>
+          <div>Date: {moment(date).format('MM DD YYYY')}</div>
+          <p>(if you have data for this day, it will be displayed here)</p>
+          <br />
+          <PeriodUpdate date={date} user={user} />
+          <br />
+          <br />
+          <SymptomUpdate date={date} user={user} />
+          <br />
+          <br />
+          <FinanceUpdate date={date} user={user} />
+          </DialogContentText>
+
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
@@ -91,8 +117,6 @@ function CalendarView(props) {
 const useStyles = makeStyles((theme) => ({
   modal: { display: 'flex', alignItems: 'center', justifyContent: 'center' },
   paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
