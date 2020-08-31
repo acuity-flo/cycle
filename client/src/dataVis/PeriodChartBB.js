@@ -146,19 +146,48 @@ import React, { Component } from "react";
 
 // component and styles
 import BillboardChart from "react-billboardjs";
-
+import * as d3 from "d3"
 
 
 
 export default function PeriodChartBB () {
   const CHART_DATA = {
-    columns: [
-      ["data1", 30, 20, 50, 40, 60, 50],
-      ["data2", 200, 130, 90, 240, 130, 220],
-      ["data3", 300, 200, 160, 400, 250, 250, 450]
-    ],
-    type: "line",
-    labels: true
+    x: "x",
+    json: {
+      flow: ["1", "2", "4", "2", "5"],
+      // dates 
+      x: ["04-01-2015", "04-02-2015", "04-03-2015", "04-04-2015","04-05-2015"]    
+    },
+    // columns: [
+    //   ["data1", 30, 20, 50, 40, 60, 50],
+    //   ["data2", 200, 130, 90, 240, 130, 220],
+    //   ["data3", 300, 200, 160, 400, 250, 250, 450]
+    // ],
+    type: "bubble",
+    labels: true, 
+    xFormat: "%m-%d-%Y", 
+    }
+
+
+
+  const CHART_XAXIS = {
+      x: {
+        tick: {
+          fit: false,
+          count: 5
+        },
+        type: "timeseries"
+      }
   }
-  return (<BillboardChart data={CHART_DATA} />)
+
+  const CHART_TOOLTIP = {
+      format: {
+        title: function(x) {
+      return d3.timeFormat("%m-%d-%Y")(x);
+     }
+      }
+  }
+
+  return (<BillboardChart data={CHART_DATA} axis={CHART_XAXIS} tooltip = {CHART_TOOLTIP}/>)
 }
+
