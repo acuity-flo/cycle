@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 function PeriodChartBB (props) {
   let { start, end, authUser} = props;
   let CHART_AXIS, CHART_TOOLTIP, CHART_DATA
-
+  // let ref = useRef(null) //????
   const flow = (element) => {
     if (element.typeOfFlow === 'spotting') {
       element.typeOfFlow = "1";
@@ -50,8 +50,7 @@ function PeriodChartBB (props) {
   CHART_AXIS = {
     x: {
       tick: {
-        fit: false,
-        count: 5
+        fit: true
       },
       type: "timeseries"
     },

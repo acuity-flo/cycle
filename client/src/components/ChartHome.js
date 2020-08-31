@@ -60,7 +60,7 @@ export default function ChartHome() {
       <Button onClick={onClick}>set</Button>
       <br />
       <br />
-      {choseDate ? <PeriodChart start={start} end={end} /> : ''}
+      {/* {choseDate ? <PeriodChart start={start} end={end} /> : ''} */}
       <br />
       <br />
       <br />
