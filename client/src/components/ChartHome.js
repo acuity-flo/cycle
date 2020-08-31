@@ -64,7 +64,7 @@ export default function ChartHome() {
       <br />
       <br />
       <br />
-      <PeriodChartBB />
+      {choseDate ? <PeriodChartBB start={start} end={end} /> : ''}
       {/* <PeriodChart start={start} end={end} /> */}
       <br />
       <p>click here to see your period data</p>
