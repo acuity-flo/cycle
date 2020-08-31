@@ -8,6 +8,8 @@ import omit from 'lodash/omit';
 import 'react-dates/lib/css/_datepicker.css';
 import Button from '@material-ui/core/Button';
 
+import PeriodChartBB from '../dataVis/PeriodChartBB'
+
 export default function ChartHome() {
   const [start, setStart] = useState(moment());
   const [end, setEnd] = useState(moment());
@@ -59,6 +61,10 @@ export default function ChartHome() {
       <br />
       <br />
       {choseDate ? <PeriodChart start={start} end={end} /> : ''}
+      <br />
+      <br />
+      <br />
+      <PeriodChartBB />
       {/* <PeriodChart start={start} end={end} /> */}
       <br />
       <p>click here to see your period data</p>
