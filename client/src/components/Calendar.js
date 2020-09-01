@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import { connect } from 'react-redux';
 // import DayModal from '../forms/CalendarDayModal';
-import { Modal, Button, Dialog, DialogTitle, DialogContent, DialogContentText } from '@material-ui/core';
+import { Modal, Button, Dialog, DialogTitle, DialogContent, DialogContentText, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 //TEST
@@ -51,6 +51,7 @@ function CalendarView(props) {
   return (
     <div>
       <h1>CALENDAR</h1>
+      <Container maxWidth="xs">
       <Calendar
         onChange={onChange}
         value={value}
@@ -60,6 +61,7 @@ function CalendarView(props) {
         }}
         tileClassName={classesFunc}
       ></Calendar>
+      </Container>
       <br />
       <p>
         (note: period/symptom/finance data will be displayed on the calendar in

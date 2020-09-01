@@ -71,8 +71,8 @@ const AuthForm = (props) => {
       </FormControl>
       <FormLabel className={classes.inputLabel}>If you know you average cycle length, enter it above. We will set your average cycle length to 28 days if not entered.</FormLabel>
       </Fragment>}
-      <Button variant="outline" color="primary" type="submit" className={classes.button}>Submit</Button>
-      <Button variant="outline" color="primary" onClick={() => type === "login" ? setType('signup') : setType('login')} className={classes.button}>{type === "login" ? "New User? Sign Up Now" : "Already a User? Login"}</Button>
+      <Button variant="outlined" color="primary" type="submit" className={classes.button}>Submit</Button>
+      <Button variant="outlined" color="primary" onClick={() => type === "login" ? setType('signup') : setType('login')} className={classes.button}>{type === "login" ? "New User? Sign Up Now" : "Already a User? Login"}</Button>
     </form>
     </div>
 
@@ -124,7 +124,9 @@ const useStyles = makeStyles((theme) => ({
     width: "20vw"
   },
   button: {
-    margin: "0.5em"
+    margin: "0.5em",
+    backgroundColor: "white",
+    color: "#545454"
   }
 }));
 

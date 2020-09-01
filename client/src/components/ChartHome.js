@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import omit from 'lodash/omit';
 import 'react-dates/lib/css/_datepicker.css';
-import Button from '@material-ui/core/Button';
+import {Button, Container} from '@material-ui/core';
 
 import PeriodChartBB from '../dataVis/PeriodChartBB'
 
@@ -45,6 +45,7 @@ export default function ChartHome() {
 
   return (
     <div>
+      <Container maxWidth="xs">
       <h2>HOME OF CHARTS</h2>
       <DateRangePicker
         startDate={start}
@@ -58,6 +59,7 @@ export default function ChartHome() {
         isOutsideRange={() => false}
       />
       <Button onClick={onClick}>set</Button>
+      </Container>
       <br />
       <br />
       {choseDate ? <PeriodChart start={start} end={end} /> : ''}
