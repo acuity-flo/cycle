@@ -4,16 +4,31 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 
+//thunk
 import { addSymptomData } from '../store'
 
 export default function SymptomUpdate (props) {
+  // user and symptom data for day opened by the calendar if anything for date
   const user = props.user
-  const todayData = props.user.symptomTags.filter(el => moment(el.date).isSame(props.date))
+  let todayDataIdx = undefined;
+  const todayData = props.user.symptomTags.filter((el, index) => {
+    if (moment(el.date).isSame(props.date)) {
+      todayDataIdx = index;
+      return el;
+    }
+  });
+
+  //set classes for styles
   const classes = useStyles()
+
+  //to dispatch thunk
   const dispatch = useDispatch()
+
+  //set symptoms to empty array to start
   const [symptoms, setSymptoms] = useState([])
   const [loading, setLoading] = useState(true)
 
+  //called in useEffect, loads data to symptoms on state
   const loadData = () => {
     setSymptoms([
       {
@@ -114,9 +129,12 @@ export default function SymptomUpdate (props) {
     newSymptoms[evt.target.name].bool = evt.target.checked
     setSymptoms(newSymptoms)
   }
+
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    const updatedSymptoms = symptoms.reduce((acc, el) => {
+    const updatedSymptomTags = [...user.symptomTags]
+
+    symptoms.reduce((acc, el) => {
       if (el.bool) {
         const obj = {
           symptomName: el.name,
@@ -127,26 +145,25 @@ export default function SymptomUpdate (props) {
       return acc
     }, [])
 
-    const symptomsObj = {
-      date: props.date,
-      symptoms: updatedSymptoms
-    }
-
-    let newSymptomsTagsArr
-    if(todayData[0]) {
-      newSymptomsTagsArr = user.symptomTags.map(el => {
-        if (moment(el.date).isSame(props.date)) {
-          el.symptoms = updatedSymptoms
-          return el
-        } else {
-          return el
+    // only if array has some symptoms dispatch with update for today
+    // elif data for today was completely removed, delete obj for the day
+    if (symptoms.length) {
+      if (todayDataIdx) {
+        updatedSymptomTags[todayDataIdx].symptoms = symptoms
+      } else {
+        const symptomsObj = {
+          date: props.date,
+          symptoms
         }
-      })
-    } else {
-      newSymptomsTagsArr = [...user.symptomTags, symptomsObj]
+        updatedSymptomTags.push (symptomsObj)
+      }
+      dispatch(addSymptomData(user.username, updatedSymptomTags))
+    } else if (todayDataIdx) {
+      // remove obj from array if no symptoms
+      updatedSymptomTags = updatedSymptomTags.splice(todayDataIdx, 1)
+      // dispatch thunk
+      dispatch(addSymptomData(user.username, updatedSymptomTags))
     }
-
-    dispatch(addSymptomData(user.username, newSymptomsTagsArr))
   }
 
   useEffect(() => {
