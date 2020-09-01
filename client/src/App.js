@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 
@@ -17,16 +17,19 @@ import ErrorComp from './components/404'
 
 
 function App(props) {
+  const [loading, setLoading] = useState(true)
   const user = props.authUser;
   const isLoggedIn = props.isLoggedIn;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(authMe());
+    setLoading(false)
   }, [dispatch]);
 
   console.log(user);
 
   //Need to figure out Auth form loads before route path
+  if(!loading) {
   return (
     <Router>
       <NavBar />
@@ -50,7 +53,17 @@ function App(props) {
       </Switch>
     </Router>
   );
+  }
+ else {
+  return (
+     <Router>
+     <NavBar />
+     <h1>LOADIN</h1>
+     </Router>
+  )
 }
+}
+
 
 const mapState = (state) => {
   return {
