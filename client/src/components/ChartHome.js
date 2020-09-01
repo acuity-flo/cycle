@@ -9,7 +9,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import Button from '@material-ui/core/Button';
 
 import PeriodChartBB from '../dataVis/PeriodChartBB'
-
+import FinanceChartBB from '../dataVis/FinanceChart'
 export default function ChartHome() {
   const [start, setStart] = useState(moment());
   const [end, setEnd] = useState(moment());
@@ -60,7 +60,7 @@ export default function ChartHome() {
       <Button onClick={onClick}>set</Button>
       <br />
       <br />
-      {choseDate ? <PeriodChart start={start} end={end} /> : ''}
+      {/* {choseDate ? <PeriodChart start={start} end={end} /> : ''} */}
       <br />
       <br />
       <br />
@@ -69,6 +69,7 @@ export default function ChartHome() {
       <br />
       <p>click here to see your period data</p>
       <br />
+      {choseDate ? <FinanceChartBB start={start} end={end} /> : ''}
       <h4>symptoms chart</h4>
       <br />
       <p>click here to see your symptoms data</p>
