@@ -17,6 +17,7 @@ function CalendarView(props) {
   const user = props.authUser;
   const period = user.period;
   const finance = user.financial;
+  const symptoms = user.symptomTags
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
 
@@ -28,7 +29,7 @@ function CalendarView(props) {
 
   const classesFunc = ({ date, view }) => {
     let classesStr = '';
-    //   //period - colors days of periods
+    //colors string for period, finance, symptoms
     if (
       period &&
       view === 'month' &&
@@ -44,6 +45,9 @@ function CalendarView(props) {
     //   finance - colors days of finance
     if(finance && view==="month" && finance.some(el => moment(el.date).format("MM DD YYYY") ===moment(date).format("MM DD YYYY"))) {
       classesStr+=" finance"
+    }
+    if(symptoms && view==="month" && symptoms.some(el => moment(el.date).format("MM DD YYYY") ===moment(date).format("MM DD YYYY"))) {
+      classesStr+=" symptoms"
     }
     return classesStr;
   };
@@ -94,12 +98,12 @@ function CalendarView(props) {
         scroll={scroll}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
+        classes={classes.dialogBox}
       >
-        <DialogTitle id="scroll-dialog-title">Form</DialogTitle>
+        <DialogTitle id="scroll-dialog-title">Update Information</DialogTitle>
         <DialogContent className={classes.paper}>
           <DialogContentText>
-          <div>Date: {moment(date).format('MM DD YYYY')}</div>
-          <p>(if you have data for this day, it will be displayed here)</p>
+          <div>Date: {moment(date).format('MMMM D, YYYY')}</div>
           <br />
           <PeriodUpdate date={date} user={user} />
           <br />
@@ -117,7 +121,9 @@ function CalendarView(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  modal: { display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  dialogBox: {
+    padding: '2em'
+  },
   paper: {
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),

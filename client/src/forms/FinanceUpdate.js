@@ -2,15 +2,19 @@ import React, { useState } from 'react'
 import { Button, FormControl, MenuItem, Input, InputLabel, Select, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 
 import { addFinanceData } from '../store'
 
 export default function FinanceUpdate (props) {
     const user = props.user
+    const todayData = user.financial.filter(el => moment(el.date).isSame(props.date))
     const classes = useStyles()
     const dispatch = useDispatch()
     const [purchases, setPurchases] = useState([{typeOfPurchase: '', cost: ''}])
-
+    // if (todayData[0]) {
+    //     setPurchases(todayData)
+    // }
     const handleChangeType = (evt) => {
         const newPurchases = [...purchases]
         newPurchases[evt.target.name].typeOfPurchase = evt.target.value
@@ -31,8 +35,6 @@ export default function FinanceUpdate (props) {
                 purchases
             }
             const updatedPurchases = [...user.financial, financeObj]
-            console.log('fiannceObj', financeObj)
-            console.log('updated purchases', updatedPurchases)
             dispatch(addFinanceData(user.username, updatedPurchases))
         }
     }
@@ -41,9 +43,10 @@ export default function FinanceUpdate (props) {
             <Typography id="discrete-slider-restrict" gutterBottom>
             Finances
             </Typography>
+            {todayData[0] && <Typography variant="body2" gutterBottom>
+            Today's Purchases: {todayData[0].purchases.map(el => <p>{el.typeOfPurchase.toUpperCase()}: {el.cost}</p>)}
+            </Typography>}
             {purchases.map((el, index) =>{
-                console.log("el", el)
-                console.log("index", index)
             return (
             <div key={index}>
                 <FormControl name="cost" value={index} className={classes.inputItem}>
