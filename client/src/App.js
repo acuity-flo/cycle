@@ -6,16 +6,15 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { authMe } from './store';
 
 //Component Imports
+import HomePage from './components/HomePage'
 import CalendarView from './components/Calendar';
-import Homepage from './components/Homepage';
+import LoginPage from './components/LoginPage';
 import UserProfile from './components/UserProfile';
 import ChartHome from './components/ChartHome';
 import NavBar from './components/NavBar';
-import Auth from './forms/Auth';
+import ErrorComp from './components/404'
 
-//DataVis Imports
-// import PeriodChart from "./dataVis/PeriodChart"
-import financeUpdate from './forms/FinanceUpdate';
+
 
 function App(props) {
   const user = props.authUser;
@@ -32,19 +31,22 @@ function App(props) {
     <Router>
       <NavBar />
       <Switch>
-        <Route exact path="/" component={Homepage} />
-
+        <Route exact path="/" component={HomePage} />
+        {/* <Route exact path="/login" component={LoginPage} /> */}
         {isLoggedIn && (
           <Switch>
             <Route exact path="/me" component={UserProfile} />
             <Route exact path="/calendar" component={CalendarView} />
             <Route exact path="/charts" component={ChartHome} />
-            {/* <Route path="/" component={Homepage} /> // need thisto be a 404 */}
+            <Route component = {ErrorComp} />
           </Switch>
         )}
 
         {/* Default component */}
-        <Route component={Auth} />
+        {!isLoggedIn &&
+              <Route component={LoginPage} />
+        }
+
       </Switch>
     </Router>
   );

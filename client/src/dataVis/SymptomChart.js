@@ -72,7 +72,7 @@ const UTIL_SYMPTOM = (symptomData, start, end) => {
     }),
     symptomObj["emotion"].map((el,idx) => {
       if(idx>0){
-        return UTIL_SYMPTOMS_LIST["emotion"].indexOf(el) 
+        return UTIL_SYMPTOMS_LIST["emotion"].indexOf(el)
       }else{
         return el
       }
@@ -143,7 +143,11 @@ function SymptomChartBB(props) {
     },
     columns: symptomCol.columns, 
     type: 'scatter',
-    // labels: false,
+    labels: {
+      format: (y) => {
+        console.log("Y AXIS ISH",y)
+      }
+    },
     xFormat: '%m-%d-%Y',
   };
 
@@ -154,6 +158,14 @@ function SymptomChartBB(props) {
       },
       type: 'timeseries',
     },
+    y:{
+      tick: {
+        show: false, 
+        text:{
+          show: false
+        }
+      }
+    }
 
 
   };
