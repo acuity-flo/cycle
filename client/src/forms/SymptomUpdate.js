@@ -132,9 +132,9 @@ export default function SymptomUpdate (props) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    const updatedSymptomTags = [...user.symptomTags]
+    let updatedSymptomTags
 
-    symptoms.reduce((acc, el) => {
+    const updatedSymptoms = symptoms.reduce((acc, el) => {
       if (el.bool) {
         const obj = {
           symptomName: el.name,
@@ -147,20 +147,27 @@ export default function SymptomUpdate (props) {
 
     // only if array has some symptoms dispatch with update for today
     // elif data for today was completely removed, delete obj for the day
-    if (symptoms.length) {
-      if (todayDataIdx) {
-        updatedSymptomTags[todayDataIdx].symptoms = symptoms
+    if (updatedSymptoms.length) {
+      if (todayDataIdx !== undefined) {
+        updatedSymptomTags = [...user.symptomTags]
+        updatedSymptomTags[todayDataIdx].symptoms = updatedSymptoms
       } else {
+        updatedSymptomTags = [...user.symptomTags]
         const symptomsObj = {
           date: props.date,
-          symptoms
+          symptoms: updatedSymptoms
         }
         updatedSymptomTags.push (symptomsObj)
       }
       dispatch(addSymptomData(user.username, updatedSymptomTags))
-    } else if (todayDataIdx) {
+    } else if (todayDataIdx !== undefined) {
+      updatedSymptomTags = [...user.symptomTags]
       // remove obj from array if no symptoms
-      updatedSymptomTags = updatedSymptomTags.splice(todayDataIdx, 1)
+      if (todayDataIdx === 0) {
+        updatedSymptomTags = updatedSymptomTags.slice(1)
+      } else {
+        updatedSymptomTags = updatedSymptomTags.splice(todayDataIdx-1, 1)
+      }
       // dispatch thunk
       dispatch(addSymptomData(user.username, updatedSymptomTags))
     }
