@@ -30,6 +30,7 @@ export default function SymptomUpdate (props) {
 
   //called in useEffect, loads data to symptoms on state
   const loadData = () => {
+    console.log('loading data in symptoms')
     setSymptoms([
       {
         name: 'stressed',
@@ -163,11 +164,7 @@ export default function SymptomUpdate (props) {
     } else if (todayDataIdx !== undefined) {
       updatedSymptomTags = [...user.symptomTags]
       // remove obj from array if no symptoms
-      if (todayDataIdx === 0) {
-        updatedSymptomTags = updatedSymptomTags.slice(1)
-      } else {
-        updatedSymptomTags = updatedSymptomTags.splice(todayDataIdx-1, 1)
-      }
+      updatedSymptomTags = updatedSymptomTags.splice(todayDataIdx, 1)
       // dispatch thunk
       dispatch(addSymptomData(user.username, updatedSymptomTags))
     }

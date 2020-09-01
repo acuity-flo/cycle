@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import {
   Button,
   FormControl,
@@ -7,6 +7,7 @@ import {
   InputLabel,
   Select,
   Typography,
+  Grid
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
@@ -26,6 +27,8 @@ export default function FinanceUpdate(props) {
     }
   });
 
+  console.log('todayData in finance', todayData)
+
   //set classes for the styles
   const classes = useStyles();
 
@@ -39,10 +42,12 @@ export default function FinanceUpdate(props) {
 
   //below called with useEffect to set purchases on state
   const loadData = () => {
-    if (todayDataIdx) {
-    setPurchases(todayData[0].purchases)
+    if (todayDataIdx !== undefined) {
+      //spread purchases from todayData and then spread the objects within it
+      const purchaseSet = [...todayData[0].purchases.map(el => {return {...el}})]
+      setPurchases(purchaseSet)
     } else {
-    setPurchases([{ typeOfPurchase: "", cost: "" }])
+      setPurchases([{ typeOfPurchase: "", cost: "" }])
     }
   }
 
@@ -65,14 +70,23 @@ export default function FinanceUpdate(props) {
     setPurchases([...purchases, { typeOfPurchase: "", cost: "" }]);
   };
 
+  const handleDeleteRow = (evt) => {
+    const idx = evt.currentTarget.name
+    let newPurchases = [...purchases]
+    newPurchases.splice(idx, 1)
+    setPurchases(newPurchases)
+  };
+
   //submit the finances updates
   const handleSubmit = (evt) => {
-    if (purchases.length) {
-      purchases.filter((el) => el.typeOfPurchase !== "")
+    evt.preventDefault()
+    if (purchases.length > 0) {
+      const purchasesUpdated = purchases.filter((el) => el.typeOfPurchase !== "")
       let updatedFinancial
-      if (todayDataIdx) {
+      if (todayDataIdx !== undefined) {
+        //spread financial data here, but it's a shallow copy.
         updatedFinancial = [...user.financial];
-        updatedFinancial[todayDataIdx].purchases = purchases;
+        updatedFinancial[todayDataIdx].purchases = purchasesUpdated;
       } else {
         const financeObj = {
           date: props.date,
@@ -80,6 +94,10 @@ export default function FinanceUpdate(props) {
         };
         updatedFinancial = [...user.financial, financeObj];
       }
+      dispatch(addFinanceData(user.username, updatedFinancial));
+    } else if (todayDataIdx !== undefined) {
+      let updatedFinancial = [...user.financial]
+      updatedFinancial.splice(todayDataIdx, 1)
       dispatch(addFinanceData(user.username, updatedFinancial));
     }
   };
@@ -96,16 +114,18 @@ export default function FinanceUpdate(props) {
       {todayDataIdx && (
         <Typography variant="body2" gutterBottom>
           Today's Purchases:{" "}
-          {purchases.map((el) => (
+          {todayData[0].purchases.map((el) => (
             <p>
               {el.typeOfPurchase.toUpperCase()}: {el.cost}
             </p>
           ))}
         </Typography>
       )}
+      <Grid container xs={12}>
       {purchases.map((el, index) => {
         return (
-          <div key={index}>
+          <Fragment>
+            <Grid item xs={5}>
             <FormControl
               name="cost"
               value={index}
@@ -114,6 +134,8 @@ export default function FinanceUpdate(props) {
               <InputLabel htmlFor="cost">Cost</InputLabel>
               <Input id="cost" name={index} value={el.cost} onChange={handleChangeCost} />
             </FormControl>
+            </Grid>
+            <Grid item xs={5} >
             <FormControl className={classes.inputItem}>
               <InputLabel id="financeType">Type</InputLabel>
               <Select
@@ -131,9 +153,14 @@ export default function FinanceUpdate(props) {
                 )}
               </Select>
             </FormControl>
-          </div>
+            </Grid>
+            <Grid item xs={2}>
+              <Button name={index} onClick={handleDeleteRow}>x</Button>
+            </Grid>
+          </Fragment>
         );
       })}
+      </Grid>
       <Button onClick={handleAddRow}>+</Button>
       <Button onClick={handleSubmit}>Update Finances</Button>
     </div>
@@ -146,6 +173,6 @@ const useStyles = makeStyles({
     flexDirection: "column",
   },
   inputItem: {
-    width: "50%",
+    width: "95%",
   },
 });

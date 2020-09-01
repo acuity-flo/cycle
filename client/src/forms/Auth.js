@@ -16,25 +16,22 @@ const AuthForm = (props) => {
     setPronouns(event.target.value)
   }
 
-      const handleSubmit = async (event) => {
-      event.preventDefault()
-      const formName = event.target.name
-      const user = {
-        email: event.target.email.value,
-        password: event.target.password.value
-      }
-      if (formName === 'signup') {
-        user.username = event.target.username.value
-        user.name = event.target.fullName.value
-        user.pronouns = event.target.pronouns.value
-        user.avgLengthOfCycle = event.target.cyclelength.value
-      }
-      // const reply = await dispatch(authUserThunk(user, formName))
-      // console.log('REPLY',reply)
-      dispatch(authUserThunk(user, formName))
-      props.history.push('/me')
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const formName = event.target.name
+    const user = {
+      email: event.target.email.value,
+      password: event.target.password.value
     }
-
+    if (formName === 'signup') {
+      user.username = event.target.username.value
+      user.name = event.target.fullName.value
+      user.pronouns = event.target.pronouns.value
+      user.avgLengthOfCycle = event.target.cyclelength.value
+    }
+    dispatch(authUserThunk(user, formName))
+    props.history.push('/me')
+  }
 
   return (
     <div className={classes.container}>
@@ -78,26 +75,6 @@ const AuthForm = (props) => {
 
   )
 }
-
-// const mapDispatch = dispatch => {
-//   return {
-//     handleSubmit(event) {
-//       event.preventDefault()
-//       const formName = event.target.name
-//       const user = {
-//         email: event.target.email.value,
-//         password: event.target.password.value
-//       }
-//       if (formName === 'signup') {
-//         user.username = event.target.username.value
-//         user.name = event.target.fullName.value
-//         user.pronouns = event.target.pronouns.value
-//         user.avgLengthOfCycle = event.target.cyclelength.value
-//       }
-//       dispatch(authUserThunk(user, formName))
-//     }
-//   }
-// }
 
 const useStyles = makeStyles((theme) => ({
   container: {

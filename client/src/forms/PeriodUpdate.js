@@ -105,15 +105,12 @@ export default function PeriodForm(props) {
       // setSuccess(true)
     } else if (todayDataIdx !== undefined) {
       let updatedPeriod = [...props.user.period];
+
       //remove obj from array when reset to 0
-      if (todayDataIdx === 0) {
-        updatedPeriod = updatedPeriod.slice(1);
-      } else {
-        updatedPeriod = updatedPeriod.splice(todayDataIdx-1, 1);
-      }
+      updatedPeriod = updatedPeriod.splice(todayDataIdx, 1);
 
       //dispatch thunk
-      dispatch(addPeriodData(props.user.username, updatedPeriod));
+      dispatch(addPeriodData(user.username, updatedPeriod));
     }
   };
 
