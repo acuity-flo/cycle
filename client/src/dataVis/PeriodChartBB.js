@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 
 function PeriodChartBB (props) {
-  let { start, end, authUser} = props;
+  let { start, end, user} = props;
   let CHART_AXIS, CHART_TOOLTIP, CHART_DATA
   // let ref = useRef(null) //????
   const flow = (element) => {
@@ -26,7 +26,7 @@ function PeriodChartBB (props) {
     return element;
   }
 
-  const periodData = props.user.period;
+  const periodData = user.period;
 
   //map over array with flow util fxn
   const flowObj = periodData.reduce((acc, el) => {

@@ -47,6 +47,15 @@ export default function PeriodForm(props) {
   const [error, setError] = useState(false)
   const [success, setSuccess] = useState(false)
 
+  let defaultValue = 0
+  if (todayData[0]) {
+    if (todayData[0].typeOfFlow === "spotting") defaultValue = 1
+    if (todayData[0].typeOfFlow === "light") defaultValue = 2
+    if (todayData[0].typeOfFlow === "medium") defaultValue = 3
+    if (todayData[0].typeOfFlow === "heavy") defaultValue = 4
+  }
+
+
   const handleChange = (evt, newValue) => {
     setFlow(newValue)
   }
@@ -99,7 +108,7 @@ export default function PeriodForm(props) {
         Nothing currently logged
       </Typography>}
       <Slider
-        defaultValue={0}
+        defaultValue={defaultValue}
         aria-labelledby="discrete-slider-always"
         step={1}
         valueLabelDisplay="off"
@@ -108,8 +117,8 @@ export default function PeriodForm(props) {
         max = {4}
         onChange = {handleChange}
       />
-      {success && <p>Added successfully!</p>}
-      {loading && <p>Loading</p>}
+      {/* {success && <p>Added successfully!</p>}
+      {loading && <p>Loading</p>} */}
       <Grid container justify="center">
         <Button color="primary" onClick = {handleSubmit}>Update Data</Button>
       </Grid>
