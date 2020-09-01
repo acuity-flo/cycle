@@ -13,6 +13,50 @@
       { "date": "2020-06-08", "typeOfFlow": "medium" },
       { "date": "2020-06-09", "typeOfFlow": "heavy" },
       { "date": "2020-06-010", "typeOfFlow": "spotting" }
+    ],
+    "symptomTags": [
+      {
+        "date": "2020-06-05",
+        "symptoms": [
+          { "symptomName": "calm", "category": "mood" },
+          { "symptomName": "stressed", "category": "mood" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-06-06",
+        "symptoms": [
+          { "symptomName": "calm", "category": "mood" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-06-07",
+        "symptoms": [
+          { "symptomName": "cramps", "category": "pain" },
+          { "symptomName": "back pain", "category": "physical" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-06-08",
+        "symptoms": [
+          { "symptomName": "cramps", "category": "pain" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-06-09",
+        "symptoms": [
+          { "symptomName": "indegestion", "category": "physical" },
+          { "symptomName": "stressed", "category": "mood" },
+          { "symptomName": "snacky", "category": "physical" }
+        ]
+      },
+      {
+        "date": "2020-06-010",
+        "symptoms": { "symptomName": "snacky", "category": "physical" }
+      }
     ]
   },
   "dummyPerson2": {
@@ -35,5 +79,3 @@
     ]
   }
 }
-
-
