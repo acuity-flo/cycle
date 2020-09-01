@@ -7,6 +7,13 @@ import * as d3 from 'd3';
 import moment from 'moment';
 import { connect } from 'react-redux';
 
+const UTIL_SYMPTOMS_LIST = {
+  mood: ["stressed", "calm", "motivated", "unmotivated"],
+  emotion: ["happy", "sad", "angry", "frustrated","anxious"],
+  pain: ["cramps", "headache","back pain"],
+  physical: [ "nausea", "bloating", "indigestion", "snacky", "pms"]
+}
+
 const UTIL_SYMPTOM = (symptomData, start, end) => {
   const symptomObj = symptomData.reduce(
     (acc, el) => {
@@ -37,20 +44,83 @@ const UTIL_SYMPTOM = (symptomData, start, end) => {
       return acc;
     },
     {
-      mood: [],
-      mood_x: [],
-      emotion: [],
-      emotion_x: [],
-      pain: [],
-      pain_x: [],
-      physical: [],
-      physical_x: [],
-      custom: [],
-      custom_x: [],
+      mood: ["mood"],
+      mood_x: ["mood_x"],
+      emotion: ["emotion"],
+      emotion_x: ["emotion_x"],
+      pain: ["pain"],
+      pain_x: ["pain_x"],
+      physical: ["physical"],
+      physical_x: ["physical_x"],
+      custom: ["custom"],
+      custom_x: ["custom_x"],
     }
   );
-  return symptomObj;
+
+  let columns = [
+    symptomObj["mood_x"],
+    symptomObj["emotion_x"],
+    symptomObj["pain_x"],
+    symptomObj["physical_x"],
+    symptomObj["custom_x"],
+    symptomObj["mood"].map((el,idx) => {
+      if(idx>0){
+        return UTIL_SYMPTOMS_LIST["mood"].indexOf(el) 
+      } else{
+        return el
+      }
+    }),
+    symptomObj["emotion"].map((el,idx) => {
+      if(idx>0){
+        return UTIL_SYMPTOMS_LIST["emotion"].indexOf(el) 
+      }else{
+        return el
+      }
+    }),
+    symptomObj["pain"].map((el,idx) => {
+      if(idx>0){
+        return UTIL_SYMPTOMS_LIST["pain"].indexOf(el) 
+      }else{
+        return el
+      }
+    }),
+    symptomObj["physical"].map((el,idx) => {
+      if(idx>0){
+        return UTIL_SYMPTOMS_LIST["physical"].indexOf(el) 
+      }else{
+        return el
+      }
+    }),
+    symptomObj["custom"].map((el,idx) => {
+      if(idx>0){
+        return UTIL_SYMPTOMS_LIST["custom"].indexOf(el) 
+      }else{
+        return el
+      }
+    }),
+  ]
+  //return columns;
+
+  let labels = [
+    symptomObj["mood"],
+    symptomObj["emotion"],
+    symptomObj["pain"],
+    symptomObj["physical"],
+    symptomObj["custom"],
+  ]
+
+  let data = {
+    columns, 
+    labels
+  }
+
+  return data
 };
+
+
+
+
+
 
 function SymptomChartBB(props) {
   let { start, end, user } = props;
@@ -60,21 +130,18 @@ function SymptomChartBB(props) {
   // let [CHART_TOOLTIP, setChartToolTip] = useState({});
   // let [loading, setLoading] = useState(true);
 
-  let symptomObj = UTIL_SYMPTOM(symptomData, start, end);
+  let symptomCol = UTIL_SYMPTOM(symptomData, start, end);
+  console.log("COL" ,symptomCol)
 
   let CHART_DATA = {
     xs: {
-      // mood: 'mood_x',
-      emotion: 'emotion_x',
-      // pain: 'pain_x',
-      // physical: 'physical_x',
-      // custom: 'custom_x',
+      mood: symptomCol.columns[0][0],
+      emotion: symptomCol.columns[1][0], 
+      pain: symptomCol.columns[2][0],
+      physical: symptomCol.columns[3][0],
+      custom: symptomCol.columns[4][0],
     },
-    columns: [
-      ['emotion_x', '06-04-2020', '06-05-2020', '06-06-2020'],
-      ['emotion', '1', '2', '3'],
-      // ['emotion', 'anxious', 'anxious', 'anxious'],
-    ],
+    columns: symptomCol.columns, 
     type: 'scatter',
     // labels: false,
     xFormat: '%m-%d-%Y',
@@ -87,6 +154,8 @@ function SymptomChartBB(props) {
       },
       type: 'timeseries',
     },
+
+
   };
 
   let CHART_TOOLTIP = {
@@ -97,46 +166,6 @@ function SymptomChartBB(props) {
     },
   };
 
-  // useEffect(() => {
-  //   let symptomObj = UTIL_SYMPTOM(symptomData, start, end);
-  //   console.log(symptomObj);
-
-  //   setChartData = {
-  //     xs: {
-  //       // mood: 'mood_x',
-  //       emotion: 'emotion_x',
-  //       // pain: 'pain_x',
-  //       // physical: 'physical_x',
-  //       // custom: 'custom_x',
-  //     },
-  //     columns: [
-  //       ['emotion_x', '06-04-2020', '06-05-2020', '06-06-2020'],
-  //       ['emotion', 'anxious', 'anxious', 'anxious'],
-  //     ],
-  //     type: 'scatter',
-  //     // labels: false,
-  //     xFormat: '%m-%d-%Y',
-  //   };
-
-  //   setChartAxis = {
-  //     x: {
-  //       tick: {
-  //         fit: true,
-  //       },
-  //       type: 'timeseries',
-  //     },
-  //   };
-
-  //   setChartToolTip = {
-  //     format: {
-  //       title: function (x) {
-  //         return d3.timeFormat('%m-%d-%Y')(x);
-  //       },
-  //     },
-  //   };
-
-  //   setLoading(false);
-  // }, [user, start, end]);
 
   return CHART_DATA && CHART_AXIS && CHART_TOOLTIP ? (
     <BillboardChart

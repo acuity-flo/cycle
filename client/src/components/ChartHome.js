@@ -66,6 +66,7 @@ export default function ChartHome() {
       <br />
       <br />
       <br />
+      <Container>
       <h4>period chart</h4>
       <br />
       {choseDate ? <PeriodChartBB start={start} end={end} /> : ''}
@@ -79,6 +80,7 @@ export default function ChartHome() {
       {choseDate ? <SymptomChartBB start={start} end={end} /> : ''}
       <br />
       <br />
+      </Container>
     </div>
   );
 }
