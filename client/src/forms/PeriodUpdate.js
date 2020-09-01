@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { addPeriodData } from '../store';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
+
 import {
   Button,
   Slider,
-  Typography
+  Typography,
+  Grid
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -35,50 +38,66 @@ const marks = [
 
 
 export default function PeriodForm(props) {
+  const user = props.user
+  const todayData = user.period.filter(el => moment(el.date).isSame(props.date))
   const classes = useStyles();
   const [flow, setFlow] = useState(0)
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   const handleChange = (evt, newValue) => {
     setFlow(newValue)
   }
 
   const handleSubmit = (evt) => {
-    console.log("IM HANDLING", flow)
     evt.preventDefault()
-
+    // setLoading(true)
     if(flow>0){
       const periodObj = {}
-      periodObj["date"] = props.date
+      periodObj.date = props.date
       if(flow === 1){
-        periodObj["typeOfFlow"] = "spotting"
+        periodObj.typeOfFlow = "spotting"
       } else if (flow === 2){
-        periodObj["typeOfFlow"] = "light"
+        periodObj.typeOfFlow = "light"
       } else if (flow === 3){
-        periodObj["typeOfFlow"] = "medium"
+        periodObj.typeOfFlow = "medium"
       } else if (flow === 4){
-      periodObj["typeOfFlow"] = "heavy"
+      periodObj.typeOfFlow = "heavy"
       }
+      let bool = true
+      let updatedPeriod = props.user.period.map(el => {
+        if (moment(el.date).isSame(periodObj.date)) {
+          bool = false
+          el.typeOfFlow = periodObj.typeOfFlow
+          return el
+        } else {
+          return el
+        }
+      })
 
-      let updatedPeriod = []
-      if(props.user.period) {
+      if(bool) {
         updatedPeriod = [...props.user.period, periodObj]
-      } else {
-        updatedPeriod = [periodObj]
       }
-
-      console.log(updatedPeriod , "Updated Period")
       dispatch(addPeriodData(props.user.username, updatedPeriod))
+      // setLoading(false)
+      // setSuccess(true)
     }
 
   }
-
 
   return (
     <div className={classes.root}>
       <Typography id="discrete-slider-restrict" gutterBottom>
         FLOW
       </Typography>
+      {todayData[0] && <Typography variant="body2" gutterBottom>
+        Currently logged: {todayData[0].typeOfFlow}
+      </Typography>}
+      {!todayData[0] && <Typography variant="body2" gutterBottom>
+        Nothing currently logged
+      </Typography>}
       <Slider
         defaultValue={0}
         aria-labelledby="discrete-slider-always"
@@ -89,7 +108,11 @@ export default function PeriodForm(props) {
         max = {4}
         onChange = {handleChange}
       />
-      <Button onClick = {handleSubmit}>Add Period</Button>
+      {success && <p>Added successfully!</p>}
+      {loading && <p>Loading</p>}
+      <Grid container justify="center">
+        <Button color="primary" onClick = {handleSubmit}>Update Data</Button>
+      </Grid>
     </div>
   );
 }
