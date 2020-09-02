@@ -13,6 +13,11 @@ export default function FormContainer(props) {
   const [symptoms, setSymptoms] = useState([]);
   const [flow, setFlow] = useState(0);
   const [purchases, setPurchases] = useState([]);
+  const [symptomsIdx, setSymptomsIdx] = useState(undefined)
+const [financeIdx, setFinanceIdx] = useState(undefined)
+const [flowIdx, setFlowIdx] = useState(undefined)
+
+
 
   const dispatch = useDispatch();
 
@@ -22,11 +27,13 @@ export default function FormContainer(props) {
     const flowStr = UTIL_PERIOD_STR (flow)
     const purchasesUpdated = purchases.filter((el) => el.typeOfPurchase !== "")
 
+    console.log('finance idx', financeIdx)
+
     const update = {
-      date, 
+      date,
       username: user.username,
-      financeUpdate: purchasesUpdated, 
-      symptomUpdate: symptomsReduce, 
+      financeUpdate: purchasesUpdated,
+      symptomUpdate: symptomsReduce,
       flowUpdate: flowStr
     }
 
@@ -35,14 +42,18 @@ export default function FormContainer(props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <PeriodUpdate date={date} user={user} setFlow = {setFlow} flow={flow}/>
+      <PeriodUpdate date={date} user={user} setFlow = {setFlow} flow={flow} flowIdx={flowIdx} setFlowIdx={setFlowIdx}
+
+      />
       <SymptomUpdate
         date={date}
         user={user}
         setSymptoms={setSymptoms}
         symptoms={symptoms}
+        symptomsIdx={symptomsIdx}
+        setSymptomsIdx={setSymptomsIdx}
       />
-      <FinanceUpdate date={date} user={user} setPurchases={setPurchases} purchases = {purchases}/>
+      <FinanceUpdate date={date} user={user} setPurchases={setPurchases} purchases = {purchases} financeIdx={financeIdx} setFinanceIdx={setFinanceIdx}/>
       <Button type="submit">Submit</Button>
     </form>
   );
