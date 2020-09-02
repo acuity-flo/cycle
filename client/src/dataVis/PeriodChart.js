@@ -28,6 +28,7 @@ function PeriodChart(props) {
 
     //manipulates period arr on state
     element.date = moment(element.date).format('MM DD YYYY');
+    console.log(element.date)
     return element;
   };
 

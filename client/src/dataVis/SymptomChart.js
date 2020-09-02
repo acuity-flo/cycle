@@ -20,10 +20,9 @@ const UTIL_SYMPTOM = (symptomData, start, end) => {
 
   const symptomObj = symptomData.reduce(
     (acc, el) => {
-      const newStart = start.subtract(1,'day')
-      const newEnd = end.add(1,'day')
+      console.log("DATE SYMP",el.date)
 
-      if (moment(el.date).isBetween(newStart, newEnd)) {
+      if (moment(el.date).isBetween(start, end)) {
         const dateChange = el.date.slice(0,10)
         el.symptoms.forEach((innerEl) => {
 
@@ -153,7 +152,7 @@ function SymptomChartBB(props) {
     type: 'scatter',
     labels: {
       format: (y) => {
-        console.log("Y AXIS ISH",y)
+        //console.log("Y AXIS ISH",y)
       }
     },
     xFormat: '%m-%d-%Y',
