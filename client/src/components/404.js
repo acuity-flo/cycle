@@ -1,14 +1,13 @@
 import React from 'react'
+import Auth from '../forms/Auth'
 import { makeStyles } from '@material-ui/core/styles'
 
-export default function HomePage () {
+export default function ErrorComp () {
     const classes = useStyles()
     return (
         <div className={classes.container}>
             <img src={require('../images/Logo_Update.svg')} className={classes.image} />
-            <h1>HI IM THE HOMEPAGE</h1>
-            <h1>To Login Press here: </h1> 
-            <a href="/login">HEREEE</a>
+            <h1> OH NO 404</h1>
         </div>
     )
 }

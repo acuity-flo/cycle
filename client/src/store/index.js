@@ -65,20 +65,13 @@ export const authUserThunk = (user, type) => async (dispatch) => {
   }
 };
 
-export const updateUserThunk = (type, username, update, date, todayDataIdx) => async dispatch => {
+// todayDataIdx
+export const updateUserThunk = (update) => async dispatch => {
   try {
     console.log('update user data in redux')
-    console.log('type', type)
-    console.log('username', username)
-    console.log('update', update)
-    console.log('date', date)
-    console.log('todayDataIdx', todayDataIdx)
-    const { data } = await axios.put(`/api/${username}`, {
-      type,
-      update,
-      date,
-      index: todayDataIdx
-    });
+    console.log('update in thunk', update)
+
+    const { data } = await axios.put(`/api/${update.username}`, update);
     dispatch(updateUser(data))
   } catch (e) {
     console.log(e)

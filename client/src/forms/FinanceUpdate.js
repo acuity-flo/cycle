@@ -18,7 +18,7 @@ import { addFinanceData, updateUserThunk } from "../store";
 
 export default function FinanceUpdate(props) {
   //user and finance data for day opened by the calendar, if anything for that date
-  const { user, date } = props;
+  const { user, date, purchases, setPurchases } = props;
   let todayDataIdx = undefined;
   const todayData = user.financial.filter((el, index) => {
     if (moment(el.date).isSame(props.date)) {
@@ -34,7 +34,7 @@ export default function FinanceUpdate(props) {
   const dispatch = useDispatch();
 
   //set purchases array to empty for additions
-  const [purchases, setPurchases] = useState([]);
+  // const [purchases, setPurchases] = useState([]);
 
   //set purchases array with current data or set it with one empty purchase object
 
@@ -60,6 +60,7 @@ export default function FinanceUpdate(props) {
   const handleChangeCost = (evt) => {
     const newPurchases = [...purchases];
     newPurchases[evt.target.name].cost = evt.target.value;
+    console.log("in Finance update - Cost update", newPurchases)
     setPurchases(newPurchases);
   };
 
@@ -72,34 +73,35 @@ export default function FinanceUpdate(props) {
     const idx = evt.currentTarget.name
     let newPurchases = [...purchases]
     newPurchases.splice(idx, 1)
+    console.log("in Finance update - delete", newPurchases)
     setPurchases(newPurchases)
   };
 
   //submit the finances updates
-  const handleSubmit = (evt) => {
-    evt.preventDefault()
-    dispatch(updateUserThunk('financial', user.username, purchases, date, todayDataIdx))
-    // if (purchases.length > 0) {
-    //   const purchasesUpdated = purchases.filter((el) => el.typeOfPurchase !== "")
-    //   let updatedFinancial
-    //   if (todayDataIdx !== undefined) {
-    //     //spread financial data here, but it's a shallow copy.
-    //     updatedFinancial = [...user.financial];
-    //     updatedFinancial[todayDataIdx].purchases = purchasesUpdated;
-    //   } else {
-    //     const financeObj = {
-    //       date: props.date,
-    //       purchases,
-    //     };
-    //     updatedFinancial = [...user.financial, financeObj];
-    //   }
-    //   dispatch(addFinanceData(user.username, updatedFinancial));
-    // } else if (todayDataIdx !== undefined) {
-    //   let updatedFinancial = [...user.financial]
-    //   updatedFinancial.splice(todayDataIdx, 1)
-    //   dispatch(addFinanceData(user.username, updatedFinancial));
-    // }
-  };
+  // const handleSubmit = (evt) => {
+  //   evt.preventDefault()
+  //   dispatch(updateUserThunk('financial', user.username, purchases, date, todayDataIdx))
+  //   // if (purchases.length > 0) {
+  //   //   const purchasesUpdated = purchases.filter((el) => el.typeOfPurchase !== "")
+  //   //   let updatedFinancial
+  //   //   if (todayDataIdx !== undefined) {
+  //   //     //spread financial data here, but it's a shallow copy.
+  //   //     updatedFinancial = [...user.financial];
+  //   //     updatedFinancial[todayDataIdx].purchases = purchasesUpdated;
+  //   //   } else {
+  //   //     const financeObj = {
+  //   //       date: props.date,
+  //   //       purchases,
+  //   //     };
+  //   //     updatedFinancial = [...user.financial, financeObj];
+  //   //   }
+  //   //   dispatch(addFinanceData(user.username, updatedFinancial));
+  //   // } else if (todayDataIdx !== undefined) {
+  //   //   let updatedFinancial = [...user.financial]
+  //   //   updatedFinancial.splice(todayDataIdx, 1)
+  //   //   dispatch(addFinanceData(user.username, updatedFinancial));
+  //   // }
+  // };
 
   useEffect(() => {
     loadData()
@@ -161,7 +163,6 @@ export default function FinanceUpdate(props) {
       })}
       </Grid>
       <Button onClick={handleAddRow}>+</Button>
-      <Button onClick={handleSubmit}>Update Finances</Button>
     </div>
   );
 }

@@ -145,7 +145,11 @@ function SymptomChartBB(props) {
     },
     columns: symptomCol.columns,
     type: 'scatter',
-    // labels: false,
+    labels: {
+      format: (y) => {
+        console.log("Y AXIS ISH",y)
+      }
+    },
     xFormat: '%m-%d-%Y',
   };
 
@@ -156,6 +160,16 @@ function SymptomChartBB(props) {
       },
       type: 'timeseries',
     },
+    y:{
+      tick: {
+        show: false, 
+        text:{
+          show: false
+        }
+      }
+    }
+
+
   };
 
   let CHART_TOOLTIP = {

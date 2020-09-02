@@ -55,6 +55,9 @@ function Navbar(props) {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick = {()=> {
+              props.history.push('/')
+            }}
           >
           {/* <button><SvgIcon component={CycleIcon} viewBox="0 0 24 24"/></button> */}
             <SvgIcon component={CycleIcon} viewBox="0 0 24 24"/>

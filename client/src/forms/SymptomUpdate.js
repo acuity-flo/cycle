@@ -132,16 +132,16 @@ export default function SymptomUpdate (props) {
 
     evt.preventDefault()
 
-    const updatedSymptoms = symptoms.reduce((acc, el) => {
-      if (el.bool) {
-        const obj = {
-          symptomName: el.name,
-          category: el.category
-        }
-        acc.push(obj)
-      }
-      return acc
-    }, [])
+    // const updatedSymptoms = symptoms.reduce((acc, el) => {
+    //   if (el.bool) {
+    //     const obj = {
+    //       symptomName: el.name,
+    //       category: el.category
+    //     }
+    //     acc.push(obj)
+    //   }
+    //   return acc
+    // }, [])
 
     //passing in string that is the type (symptoms, finance, period), username, the new array of symptoms (all for the particular date), the date and the index for the symptomTags object in the symptomTags array
     // dispatch(updateUserThunk('symptoms', user.username, updatedSymptoms, date, todayDataIdx))

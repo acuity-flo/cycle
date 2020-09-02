@@ -104,5 +104,32 @@ const UTIL_PERIOD = (periodData, start, end) => {
   );
   return flowObj;
 };
+ export function UTIL_SYMPTOM_REDUCE (symptoms)  { 
 
-module.exports = { UTIL_FINANCE, UTIL_PERIOD, UTIL_SYMPTOM };
+  return symptoms.reduce((acc, el) => {
+  if (el.bool) {
+    const obj = {
+      symptomName: el.name,
+      category: el.category
+    }
+    acc.push(obj)
+  }
+  return acc
+}, [])
+}
+
+export function UTIL_PERIOD_STR (flow) {
+
+      if (flow === 1) {
+        return "spotting";
+      } else if (flow === 2) {
+        return "light";
+      } else if (flow === 3) {
+        return "medium";
+      } else if (flow === 4) {
+        return "heavy";
+      }
+}
+
+
+
