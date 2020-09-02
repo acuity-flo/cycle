@@ -23,27 +23,31 @@ module.exports = {
   updateUser: async (req, res, next) => {
     try {
       console.log('req.body', req.body)
-      const { period, symptomTags, financial } = req.body;
-      const update = {}
-      if (period) update.period = period
-      if (symptomTags) update.symptomTags = symptomTags
-      if (financial) update.financial = financial
+      const { type, update, date, index } = req.body;
 
-      const foundUser = await User.findOneAndUpdate(
-        { username: req.params.username },
-        update,
-        {
-          upsert: true,
-          runValidators: true,
-        }
+      const foundUser = await User.findOne(
+        { username: req.params.username }
       );
 
-      await foundUser.save()
-      const updatedUser = await User.findOne({
-        username: req.params.username,
-      });
-      console.log('updated USer', updatedUser)
-      res.json(updatedUser)
+      if (type === "period") update.period = period
+      if (type === "symptom") update.symptomTags = symptomTags
+      if (type === "financial") update.financial = financial
+
+      // const foundUser = await User.findOneAndUpdate(
+      //   { username: req.params.username },
+      //   update,
+      //   {
+      //     upsert: true,
+      //     runValidators: true,
+      //   }
+      // );
+
+      // await foundUser.save()
+      // const updatedUser = await User.findOne({
+      //   username: req.params.username,
+      // });
+      // console.log('updated USer', updatedUser)
+      // res.json(updatedUser)
     } catch (err) {
       next(err);
     }

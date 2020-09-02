@@ -57,7 +57,6 @@ export const authUserThunk = (user, type) => async (dispatch) => {
   }
   try {
     const { data } = await axios.post(`/auth/${type}`, post);
-    console.log('data', data);
     const action = authUserAction(data);
     dispatch(action);
     // history.push('/me')
@@ -66,41 +65,61 @@ export const authUserThunk = (user, type) => async (dispatch) => {
   }
 };
 
-export const addPeriodData = (username, periodArr) => {
-  return async (dispatch) => {
-    try {
-      const res = await axios.put(`/api/${username}`, {period: periodArr})
-      dispatch(updateUser(res.data))
-    } catch (e) {
-      console.log(e)
-    }
+export const updateUserThunk = (type, username, update, date, todayDataIdx) => async dispatch => {
+  try {
+    console.log('update user data in redux')
+    console.log('type', type)
+    console.log('username', username)
+    console.log('update', update)
+    console.log('date', date)
+    console.log('todayDataIdx', todayDataIdx)
+    const { data } = await axios.put(`/api/${username}`, {
+      type,
+      update,
+      date,
+      index: todayDataIdx
+    });
+    dispatch(updateUser(data))
+  } catch (e) {
+    console.log(e)
   }
 }
 
-export const addFinanceData = (username, financeArr) => {
-  return async (dispatch) => {
-    try {
-      const res = await axios.put(`/api/${username}`, {financial: financeArr})
-      dispatch(updateUser(res.data))
-    } catch (e) {
-      console.log(e)
-    }
-  }
-}
+// export const addPeriodData = (username, periodArr) => {
+//   return async (dispatch) => {
+//     try {
+//       const res = await axios.put(`/api/${username}`, {period: periodArr})
+//       dispatch(updateUser(res.data))
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   }
+// }
 
-export const addSymptomData = (username, symptomArr) => {
-  console.log("symptoms arr in thunk", symptomArr)
-  return async (dispatch) => {
-    try {
-      console.log('i hit the symptom data thunk')
-      const res = await axios.put(`/api/${username}`, {symptomTags: symptomArr})
-      console.log('res.data', res.data)
-      dispatch(updateUser(res.data))
-    } catch (e) {
-      console.log(e)
-    }
-  }
-}
+// export const addFinanceData = (username, financeArr) => {
+//   return async (dispatch) => {
+//     try {
+//       const res = await axios.put(`/api/${username}`, {financial: financeArr})
+//       dispatch(updateUser(res.data))
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   }
+// }
+
+// export const addSymptomData = (username, symptomArr) => {
+//   console.log("symptoms arr in thunk", symptomArr)
+//   return async (dispatch) => {
+//     try {
+//       console.log('i hit the symptom data thunk')
+//       const res = await axios.put(`/api/${username}`, {symptomTags: symptomArr})
+//       console.log('res.data', res.data)
+//       dispatch(updateUser(res.data))
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   }
+// }
 
 
 //get user if req.user

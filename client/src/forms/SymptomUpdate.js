@@ -4,16 +4,29 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 
-import { addSymptomData } from '../store'
+//thunk
+import { addSymptomData, updateUserThunk } from '../store'
 
 export default function SymptomUpdate (props) {
-  const user = props.user
-  const todayData = props.user.symptomTags.filter(el => moment(el.date).isSame(props.date))
+  // user and symptom data for day opened by the calendar if anything for date
+  const { user, date, setSymptoms, symptoms } = props
+  let todayDataIdx = undefined;
+  const todayData = props.user.symptomTags.filter((el, index) => {
+    if (moment(el.date).isSame(props.date)) {
+      todayDataIdx = index;
+      return el;
+    }
+  });
+
+  //set classes for styles
   const classes = useStyles()
-  const dispatch = useDispatch()
-  const [symptoms, setSymptoms] = useState([])
+
+
+  //set symptoms to empty array to start
+
   const [loading, setLoading] = useState(true)
 
+  //called in useEffect, loads data to symptoms on state
   const loadData = () => {
     setSymptoms([
       {
@@ -114,8 +127,11 @@ export default function SymptomUpdate (props) {
     newSymptoms[evt.target.name].bool = evt.target.checked
     setSymptoms(newSymptoms)
   }
+
   const handleSubmit = (evt) => {
+
     evt.preventDefault()
+
     const updatedSymptoms = symptoms.reduce((acc, el) => {
       if (el.bool) {
         const obj = {
@@ -127,26 +143,35 @@ export default function SymptomUpdate (props) {
       return acc
     }, [])
 
-    const symptomsObj = {
-      date: props.date,
-      symptoms: updatedSymptoms
-    }
+    //passing in string that is the type (symptoms, finance, period), username, the new array of symptoms (all for the particular date), the date and the index for the symptomTags object in the symptomTags array
+    // dispatch(updateUserThunk('symptoms', user.username, updatedSymptoms, date, todayDataIdx))
+    // evt.preventDefault()
+    // let updatedSymptomTags
 
-    let newSymptomsTagsArr
-    if(todayData[0]) {
-      newSymptomsTagsArr = user.symptomTags.map(el => {
-        if (moment(el.date).isSame(props.date)) {
-          el.symptoms = updatedSymptoms
-          return el
-        } else {
-          return el
-        }
-      })
-    } else {
-      newSymptomsTagsArr = [...user.symptomTags, symptomsObj]
-    }
 
-    dispatch(addSymptomData(user.username, newSymptomsTagsArr))
+
+    // // only if array has some symptoms dispatch with update for today
+    // // elif data for today was completely removed, delete obj for the day
+    // if (updatedSymptoms.length) {
+    //   if (todayDataIdx !== undefined) {
+    //     updatedSymptomTags = [...user.symptomTags]
+    //     updatedSymptomTags[todayDataIdx].symptoms = updatedSymptoms
+    //   } else {
+    //     updatedSymptomTags = [...user.symptomTags]
+    //     const symptomsObj = {
+    //       date: props.date,
+    //       symptoms: updatedSymptoms
+    //     }
+    //     updatedSymptomTags.push (symptomsObj)
+    //   }
+    //   dispatch(addSymptomData(user.username, updatedSymptomTags))
+    // } else if (todayDataIdx !== undefined) {
+    //   updatedSymptomTags = [...user.symptomTags]
+    //   // remove obj from array if no symptoms
+    //   updatedSymptomTags = updatedSymptomTags.splice(todayDataIdx, 1)
+    //   // dispatch thunk
+    //   dispatch(addSymptomData(user.username, updatedSymptomTags))
+    // }
   }
 
   useEffect(() => {
@@ -171,8 +196,6 @@ export default function SymptomUpdate (props) {
           ))}
         </FormGroup>
       </FormControl>
-
-      <Button onClick={handleSubmit}>Update Symptoms</Button>
     </>
 
   )
