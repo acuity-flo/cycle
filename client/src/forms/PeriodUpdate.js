@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import moment from "moment";
 
 //thunk
-import { addPeriodData } from "../store";
+import { addPeriodData, updateUserThunk } from "../store";
 
 // marks for the slider for flow data
 const marks = [
@@ -33,7 +33,7 @@ const marks = [
 
 export default function PeriodForm(props) {
   // user and period data for day opened by the calendar if anything for date
-  const user = props.user;
+  const { user, date } = props;
   let todayDataIdx = undefined;
   const todayData = user.period.filter((el, index) => {
     if (moment(el.date).isSame(props.date)) {
@@ -71,47 +71,49 @@ export default function PeriodForm(props) {
 
   //handle submit for the flow update
   const handleSubmit = (evt) => {
-    evt.preventDefault();
-    // only run if when the flow was changed from 0
-    // run elif when flow is 0, but there was data for the day originally
-    if (flow > 0) {
-      //set updated Period typeOfFlow for dispatch
-      let updatedPeriod, typeOfFlow;
-      if (flow === 1) {
-        typeOfFlow = "spotting";
-      } else if (flow === 2) {
-        typeOfFlow = "light";
-      } else if (flow === 3) {
-        typeOfFlow = "medium";
-      } else if (flow === 4) {
-        typeOfFlow = "heavy";
-      }
+    evt.preventDefault()
+    dispatch(updateUserThunk('period', user.username, flow, date, todayDataIdx))
 
-      // if there was data for today, reset vals and dispatch
-      //else construct obj and push obj
-      if (todayDataIdx !== undefined) {
-        updatedPeriod = [...props.user.period];
-        updatedPeriod[todayDataIdx].typeOfFlow = typeOfFlow;
-      } else {
-        updatedPeriod = [...props.user.period, {
-          date: props.date,
-          typeOfFlow,
-        }];
-      }
+    // // only run if when the flow was changed from 0
+    // // run elif when flow is 0, but there was data for the day originally
+    // if (flow > 0) {
+    //   //set updated Period typeOfFlow for dispatch
+    //   let updatedPeriod, typeOfFlow;
+    //   if (flow === 1) {
+    //     typeOfFlow = "spotting";
+    //   } else if (flow === 2) {
+    //     typeOfFlow = "light";
+    //   } else if (flow === 3) {
+    //     typeOfFlow = "medium";
+    //   } else if (flow === 4) {
+    //     typeOfFlow = "heavy";
+    //   }
 
-      //dispatch thunk
-      dispatch(addPeriodData(user.username, updatedPeriod));
-      // setLoading(false)
-      // setSuccess(true)
-    } else if (todayDataIdx !== undefined) {
-      let updatedPeriod = [...props.user.period];
+    //   // if there was data for today, reset vals and dispatch
+    //   //else construct obj and push obj
+    //   if (todayDataIdx !== undefined) {
+    //     updatedPeriod = [...props.user.period];
+    //     updatedPeriod[todayDataIdx].typeOfFlow = typeOfFlow;
+    //   } else {
+    //     updatedPeriod = [...props.user.period, {
+    //       date: props.date,
+    //       typeOfFlow,
+    //     }];
+    //   }
 
-      //remove obj from array when reset to 0
-      updatedPeriod = updatedPeriod.splice(todayDataIdx, 1);
+    //   //dispatch thunk
+    //   dispatch(addPeriodData(user.username, updatedPeriod));
+    //   // setLoading(false)
+    //   // setSuccess(true)
+    // } else if (todayDataIdx !== undefined) {
+    //   let updatedPeriod = [...props.user.period];
 
-      //dispatch thunk
-      dispatch(addPeriodData(user.username, updatedPeriod));
-    }
+    //   //remove obj from array when reset to 0
+    //   updatedPeriod = updatedPeriod.splice(todayDataIdx, 1);
+
+    //   //dispatch thunk
+    //   dispatch(addPeriodData(user.username, updatedPeriod));
+    // }
   };
 
   return (

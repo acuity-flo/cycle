@@ -14,11 +14,11 @@ import { useDispatch } from "react-redux";
 import moment from "moment";
 
 //thunk
-import { addFinanceData } from "../store";
+import { addFinanceData, updateUserThunk } from "../store";
 
 export default function FinanceUpdate(props) {
   //user and finance data for day opened by the calendar, if anything for that date
-  const user = props.user;
+  const { user, date } = props;
   let todayDataIdx = undefined;
   const todayData = user.financial.filter((el, index) => {
     if (moment(el.date).isSame(props.date)) {
@@ -26,8 +26,6 @@ export default function FinanceUpdate(props) {
       return el;
     }
   });
-
-  console.log('todayData in finance', todayData)
 
   //set classes for the styles
   const classes = useStyles();
@@ -80,26 +78,27 @@ export default function FinanceUpdate(props) {
   //submit the finances updates
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    if (purchases.length > 0) {
-      const purchasesUpdated = purchases.filter((el) => el.typeOfPurchase !== "")
-      let updatedFinancial
-      if (todayDataIdx !== undefined) {
-        //spread financial data here, but it's a shallow copy.
-        updatedFinancial = [...user.financial];
-        updatedFinancial[todayDataIdx].purchases = purchasesUpdated;
-      } else {
-        const financeObj = {
-          date: props.date,
-          purchases,
-        };
-        updatedFinancial = [...user.financial, financeObj];
-      }
-      dispatch(addFinanceData(user.username, updatedFinancial));
-    } else if (todayDataIdx !== undefined) {
-      let updatedFinancial = [...user.financial]
-      updatedFinancial.splice(todayDataIdx, 1)
-      dispatch(addFinanceData(user.username, updatedFinancial));
-    }
+    dispatch(updateUserThunk('financial', user.username, purchases, date, todayDataIdx))
+    // if (purchases.length > 0) {
+    //   const purchasesUpdated = purchases.filter((el) => el.typeOfPurchase !== "")
+    //   let updatedFinancial
+    //   if (todayDataIdx !== undefined) {
+    //     //spread financial data here, but it's a shallow copy.
+    //     updatedFinancial = [...user.financial];
+    //     updatedFinancial[todayDataIdx].purchases = purchasesUpdated;
+    //   } else {
+    //     const financeObj = {
+    //       date: props.date,
+    //       purchases,
+    //     };
+    //     updatedFinancial = [...user.financial, financeObj];
+    //   }
+    //   dispatch(addFinanceData(user.username, updatedFinancial));
+    // } else if (todayDataIdx !== undefined) {
+    //   let updatedFinancial = [...user.financial]
+    //   updatedFinancial.splice(todayDataIdx, 1)
+    //   dispatch(addFinanceData(user.username, updatedFinancial));
+    // }
   };
 
   useEffect(() => {

@@ -5,11 +5,11 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 
 //thunk
-import { addSymptomData } from '../store'
+import { addSymptomData, updateUserThunk } from '../store'
 
 export default function SymptomUpdate (props) {
   // user and symptom data for day opened by the calendar if anything for date
-  const user = props.user
+  const { user, date } = props
   let todayDataIdx = undefined;
   const todayData = props.user.symptomTags.filter((el, index) => {
     if (moment(el.date).isSame(props.date)) {
@@ -132,42 +132,45 @@ export default function SymptomUpdate (props) {
   }
 
   const handleSubmit = (evt) => {
+
     evt.preventDefault()
-    let updatedSymptomTags
+    dispatch(updateUserThunk('symptoms', user.username, symptoms, date, todayDataIdx))
+    // evt.preventDefault()
+    // let updatedSymptomTags
 
-    const updatedSymptoms = symptoms.reduce((acc, el) => {
-      if (el.bool) {
-        const obj = {
-          symptomName: el.name,
-          category: el.category
-        }
-        acc.push(obj)
-      }
-      return acc
-    }, [])
+    // const updatedSymptoms = symptoms.reduce((acc, el) => {
+    //   if (el.bool) {
+    //     const obj = {
+    //       symptomName: el.name,
+    //       category: el.category
+    //     }
+    //     acc.push(obj)
+    //   }
+    //   return acc
+    // }, [])
 
-    // only if array has some symptoms dispatch with update for today
-    // elif data for today was completely removed, delete obj for the day
-    if (updatedSymptoms.length) {
-      if (todayDataIdx !== undefined) {
-        updatedSymptomTags = [...user.symptomTags]
-        updatedSymptomTags[todayDataIdx].symptoms = updatedSymptoms
-      } else {
-        updatedSymptomTags = [...user.symptomTags]
-        const symptomsObj = {
-          date: props.date,
-          symptoms: updatedSymptoms
-        }
-        updatedSymptomTags.push (symptomsObj)
-      }
-      dispatch(addSymptomData(user.username, updatedSymptomTags))
-    } else if (todayDataIdx !== undefined) {
-      updatedSymptomTags = [...user.symptomTags]
-      // remove obj from array if no symptoms
-      updatedSymptomTags = updatedSymptomTags.splice(todayDataIdx, 1)
-      // dispatch thunk
-      dispatch(addSymptomData(user.username, updatedSymptomTags))
-    }
+    // // only if array has some symptoms dispatch with update for today
+    // // elif data for today was completely removed, delete obj for the day
+    // if (updatedSymptoms.length) {
+    //   if (todayDataIdx !== undefined) {
+    //     updatedSymptomTags = [...user.symptomTags]
+    //     updatedSymptomTags[todayDataIdx].symptoms = updatedSymptoms
+    //   } else {
+    //     updatedSymptomTags = [...user.symptomTags]
+    //     const symptomsObj = {
+    //       date: props.date,
+    //       symptoms: updatedSymptoms
+    //     }
+    //     updatedSymptomTags.push (symptomsObj)
+    //   }
+    //   dispatch(addSymptomData(user.username, updatedSymptomTags))
+    // } else if (todayDataIdx !== undefined) {
+    //   updatedSymptomTags = [...user.symptomTags]
+    //   // remove obj from array if no symptoms
+    //   updatedSymptomTags = updatedSymptomTags.splice(todayDataIdx, 1)
+    //   // dispatch thunk
+    //   dispatch(addSymptomData(user.username, updatedSymptomTags))
+    // }
   }
 
   useEffect(() => {
