@@ -25,9 +25,13 @@ module.exports = {
       console.log('req.body', req.body)
       const { type, update, date, index } = req.body;
 
-      // if (type === "period") update.period = period
-      // if (type === "symptom") update.symptomTags = symptomTags
-      // if (type === "financial") update.financial = financial
+      const foundUser = await User.findOne(
+        { username: req.params.username }
+      );
+
+      if (type === "period") update.period = period
+      if (type === "symptom") update.symptomTags = symptomTags
+      if (type === "financial") update.financial = financial
 
       // const foundUser = await User.findOneAndUpdate(
       //   { username: req.params.username },

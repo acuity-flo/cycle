@@ -9,7 +9,7 @@ import { addSymptomData, updateUserThunk } from '../store'
 
 export default function SymptomUpdate (props) {
   // user and symptom data for day opened by the calendar if anything for date
-  const { user, date } = props
+  const { user, date, setSymptoms, symptoms } = props
   let todayDataIdx = undefined;
   const todayData = props.user.symptomTags.filter((el, index) => {
     if (moment(el.date).isSame(props.date)) {
@@ -21,16 +21,13 @@ export default function SymptomUpdate (props) {
   //set classes for styles
   const classes = useStyles()
 
-  //to dispatch thunk
-  const dispatch = useDispatch()
 
   //set symptoms to empty array to start
-  const [symptoms, setSymptoms] = useState([])
+
   const [loading, setLoading] = useState(true)
 
   //called in useEffect, loads data to symptoms on state
   const loadData = () => {
-    console.log('loading data in symptoms')
     setSymptoms([
       {
         name: 'stressed',
@@ -134,20 +131,24 @@ export default function SymptomUpdate (props) {
   const handleSubmit = (evt) => {
 
     evt.preventDefault()
-    dispatch(updateUserThunk('symptoms', user.username, symptoms, date, todayDataIdx))
+
+    const updatedSymptoms = symptoms.reduce((acc, el) => {
+      if (el.bool) {
+        const obj = {
+          symptomName: el.name,
+          category: el.category
+        }
+        acc.push(obj)
+      }
+      return acc
+    }, [])
+
+    //passing in string that is the type (symptoms, finance, period), username, the new array of symptoms (all for the particular date), the date and the index for the symptomTags object in the symptomTags array
+    // dispatch(updateUserThunk('symptoms', user.username, updatedSymptoms, date, todayDataIdx))
     // evt.preventDefault()
     // let updatedSymptomTags
 
-    // const updatedSymptoms = symptoms.reduce((acc, el) => {
-    //   if (el.bool) {
-    //     const obj = {
-    //       symptomName: el.name,
-    //       category: el.category
-    //     }
-    //     acc.push(obj)
-    //   }
-    //   return acc
-    // }, [])
+
 
     // // only if array has some symptoms dispatch with update for today
     // // elif data for today was completely removed, delete obj for the day
@@ -195,8 +196,6 @@ export default function SymptomUpdate (props) {
           ))}
         </FormGroup>
       </FormControl>
-
-      <Button onClick={handleSubmit}>Update Symptoms</Button>
     </>
 
   )
