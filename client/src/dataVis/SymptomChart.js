@@ -17,29 +17,35 @@ const UTIL_SYMPTOMS_LIST = {
 // EMOTION = 20, 21, 22, 23, 24 -- 2
 
 const UTIL_SYMPTOM = (symptomData, start, end) => {
+
   const symptomObj = symptomData.reduce(
     (acc, el) => {
-      if (moment(el.date).isBetween(start, end)) {
-        el.symptoms.filter((innerEl) => {
+      const newStart = start.subtract(1,'day')
+      const newEnd = end.add(1,'day')
+
+      if (moment(el.date).isBetween(newStart, newEnd)) {
+        const dateChange = el.date.slice(0,10)
+        el.symptoms.forEach((innerEl) => {
+
           if (innerEl.category === 'mood') {
             acc.mood.push(innerEl.symptomName);
-            acc.mood_x.push(moment(el.date).format('MM-DD-YYYY'));
-          }
+            acc.mood_x.push(moment(dateChange).format('MM-DD-YYYY'));
+            }
           if (innerEl.category === 'emotion') {
             acc.emotion.push(innerEl.symptomName);
-            acc.emotion_x.push(moment(el.date).format('MM-DD-YYYY'));
+            acc.emotion_x.push(moment(dateChange).format('MM-DD-YYYY'));
           }
           if (innerEl.category === 'pain') {
             acc.pain.push(innerEl.symptomName);
-            acc.pain_x.push(moment(el.date).format('MM-DD-YYYY'));
+            acc.pain_x.push(moment(dateChange).format('MM-DD-YYYY'));
           }
           if (innerEl.category === 'physical') {
             acc.physical.push(innerEl.symptomName);
-            acc.physical_x.push(moment(el.date).format('MM-DD-YYYY'));
+            acc.physical_x.push(moment(dateChange).format('MM-DD-YYYY'));
           }
           if (innerEl.category === 'custom') {
             acc.custom.push(innerEl.symptomName);
-            acc.custom_x.push(moment(el.date).format('MM-DD-YYYY'));
+            acc.custom_x.push(moment(dateChange).format('MM-DD-YYYY'));
           }
         });
       }
@@ -58,6 +64,8 @@ const UTIL_SYMPTOM = (symptomData, start, end) => {
       custom_x: ['custom_x'],
     }
   );
+
+  console.log("symptomObj", symptomObj)
 
   let columns = [
     symptomObj['mood_x'],
