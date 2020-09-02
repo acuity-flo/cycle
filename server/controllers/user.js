@@ -22,12 +22,23 @@ module.exports = {
   },
   updateUser: async (req, res, next) => {
     try {
-      console.log('req.body', req.body)
-      // const { type, update, date, index } = req.body;
+      // console.log('req.body', req.body)
+      const {
+        date,
+        username,
+        financeUpdate,
+        symptomUpdate,
+        flowUpdate,
+      } = req.body;
 
-      // const foundUser = await User.findOne(
-      //   { username: req.params.username }
-      // );
+      const foundUser = await User.findOne({ username: req.params.username });
+
+      const financeObj = {date: date, purchases: financeUpdate}
+
+      console.log('financial data', foundUser.financial);
+      console.log('financial update', financeObj)
+
+      // const { type, update, date, index } = req.body;
 
       // if (type === "period") update.period = period
       // if (type === "symptom") update.symptomTags = symptomTags
@@ -54,28 +65,34 @@ module.exports = {
   },
   //login?
   loginUser: async (req, res, next) => {
-    console.log('req.body in route',req.body)
+    console.log('req.body in route', req.body);
     try {
       const authUser = await User.findOne({
-        email: req.body.email
-      }) // .exec() ?
+        email: req.body.email,
+      }); // .exec() ?
       console.log('authUser', authUser);
 
-      if(!Bcrypt.compareSync(req.body.password, authUser.password)){
-        res.sendStatus(400)
+      if (!Bcrypt.compareSync(req.body.password, authUser.password)) {
+        res.sendStatus(400);
       } else {
-        req.login(authUser, (err) => (err ? next(err) : res.json(authUser)));  //works without BCrypt
+        req.login(authUser, (err) => (err ? next(err) : res.json(authUser))); //works without BCrypt
       }
 
       // console.log('authUser', authUser);
-
     } catch (err) {
       next(err);
     }
   },
   //signup?
   signUpUser: async (req, res, next) => {
-    let { name, email, username, password, pronouns, avgLengthOfCycle } = req.body;
+    let {
+      name,
+      email,
+      username,
+      password,
+      pronouns,
+      avgLengthOfCycle,
+    } = req.body;
     password = Bcrypt.hashSync(password, 10);
     const newUser = new User({
       name,
@@ -83,7 +100,7 @@ module.exports = {
       username,
       password,
       pronouns,
-      avgLengthOfCycle
+      avgLengthOfCycle,
     });
 
     try {
@@ -95,13 +112,13 @@ module.exports = {
     }
   },
   authMe: async (req, res, next) => {
-    res.json(req.user)
+    res.json(req.user);
   },
   logoutUser: async (req, res) => {
-    req.logout()
-    req.session.destroy()
-    res.redirect('/')
-  }
+    req.logout();
+    req.session.destroy();
+    res.redirect('/');
+  },
 };
 
 // date validation within arrays - map through array, and combine objects if date appears multiple times
