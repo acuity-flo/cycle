@@ -17,29 +17,33 @@ const UTIL_SYMPTOMS_LIST = {
 // EMOTION = 20, 21, 22, 23, 24 -- 2
 
 const UTIL_SYMPTOM = (symptomData, start, end) => {
+
   const symptomObj = symptomData.reduce(
     (acc, el) => {
+
       if (moment(el.date).isBetween(start, end)) {
-        el.symptoms.filter((innerEl) => {
+        const dateChange = el.date.slice(0,10)
+        el.symptoms.forEach((innerEl) => {
+
           if (innerEl.category === 'mood') {
             acc.mood.push(innerEl.symptomName);
-            acc.mood_x.push(moment(el.date).format('MM-DD-YYYY'));
-          }
+            acc.mood_x.push(moment(dateChange).format('MM-DD-YYYY'));
+            }
           if (innerEl.category === 'emotion') {
             acc.emotion.push(innerEl.symptomName);
-            acc.emotion_x.push(moment(el.date).format('MM-DD-YYYY'));
+            acc.emotion_x.push(moment(dateChange).format('MM-DD-YYYY'));
           }
           if (innerEl.category === 'pain') {
             acc.pain.push(innerEl.symptomName);
-            acc.pain_x.push(moment(el.date).format('MM-DD-YYYY'));
+            acc.pain_x.push(moment(dateChange).format('MM-DD-YYYY'));
           }
           if (innerEl.category === 'physical') {
             acc.physical.push(innerEl.symptomName);
-            acc.physical_x.push(moment(el.date).format('MM-DD-YYYY'));
+            acc.physical_x.push(moment(dateChange).format('MM-DD-YYYY'));
           }
           if (innerEl.category === 'custom') {
             acc.custom.push(innerEl.symptomName);
-            acc.custom_x.push(moment(el.date).format('MM-DD-YYYY'));
+            acc.custom_x.push(moment(dateChange).format('MM-DD-YYYY'));
           }
         });
       }
@@ -127,13 +131,9 @@ const UTIL_SYMPTOM = (symptomData, start, end) => {
 function SymptomChartBB(props) {
   let { start, end, user } = props;
   let symptomData = user.symptomTags;
-  // let [CHART_DATA, setChartData] = useState({});
-  // let [CHART_AXIS, setChartAxis] = useState({});
-  // let [CHART_TOOLTIP, setChartToolTip] = useState({});
-  // let [loading, setLoading] = useState(true);
 
   let symptomCol = UTIL_SYMPTOM(symptomData, start, end);
-  console.log('COL', symptomCol);
+
 
   let CHART_DATA = {
     xs: {
@@ -146,8 +146,11 @@ function SymptomChartBB(props) {
     columns: symptomCol.columns,
     type: 'scatter',
     labels: {
-      format: (y) => {
-        console.log("Y AXIS ISH",y)
+      format: (y) => { 
+        if (10 <= y && y<20){return UTIL_SYMPTOMS_LIST["mood"][y-10]}
+        if (20 <= y && y<30){return UTIL_SYMPTOMS_LIST["emotion"][y-20]}
+        if (30 <= y && y<40){return UTIL_SYMPTOMS_LIST["pain"][y-30]}
+        if (40 <= y && y<50){return UTIL_SYMPTOMS_LIST["physical"][y-40]}
       }
     },
     xFormat: '%m-%d-%Y',

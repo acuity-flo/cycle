@@ -17,6 +17,8 @@ export default function ChartHome() {
   const [end, setEnd] = useState(moment());
   const [focus, setFocus] = useState(null);
   const [choseDate, setDate] = useState(false);
+  const [startProp, setStartProp] = useState(moment())
+  const [endProp, setEndProp] = useState(moment())
 
   const defaultProps = {
     //from example
@@ -32,18 +34,22 @@ export default function ChartHome() {
   const onDatesChange = ({ startDate, endDate }) => {
     setStart(startDate);
     setEnd(endDate);
+    setStartProp(moment(startDate).subtract(1,"day"))
+    setEndProp(moment(endDate).add(1,"day"))
   };
 
   const onFocusChange = (focusedInput) => {
     setFocus(focusedInput);
   };
 
-  // after render need to make false again
   const onClick = () => {
     setDate(true);
     // setTimeout(setDate(false), 1000);
     // return <PeriodChart start={start} end={end} />;
   };
+
+
+
 
   return (
     <div>
@@ -69,15 +75,15 @@ export default function ChartHome() {
       <Container>
       <h4>period chart</h4>
       <br />
-      {choseDate ? <PeriodChartBB start={start} end={end} /> : ''}
+      {choseDate ? <PeriodChartBB start={startProp} end={endProp} /> : ''}
       <br />
       <h4>finance chart</h4>
       <br />
-      {choseDate ? <FinanceChartBB start={start} end={end} /> : ''}
+      {choseDate ? <FinanceChartBB start={startProp} end={endProp} /> : ''}
       <br />
       <h4>symptom chart</h4>
       <br />
-      {choseDate ? <SymptomChartBB start={start} end={end} /> : ''}
+      {choseDate ? <SymptomChartBB start={startProp} end={endProp} /> : ''}
       <br />
       <br />
       </Container>
