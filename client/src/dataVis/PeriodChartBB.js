@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 function PeriodChartBB (props) {
   let { start, end, user} = props;
   let CHART_AXIS, CHART_TOOLTIP, CHART_DATA
-  // let ref = useRef(null) //????
+  
   const flow = (element) => {
     if (element.typeOfFlow === 'spotting') {
       element.typeOfFlow = "1";
@@ -21,9 +21,8 @@ function PeriodChartBB (props) {
     } else if (element.typeOfFlow === 'heavy') {
       element.typeOfFlow = "4";
     }
-    //manipulates period arr on state
+
     element.date = moment(element.date.slice(0,10)).format('MM-DD-YYYY');
-    console.log(element.date)
     return element;
   }
 

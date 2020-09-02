@@ -87,7 +87,7 @@ const UTIL_PERIOD = (periodData, start, end) => {
     } else if (element.typeOfFlow === 'heavy') {
       element.typeOfFlow = '4';
     }
-    element.date = moment(element.date).format('MM-DD-YYYY');
+    element.date = moment(element.date.slice(0,10)).format('MM-DD-YYYY');
     return element;
   };
 

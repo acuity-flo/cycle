@@ -146,8 +146,11 @@ function SymptomChartBB(props) {
     columns: symptomCol.columns,
     type: 'scatter',
     labels: {
-      format: (y) => {
-        //console.log("Y AXIS ISH",y)
+      format: (y) => { 
+        if (10 <= y && y<20){return UTIL_SYMPTOMS_LIST["mood"][y-10]}
+        if (20 <= y && y<30){return UTIL_SYMPTOMS_LIST["emotion"][y-20]}
+        if (30 <= y && y<40){return UTIL_SYMPTOMS_LIST["pain"][y-30]}
+        if (40 <= y && y<50){return UTIL_SYMPTOMS_LIST["physical"][y-40]}
       }
     },
     xFormat: '%m-%d-%Y',
