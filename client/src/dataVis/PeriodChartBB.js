@@ -22,7 +22,7 @@ function PeriodChartBB (props) {
       element.typeOfFlow = "4";
     }
     //manipulates period arr on state
-    element.date = moment(element.date).format('MM-DD-YYYY');
+    element.date = moment(element.date.slice(0,10)).format('MM-DD-YYYY');
     return element;
   }
 
@@ -30,7 +30,10 @@ function PeriodChartBB (props) {
 
   //map over array with flow util fxn
   const flowObj = periodData.reduce((acc, el) => {
-    if (moment(el.date).isBetween(start, end)) {
+    const newStart = start.subtract(1,'day')
+    const newEnd = end.add(1,'day')
+
+    if (moment(el.date).isBetween(newStart, newEnd)) {
       let data = flow(el)
       acc.flow.push(data.typeOfFlow)
       acc.x.push(data.date)

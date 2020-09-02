@@ -65,8 +65,6 @@ const UTIL_SYMPTOM = (symptomData, start, end) => {
     }
   );
 
-  console.log("symptomObj", symptomObj)
-
   let columns = [
     symptomObj['mood_x'],
     symptomObj['emotion_x'],
