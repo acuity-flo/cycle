@@ -7,12 +7,30 @@
     "password": "password",
     "pronouns": "she/her/hers",
     "period": [
-      { "date": "2020-06-05", "typeOfFlow": "light" },
+      { "date": "2020-06-05", "typeOfFlow": "heavy" },
       { "date": "2020-06-06", "typeOfFlow": "light" },
       { "date": "2020-06-07", "typeOfFlow": "heavy" },
       { "date": "2020-06-08", "typeOfFlow": "medium" },
       { "date": "2020-06-09", "typeOfFlow": "heavy" },
-      { "date": "2020-06-010", "typeOfFlow": "spotting" }
+      { "date": "2020-06-010", "typeOfFlow": "spotting" },
+      { "date": "2020-07-05", "typeOfFlow": "medium" },
+      { "date": "2020-07-06", "typeOfFlow": "light" },
+      { "date": "2020-07-07", "typeOfFlow": "heavy" },
+      { "date": "2020-07-08", "typeOfFlow": "medium" },
+      { "date": "2020-07-09", "typeOfFlow": "heavy" },
+      { "date": "2020-07-010", "typeOfFlow": "spotting" },
+      { "date": "2020-08-05", "typeOfFlow": "light" },
+      { "date": "2020-08-06", "typeOfFlow": "light" },
+      { "date": "2020-08-07", "typeOfFlow": "heavy" },
+      { "date": "2020-08-08", "typeOfFlow": "medium" },
+      { "date": "2020-08-09", "typeOfFlow": "heavy" },
+      { "date": "2020-08-010", "typeOfFlow": "spotting" },
+      { "date": "2020-09-05", "typeOfFlow": "light" },
+      { "date": "2020-09-06", "typeOfFlow": "light" },
+      { "date": "2020-09-07", "typeOfFlow": "heavy" },
+      { "date": "2020-09-08", "typeOfFlow": "medium" },
+      { "date": "2020-09-09", "typeOfFlow": "heavy" },
+      { "date": "2020-09-010", "typeOfFlow": "spotting" }
     ],
     "symptomTags": [
       {
@@ -56,6 +74,302 @@
       {
         "date": "2020-06-010",
         "symptoms": { "symptomName": "snacky", "category": "physical" }
+      },
+      {
+        "date": "2020-07-05",
+        "symptoms": [
+          { "symptomName": "calm", "category": "mood" },
+          { "symptomName": "stressed", "category": "mood" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-07-06",
+        "symptoms": [
+          { "symptomName": "calm", "category": "mood" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-07-07",
+        "symptoms": [
+          { "symptomName": "cramps", "category": "pain" },
+          { "symptomName": "back pain", "category": "physical" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-07-08",
+        "symptoms": [
+          { "symptomName": "cramps", "category": "pain" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-07-09",
+        "symptoms": [
+          { "symptomName": "indegestion", "category": "physical" },
+          { "symptomName": "stressed", "category": "mood" },
+          { "symptomName": "snacky", "category": "physical" }
+        ]
+      },
+      {
+        "date": "2020-07-010",
+        "symptoms": { "symptomName": "snacky", "category": "physical" }
+      },
+      {
+        "date": "2020-08-05",
+        "symptoms": [
+          { "symptomName": "calm", "category": "mood" },
+          { "symptomName": "stressed", "category": "mood" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-08-06",
+        "symptoms": [
+          { "symptomName": "calm", "category": "mood" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-08-07",
+        "symptoms": [
+          { "symptomName": "cramps", "category": "pain" },
+          { "symptomName": "back pain", "category": "physical" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-08-08",
+        "symptoms": [
+          { "symptomName": "cramps", "category": "pain" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-08-09",
+        "symptoms": [
+          { "symptomName": "indegestion", "category": "physical" },
+          { "symptomName": "stressed", "category": "mood" },
+          { "symptomName": "snacky", "category": "physical" }
+        ]
+      },
+      {
+        "date": "2020-08-010",
+        "symptoms": { "symptomName": "snacky", "category": "physical" }
+      },
+      {
+        "date": "2020-09-05",
+        "symptoms": [
+          { "symptomName": "calm", "category": "mood" },
+          { "symptomName": "stressed", "category": "mood" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-09-06",
+        "symptoms": [
+          { "symptomName": "calm", "category": "mood" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-09-07",
+        "symptoms": [
+          { "symptomName": "cramps", "category": "pain" },
+          { "symptomName": "back pain", "category": "physical" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-09-08",
+        "symptoms": [
+          { "symptomName": "cramps", "category": "pain" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
+      },
+      {
+        "date": "2020-09-09",
+        "symptoms": [
+          { "symptomName": "indegestion", "category": "physical" },
+          { "symptomName": "stressed", "category": "mood" },
+          { "symptomName": "snacky", "category": "physical" }
+        ]
+      },
+      {
+        "date": "2020-09-010",
+        "symptoms": { "symptomName": "snacky", "category": "physical" }
+      }
+    ],
+    "financial": [
+      {
+        "date": "2020-06-05",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 15 },
+          { "typeOfPurchase": "sanitary products", "cost": 26 },
+          { "typeOfPurchase": "doctor", "cost": 50 }
+        ]
+      },
+      {
+        "date": "2020-06-06",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 100 },
+          { "typeOfPurchase": "sanitary products", "cost": 56 }
+        ]
+      },
+      {
+        "date": "2020-06-07",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 59 },
+          { "typeOfPurchase": "sanitary products", "cost": 200 },
+          { "typeOfPurchase": "doctor", "cost": 150 }
+        ]
+      },
+      {
+        "date": "2020-06-08",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 89 },
+          { "typeOfPurchase": "sanitary products", "cost": 95 }
+        ]
+      },
+      {
+        "date": "2020-06-09",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 125 },
+          { "typeOfPurchase": "sanitary products", "cost": 95 },
+          { "typeOfPurchase": "doctor", "cost": 95 }
+        ]
+      },
+      {
+        "date": "2020-06-010",
+        "purchases": { "typeOfPurchase": "prescription", "cost": "200" }
+      },
+      {
+        "date": "2020-07-05",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 15 },
+          { "typeOfPurchase": "sanitary products", "cost": 26 },
+          { "typeOfPurchase": "doctor", "cost": 50 }
+        ]
+      },
+      {
+        "date": "2020-07-06",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 100 },
+          { "typeOfPurchase": "sanitary products", "cost": 56 }
+        ]
+      },
+      {
+        "date": "2020-07-07",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 59 },
+          { "typeOfPurchase": "sanitary products", "cost": 200 },
+          { "typeOfPurchase": "doctor", "cost": 150 }
+        ]
+      },
+      {
+        "date": "2020-07-08",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 89 },
+          { "typeOfPurchase": "sanitary products", "cost": 95 }
+        ]
+      },
+      {
+        "date": "2020-07-09",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 125 },
+          { "typeOfPurchase": "sanitary products", "cost": 95 },
+          { "typeOfPurchase": "doctor", "cost": 95 }
+        ]
+      },
+      {
+        "date": "2020-07-010",
+        "purchases": { "typeOfPurchase": "prescription", "cost": "200" }
+      },
+      {
+        "date": "2020-08-05",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 15 },
+          { "typeOfPurchase": "sanitary products", "cost": 26 },
+          { "typeOfPurchase": "doctor", "cost": 50 }
+        ]
+      },
+      {
+        "date": "2020-08-06",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 100 },
+          { "typeOfPurchase": "sanitary products", "cost": 56 }
+        ]
+      },
+      {
+        "date": "2020-08-07",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 59 },
+          { "typeOfPurchase": "sanitary products", "cost": 200 },
+          { "typeOfPurchase": "doctor", "cost": 150 }
+        ]
+      },
+      {
+        "date": "2020-08-08",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 89 },
+          { "typeOfPurchase": "sanitary products", "cost": 95 }
+        ]
+      },
+      {
+        "date": "2020-08-09",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 125 },
+          { "typeOfPurchase": "sanitary products", "cost": 95 },
+          { "typeOfPurchase": "doctor", "cost": 95 }
+        ]
+      },
+      {
+        "date": "2020-08-010",
+        "purchases": { "typeOfPurchase": "prescription", "cost": "200" }
+      },
+      {
+        "date": "2020-09-05",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 15 },
+          { "typeOfPurchase": "sanitary products", "cost": 26 },
+          { "typeOfPurchase": "doctor", "cost": 50 }
+        ]
+      },
+      {
+        "date": "2020-09-06",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 100 },
+          { "typeOfPurchase": "sanitary products", "cost": 56 }
+        ]
+      },
+      {
+        "date": "2020-09-07",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 59 },
+          { "typeOfPurchase": "sanitary products", "cost": 200 },
+          { "typeOfPurchase": "doctor", "cost": 150 }
+        ]
+      },
+      {
+        "date": "2020-09-08",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 89 },
+          { "typeOfPurchase": "sanitary products", "cost": 95 }
+        ]
+      },
+      {
+        "date": "2020-09-09",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 125 },
+          { "typeOfPurchase": "sanitary products", "cost": 95 },
+          { "typeOfPurchase": "doctor", "cost": 95 }
+        ]
+      },
+      {
+        "date": "2020-09-010",
+        "purchases": { "typeOfPurchase": "prescription", "cost": "200" }
       }
     ]
   },
@@ -67,15 +381,15 @@
     "period": [
       { "date": "2020-06-05", "typeOfFlow": "light" },
       { "date": "2020-06-06", "typeOfFlow": "medium" },
-      { "date": "2020-06-07", "typeOfFlow": "heavy" },
+      { "date": "2020-06-07", "typeOfFlow": "medium" },
+      { "date": "2020-06-08", "typeOfFlow": "heavy" },
       { "date": "2020-06-09", "typeOfFlow": "light" },
       { "date": "2020-06-10", "typeOfFlow": "spotting" },
       { "date": "2020-07-05", "typeOfFlow": "light" },
       { "date": "2020-07-06", "typeOfFlow": "medium" },
-      { "date": "2020-07-07", "typeOfFlow": "heavy" },
       { "date": "2020-07-09", "typeOfFlow": "light" },
       { "date": "2020-07-10", "typeOfFlow": "spotting" },
-      { "date": "2020-07-11", "typeOfFlow": "spotting" }
+      { "date": "2020-07-11", "typeOfFlow": "heavy" }
     ]
   }
 }
