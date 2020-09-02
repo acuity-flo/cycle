@@ -1,5 +1,7 @@
 const User = require('../db/models/User');
 const Bcrypt = require('bcryptjs');
+const { update } = require('../db/models/User');
+const e = require('express');
 
 module.exports = {
   findUsers: async (req, res, next) => {
@@ -22,50 +24,101 @@ module.exports = {
   },
   updateUser: async (req, res, next) => {
     try {
-      // console.log('req.body', req.body)
       const {
         date,
         username,
         financeUpdate,
+        financeIdx,
         symptomUpdate,
+        symptomsIdx,
         flowUpdate,
+        flowIdx
       } = req.body;
 
+      console.log('date from req body', date)
       const foundUser = await User.findOne({ username: req.params.username });
 
-      const financeObj = {date: date, purchases: financeUpdate}
+      console.log('found user date', foundUser.financial[0].date)
+      if (financeIdx) {
+        if (financeUpdate.length) {
+          foundUser.financial[financeIdx].purchases = financeUpdate
+        }
+        else {
+          console.log('finance has idx, no data')
+          // User.updateOne({
+          //   _id: foundUser._id
+          // },{
+          //   $pull: {
+          //     date: date.slice(0,10) + "T00:00:00.000Z"
+          //   }}).exec()
+          //this seems harsh?
+          //ASK CHLOE
+          foundUser.financial.splice(financeIdx, 1)
+        }
+      } else if (financeUpdate.length) {
+        const financeObj = {
+          date,
+          purchases: financeUpdate
+        }
+        User.updateOne({
+          _id: foundUser._id
+        },{
+          $push: {
+            financial: financeObj
+          }}).exec()
+      }
 
-      console.log('financial data', foundUser.financial);
-      console.log('financial update', financeObj)
+      if (symptomsIdx) {
+        if (symptomUpdate.length) {
+          foundUser.symptomTags[symptomsIdx].symptoms = symptomUpdate
+        } else {
+          foundUser.symptomTags.splice(symptomsIdx, 1)
+        }
+      } else if (symptomUpdate.length) {
+        const symptomsObj = {
+          date,
+          symptoms: symptomUpdate
+        }
+        User.updateOne({
+          _id: foundUser._id
+        },{
+          $push: {
+            symptomTags: symptomsObj
+          }}).exec()
+      }
 
-      // const { type, update, date, index } = req.body;
+      if (flowIdx) {
+        if (flowUpdate !== undefined) {
+          foundUser.period[flowIdx].typeOfFlow = flowUpdate
+        } else {
+          foundUser.period.splice(flowIdx, 1)
+        }
+      } else if (flowUpdate) {
+        const periodObj = {
+          date,
+          typeOfFlow: flowUpdate
+        }
+        User.updateOne({
+          _id: foundUser._id
+        },{
+          $push: {
+            period: periodObj
+        }}).exec()
+      }
 
-      // if (type === "period") update.period = period
-      // if (type === "symptom") update.symptomTags = symptomTags
-      // if (type === "financial") update.financial = financial
+      await foundUser.save()
 
-      // const foundUser = await User.findOneAndUpdate(
-      //   { username: req.params.username },
-      //   update,
-      //   {
-      //     upsert: true,
-      //     runValidators: true,
-      //   }
-      // );
+      const updatedUser = await User.findOne({
+        username: req.params.username,
+      });
 
-      // await foundUser.save()
-      // const updatedUser = await User.findOne({
-      //   username: req.params.username,
-      // });
-      // console.log('updated USer', updatedUser)
-      // res.json(updatedUser)
+      res.json(updatedUser)
     } catch (err) {
       next(err);
     }
   },
   //login?
   loginUser: async (req, res, next) => {
-    console.log('req.body in route', req.body);
     try {
       const authUser = await User.findOne({
         email: req.body.email,
