@@ -22,43 +22,71 @@ module.exports = {
   },
   updateUser: async (req, res, next) => {
     try {
-      // console.log('req.body', req.body)
       const {
         date,
         username,
         financeUpdate,
+        financeIdx,
         symptomUpdate,
+        symptomsIdx,
         flowUpdate,
+        flowIdx
       } = req.body;
 
       const foundUser = await User.findOne({ username: req.params.username });
 
-      const financeObj = {date: date, purchases: financeUpdate}
+      if (financeIdx) {
+        foundUser.financial[financeIdx].purchases = financeUpdate
+      } else if (financeUpdate.length) {
+        const financeObj = {
+          date,
+          purchases: financeUpdate
+        }
+        User.updateOne({
+          _id: foundUser._id
+        },{
+          $push: {
+            financial: financeObj
+          }}).exec()
+      }
 
-      console.log('financial data', foundUser.financial);
-      console.log('financial update', financeObj)
+      if (symptomsIdx) {
+        foundUser.symptomTags[symptomsIdx].symptoms = symptomUpdate
+      } else if (symptomUpdate.length) {
+        const symptomsObj = {
+          date,
+          symptoms: symptomUpdate
+        }
+        User.updateOne({
+          _id: foundUser._id
+        },{
+          $push: {
+            symptomTags: symptomsObj
+          }}).exec()
+      }
 
-      // const { type, update, date, index } = req.body;
+      if (flowIdx) {
+        foundUser.period[flowIdx].typeOfFlow = flowUpdate
+      } else if (flowUpdate) {
+        const periodObj = {
+          date,
+          typeOfFlow: flowUpdate
+        }
+        User.updateOne({
+          _id: foundUser._id
+        },{
+          $push: {
+            period: periodObj
+        }}).exec()
+      }
 
-      // if (type === "period") update.period = period
-      // if (type === "symptom") update.symptomTags = symptomTags
-      // if (type === "financial") update.financial = financial
+      await foundUser.save()
 
-      // const foundUser = await User.findOneAndUpdate(
-      //   { username: req.params.username },
-      //   update,
-      //   {
-      //     upsert: true,
-      //     runValidators: true,
-      //   }
-      // );
+      const updatedUser = await User.findOne({
+        username: req.params.username,
+      });
 
-      // await foundUser.save()
-      // const updatedUser = await User.findOne({
-      //   username: req.params.username,
-      // });
-      // console.log('updated USer', updatedUser)
-      // res.json(updatedUser)
+      res.json(updatedUser)
     } catch (err) {
       next(err);
     }

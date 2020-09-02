@@ -24,17 +24,18 @@ const [flowIdx, setFlowIdx] = useState(undefined)
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const symptomsReduce = UTIL_SYMPTOM_REDUCE(symptoms)
-    const flowStr = UTIL_PERIOD_STR (flow)
+    const flowStr = UTIL_PERIOD_STR(flow)
     const purchasesUpdated = purchases.filter((el) => el.typeOfPurchase !== "")
-
-    console.log('finance idx', financeIdx)
 
     const update = {
       date,
       username: user.username,
       financeUpdate: purchasesUpdated,
+      financeIdx,
       symptomUpdate: symptomsReduce,
-      flowUpdate: flowStr
+      symptomsIdx,
+      flowUpdate: flowStr,
+      flowIdx
     }
 
     dispatch(updateUserThunk(update))
