@@ -8,8 +8,10 @@ import omit from 'lodash/omit';
 import 'react-dates/lib/css/_datepicker.css';
 import {Button, Container} from '@material-ui/core';
 
-import PeriodChartBB from '../dataVis/PeriodChartBB'
-import FinanceChartBB from '../dataVis/FinanceChart'
+import PeriodChartBB from '../dataVis/PeriodChartBB';
+import FinanceChartBB from '../dataVis/FinanceChart';
+import SymptomChartBB from '../dataVis/SymptomChart';
+
 export default function ChartHome() {
   const [start, setStart] = useState(moment());
   const [end, setEnd] = useState(moment());
@@ -62,24 +64,23 @@ export default function ChartHome() {
       </Container>
       <br />
       <br />
-      {/* {choseDate ? <PeriodChart start={start} end={end} /> : ''} */}
       <br />
       <br />
+      <Container>
+      <h4>period chart</h4>
       <br />
       {choseDate ? <PeriodChartBB start={start} end={end} /> : ''}
-      {/* <PeriodChart start={start} end={end} /> */}
       <br />
-      <p>click here to see your period data</p>
+      <h4>finance chart</h4>
       <br />
       {choseDate ? <FinanceChartBB start={start} end={end} /> : ''}
-      <h4>symptoms chart</h4>
       <br />
-      <p>click here to see your symptoms data</p>
+      <h4>symptom chart</h4>
       <br />
-      <h4>financial chart</h4>
+      {choseDate ? <SymptomChartBB start={start} end={end} /> : ''}
       <br />
-      <p>click here to see your financial data</p>
       <br />
+      </Container>
     </div>
   );
 }

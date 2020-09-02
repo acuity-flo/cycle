@@ -3,7 +3,15 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import { connect } from 'react-redux';
 // import DayModal from '../forms/CalendarDayModal';
-import { Modal, Button, Dialog, DialogTitle, DialogContent, DialogContentText, Container } from '@material-ui/core';
+import {
+  Modal,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  Container,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import FormContainer from '../forms/FormContainer'
@@ -14,9 +22,10 @@ function CalendarView(props) {
   const user = props.authUser;
   const period = user.period;
   const finance = user.financial;
-  const symptoms = user.symptomTags
+  const symptoms = user.symptomTags;
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
+  // const [currentView, setView] = useState('');
 
   const handleClose = () => {
     setOpen(false);
@@ -40,11 +49,27 @@ function CalendarView(props) {
     }
 
     //   finance - colors days of finance
-    if(finance && view==="month" && finance.some(el => moment(el.date).format("MM DD YYYY") ===moment(date).format("MM DD YYYY"))) {
-      classesStr+=" finance"
+    if (
+      finance &&
+      view === 'month' &&
+      finance.some(
+        (el) =>
+          moment(el.date).format('MM DD YYYY') ===
+          moment(date).format('MM DD YYYY')
+      )
+    ) {
+      classesStr += ' finance';
     }
-    if(symptoms && view==="month" && symptoms.some(el => moment(el.date).format("MM DD YYYY") ===moment(date).format("MM DD YYYY"))) {
-      classesStr+=" symptoms"
+    if (
+      symptoms &&
+      view === 'month' &&
+      symptoms.some(
+        (el) =>
+          moment(el.date).format('MM DD YYYY') ===
+          moment(date).format('MM DD YYYY')
+      )
+    ) {
+      classesStr += ' symptoms';
     }
     return classesStr;
   };
@@ -53,15 +78,18 @@ function CalendarView(props) {
     <div>
       <h1>CALENDAR</h1>
       <Container maxWidth="xs">
-      <Calendar
-        onChange={onChange}
-        value={value}
-        onClickDay={(value) => {
-          setDate(value);
-          setOpen(true);
-        }}
-        tileClassName={classesFunc}
-      ></Calendar>
+        <Calendar
+          onChange={onChange}
+          value={value}
+          onClickDay={(value) => {
+            setDate(value);
+            setOpen(true);
+          }}
+          // onViewChange={({ value, view }) => {
+          //   setView(view);
+          // }}
+          tileClassName={classesFunc}
+        ></Calendar>
       </Container>
       <br />
       <p>
@@ -85,13 +113,14 @@ function CalendarView(props) {
           </DialogContentText>
         </DialogContent>
       </Dialog>
+      <UserDataView user={user} />
     </div>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   dialogBox: {
-    padding: '2em'
+    padding: '2em',
   },
   paper: {
     boxShadow: theme.shadows[5],
