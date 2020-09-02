@@ -1,5 +1,7 @@
 const User = require('../db/models/User');
 const Bcrypt = require('bcryptjs');
+const { update } = require('../db/models/User');
+const e = require('express');
 
 module.exports = {
   findUsers: async (req, res, next) => {
@@ -33,10 +35,26 @@ module.exports = {
         flowIdx
       } = req.body;
 
+      console.log('date from req body', date)
       const foundUser = await User.findOne({ username: req.params.username });
 
+      console.log('found user date', foundUser.financial[0].date)
       if (financeIdx) {
-        foundUser.financial[financeIdx].purchases = financeUpdate
+        if (financeUpdate.length) {
+          foundUser.financial[financeIdx].purchases = financeUpdate
+        }
+        else {
+          console.log('finance has idx, no data')
+          // User.updateOne({
+          //   _id: foundUser._id
+          // },{
+          //   $pull: {
+          //     date: date.slice(0,10) + "T00:00:00.000Z"
+          //   }}).exec()
+          //this seems harsh?
+          //ASK CHLOE
+          foundUser.financial.splice(financeIdx, 1)
+        }
       } else if (financeUpdate.length) {
         const financeObj = {
           date,
@@ -51,7 +69,11 @@ module.exports = {
       }
 
       if (symptomsIdx) {
-        foundUser.symptomTags[symptomsIdx].symptoms = symptomUpdate
+        if (symptomUpdate.length) {
+          foundUser.symptomTags[symptomsIdx].symptoms = symptomUpdate
+        } else {
+          foundUser.symptomTags.splice(symptomsIdx, 1)
+        }
       } else if (symptomUpdate.length) {
         const symptomsObj = {
           date,
@@ -66,7 +88,11 @@ module.exports = {
       }
 
       if (flowIdx) {
-        foundUser.period[flowIdx].typeOfFlow = flowUpdate
+        if (flowUpdate !== undefined) {
+          foundUser.period[flowIdx].typeOfFlow = flowUpdate
+        } else {
+          foundUser.period.splice(flowIdx, 1)
+        }
       } else if (flowUpdate) {
         const periodObj = {
           date,
@@ -93,7 +119,6 @@ module.exports = {
   },
   //login?
   loginUser: async (req, res, next) => {
-    console.log('req.body in route', req.body);
     try {
       const authUser = await User.findOne({
         email: req.body.email,
