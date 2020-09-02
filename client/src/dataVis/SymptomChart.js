@@ -20,7 +20,6 @@ const UTIL_SYMPTOM = (symptomData, start, end) => {
 
   const symptomObj = symptomData.reduce(
     (acc, el) => {
-      console.log("DATE SYMP",el.date)
 
       if (moment(el.date).isBetween(start, end)) {
         const dateChange = el.date.slice(0,10)
@@ -132,13 +131,9 @@ const UTIL_SYMPTOM = (symptomData, start, end) => {
 function SymptomChartBB(props) {
   let { start, end, user } = props;
   let symptomData = user.symptomTags;
-  // let [CHART_DATA, setChartData] = useState({});
-  // let [CHART_AXIS, setChartAxis] = useState({});
-  // let [CHART_TOOLTIP, setChartToolTip] = useState({});
-  // let [loading, setLoading] = useState(true);
 
   let symptomCol = UTIL_SYMPTOM(symptomData, start, end);
-  console.log('COL', symptomCol);
+
 
   let CHART_DATA = {
     xs: {
