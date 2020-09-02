@@ -14,12 +14,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-//TEST
-import PeriodUpdate from '../forms/PeriodUpdate';
-import FinanceUpdate from '../forms/FinanceUpdate';
-import SymptomUpdate from '../forms/SymptomUpdate';
-
-import UserDataView from './UserDataView';
+import FormContainer from '../forms/FormContainer'
 
 function CalendarView(props) {
   const [value, onChange] = useState(new Date());
@@ -101,28 +96,8 @@ function CalendarView(props) {
         (note: period/symptom/finance data will be displayed on the calendar in
         diff colors)
       </p>
-      {/* <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        className={classes.modal}
-        disableScrollLock="true"
-      >
-        <div className={classes.paper}>
-          <div>Date: {moment(date).format('MM DD YYYY')}</div>
-          <p>(if you have data for this day, it will be displayed here)</p>
-          <br />
-          <PeriodUpdate date={date} user={user} />
-          <br />
-          <br />
-          <SymptomUpdate date={date} user={user} />
-          <br />
-          <br />
-          <FinanceUpdate date={date} user={user} />
-        </div>
-      </Modal> */}
-      <Dialog
+
+        <Dialog
         open={open}
         onClose={handleClose}
         scroll={scroll}
@@ -134,14 +109,7 @@ function CalendarView(props) {
         <DialogContent className={classes.paper}>
           <DialogContentText>
             <div>Date: {moment(date).format('MMMM D, YYYY')}</div>
-            <br />
-            <PeriodUpdate date={date} user={user} />
-            <br />
-            <br />
-            <SymptomUpdate date={date} user={user} />
-            <br />
-            <br />
-            <FinanceUpdate date={date} user={user} />
+            <FormContainer date={date} user={user} />
           </DialogContentText>
         </DialogContent>
       </Dialog>
