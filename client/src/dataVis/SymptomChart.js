@@ -73,20 +73,12 @@ const UTIL_SYMPTOM = (symptomData, start, end) => {
         return el;
       }
     }),
-<<<<<<< HEAD
-    symptomObj["emotion"].map((el,idx) => {
-      if(idx>0){
-        return UTIL_SYMPTOMS_LIST["emotion"].indexOf(el)
-      }else{
-        return el
-=======
     symptomObj['emotion'].map((el, idx) => {
       if (idx > 0) {
         const value = 20 + UTIL_SYMPTOMS_LIST['emotion'].indexOf(el);
         return Number(value);
       } else {
         return el;
->>>>>>> c9936c726f719fc845fde7b6271fecc9aa1797fa
       }
     }),
     symptomObj['pain'].map((el, idx) => {
@@ -168,7 +160,6 @@ function SymptomChartBB(props) {
       },
       type: 'timeseries',
     },
-<<<<<<< HEAD
     y:{
       tick: {
         show: false, 
@@ -179,8 +170,6 @@ function SymptomChartBB(props) {
     }
 
 
-=======
->>>>>>> c9936c726f719fc845fde7b6271fecc9aa1797fa
   };
 
   let CHART_TOOLTIP = {
