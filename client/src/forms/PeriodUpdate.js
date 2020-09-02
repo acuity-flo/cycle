@@ -1,54 +1,63 @@
-import React, { useState } from "react";
-import { Button, Slider, Typography, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
-import moment from "moment";
+import React, { useState } from 'react';
+import { Button, Slider, Typography, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch } from 'react-redux';
+import moment from 'moment';
 
 //thunk
-import { addPeriodData, updateUserThunk } from "../store";
+import { addPeriodData, updateUserThunk } from '../store';
 
 // marks for the slider for flow data
 const marks = [
   {
     value: 0,
-    label: "None",
+    label: 'None',
   },
   {
     value: 1,
-    label: "Spotting",
+    label: 'Spotting',
   },
   {
     value: 2,
-    label: "Light",
+    label: 'Light',
   },
   {
     value: 3,
-    label: "Medium",
+    label: 'Medium',
   },
   {
     value: 4,
-    label: "Heavy",
+    label: 'Heavy',
   },
 ];
 
 export default function PeriodForm(props) {
   // user and period data for day opened by the calendar if anything for date
-  const { user, date, flow, setFlow } = props;
+  const { user, date, flow, setFlow, flowIdx, setFlowIdx } = props;
 
-  let todayDataIdx = undefined;
+  // let todayDataIdx = undefined;
+  // const todayData = user.period.filter((el, index) => {
+  //   if (moment(el.date).isSame(props.date)) {
+  //     todayDataIdx = index;
+  //     return el;
+  //   }
+  // });
+
   const todayData = user.period.filter((el, index) => {
-    if (moment(el.date).isSame(props.date)) {
-      todayDataIdx = index;
+    const newDate = el.date.slice(0, 10);
+    if (moment(newDate).isSame(date)) {
+      setFlowIdx(index);
       return el;
     }
   });
+
   //set default value for the slider
   let defaultValue = 0;
   if (todayData[0]) {
-    if (todayData[0].typeOfFlow === "spotting") defaultValue = 1;
-    if (todayData[0].typeOfFlow === "light") defaultValue = 2;
-    if (todayData[0].typeOfFlow === "medium") defaultValue = 3;
-    if (todayData[0].typeOfFlow === "heavy") defaultValue = 4;
+    if (todayData[0].typeOfFlow === 'spotting') defaultValue = 1;
+    if (todayData[0].typeOfFlow === 'light') defaultValue = 2;
+    if (todayData[0].typeOfFlow === 'medium') defaultValue = 3;
+    if (todayData[0].typeOfFlow === 'heavy') defaultValue = 4;
   }
 
   //set classes for styles

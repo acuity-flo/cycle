@@ -27,12 +27,9 @@ export default function FinanceUpdate(props) {
     setFinanceIdx,
   } = props;
 
-  // let todayDataIdx = undefined;
-
   const todayData = user.financial.filter((el, index) => {
-    // need to fix matching dates of el and date from props
-    // we are grabbing financial data properly from the user
-    if (moment(el.date).isSame(date)) {
+    const newDate = el.date.slice(0, 10);
+    if (moment(newDate).isSame(date)) {
       setFinanceIdx(index);
       return el;
     }

@@ -66,7 +66,7 @@
       {
         "date": "2020-06-09",
         "symptoms": [
-          { "symptomName": "indegestion", "category": "physical" },
+          { "symptomName": "indigestion", "category": "physical" },
           { "symptomName": "stressed", "category": "mood" },
           { "symptomName": "snacky", "category": "physical" }
         ]
@@ -108,7 +108,7 @@
       {
         "date": "2020-07-09",
         "symptoms": [
-          { "symptomName": "indegestion", "category": "physical" },
+          { "symptomName": "indigestion", "category": "physical" },
           { "symptomName": "stressed", "category": "mood" },
           { "symptomName": "snacky", "category": "physical" }
         ]
@@ -150,7 +150,7 @@
       {
         "date": "2020-08-09",
         "symptoms": [
-          { "symptomName": "indegestion", "category": "physical" },
+          { "symptomName": "indigestion", "category": "physical" },
           { "symptomName": "stressed", "category": "mood" },
           { "symptomName": "snacky", "category": "physical" }
         ]
@@ -192,7 +192,7 @@
       {
         "date": "2020-09-09",
         "symptoms": [
-          { "symptomName": "indegestion", "category": "physical" },
+          { "symptomName": "indigestion", "category": "physical" },
           { "symptomName": "stressed", "category": "mood" },
           { "symptomName": "snacky", "category": "physical" }
         ]
