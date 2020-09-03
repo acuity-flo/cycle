@@ -11,11 +11,12 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Icon from '@material-ui/core/Icon';
+import Typography from '@material-ui/core/Typography'
 
 //thunk
 import { logout } from '../store';
 import SvgIcon from '@material-ui/icons/Menu';
-import LogoSVG from '../images/Logo_Update.svg'
+import { ReactComponent as LogoSVG }  from '../images/Logo2.svg'
 import LogoPNG from '../images/Logo.png'
 
 
@@ -52,18 +53,22 @@ function Navbar(props) {
         <Toolbar>
           <IconButton
             edge="start"
-            className={classes.menuButton}
+            // className={classes.menuButton}
             color="inherit"
             aria-label="menu"
             onClick = {()=> {
               props.history.push('/')
             }}
           >
+          <Typography variant="title">
+            <LogoSVG height={50} width={50}/>
+          </Typography>
           {/* <button><SvgIcon component={CycleIcon} viewBox="0 0 24 24"/></button> */}
-            <SvgIcon component={CycleIcon} viewBox="0 0 24 24"/>
-            {/* <Icon classes={{root: classes.iconRoot}} > 
-              <img src= {LogoPNG} className = {classes.imageIcon} /> 
-            </Icon> */}
+            {/* <SvgIcon component={CycleIcon} viewBox="0 0 24 24"/> */}
+            {/* <Icon classes={{root: classes.iconRoot}} >  */}
+              {/* <img src= {LogoPNG} className = {classes.imageIcon} />  */}
+              {/* <h1></h1> */}
+            {/* </Icon> */}
             {/* <img src = "Logo.png"/> */}
           </IconButton>
           {auth && (
@@ -143,26 +148,32 @@ const useStyles = makeStyles((theme) => ({
   imageIcon: {
     //  width: '100%',
     height: '100%', 
-    fontSize: '500px'
+    fontSize: '100vw',
     // textAlign: 'initial',
+    // marginTop: "5vh",
+    // width: "50vw",
+    // alignSelf: "center"
   },
   iconHome: {
-    fontSize: '50px',
+    // fontSize: '50px',
     // paddingBottom: "2px", 
-    justifyContent: "center"
+    justifyContent: "center",
+    // marginTop: "5vh",
+    // width: "50vw",
+    // alignSelf: "center"
   },
   iconRoot: {
-    textAlign:"center"
+    alignSelf: "center"
   }
 }));
 
-const CycleIcon = () => {
-  const classes = useStyles()
-  return (
-    <Icon className={classes.iconHome}><img src={LogoSVG} className={classes.imageIcon}/></Icon>
-    // className={classes.imageIcon}
-    //height ={25} width={25}
-  )
-}
+// const CycleIcon = () => {
+//   const classes = useStyles()
+//   return (
+//     <Icon className={classes.iconHome}><img src={LogoSVG} className={classes.imageIcon}/></Icon>
+//     // className={classes.imageIcon}
+//     //height ={25} width={25}
+//   )
+// }
 
 
