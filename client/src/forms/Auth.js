@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router';
+import {connect} from 'react-redux'
 
 const AuthForm = (props) => {
   const [type, setType] = useState('login');
@@ -85,6 +86,7 @@ const AuthForm = (props) => {
             </FormLabel>
           </Fragment>
         )}
+        {props.message && <p>{props.message}</p>}
         <Button
           variant="outlined"
           color="primary"
@@ -139,4 +141,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default withRouter(AuthForm);
+const mapState = (state) => {
+  return {
+    user: state.authUser,
+    isLoggedIn: !!state.authUser._id,
+    message: state.statusMessage
+  };
+};
+
+export default connect(mapState)(withRouter(AuthForm))

@@ -14,7 +14,7 @@ const AUTH_USER = 'AUTH_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_VIEW = 'UPDATE_VIEW';
-const GET_STATUS = 'GET_STATUS'
+const SET_STATUS = 'SET_STATUS'
 const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
 //action creator
@@ -38,8 +38,8 @@ const updateView = (name, bool) => ({
   bool,
 });
 
-const getStatus = (message) => ({
-  type: GET_STATUS, 
+const setStatus = (message) => ({
+  type: SET_STATUS, 
   message
 })
 const updateProfile = (user) => ({
@@ -80,25 +80,26 @@ export const authUserThunk = (user, type) => async (dispatch) => {
 
   try {
     const res = await axios.post(`/auth/${type}`, post)
-    console.log("res",res)
     
     if(res.data){
       const action = authUserAction(res.data);
       dispatch(action)
     }
-    
-    // const action = authUserAction(data);
-    // dispatch(action);
-    // history.push('/me')
-    const { data } = await axios.post(`/auth/${type}`, post);
-    const action = authUserAction(data);
-    dispatch(action);
+
   } catch (e) {
     if(e.response.status === 400){
-      console.log("invalid Password")
+      dispatch(setStatus("Password entered doesn't match!"))
     }
+
+    if(e.response.status === 435) {
+      dispatch(setStatus("Sorry, this Username is already taken!"))
+    }
+    if(e.response.status === 437) {
+      dispatch(setStatus("Oops, this Email is already registered!"))
+    }
+
     if(e.response.status === 403){
-      console.log("invalid email")
+      dispatch(setStatus("Sorry, we don't have this email on file!"))
     }
 
   }
@@ -174,6 +175,8 @@ const reducer = (state = initialState, action) => {
       return initialState;
     case UPDATE_USER:
       return { ...state, statusMessage: null, authUser: action.user }
+    case SET_STATUS: 
+      return {...state, statusMessage: action.message}
     default:
       return state;
   }

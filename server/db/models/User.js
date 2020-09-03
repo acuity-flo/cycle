@@ -77,4 +77,5 @@ userSchema.plugin(passportLocalMongoose, { usernameField: 'username' });
 
 const User = mongoose.model('User', userSchema);
 
+
 module.exports = User;
