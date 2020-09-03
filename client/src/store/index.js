@@ -4,13 +4,17 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 //initial state will be an empty object, state will always be a user
-const authUser = {};
+const initialState = {
+  authUser: {},
+  statusMessage: null
+};
 
 //action
 const AUTH_USER = 'AUTH_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_VIEW = 'UPDATE_VIEW';
+const GET_STATUS = 'GET_STATUS'
 
 //action creator
 const authUserAction = (user) => ({
@@ -32,6 +36,11 @@ const updateView = (name, bool) => ({
   name,
   bool,
 });
+
+const getStatus = (message) => ({
+  type: GET_STATUS, 
+  message
+})
 
 //thunks
 //auth user thunk for login or signup
@@ -62,13 +71,28 @@ export const authUserThunk = (user, type) => async (dispatch) => {
       password,
     };
   }
+
+
   try {
-    const { data } = await axios.post(`/auth/${type}`, post);
-    const action = authUserAction(data);
-    dispatch(action);
+    const res = await axios.post(`/auth/${type}`, post)
+    console.log("res",res)
+    
+    if(res.data){
+      const action = authUserAction(res.data);
+      dispatch(action)
+    }
+    
+    // const action = authUserAction(data);
+    // dispatch(action);
     // history.push('/me')
   } catch (e) {
-    console.log(e);
+    if(e.response.status === 400){
+      console.log("invalid Password")
+    }
+    if(e.response.status === 403){
+      console.log("invalid email")
+    }
+
   }
 };
 
@@ -95,47 +119,10 @@ export const updateViewThunk = (username, name, bool) => async (dispatch) => {
   }
 };
 
-// export const addPeriodData = (username, periodArr) => {
-//   return async (dispatch) => {
-//     try {
-//       const res = await axios.put(`/api/${username}`, {period: periodArr})
-//       dispatch(updateUser(res.data))
-//     } catch (e) {
-//       console.log(e)
-//     }
-//   }
-// }
-
-// export const addFinanceData = (username, financeArr) => {
-//   return async (dispatch) => {
-//     try {
-//       const res = await axios.put(`/api/${username}`, {financial: financeArr})
-//       dispatch(updateUser(res.data))
-//     } catch (e) {
-//       console.log(e)
-//     }
-//   }
-// }
-
-// export const addSymptomData = (username, symptomArr) => {
-//   console.log("symptoms arr in thunk", symptomArr)
-//   return async (dispatch) => {
-//     try {
-//       console.log('i hit the symptom data thunk')
-//       const res = await axios.put(`/api/${username}`, {symptomTags: symptomArr})
-//       console.log('res.data', res.data)
-//       dispatch(updateUser(res.data))
-//     } catch (e) {
-//       console.log(e)
-//     }
-//   }
-// }
-
-//get user if req.user
 export const authMe = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/auth/me');
-    const action = authUserAction(data || authUser);
+    const action = authUserAction(data || initialState.authUser);
     dispatch(action);
   } catch (e) {
     console.log(e);
@@ -151,22 +138,22 @@ export const logout = () => async (dispatch) => {
   }
 };
 
-const reducer = (state = authUser, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_VIEW: {
       if (action.name === 'period')
-        return { ...state, periodTracking: action.bool };
+        return { ...state, statusMessage: null, authUser: {...state.authUser, periodTracking: action.bool } }
       if (action.name === 'symptom')
-        return { ...state, symptomTracking: action.bool };
+      return { ...state, statusMessage: null, authUser: {...state.authUser, symptomTracking: action.bool} }
       if (action.name === 'finance')
-        return { ...state, financialTracking: action.bool };
+      return { ...state, statusMessage: null, authUser: {...state.authUser, financialTracking: action.bool} }      
     }
     case AUTH_USER:
-      return action.user;
+      return { ...state, statusMessage: null, authUser: action.user }
     case LOGOUT_USER:
-      return authUser;
+      return initialState;
     case UPDATE_USER:
-      return action.user;
+      return { ...state, statusMessage: null, authUser: action.user }
     default:
       return state;
   }

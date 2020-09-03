@@ -128,8 +128,8 @@ const useStyles = makeStyles((theme) => ({
 
 const mapState = (state) => {
   return {
-    authUser: state,
-    isLoggedIn: !!state.id,
+    authUser: state.authUser,
+    isLoggedIn: !!state.authUser._id,
   };
 };
 
