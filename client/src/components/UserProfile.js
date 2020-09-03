@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import UserSwitch from '../forms/UserSwitches';
+
 const UserProfile = (props) => {
   const user = props.authUser;
   return (
@@ -15,8 +17,8 @@ const UserProfile = (props) => {
         you can view some of your average stats here and make some edits to your
         profile
 
-
       </p>
+      <UserSwitch user={user} />
     </div>
   );
 };
