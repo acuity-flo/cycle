@@ -1,14 +1,18 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, Button } from '@material-ui/core/'
 
 export default function HomePage () {
     const classes = useStyles()
     return (
         <div className={classes.container}>
             <img src={require('../images/Logo_Update.svg')} className={classes.image} />
-            <h1>HI IM THE HOMEPAGE</h1>
-            <h1>To Login Press here: </h1> 
+
+            <h1>Symptoms? Menstruation? Finances?</h1> 
+            <h1>Welcome to Cycle.</h1>
+            <p>The cyclical tracking app for female-identifying, non-binary, and trans people aimed to record their monthly symptoms, menstruation, and/or related finances.</p>
+            <p>What makes Cycle different from the other tracking apps out there?</p>
             <a href="/login">HEREEE</a>
+            <Button className={classes.button}>Get Started!</Button>
         </div>
     )
 }
@@ -18,27 +22,9 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       flexDirection: "column",
     },
-    image: {
-      marginTop: "5vh",
-      width: "30vw",
-      alignSelf: "center"
-    },
-    root: {
-      flexGrow: 1,
-      display: "flex",
-      flexDirection: "column",
-      flexWrap: "nowrap",
-      width: "40vw",
-      alignItems: "center",
-    },
-    pronouns: {
-      alignSelf: "flex-start",
-    },
-    inputItem: {
+    button: {
       margin: "0.5em",
-      width: "20vw"
-    },
-    inputLabel: {
-      width: "20vw"
+      backgroundColor: "white",
+      color: "#545454"
     }
   }));
