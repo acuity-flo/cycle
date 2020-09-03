@@ -23,7 +23,7 @@ function CalendarView(props) {
   const symptoms = user.symptomTags;
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
-  // const [currentView, setView] = useState('');
+
 
   const handleClose = () => {
     setOpen(false);
