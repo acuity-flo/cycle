@@ -11,6 +11,7 @@ const AUTH_USER = 'AUTH_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_VIEW = 'UPDATE_VIEW';
+const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
 //action creator
 const authUserAction = (user) => ({
@@ -31,6 +32,11 @@ const updateView = (name, bool) => ({
   type: UPDATE_VIEW,
   name,
   bool,
+});
+
+const updateProfile = (user) => ({
+  type: UPDATE_PROFILE,
+  user,
 });
 
 //thunks
@@ -66,17 +72,25 @@ export const authUserThunk = (user, type) => async (dispatch) => {
     const { data } = await axios.post(`/auth/${type}`, post);
     const action = authUserAction(data);
     dispatch(action);
-    // history.push('/me')
   } catch (e) {
     console.log(e);
   }
 };
 
-// todayDataIdx
 export const updateUserThunk = (update) => async (dispatch) => {
   try {
     const { data } = await axios.put(`/api/${update.username}`, update);
     dispatch(updateUser(data));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const updateProfileThunk = (update) => async (dispatch) => {
+  try {
+    const { data } = await axios.put(`/api/${update.username}/profile`, update);
+    dispatch(updateProfile(data));
+    return '';
   } catch (e) {
     console.log(e);
   }
@@ -94,42 +108,6 @@ export const updateViewThunk = (username, name, bool) => async (dispatch) => {
     console.log(e);
   }
 };
-
-// export const addPeriodData = (username, periodArr) => {
-//   return async (dispatch) => {
-//     try {
-//       const res = await axios.put(`/api/${username}`, {period: periodArr})
-//       dispatch(updateUser(res.data))
-//     } catch (e) {
-//       console.log(e)
-//     }
-//   }
-// }
-
-// export const addFinanceData = (username, financeArr) => {
-//   return async (dispatch) => {
-//     try {
-//       const res = await axios.put(`/api/${username}`, {financial: financeArr})
-//       dispatch(updateUser(res.data))
-//     } catch (e) {
-//       console.log(e)
-//     }
-//   }
-// }
-
-// export const addSymptomData = (username, symptomArr) => {
-//   console.log("symptoms arr in thunk", symptomArr)
-//   return async (dispatch) => {
-//     try {
-//       console.log('i hit the symptom data thunk')
-//       const res = await axios.put(`/api/${username}`, {symptomTags: symptomArr})
-//       console.log('res.data', res.data)
-//       dispatch(updateUser(res.data))
-//     } catch (e) {
-//       console.log(e)
-//     }
-//   }
-// }
 
 //get user if req.user
 export const authMe = () => async (dispatch) => {
@@ -161,6 +139,8 @@ const reducer = (state = authUser, action) => {
       if (action.name === 'finance')
         return { ...state, financialTracking: action.bool };
     }
+    case UPDATE_PROFILE:
+      return action.user;
     case AUTH_USER:
       return action.user;
     case LOGOUT_USER:

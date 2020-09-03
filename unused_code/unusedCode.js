@@ -1,3 +1,39 @@
+// export const addPeriodData = (username, periodArr) => {
+//   return async (dispatch) => {
+//     try {
+//       const res = await axios.put(`/api/${username}`, {period: periodArr})
+//       dispatch(updateUser(res.data))
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   }
+// }
+
+// export const addFinanceData = (username, financeArr) => {
+//   return async (dispatch) => {
+//     try {
+//       const res = await axios.put(`/api/${username}`, {financial: financeArr})
+//       dispatch(updateUser(res.data))
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   }
+// }
+
+// export const addSymptomData = (username, symptomArr) => {
+//   console.log("symptoms arr in thunk", symptomArr)
+//   return async (dispatch) => {
+//     try {
+//       console.log('i hit the symptom data thunk')
+//       const res = await axios.put(`/api/${username}`, {symptomTags: symptomArr})
+//       console.log('res.data', res.data)
+//       dispatch(updateUser(res.data))
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   }
+// }
+
 // symptom update form
 
 // const handleSubmit = (evt) => {

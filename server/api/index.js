@@ -1,4 +1,3 @@
-const User = require('../db/models/User');
 const router = require('express').Router();
 const userController = require('../controllers/user');
 
@@ -7,9 +6,7 @@ router
   .get(userController.findOneUser)
   .put(userController.updateUser);
 
-router
-  .route('/:username/views/')
-  .put(userController.updateViews)
-// router.route('/').get(userController.findUsers).post(userController.signUpUser);
+router.route('/:username/views/').put(userController.updateViews);
+router.route('/:username/profile/').put(userController.updateProfile);
 
 module.exports = router;
