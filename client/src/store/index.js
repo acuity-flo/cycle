@@ -145,9 +145,15 @@ const reducer = (state = authUser, action) => {
   }
 };
 
-const middleware = applyMiddleware(
-  thunkMiddleware,
-  createLogger({ collapsed: true })
-);
+let middleware;
+
+if (process.env.NODE_ENV !== "development") {
+  middleware = applyMiddleware(
+    thunkMiddleware,
+    createLogger({ collapsed: true })
+  );
+} else {
+  middleware = applyMiddleware(thunkMiddleware);
+}
 
 export default createStore(reducer, middleware);
