@@ -14,10 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const ProfileUpdate = (props) => {
   const user = props.authUser;
   const [pronouns, setPronouns] = useState(user.username);
-  const [avgLengthOfCycle, setAvgLength] = useState(user.avgLengthOfCycle);
   const classes = useStyles();
 
-  // if don't submit a change, get an empty string
   const handleSubmit = async (event) => {
     event.preventDefault();
     const profileUpdate = {
