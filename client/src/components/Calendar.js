@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
 import { connect } from 'react-redux';
-// import DayModal from '../forms/CalendarDayModal';
+
 import {
-  Modal,
-  Button,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -13,8 +11,8 @@ import {
   Container,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import UserDataView from './UserDataView'
-import FormContainer from '../forms/FormContainer'
+import UserDataView from './UserDataView';
+import FormContainer from '../forms/FormContainer';
 
 function CalendarView(props) {
   const [value, onChange] = useState(new Date());
@@ -97,7 +95,7 @@ function CalendarView(props) {
         diff colors)
       </p>
 
-        <Dialog
+      <Dialog
         open={open}
         onClose={handleClose}
         scroll={scroll}
