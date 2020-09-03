@@ -10,33 +10,32 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { updateProfileThunk } from '../store';
 
 const ProfileUpdate = (props) => {
   const user = props.authUser;
-  const [pronouns, setPronouns] = useState(user.username);
+  const [pronouns, setPronouns] = useState();
+  // const [name, setName] = useState();
+  // const [cycle, setCycle] = useState();
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const profileUpdate = {
-      name: user.name,
-      username: user.username,
-      pronouns: user.pronouns,
-      avgLengthOfCycle: user.avgLengthOfCycle,
-    };
-    if (event.target.username.value) {
-      profileUpdate.username = event.target.username.value;
-    }
+    const update = {};
     if (event.target.fullName.value) {
-      profileUpdate.name = event.target.fullName.value;
+      update.name = event.target.fullName.value;
     }
     if (event.target.cyclelength.value) {
-      profileUpdate.avgLengthOfCycle = Number(event.target.cyclelength.value);
+      update.avgLengthOfCycle = Number(event.target.cyclelength.value);
     }
     if (event.target.pronouns.value) {
-      profileUpdate.pronouns = event.target.pronouns.value;
+      update.pronouns = pronouns;
     }
-    // now dispatch to redux thunk and send back updateProfile obj
+    if (Object.keys(update).length !== 0) {
+      update.username = user.username;
+      dispatch(updateProfileThunk(update));
+    }
   };
 
   const handlePronounChange = (event) => {
@@ -47,10 +46,6 @@ const ProfileUpdate = (props) => {
     <div className={classes.container}>
       <form onSubmit={handleSubmit} className={classes.root}>
         <h4>update profile</h4>
-        <FormControl name="username" className={classes.inputItem}>
-          <InputLabel htmlFor="username">update username </InputLabel>
-          <Input id="username" />
-        </FormControl>
         <FormControl name="fullName" className={classes.inputItem}>
           <InputLabel htmlFor="fullName">update name</InputLabel>
           <Input id="fullName" />
