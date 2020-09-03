@@ -15,6 +15,7 @@ const LOGOUT_USER = 'LOGOUT_USER';
 const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_VIEW = 'UPDATE_VIEW';
 const GET_STATUS = 'GET_STATUS'
+const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
 //action creator
 const authUserAction = (user) => ({
@@ -41,6 +42,10 @@ const getStatus = (message) => ({
   type: GET_STATUS, 
   message
 })
+const updateProfile = (user) => ({
+  type: UPDATE_PROFILE,
+  user,
+});
 
 //thunks
 //auth user thunk for login or signup
@@ -85,6 +90,9 @@ export const authUserThunk = (user, type) => async (dispatch) => {
     // const action = authUserAction(data);
     // dispatch(action);
     // history.push('/me')
+    const { data } = await axios.post(`/auth/${type}`, post);
+    const action = authUserAction(data);
+    dispatch(action);
   } catch (e) {
     if(e.response.status === 400){
       console.log("invalid Password")
@@ -96,11 +104,20 @@ export const authUserThunk = (user, type) => async (dispatch) => {
   }
 };
 
-// todayDataIdx
 export const updateUserThunk = (update) => async (dispatch) => {
   try {
     const { data } = await axios.put(`/api/${update.username}`, update);
     dispatch(updateUser(data));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const updateProfileThunk = (update) => async (dispatch) => {
+  try {
+    const { data } = await axios.put(`/api/${update.username}/profile`, update);
+    dispatch(updateProfile(data));
+    return '';
   } catch (e) {
     console.log(e);
   }
@@ -119,6 +136,7 @@ export const updateViewThunk = (username, name, bool) => async (dispatch) => {
   }
 };
 
+//get user if req.user
 export const authMe = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/auth/me');
@@ -148,6 +166,8 @@ const reducer = (state = initialState, action) => {
       if (action.name === 'finance')
       return { ...state, statusMessage: null, authUser: {...state.authUser, financialTracking: action.bool} }      
     }
+    case UPDATE_PROFILE:
+      return action.user;
     case AUTH_USER:
       return { ...state, statusMessage: null, authUser: action.user }
     case LOGOUT_USER:
