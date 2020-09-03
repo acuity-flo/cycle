@@ -6,7 +6,7 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { authMe } from './store';
 
 //Component Imports
-import HomePage from './components/HomePage';
+import Home from './components/Home';
 import CalendarView from './components/Calendar';
 import LoginPage from './components/LoginPage';
 import UserProfile from './components/UserProfile';
@@ -30,7 +30,7 @@ function App(props) {
       <Router>
         <NavBar />
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={Home} />
           {/* <Route exact path="/login" component={LoginPage} /> */}
           {isLoggedIn && (
             <Switch>
