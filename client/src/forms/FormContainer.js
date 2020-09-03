@@ -10,6 +10,10 @@ import { updateUserThunk } from '../store';
 
 export default function FormContainer(props) {
   const { date, user } = props;
+  const period = user.periodTracking
+  const symptom = user.symptomTracking
+  const finance = user.financialTracking
+
   const [symptoms, setSymptoms] = useState([]);
   const [flow, setFlow] = useState(0);
   const [purchases, setPurchases] = useState([]);
@@ -39,31 +43,34 @@ export default function FormContainer(props) {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <PeriodUpdate
+      {period ?  <PeriodUpdate
         date={date}
         user={user}
         setFlow={setFlow}
         flow={flow}
         flowIdx={flowIdx}
         setFlowIdx={setFlowIdx}
-      />
-      <SymptomUpdate
+      /> : ''}
+
+      {symptom ? <SymptomUpdate
         date={date}
         user={user}
         setSymptoms={setSymptoms}
         symptoms={symptoms}
         symptomsIdx={symptomsIdx}
         setSymptomsIdx={setSymptomsIdx}
-      />
-      <FinanceUpdate
+      /> :''}
+
+      {finance ? <FinanceUpdate
         date={date}
         user={user}
         setPurchases={setPurchases}
         purchases={purchases}
         financeIdx={financeIdx}
         setFinanceIdx={setFinanceIdx}
-      />
-      <Button type="submit">Submit</Button>
+      /> : ''}
+ 
+        {period || symptom || finance ? <Button type="submit">Submit</Button> : <p>You're not currently tracking anything. Please update your settings in your Profile!</p>}
     </form>
   );
 }
