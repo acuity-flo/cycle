@@ -6,7 +6,7 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { authMe } from './store';
 
 //Component Imports
-import HomePage from './components/Homepage';
+import HomePage from './components/HomePage';
 import CalendarView from './components/Calendar';
 import LoginPage from './components/LoginPage';
 import UserProfile from './components/UserProfile';
