@@ -4,12 +4,17 @@ import { DateRangePicker } from 'react-dates';
 import moment from 'moment';
 import 'react-dates/lib/css/_datepicker.css';
 import { Button, Container } from '@material-ui/core';
+import { connect } from 'react-redux';
 
 import PeriodChartBB from '../dataVis/PeriodChartBB';
 import FinanceChartBB from '../dataVis/FinanceChart';
 import SymptomChartBB from '../dataVis/SymptomChart';
 
-export default function ChartHome() {
+function ChartHome(props) {
+  const user = props.user
+  const period = user.periodTracking
+  const symptom = user.symptomTracking
+  const finance = user.financialTracking
   const [start, setStart] = useState(moment());
   const [end, setEnd] = useState(moment());
   const [focus, setFocus] = useState(null);
@@ -18,7 +23,6 @@ export default function ChartHome() {
   const [endProp, setEndProp] = useState(moment());
 
   const defaultProps = {
-    //from example
     autoFocus: false,
     autoFocusEndDate: false,
     initialStartDate: null,
@@ -41,8 +45,6 @@ export default function ChartHome() {
 
   const onClick = () => {
     setDate(true);
-    // setTimeout(setDate(false), 1000);
-    // return <PeriodChart start={start} end={end} />;
   };
 
   return (
@@ -69,18 +71,28 @@ export default function ChartHome() {
       <Container>
         <h4>period chart</h4>
         <br />
-        {choseDate ? <PeriodChartBB start={startProp} end={endProp} /> : ''}
+        {choseDate && period? <PeriodChartBB start={startProp} end={endProp} /> : ''}
         <br />
         <h4>finance chart</h4>
         <br />
-        {choseDate ? <FinanceChartBB start={startProp} end={endProp} /> : ''}
+        {choseDate && finance ? <FinanceChartBB start={startProp} end={endProp} /> : ''}
         <br />
         <h4>symptom chart</h4>
         <br />
-        {choseDate ? <SymptomChartBB start={startProp} end={endProp} /> : ''}
+        {choseDate && symptom? <SymptomChartBB start={startProp} end={endProp} /> : ''}
         <br />
         <br />
       </Container>
     </div>
   );
 }
+
+const mapState = (state) => {
+  return {
+    user: state,
+    isLoggedIn: !!state.id,
+  };
+};
+
+export default connect(mapState)(ChartHome);
+
