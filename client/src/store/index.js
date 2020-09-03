@@ -172,13 +172,14 @@ const reducer = (state = authUser, action) => {
 
 let middleware;
 
-if (process.env.NODE_ENV !== "development") {
+console.log('process.env', process.env)
+if (process.env.NODE_ENV !== 'development') {
+  middleware = applyMiddleware(thunkMiddleware);
+} else {
   middleware = applyMiddleware(
     thunkMiddleware,
     createLogger({ collapsed: true })
   );
-} else {
-  middleware = applyMiddleware(thunkMiddleware);
 }
 
 export default createStore(reducer, middleware);
