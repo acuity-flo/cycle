@@ -24,8 +24,6 @@ function App(props) {
     setLoading(false);
   }, [dispatch]);
 
-  console.log(user);
-
   //Need to figure out Auth form loads before route path
   if (!loading) {
     return (
@@ -42,7 +40,6 @@ function App(props) {
               <Route component={ErrorComp} />
             </Switch>
           )}
-
           {/* Default component */}
           {!isLoggedIn && <Route component={LoginPage} />}
         </Switch>

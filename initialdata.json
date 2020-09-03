@@ -52,7 +52,7 @@
         "date": "2020-06-07",
         "symptoms": [
           { "symptomName": "cramps", "category": "pain" },
-          { "symptomName": "back pain", "category": "physical" },
+          { "symptomName": "back pain", "category": "pain" },
           { "symptomName": "anxious", "category": "emotion" }
         ]
       },
@@ -94,7 +94,7 @@
         "date": "2020-07-07",
         "symptoms": [
           { "symptomName": "cramps", "category": "pain" },
-          { "symptomName": "back pain", "category": "physical" },
+          { "symptomName": "back pain", "category": "pain" },
           { "symptomName": "anxious", "category": "emotion" }
         ]
       },
@@ -136,7 +136,7 @@
         "date": "2020-08-07",
         "symptoms": [
           { "symptomName": "cramps", "category": "pain" },
-          { "symptomName": "back pain", "category": "physical" },
+          { "symptomName": "back pain", "category": "pain" },
           { "symptomName": "anxious", "category": "emotion" }
         ]
       },
@@ -178,7 +178,7 @@
         "date": "2020-09-07",
         "symptoms": [
           { "symptomName": "cramps", "category": "pain" },
-          { "symptomName": "back pain", "category": "physical" },
+          { "symptomName": "back pain", "category": "pain" },
           { "symptomName": "anxious", "category": "emotion" }
         ]
       },
