@@ -1,43 +1,23 @@
-import React from 'react'
-import Auth from '../forms/Auth'
-import { makeStyles } from '@material-ui/core/styles'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
-export default function ErrorComp () {
-    const classes = useStyles()
-    return (
-        <div className={classes.container}>
-            <img src={require('../images/Logo_Update.svg')} className={classes.image} />
-            <h1> OH NO 404</h1>
-        </div>
-    )
+export default function ErrorComp() {
+  const classes = useStyles();
+  return (
+    <div className={classes.container}>
+      <img src={require('../images/404.svg')} className={classes.image} />
+    </div>
+  );
 }
 
 const useStyles = makeStyles((theme) => ({
-    container: {
-      display: "flex",
-      flexDirection: "column",
-    },
-    image: {
-      marginTop: "5vh",
-      width: "30vw",
-      alignSelf: "center"
-    },
-    root: {
-      flexGrow: 1,
-      display: "flex",
-      flexDirection: "column",
-      flexWrap: "nowrap",
-      width: "40vw",
-      alignItems: "center",
-    },
-    pronouns: {
-      alignSelf: "flex-start",
-    },
-    inputItem: {
-      margin: "0.5em",
-      width: "20vw"
-    },
-    inputLabel: {
-      width: "20vw"
-    }
-  }));
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  image: {
+    marginTop: '5vh',
+    width: '50vw',
+    alignSelf: 'center',
+  },
+}));

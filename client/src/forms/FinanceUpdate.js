@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import {
   Button,
   FormControl,
@@ -10,22 +10,11 @@ import {
   Grid,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux';
 import moment from 'moment';
-
-//thunk
-import { addFinanceData, updateUserThunk } from '../store';
 
 export default function FinanceUpdate(props) {
   //user and finance data for day opened by the calendar, if anything for that date
-  const {
-    user,
-    date,
-    purchases,
-    setPurchases,
-    financeIdx,
-    setFinanceIdx,
-  } = props;
+  const { user, date, purchases, setPurchases, setFinanceIdx } = props;
 
   const todayData = user.financial.filter((el, index) => {
     const newDate = el.date.slice(0, 10);
@@ -37,14 +26,6 @@ export default function FinanceUpdate(props) {
 
   //set classes for the styles
   const classes = useStyles();
-
-  //to dispatch thunk
-  const dispatch = useDispatch();
-
-  //set purchases array to empty for additions
-  // const [purchases, setPurchases] = useState([]);
-
-  //set purchases array with current data or set it with one empty purchase object
 
   //below called with useEffect to set purchases on state
   const loadData = () => {
@@ -88,32 +69,6 @@ export default function FinanceUpdate(props) {
     console.log('in Finance update - delete', newPurchases);
     setPurchases(newPurchases);
   };
-
-  //submit the finances updates
-  // const handleSubmit = (evt) => {
-  //   evt.preventDefault()
-  //   dispatch(updateUserThunk('financial', user.username, purchases, date, todayDataIdx))
-  //   // if (purchases.length > 0) {
-  //   //   const purchasesUpdated = purchases.filter((el) => el.typeOfPurchase !== "")
-  //   //   let updatedFinancial
-  //   //   if (todayDataIdx !== undefined) {
-  //   //     //spread financial data here, but it's a shallow copy.
-  //   //     updatedFinancial = [...user.financial];
-  //   //     updatedFinancial[todayDataIdx].purchases = purchasesUpdated;
-  //   //   } else {
-  //   //     const financeObj = {
-  //   //       date: props.date,
-  //   //       purchases,
-  //   //     };
-  //   //     updatedFinancial = [...user.financial, financeObj];
-  //   //   }
-  //   //   dispatch(addFinanceData(user.username, updatedFinancial));
-  //   // } else if (todayDataIdx !== undefined) {
-  //   //   let updatedFinancial = [...user.financial]
-  //   //   updatedFinancial.splice(todayDataIdx, 1)
-  //   //   dispatch(addFinanceData(user.username, updatedFinancial));
-  //   // }
-  // };
 
   useEffect(() => {
     loadData();

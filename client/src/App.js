@@ -6,7 +6,7 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { authMe } from './store';
 
 //Component Imports
-import HomePage from './components/Homepage';
+import HomePage from './components/HomePage';
 import CalendarView from './components/Calendar';
 import LoginPage from './components/LoginPage';
 import UserProfile from './components/UserProfile';
@@ -24,8 +24,6 @@ function App(props) {
     setLoading(false);
   }, [dispatch]);
 
-  console.log(user);
-
   //Need to figure out Auth form loads before route path
   if (!loading) {
     return (
@@ -42,7 +40,6 @@ function App(props) {
               <Route component={ErrorComp} />
             </Switch>
           )}
-
           {/* Default component */}
           {!isLoggedIn && <Route component={LoginPage} />}
         </Switch>

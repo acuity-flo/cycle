@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Slider, Typography, Grid } from '@material-ui/core';
+import { Slider, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux';
 import moment from 'moment';
-
-//thunk
-import { addPeriodData, updateUserThunk } from '../store';
 
 // marks for the slider for flow data
 const marks = [
@@ -33,15 +29,7 @@ const marks = [
 
 export default function PeriodForm(props) {
   // user and period data for day opened by the calendar if anything for date
-  const { user, date, flow, setFlow, flowIdx, setFlowIdx } = props;
-
-  // let todayDataIdx = undefined;
-  // const todayData = user.period.filter((el, index) => {
-  //   if (moment(el.date).isSame(props.date)) {
-  //     todayDataIdx = index;
-  //     return el;
-  //   }
-  // });
+  const { user, date, setFlow, setFlowIdx } = props;
 
   const todayData = user.period.filter((el, index) => {
     const newDate = el.date.slice(0, 10);
@@ -63,68 +51,15 @@ export default function PeriodForm(props) {
   //set classes for styles
   const classes = useStyles();
 
-  //to dispatch thunk
-  const dispatch = useDispatch();
-
-  //set flow to 0 and if not updated then the thunk won't run
-  // const [flow, setFlow] = useState(0);
-
   //loading, error, success messages
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(false);
+  // const [success, setSuccess] = useState(false);
 
   // handle changing the flow value selected
   const handleChange = (evt, newValue) => {
     setFlow(newValue);
   };
-
-  //handle submit for the flow update
-  // const handleSubmit = (evt) => {
-  //   evt.preventDefault()
-  //   dispatch(updateUserThunk('period', user.username, flow, date, todayDataIdx))
-
-  //   // // only run if when the flow was changed from 0
-  //   // // run elif when flow is 0, but there was data for the day originally
-  //   // if (flow > 0) {
-  //   //   //set updated Period typeOfFlow for dispatch
-  //   //   let updatedPeriod, typeOfFlow;
-  //   //   if (flow === 1) {
-  //   //     typeOfFlow = "spotting";
-  //   //   } else if (flow === 2) {
-  //   //     typeOfFlow = "light";
-  //   //   } else if (flow === 3) {
-  //   //     typeOfFlow = "medium";
-  //   //   } else if (flow === 4) {
-  //   //     typeOfFlow = "heavy";
-  //   //   }
-
-  //   //   // if there was data for today, reset vals and dispatch
-  //   //   //else construct obj and push obj
-  //   //   if (todayDataIdx !== undefined) {
-  //   //     updatedPeriod = [...props.user.period];
-  //   //     updatedPeriod[todayDataIdx].typeOfFlow = typeOfFlow;
-  //   //   } else {
-  //   //     updatedPeriod = [...props.user.period, {
-  //   //       date: props.date,
-  //   //       typeOfFlow,
-  //   //     }];
-  //   //   }
-
-  //   //   //dispatch thunk
-  //   //   dispatch(addPeriodData(user.username, updatedPeriod));
-  //   //   // setLoading(false)
-  //   //   // setSuccess(true)
-  //   // } else if (todayDataIdx !== undefined) {
-  //   //   let updatedPeriod = [...props.user.period];
-
-  //   //   //remove obj from array when reset to 0
-  //   //   updatedPeriod = updatedPeriod.splice(todayDataIdx, 1);
-
-  //   //   //dispatch thunk
-  //   //   dispatch(addPeriodData(user.username, updatedPeriod));
-  //   // }
-  // };
 
   return (
     <div className={classes.root}>
@@ -151,8 +86,6 @@ export default function PeriodForm(props) {
         max={4}
         onChange={handleChange}
       />
-      {/* {success && <p>Added successfully!</p>}
-      {loading && <p>Loading</p>} */}
     </div>
   );
 }
