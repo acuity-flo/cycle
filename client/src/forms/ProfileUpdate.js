@@ -38,7 +38,6 @@ const ProfileUpdate = (props) => {
     if (event.target.pronouns.value) {
       profileUpdate.pronouns = event.target.pronouns.value;
     }
-    console.log(profileUpdate);
     // now dispatch to redux thunk and send back updateProfile obj
   };
 

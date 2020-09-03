@@ -15,18 +15,14 @@ const UserProfile = (props) => {
       <p>Username: {user.username}</p>
       <p>Pronouns: {user.pronouns}</p>
       <p>Average Cycle Length: {user.avgLengthOfCycle}</p>
-<<<<<<< HEAD
       <p>
         you can view some of your average stats here and make some edits to your
         profile
-
       </p>
       <UserSwitch user={user} />
-    </div>
-=======
+
       <ProfileUpdate />
     </Container>
->>>>>>> a2017d9eb04ffc2c3eeca6c43c23d74db7f52411
   );
 };
 
