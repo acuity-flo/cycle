@@ -9,8 +9,8 @@ const authUser = {};
 //action
 const AUTH_USER = 'AUTH_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
-const UPDATE_USER = 'UPDATE_USER'
-const UPDATE_VIEW = 'UPDATE_VIEW'
+const UPDATE_USER = 'UPDATE_USER';
+const UPDATE_VIEW = 'UPDATE_VIEW';
 
 //action creator
 const authUserAction = (user) => ({
@@ -24,14 +24,14 @@ const logoutUser = () => ({
 
 const updateUser = (user) => ({
   type: UPDATE_USER,
-  user
-})
+  user,
+});
 
 const updateView = (name, bool) => ({
   type: UPDATE_VIEW,
   name,
-  bool
-})
+  bool,
+});
 
 //thunks
 //auth user thunk for login or signup
@@ -73,27 +73,27 @@ export const authUserThunk = (user, type) => async (dispatch) => {
 };
 
 // todayDataIdx
-export const updateUserThunk = (update) => async dispatch => {
+export const updateUserThunk = (update) => async (dispatch) => {
   try {
     const { data } = await axios.put(`/api/${update.username}`, update);
-    dispatch(updateUser(data))
+    dispatch(updateUser(data));
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
 
-export const updateViewThunk = (username, name, bool) => async dispatch => {
+export const updateViewThunk = (username, name, bool) => async (dispatch) => {
   try {
-    dispatch(updateView(name, bool))
+    dispatch(updateView(name, bool));
     const { data } = await axios.put(`/api/${username}/views`, {
       name,
-      bool
-    })
-    dispatch(updateUser(data))
+      bool,
+    });
+    dispatch(updateUser(data));
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
 
 // export const addPeriodData = (username, periodArr) => {
 //   return async (dispatch) => {
@@ -131,7 +131,6 @@ export const updateViewThunk = (username, name, bool) => async dispatch => {
 //   }
 // }
 
-
 //get user if req.user
 export const authMe = () => async (dispatch) => {
   try {
@@ -155,16 +154,19 @@ export const logout = () => async (dispatch) => {
 const reducer = (state = authUser, action) => {
   switch (action.type) {
     case UPDATE_VIEW: {
-      if (action.name === "period") return {...state, periodTracking: action.bool}
-      if (action.name === "symptom") return {...state, symptomTracking: action.bool}
-      if (action.name === "finance") return {...state, financialTracking: action.bool}
+      if (action.name === 'period')
+        return { ...state, periodTracking: action.bool };
+      if (action.name === 'symptom')
+        return { ...state, symptomTracking: action.bool };
+      if (action.name === 'finance')
+        return { ...state, financialTracking: action.bool };
     }
     case AUTH_USER:
       return action.user;
     case LOGOUT_USER:
       return authUser;
     case UPDATE_USER:
-      return action.user
+      return action.user;
     default:
       return state;
   }
@@ -172,7 +174,7 @@ const reducer = (state = authUser, action) => {
 
 let middleware;
 
-if (process.env.NODE_ENV !== "development") {
+if (process.env.NODE_ENV !== 'development') {
   middleware = applyMiddleware(
     thunkMiddleware,
     createLogger({ collapsed: true })
