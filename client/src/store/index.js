@@ -6,7 +6,7 @@ import thunkMiddleware from 'redux-thunk';
 //initial state will be an empty object, state will always be a user
 const initialState = {
   authUser: {},
-  statusMessage: null
+  statusMessage: null,
 };
 
 //action
@@ -14,7 +14,11 @@ const AUTH_USER = 'AUTH_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_VIEW = 'UPDATE_VIEW';
+<<<<<<< HEAD
 const SET_STATUS = 'SET_STATUS'
+=======
+const GET_STATUS = 'GET_STATUS';
+>>>>>>> 26635598d89b087a5ad69bf6cdaf1f178677a0cf
 const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
 //action creator
@@ -39,7 +43,7 @@ const updateView = (name, bool) => ({
 });
 
 const setStatus = (message) => ({
-  type: SET_STATUS, 
+  type: SET_STATUS,
   message
 })
 const updateProfile = (user) => ({
@@ -76,14 +80,13 @@ export const authUserThunk = (user, type) => async (dispatch) => {
       password,
     };
   }
-
-
   try {
-    const res = await axios.post(`/auth/${type}`, post)
-    
-    if(res.data){
+    const res = await axios.post(`/auth/${type}`, post);
+    console.log('res', res);
+
+    if (res.data) {
       const action = authUserAction(res.data);
-      dispatch(action)
+      dispatch(action);
     }
 
   } catch (e) {
@@ -100,7 +103,7 @@ export const authUserThunk = (user, type) => async (dispatch) => {
 
     if(e.response.status === 403){
       dispatch(setStatus("Sorry, we don't have this email on file!"))
-    }
+
 
   }
 };
@@ -116,6 +119,7 @@ export const updateUserThunk = (update) => async (dispatch) => {
 
 export const updateProfileThunk = (update) => async (dispatch) => {
   try {
+    console.log('update in thunk', update);
     const { data } = await axios.put(`/api/${update.username}/profile`, update);
     dispatch(updateProfile(data));
     return '';
@@ -161,21 +165,33 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_VIEW: {
       if (action.name === 'period')
-        return { ...state, statusMessage: null, authUser: {...state.authUser, periodTracking: action.bool } }
+        return {
+          ...state,
+          statusMessage: null,
+          authUser: { ...state.authUser, periodTracking: action.bool },
+        };
       if (action.name === 'symptom')
-      return { ...state, statusMessage: null, authUser: {...state.authUser, symptomTracking: action.bool} }
+        return {
+          ...state,
+          statusMessage: null,
+          authUser: { ...state.authUser, symptomTracking: action.bool },
+        };
       if (action.name === 'finance')
-      return { ...state, statusMessage: null, authUser: {...state.authUser, financialTracking: action.bool} }      
+        return {
+          ...state,
+          statusMessage: null,
+          authUser: { ...state.authUser, financialTracking: action.bool },
+        };
     }
     case UPDATE_PROFILE:
-      return action.user;
+      return { ...state, statusMessage: null, authUser: action.user };
     case AUTH_USER:
-      return { ...state, statusMessage: null, authUser: action.user }
+      return { ...state, statusMessage: null, authUser: action.user };
     case LOGOUT_USER:
       return initialState;
     case UPDATE_USER:
       return { ...state, statusMessage: null, authUser: action.user }
-    case SET_STATUS: 
+    case SET_STATUS:
       return {...state, statusMessage: action.message}
     default:
       return state;
