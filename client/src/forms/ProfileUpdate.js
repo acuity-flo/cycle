@@ -42,7 +42,6 @@ const ProfileUpdate = (props) => {
   return (
     <div className={classes.container}>
       <form onSubmit={handleSubmit} className={classes.root}>
-        <h4>update profile</h4>
         <FormControl name="fullName" className={classes.inputItem}>
           <InputLabel htmlFor="fullName">update name</InputLabel>
           <Input id="fullName" />

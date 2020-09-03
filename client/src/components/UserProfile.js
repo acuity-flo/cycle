@@ -1,28 +1,33 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ProfileUpdate from '../forms/ProfileUpdate';
+import UserDataView from './UserDataView';
+import UserSwitch from '../forms/UserSwitches';
+import moment from 'moment';
 import {
   Dialog,
-  DialogTitle,
   DialogContent,
-  DialogContentText,
   Container,
   Button,
+  makeStyles,
+  FormControl,
+  Input,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import UserSwitch from '../forms/UserSwitches';
 
 const UserProfile = (props) => {
   const user = props.user;
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [month, setMonth] = useState('default month');
   const [scroll, setScroll] = React.useState('paper');
   const classes = useStyles();
 
   const handleClose = () => {
     setOpen(false);
   };
-
+  console.log(month);
   return (
     <Container>
       <h1>PROFILE</h1>
@@ -50,7 +55,6 @@ const UserProfile = (props) => {
         aria-describedby="scroll-dialog-description"
         classes={classes.dialogBox}
       >
-        <DialogTitle id="scroll-dialog-title">Update Profile Info</DialogTitle>
         <DialogContent className={classes.paper}>
           <ProfileUpdate user={user} />
           <Button
@@ -65,6 +69,29 @@ const UserProfile = (props) => {
           </Button>
         </DialogContent>
       </Dialog>
+
+      <form
+        onSubmit={() => {
+          console.log('clicked submit');
+        }}
+      >
+        <FormControl name="pronouns" className={classes.inputItem}>
+          <InputLabel id="months">choose month</InputLabel>
+          <Select
+            labelId="months"
+            name="months"
+            onChange={(evt) => {
+              setMonth(evt.target.value);
+            }}
+          >
+            <MenuItem value="january">january</MenuItem>
+            <MenuItem value="february">february</MenuItem>
+            <MenuItem value="march">march</MenuItem>
+          </Select>
+        </FormControl>
+      </form>
+      <p>your averages for: {month}</p>
+      <UserDataView user={user} month={month} />
     </Container>
   );
 };
@@ -81,6 +108,10 @@ const useStyles = makeStyles((theme) => ({
     margin: '0.5em',
     backgroundColor: 'white',
     color: '#545454',
+  },
+  inputItem: {
+    margin: '0.5em',
+    width: '20vw',
   },
 }));
 
