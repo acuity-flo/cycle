@@ -4,7 +4,7 @@ import React from 'react';
 import BillboardChart from 'react-billboardjs';
 import * as d3 from 'd3';
 import { connect } from 'react-redux';
-import { UTIL_SYMPTOM, UTIL_SYMPTOMS_LIST } from '../utilFcn';
+import { UTIL_SYMPTOM, UTIL_SYMPTOMS_LABEL } from '../utilFcn';
 
 function SymptomChartBB(props) {
   let { start, end, user } = props;
@@ -24,18 +24,7 @@ function SymptomChartBB(props) {
     type: 'scatter',
     labels: {
       format: (y) => {
-        if (10 <= y && y < 20) {
-          return UTIL_SYMPTOMS_LIST['mood'][y - 10];
-        }
-        if (20 <= y && y < 30) {
-          return UTIL_SYMPTOMS_LIST['emotion'][y - 20];
-        }
-        if (30 <= y && y < 40) {
-          return UTIL_SYMPTOMS_LIST['pain'][y - 30];
-        }
-        if (40 <= y && y < 50) {
-          return UTIL_SYMPTOMS_LIST['physical'][y - 40];
-        }
+        return UTIL_SYMPTOMS_LABEL(y);
       },
     },
     xFormat: '%m-%d-%Y',

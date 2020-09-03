@@ -60,7 +60,6 @@ export function UTIL_PERIOD_FLOW(periodData, start, end) {
     return element;
   };
 
-  //map over array with flow util fxn
   const flowObj = periodData.reduce(
     (acc, el) => {
       if (moment(el.date).isBetween(start, end)) {
@@ -93,6 +92,23 @@ export const UTIL_SYMPTOMS_LIST = {
   pain: ['cramps', 'headache', 'back pain'],
   physical: ['nausea', 'bloating', 'indigestion', 'snacky', 'pms'],
 };
+
+export function UTIL_SYMPTOMS_LABEL(y) {
+  let check = y.toString()[0];
+  let index = y.toString().slice(1);
+  if (check === '1') {
+    return UTIL_SYMPTOMS_LIST['mood'][index];
+  }
+  if (check === '2') {
+    return UTIL_SYMPTOMS_LIST['emotion'][index];
+  }
+  if (check === '3') {
+    return UTIL_SYMPTOMS_LIST['pain'][index];
+  }
+  if (check === '4') {
+    return UTIL_SYMPTOMS_LIST['physical'][index];
+  }
+}
 
 export function UTIL_SYMPTOM(symptomData, start, end) {
   const symptomObj = symptomData.reduce(
@@ -146,7 +162,7 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
     symptomObj['custom_x'],
     symptomObj['mood'].map((el, idx) => {
       if (idx > 0) {
-        const value = 10 + UTIL_SYMPTOMS_LIST['mood'].indexOf(el);
+        const value = '1' + UTIL_SYMPTOMS_LIST['mood'].indexOf(el).toString();
         return Number(value);
       } else {
         return el;
@@ -154,7 +170,8 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
     }),
     symptomObj['emotion'].map((el, idx) => {
       if (idx > 0) {
-        const value = 20 + UTIL_SYMPTOMS_LIST['emotion'].indexOf(el);
+        const value =
+          '2' + UTIL_SYMPTOMS_LIST['emotion'].indexOf(el).toString();
         return Number(value);
       } else {
         return el;
@@ -162,7 +179,7 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
     }),
     symptomObj['pain'].map((el, idx) => {
       if (idx > 0) {
-        const value = 30 + UTIL_SYMPTOMS_LIST['pain'].indexOf(el);
+        const value = '3' + UTIL_SYMPTOMS_LIST['pain'].indexOf(el).toString();
         return Number(value);
       } else {
         return el;
@@ -170,7 +187,8 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
     }),
     symptomObj['physical'].map((el, idx) => {
       if (idx > 0) {
-        const value = 40 + UTIL_SYMPTOMS_LIST['physical'].indexOf(el);
+        const value =
+          '4' + UTIL_SYMPTOMS_LIST['physical'].indexOf(el).toString();
         return Number(value);
       } else {
         return el;
@@ -178,7 +196,7 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
     }),
     symptomObj['custom'].map((el, idx) => {
       if (idx > 0) {
-        const value = 50 + UTIL_SYMPTOMS_LIST['custom'].indexOf(el);
+        const value = '5' + UTIL_SYMPTOMS_LIST['custom'].indexOf(el).toString();
         return Number(value);
       } else {
         return el;
