@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {
   Button,
@@ -13,10 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { updateProfileThunk } from '../store';
 
 const ProfileUpdate = (props) => {
-  const user = props.authUser;
+  const user = props.user;
   const [pronouns, setPronouns] = useState();
-  // const [name, setName] = useState();
-  // const [cycle, setCycle] = useState();
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -111,11 +108,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const mapState = (state) => {
-  return {
-    authUser: state,
-    isLoggedIn: !!state.id,
-  };
-};
-
-export default connect(mapState)(ProfileUpdate);
+export default ProfileUpdate;
