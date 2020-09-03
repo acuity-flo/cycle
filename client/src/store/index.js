@@ -172,7 +172,6 @@ const reducer = (state = authUser, action) => {
 
 let middleware;
 
-console.log('process.env', process.env)
 if (process.env.NODE_ENV !== 'development') {
   middleware = applyMiddleware(thunkMiddleware);
 } else {
