@@ -4,14 +4,14 @@ const { update } = require('../db/models/User');
 const e = require('express');
 
 module.exports = {
-  findUsers: async (req, res, next) => {
-    try {
-      const users = await User.find({});
-      res.json(users);
-    } catch (err) {
-      next(err);
-    }
-  },
+  // findUsers: async (req, res, next) => {
+  //   try {
+  //     const users = await User.find({});
+  //     res.json(users);
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // },
   findOneUser: async (req, res, next) => {
     try {
       const foundUser = await User.findOne({
@@ -35,24 +35,13 @@ module.exports = {
         flowIdx
       } = req.body;
 
-      console.log('date from req body', date)
       const foundUser = await User.findOne({ username: req.params.username });
 
-      console.log('found user date', foundUser.financial[0].date)
       if (financeIdx) {
         if (financeUpdate.length) {
           foundUser.financial[financeIdx].purchases = financeUpdate
         }
         else {
-          console.log('finance has idx, no data')
-          // User.updateOne({
-          //   _id: foundUser._id
-          // },{
-          //   $pull: {
-          //     date: date.slice(0,10) + "T00:00:00.000Z"
-          //   }}).exec()
-          //this seems harsh?
-          //ASK CHLOE
           foundUser.financial.splice(financeIdx, 1)
         }
       } else if (financeUpdate.length) {
@@ -116,6 +105,26 @@ module.exports = {
     } catch (err) {
       next(err);
     }
+  },
+  updateViews: async (req, res, next) => {
+    const { name, bool } = req.body
+    const username = req.params.username
+    const update = {}
+    if (name === "period") update.periodTracking = bool
+    if (name === "symptom") update.symptomTracking = bool
+    if (name === "finance") update.financialTracking = bool
+
+    const foundUser = await User.findOneAndUpdate(
+      {username},
+      update,
+      {
+        upsert: true,
+        runValidators: true
+      }
+    )
+    await foundUser.save()
+    const updatedUser = await User.findOne({username});
+    res.json(updatedUser)
   },
   //login?
   loginUser: async (req, res, next) => {

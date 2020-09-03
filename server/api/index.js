@@ -7,6 +7,9 @@ router
   .get(userController.findOneUser)
   .put(userController.updateUser);
 
-router.route('/').get(userController.findUsers).post(userController.signUpUser);
+router
+  .route('/:username/views/')
+  .put(userController.updateViews)
+// router.route('/').get(userController.findUsers).post(userController.signUpUser);
 
 module.exports = router;
