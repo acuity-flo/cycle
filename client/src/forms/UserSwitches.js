@@ -11,19 +11,6 @@ export default function UserSwitch (props) {
   const symptom = user.symptomTracking
   const finance = user.financialTracking
   const dispatch = useDispatch()
-  // const [state, setState] = useState({
-  //   period: true,
-  //   symptom: true,
-  //   finance: true,
-  // })
-
-  // useEffect(() => {
-  //   setState({
-  //     period: user.periodTracking,
-  //     symptom: user.symptomTracking,
-  //     finance: user.financialTracking
-  //   })
-  // })
 
   const handleChange = (evt) => {
     evt.preventDefault()
