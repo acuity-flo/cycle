@@ -106,8 +106,8 @@ function Navbar(props) {
 }
 
 const mapState = (state) => ({
-  authUser: state,
-  isLoggedIn: !!state._id,
+  authUser: state.authUser,
+  isLoggedIn: !!state.authUser._id,
 });
 
 export default withRouter(connect(mapState)(Navbar));

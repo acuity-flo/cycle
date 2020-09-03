@@ -136,15 +136,26 @@ module.exports = {
 
   //login?
   loginUser: async (req, res, next) => {
+    const authUser = await User.findOne({
+      email: req.body.email,
+    });
+
+    // const passwordVal = Bcrypt.compareSync(req.body.password, authUser.password)
+
     try {
-      const authUser = await User.findOne({
-        email: req.body.email,
-      }); // .exec() ?
-      if (!Bcrypt.compareSync(req.body.password, authUser.password)) {
-        res.sendStatus(400);
-      } else {
-        req.login(authUser, (err) => (err ? next(err) : res.json(authUser))); //works without BCrypt
+      // const authUser = await User.findOne({
+      //   email: req.body.email,
+      // });
+      // console.log('authUser', authUser);
+
+      if(!authUser){
+        res.sendStatus(403)
+      } else if (!Bcrypt.compareSync(req.body.password, authUser.password)){
+        res.sendStatus(400)
+      }else{
+        req.login(authUser, (err) => (err ? next(err) : res.json(authUser)))
       }
+  
     } catch (err) {
       next(err);
     }

@@ -60,8 +60,8 @@ function PeriodChartBB(props) {
 
 const mapState = (state) => {
   return {
-    user: state,
-    isLoggedIn: !!state.id,
+    user: state.authUser,
+    isLoggedIn: !!state.authUser._id,
   };
 };
 

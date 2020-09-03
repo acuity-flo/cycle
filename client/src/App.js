@@ -57,8 +57,8 @@ function App(props) {
 
 const mapState = (state) => {
   return {
-    authUser: state,
-    isLoggedIn: !!state._id,
+    authUser: state.authUser,
+    isLoggedIn: !!state.authUser._id,
   };
 };
 
