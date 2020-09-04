@@ -85,6 +85,7 @@ export default function PeriodForm(props) {
         min={0}
         max={4}
         onChange={handleChange}
+        className={classes.slider}
       />
     </div>
   );
@@ -93,5 +94,8 @@ export default function PeriodForm(props) {
 const useStyles = makeStyles({
   root: {
     width: 400,
+  },
+  slider: {
+    color: '#d8bfd8',
   },
 });

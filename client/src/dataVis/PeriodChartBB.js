@@ -20,11 +20,24 @@ function PeriodChartBB(props) {
     type: 'bubble',
     labels: false,
     xFormat: '%m-%d-%Y',
+    colors: {
+      flow: '#d8bfd8'
+    }
   };
 
   CHART_AXIS = {
     x: {
+      padding: {
+        left: 500,
+        right: 200,
+      },
       tick: {
+        fit: true,
+      },
+      min: {
+        fit: true,
+      },
+      max: {
         fit: true,
       },
       type: 'timeseries',

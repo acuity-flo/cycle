@@ -18,10 +18,19 @@ function FinanceChartBB(props) {
     type: 'line',
     labels: false,
     xFormat: '%m-%d-%Y',
+    colors: {
+      prescription: '#d8bfd8',
+      sanitaryProduct: '#9cc0e7',
+      doctor: '#E7C39C',
+      other: '#545454'
+    }
   };
 
   let CHART_AXIS = {
     x: {
+      min: {
+        fit: true
+      },
       type: 'timeseries',
       tick: {
         fit: true,
