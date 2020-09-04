@@ -27,7 +27,6 @@ const UserProfile = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(month);
   return (
     <Container>
       <h1>PROFILE</h1>
@@ -84,13 +83,15 @@ const UserProfile = (props) => {
               setMonth(evt.target.value);
             }}
           >
+            <MenuItem value="june">june</MenuItem>
+            <MenuItem value="july">july</MenuItem>
+            <MenuItem value="august">august</MenuItem>
             <MenuItem value="january">january</MenuItem>
             <MenuItem value="february">february</MenuItem>
             <MenuItem value="march">march</MenuItem>
           </Select>
         </FormControl>
       </form>
-      <p>your averages for: {month}</p>
       <UserDataView user={user} month={month} />
     </Container>
   );
