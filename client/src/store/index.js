@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
+import { Store } from 'express-session';
 
 //initial state will be an empty object, state will always be a user
 const initialState = {
@@ -141,8 +142,60 @@ export const authMe = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/auth/me');
     const action = authUserAction(data || initialState.authUser);
-    dispatch(action);
+
+    if (data) {
+      console.log('I am in the if in redux indexdb')
+      let request = indexedDB.open('CYCLE_EXAMPLE', 1), db, tx, store;
+
+      request.onupgradeneeded = function(event) {
+        db = request.result
+        store = db.createObjectStore("CYCLE_STORE", {keyPath: "username"})
+      }
+      request.onsuccess = function(event) {
+          console.log('redux, db open successful')
+          console.log('[onsuccess]', request.result);
+          db = request.result
+          tx = db.transaction('CYCLE_STORE', 'readwrite')
+          store = tx.objectStore('CYCLE_STORE')
+
+          db.onerror = function(event) {
+            console.log('CYCLE_STORE ERROR', event.target.errorCode)
+          }
+          store.put(data)
+
+          tx.oncomplete = function() {
+            db.close()
+          }
+      };
+      request.onerror = function(event) {
+          console.log('[onerror]', request.error);
+      };
+      dispatch(action);
+    }
   } catch (e) {
+    console.log('I hit an error in redux auth me')
+    let request = indexedDB.open('CYCLE_EXAMPLE', 1), db, tx, store;
+
+    request.onsuccess = function(event) {
+        console.log('redux, db open successful')
+        console.log('[onsuccess]', request.result);
+        db = request.result
+        tx = db.transaction('CYCLE_STORE', 'readwrite')
+        store = tx.objectStore('CYCLE_STORE')
+
+        db.onerror = function(event) {
+          console.log('CYCLE_STORE ERROR', event.target.errorCode)
+        }
+        let userDataRequest = store.get("cherisecycles")
+
+        userDataRequest.onsuccess = function() {
+          "I successfully got data from the indexdb in error statement"
+          dispatch(authUserAction(userDataRequest.result));
+        }
+        tx.oncomplete = function() {
+          db.close()
+        }
+    };
     console.log(e);
   }
 };
