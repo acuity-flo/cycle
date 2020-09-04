@@ -13,7 +13,7 @@ import {
   Container,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import UserDataView from './UserDataView';
+
 import FormContainer from '../forms/FormContainer';
 
 function CalendarView(props) {
@@ -25,7 +25,6 @@ function CalendarView(props) {
   const symptoms = user.symptomTags;
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
-
 
   const handleClose = () => {
     setOpen(false);
@@ -118,7 +117,6 @@ function CalendarView(props) {
           </DialogContentText>
         </DialogContent>
       </Dialog>
-      <UserDataView user={user} />
     </div>
   );
 }

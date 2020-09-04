@@ -16,7 +16,7 @@ import ErrorComp from './components/404';
 
 function App(props) {
   const [loading, setLoading] = useState(true);
-  const user = props.authUser;
+  const user = props.user;
   const isLoggedIn = props.isLoggedIn;
   const dispatch = useDispatch();
   useEffect(() => {
@@ -57,7 +57,7 @@ function App(props) {
 
 const mapState = (state) => {
   return {
-    authUser: state.authUser,
+    user: state.authUser,
     isLoggedIn: !!state.authUser._id,
   };
 };
