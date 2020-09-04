@@ -3,8 +3,6 @@ import Calendar from 'react-calendar';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-
-
 import {
   Dialog,
   DialogTitle,
@@ -13,7 +11,6 @@ import {
   Container,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
 import FormContainer from '../forms/FormContainer';
 
 function CalendarView(props) {
@@ -31,51 +28,47 @@ function CalendarView(props) {
   };
 
   const classes = useStyles();
-
-
-    const circlesFunc = ({ date, view }) => {
-
-    return(
+  const circlesFunc = ({ date, view }) => {
+    return (
       <div>
-        {(period &&
-            view === 'month' &&
-            period.some(
-              (el) =>
-                moment(el.date).format('MM DD YYYY') ===
-                moment(date).format('MM DD YYYY')
-            )
-          ) ? <FiberManualRecordIcon style={{fill: '#DEB88F' }} fontSize="small"/> : ""
-        }
+        {period &&
+        view === 'month' &&
+        period.some(
+          (el) =>
+            moment(el.date).format('MM DD YYYY') ===
+            moment(date).format('MM DD YYYY')
+        ) ? (
+          <FiberManualRecordIcon style={{ fill: '#DEB88F' }} fontSize="small" />
+        ) : (
+          ''
+        )}
 
+        {finance &&
+        view === 'month' &&
+        finance.some(
+          (el) =>
+            moment(el.date).format('MM DD YYYY') ===
+            moment(date).format('MM DD YYYY')
+        ) ? (
+          <FiberManualRecordIcon style={{ fill: '#9BB47A' }} fontSize="small" />
+        ) : (
+          ''
+        )}
 
-        {(
-          finance &&
-          view === 'month' &&
-          finance.some(
-            (el) =>
-              moment(el.date).format('MM DD YYYY') ===
-              moment(date).format('MM DD YYYY')
-          )
-        ) ? <FiberManualRecordIcon style={{fill: '#9BB47A' }} fontSize="small"/> : ""
-        }
-
-        {(
-          symptoms &&
-          view === 'month' &&
-          symptoms.some(
-            (el) =>
-              moment(el.date).format('MM DD YYYY') ===
-              moment(date).format('MM DD YYYY')
-          )
-        ) ? <FiberManualRecordIcon style={{fill: '#8FB5DE' }} fontSize="small"/> : ""
-        }
-
+        {symptoms &&
+        view === 'month' &&
+        symptoms.some(
+          (el) =>
+            moment(el.date).format('MM DD YYYY') ===
+            moment(date).format('MM DD YYYY')
+        ) ? (
+          <FiberManualRecordIcon style={{ fill: '#8FB5DE' }} fontSize="small" />
+        ) : (
+          ''
+        )}
       </div>
-    )
-
+    );
   };
-
-
 
   return (
     <div>
@@ -88,19 +81,25 @@ function CalendarView(props) {
             setDate(value);
             setOpen(true);
           }}
-
-          tileContent	={circlesFunc}
+          tileContent={circlesFunc}
         ></Calendar>
       </Container>
       <br />
       <p>
         Key:
-          <p>Period: <FiberManualRecordIcon style={{fill: '#DEB88F' }} fontSize="small"/> </p>
-          <p>Finance:  <FiberManualRecordIcon style={{fill: '#9BB47A' }} fontSize="small"/></p>
-          <p>Symptom:  <FiberManualRecordIcon style={{fill: '#8FB5DE' }} fontSize="small"/></p>
-
+        <p>
+          Period:{' '}
+          <FiberManualRecordIcon style={{ fill: '#DEB88F' }} fontSize="small" />{' '}
+        </p>
+        <p>
+          Finance:{' '}
+          <FiberManualRecordIcon style={{ fill: '#9BB47A' }} fontSize="small" />
+        </p>
+        <p>
+          Symptom:{' '}
+          <FiberManualRecordIcon style={{ fill: '#8FB5DE' }} fontSize="small" />
+        </p>
       </p>
-
       <Dialog
         open={open}
         onClose={handleClose}
@@ -109,10 +108,11 @@ function CalendarView(props) {
         aria-describedby="scroll-dialog-description"
         classes={classes.dialogBox}
       >
-        <DialogTitle id="scroll-dialog-title">Update Information</DialogTitle>
+        <DialogTitle id="scroll-dialog-title">
+          {moment(date).format('MMMM D, YYYY')}
+        </DialogTitle>
         <DialogContent className={classes.paper}>
           <DialogContentText>
-            <div>Date: {moment(date).format('MMMM D, YYYY')}</div>
             <FormContainer date={date} user={user} />
           </DialogContentText>
         </DialogContent>
