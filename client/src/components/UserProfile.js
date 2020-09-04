@@ -28,7 +28,6 @@ const UserProfile = (props) => {
   };
   return (
     <Container>
-      <Typography variant="h1">CYCLE</Typography>
       <h5>Welcome, {user.name}</h5>
       <p>Email: {user.email}</p>
       <p>Username: {user.username}</p>

@@ -6,6 +6,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import { Button, Container } from '@material-ui/core';
 import { connect } from 'react-redux';
 
+
 import PeriodChartBB from '../dataVis/PeriodChartBB';
 import FinanceChartBB from '../dataVis/FinanceChart';
 import SymptomChartBB from '../dataVis/SymptomChart';
@@ -21,6 +22,7 @@ function ChartHome(props) {
   const [choseDate, setDate] = useState(false);
   const [startProp, setStartProp] = useState(moment());
   const [endProp, setEndProp] = useState(moment());
+
 
   const defaultProps = {
     autoFocus: false,
@@ -49,8 +51,11 @@ function ChartHome(props) {
 
   return (
     <div>
-      <Container maxWidth="xs">
-        <h2>HOME OF CHARTS</h2>
+       <br />
+       <br />
+      <Container
+        maxWidth="xs"
+        >
         <DateRangePicker
           startDate={start}
           startDateId={'start date'}
@@ -61,23 +66,21 @@ function ChartHome(props) {
           onFocusChange={onFocusChange}
           {...defaultProps}
           isOutsideRange={() => false}
+          numberOfMonths={1}
         />
         <Button onClick={onClick}>set</Button>
       </Container>
       <br />
+      {/* <br />
       <br />
-      <br />
-      <br />
+      <br /> */}
       <Container>
-        <h4>period chart</h4>
         <br />
         {choseDate && period? <PeriodChartBB start={startProp} end={endProp} /> : ''}
         <br />
-        <h4>finance chart</h4>
         <br />
         {choseDate && finance ? <FinanceChartBB start={startProp} end={endProp} /> : ''}
         <br />
-        <h4>symptom chart</h4>
         <br />
         {choseDate && symptom? <SymptomChartBB start={startProp} end={endProp} /> : ''}
         <br />

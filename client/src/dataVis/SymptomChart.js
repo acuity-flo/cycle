@@ -29,10 +29,10 @@ function SymptomChartBB(props) {
     },
     xFormat: '%m-%d-%Y',
     colors: {
-      mood: '#d8bfd8',
-      emotion: '#9cc0e7',
-      pain: '#E7C39C',
-      physical: '#545454'
+      mood: '#DEB88F',
+      emotion: '#9BB47A',
+      pain: '#8FB5DE',
+      physical: '#A17AB4'
     }
   };
 
