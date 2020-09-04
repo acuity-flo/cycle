@@ -14,7 +14,7 @@ const AUTH_USER = 'AUTH_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_VIEW = 'UPDATE_VIEW';
-const SET_STATUS = 'SET_STATUS'
+const SET_STATUS = 'SET_STATUS';
 const GET_STATUS = 'GET_STATUS';
 const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
@@ -41,8 +41,8 @@ const updateView = (name, bool) => ({
 
 const setStatus = (message) => ({
   type: SET_STATUS,
-  message
-})
+  message,
+});
 const updateProfile = (user) => ({
   type: UPDATE_PROFILE,
   user,
@@ -85,23 +85,21 @@ export const authUserThunk = (user, type) => async (dispatch) => {
       const action = authUserAction(res.data);
       dispatch(action);
     }
-
   } catch (e) {
-    if(e.response.status === 400){
-      dispatch(setStatus("Password entered doesn't match!"))
+    if (e.response.status === 400) {
+      dispatch(setStatus("Password entered doesn't match!"));
     }
 
-    if(e.response.status === 435) {
-      dispatch(setStatus("Sorry, this Username is already taken!"))
+    if (e.response.status === 435) {
+      dispatch(setStatus('Sorry, this Username is already taken!'));
     }
-    if(e.response.status === 437) {
-      dispatch(setStatus("Oops, this Email is already registered!"))
+    if (e.response.status === 437) {
+      dispatch(setStatus('Oops, this Email is already registered!'));
     }
 
-    if(e.response.status === 403){
-      dispatch(setStatus("Sorry, we don't have this email on file!"))
-
-
+    if (e.response.status === 403) {
+      dispatch(setStatus("Sorry, we don't have this email on file!"));
+    }
   }
 };
 
@@ -187,9 +185,9 @@ const reducer = (state = initialState, action) => {
     case LOGOUT_USER:
       return initialState;
     case UPDATE_USER:
-      return { ...state, statusMessage: null, authUser: action.user }
+      return { ...state, statusMessage: null, authUser: action.user };
     case SET_STATUS:
-      return {...state, statusMessage: action.message}
+      return { ...state, statusMessage: action.message };
     default:
       return state;
   }
