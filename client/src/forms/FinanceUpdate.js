@@ -53,7 +53,6 @@ export default function FinanceUpdate(props) {
   const handleChangeCost = (evt) => {
     const newPurchases = [...purchases];
     newPurchases[evt.target.name].cost = evt.target.value;
-    console.log('in Finance update - Cost update', newPurchases);
     setPurchases(newPurchases);
   };
 
@@ -66,7 +65,6 @@ export default function FinanceUpdate(props) {
     const idx = evt.currentTarget.name;
     let newPurchases = [...purchases];
     newPurchases.splice(idx, 1);
-    console.log('in Finance update - delete', newPurchases);
     setPurchases(newPurchases);
   };
 
@@ -79,16 +77,6 @@ export default function FinanceUpdate(props) {
       <Typography id="discrete-slider-restrict" gutterBottom>
         Finances
       </Typography>
-      {todayData && todayData.length && (
-        <Typography variant="body2" gutterBottom>
-          Today's Purchases:{' '}
-          {todayData[0].purchases.map((el) => (
-            <p>
-              {el.typeOfPurchase.toUpperCase()}: {el.cost}
-            </p>
-          ))}
-        </Typography>
-      )}
       <Grid container xs={12}>
         {purchases.map((el, index) => {
           return (
