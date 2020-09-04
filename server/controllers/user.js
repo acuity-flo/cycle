@@ -139,15 +139,8 @@ module.exports = {
     const authUser = await User.findOne({
       email: req.body.email,
     });
-
-    // const passwordVal = Bcrypt.compareSync(req.body.password, authUser.password)
-
+    
     try {
-      // const authUser = await User.findOne({
-      //   email: req.body.email,
-      // });
-      // console.log('authUser', authUser);
-
       if(!authUser){
         res.sendStatus(403)
       } else if (!Bcrypt.compareSync(req.body.password, authUser.password)){
@@ -171,19 +164,29 @@ module.exports = {
       pronouns,
       avgLengthOfCycle,
     } = req.body;
-    password = Bcrypt.hashSync(password, 10);
-    const newUser = new User({
-      name,
-      email,
-      username,
-      password,
-      pronouns,
-      avgLengthOfCycle,
-    });
+
     try {
-      await newUser.save();
-      res.json(newUser);
+
+      password = Bcrypt.hashSync(password, 10);
+        const newUser = new User({
+          name,
+          email,
+          username,
+          password,
+          pronouns,
+          avgLengthOfCycle,
+        });
+
+        await newUser.save();
+        res.json(newUser)
+
+   
     } catch (err) {
+      if(err.keyPattern.username){ 
+        err.status = 435
+      } else if(err.keyPattern.email){
+        err.status = 437
+      }
       next(err);
     }
   },
