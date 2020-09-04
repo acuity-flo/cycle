@@ -171,32 +171,31 @@ export const authMe = () => async (dispatch) => {
           console.log('[onerror]', request.error);
       };
       dispatch(action);
-    } else {
-      console.log('i am in the else indexdb request in redux')
-      let request = indexedDB.open('CYCLE_EXAMPLE', 1), db, tx, store;
-
-      request.onsuccess = function(event) {
-          console.log('redux, db open successful')
-          console.log('[onsuccess]', request.result);
-          db = request.result
-          tx = db.transaction('CYCLE_STORE', 'readwrite')
-          store = tx.objectStore('CYCLE_STORE')
-
-          db.onerror = function(event) {
-            console.log('CYCLE_STORE ERROR', event.target.errorCode)
-          }
-          let userDataRequest = store.get("cherisecycles")
-
-          userDataRequest.onsuccess = function() {
-            dispatch(authUserAction(userDataRequest.result));
-          }
-          tx.oncomplete = function() {
-            db.close()
-          }
-      };
     }
   } catch (e) {
     console.log('I hit an error in redux auth me')
+    let request = indexedDB.open('CYCLE_EXAMPLE', 1), db, tx, store;
+
+    request.onsuccess = function(event) {
+        console.log('redux, db open successful')
+        console.log('[onsuccess]', request.result);
+        db = request.result
+        tx = db.transaction('CYCLE_STORE', 'readwrite')
+        store = tx.objectStore('CYCLE_STORE')
+
+        db.onerror = function(event) {
+          console.log('CYCLE_STORE ERROR', event.target.errorCode)
+        }
+        let userDataRequest = store.get("cherisecycles")
+
+        userDataRequest.onsuccess = function() {
+          "I successfully got data from the indexdb in error statement"
+          dispatch(authUserAction(userDataRequest.result));
+        }
+        tx.oncomplete = function() {
+          db.close()
+        }
+    };
     console.log(e);
   }
 };
