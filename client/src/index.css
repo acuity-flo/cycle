@@ -12,16 +12,16 @@ code {
     monospace;
 }
 
-.period {
-  background-color: red;
+/* calendar CSS */
+.react-calendar{
+width: 100%;
 }
 
-.finance{
-  background-color: greenyellow;
+.react-calendar__tile{
+  height: 100%;
 }
 
-.symptoms{
-  background-color: teal;
+.react-calendar__tile{
+  height: 100%;
 }
-
 
