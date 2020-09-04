@@ -13,6 +13,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router';
 import {connect} from 'react-redux'
+import ReactLoading from 'react-loading'
 
 const AuthForm = (props) => {
   const [type, setType] = useState('login');
