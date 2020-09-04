@@ -30,7 +30,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf build/ && react-scripts build && npm run-script sw-append",
+    "sw-append": "cat src/sw-append.js >> build/service-worker.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
