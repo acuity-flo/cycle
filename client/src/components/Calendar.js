@@ -44,10 +44,10 @@ function CalendarView(props) {
                 moment(el.date).format('MM DD YYYY') ===
                 moment(date).format('MM DD YYYY')
             )
-          ) ? <FiberManualRecordIcon style={{fill: '#d8bfd8' }} fontSize="small"/> : "" 
+          ) ? <FiberManualRecordIcon style={{fill: '#d8bfd8' }} fontSize="small"/> : ""
         }
 
-      
+
         {(
           finance &&
           view === 'month' &&
@@ -56,7 +56,7 @@ function CalendarView(props) {
               moment(el.date).format('MM DD YYYY') ===
               moment(date).format('MM DD YYYY')
           )
-        ) ? <FiberManualRecordIcon style={{fill: '#E7C39C' }} fontSize="small"/> : "" 
+        ) ? <FiberManualRecordIcon style={{fill: '#E7C39C' }} fontSize="small"/> : ""
         }
 
         {(
@@ -69,7 +69,7 @@ function CalendarView(props) {
           )
         ) ? <FiberManualRecordIcon style={{fill: '#9cc0e7' }} fontSize="small"/> : ""
         }
-        
+
       </div>
     )
 
@@ -88,7 +88,7 @@ function CalendarView(props) {
             setDate(value);
             setOpen(true);
           }}
-      
+
           tileContent	={circlesFunc}
         ></Calendar>
       </Container>

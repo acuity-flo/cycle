@@ -28,6 +28,12 @@ function SymptomChartBB(props) {
       },
     },
     xFormat: '%m-%d-%Y',
+    colors: {
+      mood: '#d8bfd8',
+      emotion: '#9cc0e7',
+      pain: '#E7C39C',
+      physical: '#545454'
+    }
   };
 
   let CHART_AXIS = {
