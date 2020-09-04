@@ -16,29 +16,29 @@ self.addEventListener('activate', () => {
   console.log('this is a activate request')
 })
 
-self.addEventListener('fetch', evt => {
-  console.log('this is a fetch request')
-  console.log('this is the event in fetch', evt)
-  console.log('this is the evt request in fetch', evt.request)
-  evt.respondWith(
-    caches.match(evt.request)
-      .then(res => {
-        console.log('res in first then', res)
-        if (res) {
-          return res
-        }
-        return fetch(event.request)
-      })
-      .then(res => {
-        console.log('res in second then', res)
-        return caches.open(cacheName)
-          .then(cache => {
-            cache.put(event.request.url, res.clone());
-            return res;
-        })
-      })
-      .catch(error => {
-        console.log('there was an error', error)
-      })
-  )
-})
+// self.addEventListener('fetch', evt => {
+//   console.log('this is a fetch request')
+//   console.log('this is the event in fetch', evt)
+//   console.log('this is the evt request in fetch', evt.request)
+//   evt.respondWith(
+//     caches.match(evt.request)
+//       .then(res => {
+//         console.log('res in first then', res)
+//         if (res) {
+//           return res
+//         }
+//         return fetch(event.request)
+//       })
+//       .then(res => {
+//         console.log('res in second then', res)
+//         return caches.open(cacheName)
+//           .then(cache => {
+//             cache.put(event.request.url, res.clone());
+//             return res;
+//         })
+//       })
+//       .catch(error => {
+//         console.log('there was an error', error)
+//       })
+//   )
+// })
