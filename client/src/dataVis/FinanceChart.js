@@ -19,10 +19,10 @@ function FinanceChartBB(props) {
     labels: false,
     xFormat: '%m-%d-%Y',
     colors: {
-      prescription: '#d8bfd8',
-      sanitaryProduct: '#9cc0e7',
-      doctor: '#E7C39C',
-      other: '#545454'
+      prescription: '#DEB88F',
+      sanitaryProduct: '#9BB47A',
+      doctor: '#8FB5DE',
+      other: '#A17AB4'
     }
   };
 

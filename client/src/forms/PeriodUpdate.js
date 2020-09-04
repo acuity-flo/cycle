@@ -96,6 +96,6 @@ const useStyles = makeStyles({
     width: 400,
   },
   slider: {
-    color: '#d8bfd8',
+    color: '#DEB88F',
   },
 });

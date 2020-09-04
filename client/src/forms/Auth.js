@@ -39,7 +39,7 @@ const AuthForm = (props) => {
       user.avgLengthOfCycle = event.target.cyclelength.value;
     }
     dispatch(authUserThunk(user, formName));
-    props.history.push('/me');
+    props.history.push('/calendar');
   };
 
   return (
