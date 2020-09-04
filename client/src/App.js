@@ -32,7 +32,7 @@ function App(props) {
         <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
-  
+
           {isLoggedIn && (
             <Switch>
               <Route exact path="/calendar" component={CalendarView} />
@@ -50,17 +50,12 @@ function App(props) {
     return (
       <Router>
         <NavBar />
-<<<<<<< HEAD
-        {/* <h1>LOADIN</h1> */}
         <ReactLoading
           type={'balls'}
           color={'#545454'}
           height={'20%'}
           width={'20%'}
         />
-=======
-        <ReactLoading type={'balls'} color={'#545454'} height={'20%'} width={'20%'} />
->>>>>>> 7ebbe4838c3aa3c62c555d1728f426160f982c3f
       </Router>
     );
   }

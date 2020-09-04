@@ -31,7 +31,6 @@ function CalendarView(props) {
   const circlesFunc = ({ date, view }) => {
     return (
       <div>
-<<<<<<< HEAD
         {period &&
         view === 'month' &&
         period.some(
@@ -39,10 +38,11 @@ function CalendarView(props) {
             moment(el.date).format('MM DD YYYY') ===
             moment(date).format('MM DD YYYY')
         ) ? (
-          <FiberManualRecordIcon style={{ fill: '#d8bfd8' }} fontSize="small" />
+          <FiberManualRecordIcon style={{ fill: '#DEB88F' }} fontSize="small" />
         ) : (
           ''
         )}
+
         {finance &&
         view === 'month' &&
         finance.some(
@@ -50,10 +50,11 @@ function CalendarView(props) {
             moment(el.date).format('MM DD YYYY') ===
             moment(date).format('MM DD YYYY')
         ) ? (
-          <FiberManualRecordIcon style={{ fill: '#E7C39C' }} fontSize="small" />
+          <FiberManualRecordIcon style={{ fill: '#9BB47A' }} fontSize="small" />
         ) : (
           ''
         )}
+
         {symptoms &&
         view === 'month' &&
         symptoms.some(
@@ -61,45 +62,10 @@ function CalendarView(props) {
             moment(el.date).format('MM DD YYYY') ===
             moment(date).format('MM DD YYYY')
         ) ? (
-          <FiberManualRecordIcon style={{ fill: '#9cc0e7' }} fontSize="small" />
+          <FiberManualRecordIcon style={{ fill: '#8FB5DE' }} fontSize="small" />
         ) : (
           ''
         )}
-=======
-        {(period &&
-            view === 'month' &&
-            period.some(
-              (el) =>
-                moment(el.date).format('MM DD YYYY') ===
-                moment(date).format('MM DD YYYY')
-            )
-          ) ? <FiberManualRecordIcon style={{fill: '#DEB88F' }} fontSize="small"/> : ""
-        }
-
-
-        {(
-          finance &&
-          view === 'month' &&
-          finance.some(
-            (el) =>
-              moment(el.date).format('MM DD YYYY') ===
-              moment(date).format('MM DD YYYY')
-          )
-        ) ? <FiberManualRecordIcon style={{fill: '#9BB47A' }} fontSize="small"/> : ""
-        }
-
-        {(
-          symptoms &&
-          view === 'month' &&
-          symptoms.some(
-            (el) =>
-              moment(el.date).format('MM DD YYYY') ===
-              moment(date).format('MM DD YYYY')
-          )
-        ) ? <FiberManualRecordIcon style={{fill: '#8FB5DE' }} fontSize="small"/> : ""
-        }
-
->>>>>>> 7ebbe4838c3aa3c62c555d1728f426160f982c3f
       </div>
     );
   };
@@ -121,25 +87,18 @@ function CalendarView(props) {
       <br />
       <p>
         Key:
-<<<<<<< HEAD
         <p>
           Period:{' '}
-          <FiberManualRecordIcon style={{ fill: '#d8bfd8' }} fontSize="small" />{' '}
+          <FiberManualRecordIcon style={{ fill: '#DEB88F' }} fontSize="small" />{' '}
         </p>
         <p>
           Finance:{' '}
-          <FiberManualRecordIcon style={{ fill: '#E7C39C' }} fontSize="small" />
+          <FiberManualRecordIcon style={{ fill: '#9BB47A' }} fontSize="small" />
         </p>
         <p>
           Symptom:{' '}
-          <FiberManualRecordIcon style={{ fill: '#9cc0e7' }} fontSize="small" />
+          <FiberManualRecordIcon style={{ fill: '#8FB5DE' }} fontSize="small" />
         </p>
-=======
-          <p>Period: <FiberManualRecordIcon style={{fill: '#DEB88F' }} fontSize="small"/> </p>
-          <p>Finance:  <FiberManualRecordIcon style={{fill: '#9BB47A' }} fontSize="small"/></p>
-          <p>Symptom:  <FiberManualRecordIcon style={{fill: '#8FB5DE' }} fontSize="small"/></p>
-
->>>>>>> 7ebbe4838c3aa3c62c555d1728f426160f982c3f
       </p>
       <Dialog
         open={open}
