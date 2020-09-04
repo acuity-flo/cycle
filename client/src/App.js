@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import ReactLoading from 'react-loading'
+import ReactLoading from 'react-loading';
 
 //Thunks
 import { authMe } from './store';
@@ -14,8 +14,6 @@ import UserProfile from './components/UserProfile';
 import ChartHome from './components/ChartHome';
 import NavBar from './components/NavBar';
 import ErrorComp from './components/404';
-
-
 
 function App(props) {
   const [loading, setLoading] = useState(true);
@@ -53,7 +51,12 @@ function App(props) {
       <Router>
         <NavBar />
         {/* <h1>LOADIN</h1> */}
-        <ReactLoading type={'balls'} color={'#545454'} height={'20%'} width={'20%'} />
+        <ReactLoading
+          type={'balls'}
+          color={'#545454'}
+          height={'20%'}
+          width={'20%'}
+        />
       </Router>
     );
   }

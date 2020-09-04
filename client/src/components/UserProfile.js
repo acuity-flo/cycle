@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import ProfileUpdate from '../forms/ProfileUpdate';
 import UserDataView from './UserDataView';
 import UserSwitch from '../forms/UserSwitches';
-import moment from 'moment';
 import {
   Dialog,
   DialogContent,
@@ -11,11 +10,10 @@ import {
   Button,
   makeStyles,
   FormControl,
-  Input,
   InputLabel,
   Select,
   MenuItem,
-  Typography
+  Typography,
 } from '@material-ui/core';
 
 const UserProfile = (props) => {

@@ -52,6 +52,36 @@ export function UTIL_FINANCE_TOTALS(financeObj) {
   return financialTotalsObj;
 }
 
+export function UTIL_FINANCE_TODAY_DATA(user, date) {
+  const todayData = user.financial.filter((el, index) => {
+    const newDate = el.date.slice(0, 10);
+    if (moment(newDate).isSame(date)) {
+      return el;
+    }
+  });
+  return todayData;
+}
+
+export function UTIL_PERIOD_TODAY_DATA(user, date) {
+  const todayData = user.period.filter((el, index) => {
+    const newDate = el.date.slice(0, 10);
+    if (moment(newDate).isSame(date)) {
+      return el;
+    }
+  });
+  return todayData;
+}
+
+export function UTIL_SYMPTOM_TODAY_DATA(user, date) {
+  const todayData = user.symptomTags.filter((el, index) => {
+    const newDate = el.date.slice(0, 10);
+    if (moment(newDate).isSame(date)) {
+      return el;
+    }
+  });
+  return todayData;
+}
+
 export function UTIL_SYMPTOM_REDUCE(symptoms) {
   return symptoms.reduce((acc, el) => {
     if (el.bool) {
