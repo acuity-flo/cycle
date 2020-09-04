@@ -44,7 +44,7 @@ function CalendarView(props) {
                 moment(el.date).format('MM DD YYYY') ===
                 moment(date).format('MM DD YYYY')
             )
-          ) ? <FiberManualRecordIcon style={{fill: '#d8bfd8' }} fontSize="small"/> : ""
+          ) ? <FiberManualRecordIcon style={{fill: '#DEB88F' }} fontSize="small"/> : ""
         }
 
 
@@ -56,7 +56,7 @@ function CalendarView(props) {
               moment(el.date).format('MM DD YYYY') ===
               moment(date).format('MM DD YYYY')
           )
-        ) ? <FiberManualRecordIcon style={{fill: '#E7C39C' }} fontSize="small"/> : ""
+        ) ? <FiberManualRecordIcon style={{fill: '#9BB47A' }} fontSize="small"/> : ""
         }
 
         {(
@@ -67,7 +67,7 @@ function CalendarView(props) {
               moment(el.date).format('MM DD YYYY') ===
               moment(date).format('MM DD YYYY')
           )
-        ) ? <FiberManualRecordIcon style={{fill: '#9cc0e7' }} fontSize="small"/> : ""
+        ) ? <FiberManualRecordIcon style={{fill: '#8FB5DE' }} fontSize="small"/> : ""
         }
 
       </div>
@@ -95,9 +95,9 @@ function CalendarView(props) {
       <br />
       <p>
         Key:
-          <p>Period: <FiberManualRecordIcon style={{fill: '#d8bfd8' }} fontSize="small"/> </p>
-          <p>Finance:  <FiberManualRecordIcon style={{fill: '#E7C39C' }} fontSize="small"/></p>
-          <p>Symptom:  <FiberManualRecordIcon style={{fill: '#9cc0e7' }} fontSize="small"/></p>
+          <p>Period: <FiberManualRecordIcon style={{fill: '#DEB88F' }} fontSize="small"/> </p>
+          <p>Finance:  <FiberManualRecordIcon style={{fill: '#9BB47A' }} fontSize="small"/></p>
+          <p>Symptom:  <FiberManualRecordIcon style={{fill: '#8FB5DE' }} fontSize="small"/></p>
 
       </p>
 

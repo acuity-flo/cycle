@@ -58,10 +58,12 @@ function Navbar(props) {
           <Typography variant="title">
             <LogoSVG height={50} width={50}/>
           </Typography>
-
+        
           </IconButton>
+
+         
           {auth && (
-            <div>
+            <div className={classes.menuButton}>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -86,15 +88,17 @@ function Navbar(props) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={() => handleRedirect('me')}>
-                  Profile
+    
+                <MenuItem onClick={() => handleRedirect('calendar')}>
+                  Calendar
                 </MenuItem>
                 <MenuItem onClick={() => handleRedirect('charts')}>
                   My Charts
                 </MenuItem>
-                <MenuItem onClick={() => handleRedirect('calendar')}>
-                  Calendar
+                <MenuItem onClick={() => handleRedirect('profile')}>
+                  Profile
                 </MenuItem>
+
                 <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
               </Menu>
             </div>
@@ -121,8 +125,10 @@ const useStyles = makeStyles((theme) => ({
     background: '#545454'
   },
   menuButton: {
-    marginRight: theme.spacing(2),
-    fontSize: '500%'
+    marginRight: -25,
+    marginLeft: "auto",
+    alignContent:"center",
+    fontSize: '100%'
   },
   title: {
     flexGrow: 1,

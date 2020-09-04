@@ -21,7 +21,7 @@ function PeriodChartBB(props) {
     labels: false,
     xFormat: '%m-%d-%Y',
     colors: {
-      flow: '#d8bfd8'
+      flow: '#DEB88F'
     }
   };
 
