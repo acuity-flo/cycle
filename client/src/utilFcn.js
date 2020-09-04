@@ -32,6 +32,26 @@ export function UTIL_FINANCE(financeData, start, end) {
   return financeObj;
 }
 
+export function UTIL_FINANCE_TOTALS(financeObj) {
+  const { doctor, other, prescription, sanitaryProduct } = financeObj;
+  const doctorTotal = doctor.reduce((acc, el) => {
+    return (acc += el);
+  });
+  const prescriptionTotal = prescription.reduce((acc, el) => {
+    return (acc += el);
+  });
+  const sanitaryProductTotal = sanitaryProduct.reduce((acc, el) => {
+    return (acc += el);
+  });
+  const financialTotalsObj = {
+    doctor: doctorTotal,
+    prescription: prescriptionTotal,
+    sanitaryProduct: sanitaryProductTotal,
+    total: doctorTotal + prescriptionTotal + sanitaryProductTotal,
+  };
+  return financialTotalsObj;
+}
+
 export function UTIL_SYMPTOM_REDUCE(symptoms) {
   return symptoms.reduce((acc, el) => {
     if (el.bool) {
