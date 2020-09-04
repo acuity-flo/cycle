@@ -14,11 +14,8 @@ const AUTH_USER = 'AUTH_USER';
 const LOGOUT_USER = 'LOGOUT_USER';
 const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_VIEW = 'UPDATE_VIEW';
-<<<<<<< HEAD
 const SET_STATUS = 'SET_STATUS'
-=======
 const GET_STATUS = 'GET_STATUS';
->>>>>>> 26635598d89b087a5ad69bf6cdaf1f178677a0cf
 const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
 //action creator

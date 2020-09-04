@@ -219,3 +219,7 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
 
   return data;
 }
+
+export function COST_UTIL(cost) {
+  return (cost / 100).toFixed(2);
+}
