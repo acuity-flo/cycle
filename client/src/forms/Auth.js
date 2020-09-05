@@ -130,11 +130,36 @@ const useStyles = makeStyles((theme) => ({
   },
   inputItem: {
     margin: '0.5em',
-    width: '20vw',
+    width: '20%',
+    '@media(max-width: 1000px)': {
+      width: '35%'
+    },
+    '@media(max-width: 800px)': {
+      width: '50%'
+    },
+    '@media(max-width: 600px)': {
+      width: '65%'
+    },
+    '@media(max-width: 400px)': {
+      width: '80%'
+    },
   },
   inputLabel: {
-    width: '20vw',
+    width: '20%',
+    '@media(max-width: 1000px)': {
+      width: '35%'
+    },
+    '@media(max-width: 800px)': {
+      width: '50%'
+    },
+    '@media(max-width: 600px)': {
+      width: '65%'
+    },
+    '@media(max-width: 400px)': {
+      width: '80%'
+    },
   },
+
   button: {
     margin: '0.5em',
     backgroundColor: 'white',

@@ -30,8 +30,16 @@ const theme = createMuiTheme({
     h1: {
       fontFamily: 'Hammersmith One, sans-serif',
     }
-  }
+  },
 })
+
+theme.typography.body1 = {
+  fontFamily: 'Roboto, sans-serif',
+  fontSize: '1em',
+  '@media(max-width: 400px)': {
+    fontSize: '0.6em'
+  }
+}
 
 
 ReactDOM.render(

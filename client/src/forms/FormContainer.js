@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import {
   Container,
   Button,
   makeStyles,
-  Dialog,
-  DialogContent,
   Typography,
 } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
@@ -26,7 +24,6 @@ export default function FormContainer(props) {
   const period = user.periodTracking;
   const symptom = user.symptomTracking;
   const finance = user.financialTracking;
-  const [scroll, setScroll] = React.useState('paper');
   const [open, setOpen] = useState(false);
   const [symptoms, setSymptoms] = useState([]);
   const [flow, setFlow] = useState(0);
@@ -34,17 +31,19 @@ export default function FormContainer(props) {
   const [symptomsIdx, setSymptomsIdx] = useState(undefined);
   const [financeIdx, setFinanceIdx] = useState(undefined);
   const [flowIdx, setFlowIdx] = useState(undefined);
-
-  const todayFinanceData = UTIL_FINANCE_TODAY_DATA(user, date);
-  const todayPeriodData = UTIL_PERIOD_TODAY_DATA(user, date);
-  const todaySymptomData = UTIL_SYMPTOM_TODAY_DATA(user, date);
-  // console.log(todaySymptomData, 'today symptoms');
+  const [todayFinanceData, setTodayFinanceData] = useState([])
+  const [todayPeriodData, setTodayPeriodData] = useState([])
+  const [todaySymptomData, setTodaySymptomData] = useState([])
 
   const dispatch = useDispatch();
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const loadData = () => {
+    setTodayFinanceData(UTIL_FINANCE_TODAY_DATA(user, date))
+    setTodayPeriodData(UTIL_PERIOD_TODAY_DATA(user, date))
+    setTodaySymptomData(UTIL_SYMPTOM_TODAY_DATA(user, date))
+  }
+
+  const toggle = () => setOpen(!open)
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -63,105 +62,85 @@ export default function FormContainer(props) {
       flowIdx,
     };
     dispatch(updateUserThunk(update));
-  };
+    toggle()
+  }
+
+  useEffect(() => {
+    loadData()
+  }, [user])
+
   return (
-    <Container>
-      {todayPeriodData && (
-        <Typography variant="body2" gutterBottom>
-          Today's Flow: {todayPeriodData[0].typeOfFlow}
-        </Typography>
-      )}
-      {todayFinanceData && todayFinanceData.length && (
-        <Typography variant="body2" gutterBottom>
-          Today's Purchases:{' '}
-          {todayFinanceData[0].purchases.map((el) => (
-            <p>
-              {el.typeOfPurchase.toUpperCase()}: {el.cost}
-            </p>
-          ))}
-        </Typography>
-      )}
+    <Container >
+      {!open &&
+      <Fragment>
+      <Typography variant="h6">CURRENTLY LOGGED</Typography>
+      <Typography variant="body2" gutterBottom>
+        {todayPeriodData[0] ? `Flow: ${todayPeriodData[0].typeOfFlow.slice(0, 1).toUpperCase() + todayPeriodData[0].typeOfFlow.slice(1)}` : 'Flow: Nothing logged'}
+      </Typography>
+      <Typography variant="body2" gutterBottom>
+        {todaySymptomData[0] ? `Symptoms: ${todaySymptomData[0].symptoms.map(el => el.symptomName.slice(0, 1).toUpperCase() + el.symptomName.slice(1)).join(' | ')}` : 'Symptoms: Nothing logged'}
+      </Typography>
+      <Typography variant="body2" gutterBottom>
+        {todayFinanceData[0] ? `Purchases: ${todayFinanceData[0].purchases.map(el => `${el.typeOfPurchase.slice(0, 1).toUpperCase() + el.typeOfPurchase.slice(1)}: $${el.cost}`)}` : 'Purchases: Nothing logged'}
+      </Typography>
       <Button
         variant="outlined"
         color="primary"
         className={classes.button}
-        onClick={() => {
-          setOpen(true);
-        }}
+        onClick={toggle}
       >
-        add or update
+        update
       </Button>
+      </Fragment>}
+      {open && <form onSubmit={handleSubmit}>
+        {period ? (
+          <PeriodUpdate
+            date={date}
+            user={user}
+            setFlow={setFlow}
+            flow={flow}
+            flowIdx={flowIdx}
+            setFlowIdx={setFlowIdx}
+          />
+        ) : (
+          ''
+        )}
 
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        scroll={scroll}
-        aria-labelledby="scroll-dialog-title"
-        aria-describedby="scroll-dialog-description"
-        classes={classes.dialogBox}
-      >
-        <DialogContent className={classes.paper}>
-          <form onSubmit={handleSubmit}>
-            {period ? (
-              <PeriodUpdate
-                date={date}
-                user={user}
-                setFlow={setFlow}
-                flow={flow}
-                flowIdx={flowIdx}
-                setFlowIdx={setFlowIdx}
-              />
-            ) : (
-              ''
-            )}
+        {symptom ? (
+          <SymptomUpdate
+            date={date}
+            user={user}
+            setSymptoms={setSymptoms}
+            symptoms={symptoms}
+            symptomsIdx={symptomsIdx}
+            setSymptomsIdx={setSymptomsIdx}
+          />
+        ) : (
+          ''
+        )}
 
-            {symptom ? (
-              <SymptomUpdate
-                date={date}
-                user={user}
-                setSymptoms={setSymptoms}
-                symptoms={symptoms}
-                symptomsIdx={symptomsIdx}
-                setSymptomsIdx={setSymptomsIdx}
-              />
-            ) : (
-              ''
-            )}
+        {finance ? (
+          <FinanceUpdate
+            date={date}
+            user={user}
+            setPurchases={setPurchases}
+            purchases={purchases}
+            financeIdx={financeIdx}
+            setFinanceIdx={setFinanceIdx}
+          />
+        ) : (
+          ''
+        )}
 
-            {finance ? (
-              <FinanceUpdate
-                date={date}
-                user={user}
-                setPurchases={setPurchases}
-                purchases={purchases}
-                financeIdx={financeIdx}
-                setFinanceIdx={setFinanceIdx}
-              />
-            ) : (
-              ''
-            )}
-
-            {period || symptom || finance ? (
-              <Button type="submit">Submit</Button>
-            ) : (
-              <p>
-                You're not currently tracking anything. Please update your
-                settings in your Profile!
-              </p>
-            )}
-          </form>
-          <Button
-            variant="outlined"
-            color="primary"
-            className={classes.button}
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
-            close
-          </Button>
-        </DialogContent>
-      </Dialog>
+        {period || symptom || finance ? (
+          <Button type="submit">Submit</Button>
+        ) : (
+          <p>
+            You're not currently tracking anything. Please update your
+            settings in your Profile!
+          </p>
+        )}
+      </form>}
     </Container>
   );
 }
@@ -171,12 +150,5 @@ const useStyles = makeStyles((theme) => ({
     margin: '0.5em',
     backgroundColor: 'white',
     color: '#545454',
-  },
-  dialogBox: {
-    padding: '2em',
-  },
-  paper: {
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
+  }
 }));

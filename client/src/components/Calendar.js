@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
 import { connect } from 'react-redux';
@@ -9,6 +9,7 @@ import {
   DialogContent,
   DialogContentText,
   Container,
+  Grid,
   Typography
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,42 +37,30 @@ function CalendarView(props) {
   //render dots on the calendar func
   const circlesFunc = ({ date, view }) => {
     return (
-      <div>
-        {periodTracking && period &&
+      <div className={classes.dots}>
+        {(periodTracking && period &&
         view === 'month' &&
         period.some(
           (el) =>
             moment(el.date).format('MM DD YYYY') ===
             moment(date).format('MM DD YYYY')
-        ) ? (
-          <FiberManualRecordIcon style={{ fill: '#DEB88F' }} fontSize="small" />
-        ) : (
-          ''
-        )}
+        )) ? <FiberManualRecordIcon style={{ fill: '#DEB88F' }} fontSize="inherit" /> : ''}
 
-        {financeTracking && finance &&
+        {(financeTracking && finance &&
         view === 'month' &&
         finance.some(
           (el) =>
             moment(el.date).format('MM DD YYYY') ===
             moment(date).format('MM DD YYYY')
-        ) ? (
-          <FiberManualRecordIcon style={{ fill: '#9BB47A' }} fontSize="small" />
-        ) : (
-          ''
-        )}
+        )) ? <FiberManualRecordIcon style={{ fill: '#9BB47A' }} fontSize="inherit" /> : ''}
 
-        {symptomTracking && symptoms &&
+        {(symptomTracking && symptoms &&
         view === 'month' &&
         symptoms.some(
           (el) =>
             moment(el.date).format('MM DD YYYY') ===
             moment(date).format('MM DD YYYY')
-        ) ? (
-          <FiberManualRecordIcon style={{ fill: '#8FB5DE' }} fontSize="small" />
-        ) : (
-          ''
-        )}
+        )) ? <FiberManualRecordIcon style={{ fill: '#8FB5DE' }} fontSize="inherit" /> : ''}
       </div>
     );
   };
@@ -79,37 +68,18 @@ function CalendarView(props) {
   //renders key func
   const keyRender = () => {
     return (
-      <div className={classes.key}> 
-        {periodTracking ?
-        <div>
-        Period:{' '}
-        <FiberManualRecordIcon style={{ fill: '#DEB88F' }} fontSize="small" />{' '}
-        </div> : " "
-        }
-
-        {financeTracking ?
-        <div>
-        Finance:{' '}
-        <FiberManualRecordIcon style={{ fill: '#9BB47A' }} fontSize="small" />
-        </div> : " "
-        }
-
-        {symptomTracking ?
-        <div>
-        {' '} Symptom:{' '}
-        <FiberManualRecordIcon style={{ fill: '#8FB5DE' }} fontSize="small" />
-        </div> : " "
-        }
-
+      <div className={classes.key}>
+        {periodTracking ? <div className={classes.keyItem}><FiberManualRecordIcon style={{ fill: '#DEB88F'}} fontSize="inherit" /><Typography>Period</Typography></div> : ''}
+        {financeTracking ? <div className={classes.keyItem}><FiberManualRecordIcon style={{ fill: '#9BB47A' }} fontSize="inherit" /><Typography>Finance</Typography></div> : ''}
+        {symptomTracking ? <div className={classes.keyItem}><FiberManualRecordIcon style={{ fill: '#8FB5DE' }} fontSize="inherit" /><Typography>Symptom</Typography></div> : ''}
       </div>
     )
   }
 
 
   return (
-    <div>
-      <br/>
-      <Container maxWidth="xs">
+    <Fragment>
+      <Container className={classes.container}>
         <Calendar
           onChange={onChange}
           value={value}
@@ -119,21 +89,17 @@ function CalendarView(props) {
           }}
           tileContent={circlesFunc}
           alt={"Calendar"}
+          className={classes.calendar}
+          tileClassName={classes.tiles}
         />
-
-        <Typography >
-          {keyRender()}
-        </Typography>
-
+        {keyRender()}
       </Container>
-
       <Dialog
         open={open}
         onClose={handleClose}
         scroll={scroll}
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
-        classes={classes.dialogBox}
       >
         <DialogTitle id="scroll-dialog-title">
           {moment(date).format('MMMM D, YYYY')}
@@ -144,21 +110,58 @@ function CalendarView(props) {
           </DialogContentText>
         </DialogContent>
       </Dialog>
-    </div>
+    </Fragment>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
-  dialogBox: {
-    padding: '2em',
+  container: {
+    display: 'flex',
+    flexDirection:'column',
+    flexWrap: 'nowrap',
+    marginTop: '2em',
+    alignItems: 'center',
+    width: '40%',
+    '@media(max-width: 1000px)': {
+      width: '55%'
+    },
+    '@media(max-width: 800px)': {
+      width: '65%'
+    },
+    '@media(max-width: 600px)': {
+      width: '80%'
+    },
+    '@media(max-width: 400px)': {
+      width: '95%'
+    }
+  },
+  dots: {
+    display: 'flex',
+    justifyContent: 'center'
   },
   paper: {
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    '@media(max-width: 400px)': {
+      padding: theme.spacing(2, 1, 2)
+    },
+    overflowX: 'hidden'
+  },
+  tiles: {
+    color: 'black',
+    fontSize: '0.8em',
+  },
+  calendar: {
+    border: 'none',
+    fontFamily: 'Roboto',
   },
   key:{
-    display: "flex",
-    justifyContent: "space-between"
+    marginTop: '1em',
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  keyItem: {
+    display: 'flex',
   }
 }));
 

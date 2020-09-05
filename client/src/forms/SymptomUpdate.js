@@ -208,8 +208,8 @@ export default function SymptomUpdate(props) {
 
   return (
     <>
-      <Typography id="discrete-slider-restrict" gutterBottom>
-        Symptoms
+      <Typography variant="body2" gutterBottom>
+        SYMPTOMS
       </Typography>
       <FormControl component="symptoms">
         <FormGroup>

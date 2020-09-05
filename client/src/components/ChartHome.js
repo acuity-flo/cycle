@@ -69,12 +69,13 @@ function ChartHome(props) {
             {...defaultProps}
             isOutsideRange={() => false}
             numberOfMonths={1}
+            noBorder={true}
           />
           <Button onClick={onClick}>set</Button>
         </Container>
 
           <div className = {classes.imageHome}>
-          {choseDate ? '' : <img src={require('../images/ChartEmpty.svg')} alt={"Pick a date to get started!"} className={classes.image}/>} 
+          {choseDate ? '' : <img src={require('../images/ChartEmpty.svg')} alt={"Pick a date to get started!"} className={classes.image}/>}
           </div>
 
          <br />
