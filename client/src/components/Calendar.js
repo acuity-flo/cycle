@@ -9,6 +9,7 @@ import {
   DialogContent,
   DialogContentText,
   Container,
+  Grid
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import FormContainer from '../forms/FormContainer';

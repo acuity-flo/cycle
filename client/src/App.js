@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import ReactLoading from 'react-loading';
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 //Thunks
 import { authMe } from './store';
@@ -14,9 +15,11 @@ import UserProfile from './components/UserProfile';
 import ChartHome from './components/ChartHome';
 import NavBar from './components/NavBar';
 import ErrorComp from './components/404';
-
+import BottomNav from './components/BottomNav'
 function App(props) {
   const [loading, setLoading] = useState(true);
+  const matches = useMediaQuery('@media only screen and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2)')
+
   const user = props.user;
   const isLoggedIn = props.isLoggedIn;
   const dispatch = useDispatch();
@@ -29,7 +32,7 @@ function App(props) {
   if (!loading) {
     return (
       <Router>
-        <NavBar />
+        {!matches && <NavBar />}
         <Switch>
           <Route exact path="/" component={Home} />
 
@@ -44,6 +47,7 @@ function App(props) {
           {/* Default component */}
           {!isLoggedIn && <Route component={LoginPage} />}
         </Switch>
+        {matches && <BottomNav />}
       </Router>
     );
   } else {

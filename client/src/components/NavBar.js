@@ -58,10 +58,10 @@ function Navbar(props) {
           <Typography variant="title">
             <LogoSVG height={50} width={50}/>
           </Typography>
-        
+
           </IconButton>
 
-         
+
           {auth && (
             <div className={classes.menuButton}>
               <IconButton
@@ -88,7 +88,7 @@ function Navbar(props) {
                 open={open}
                 onClose={handleClose}
               >
-    
+
                 <MenuItem onClick={() => handleRedirect('calendar')}>
                   Calendar
                 </MenuItem>
@@ -107,6 +107,7 @@ function Navbar(props) {
       </AppBar>
     </div>
   );
+
 }
 
 const mapState = (state) => ({

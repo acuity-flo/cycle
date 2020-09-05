@@ -35,9 +35,9 @@ export default function FormContainer(props) {
   const [financeIdx, setFinanceIdx] = useState(undefined);
   const [flowIdx, setFlowIdx] = useState(undefined);
 
-  const todayFinanceData = UTIL_FINANCE_TODAY_DATA(user, date);
-  const todayPeriodData = UTIL_PERIOD_TODAY_DATA(user, date);
-  const todaySymptomData = UTIL_SYMPTOM_TODAY_DATA(user, date);
+  // const todayFinanceData = UTIL_FINANCE_TODAY_DATA(user, date);
+  // const todayPeriodData = UTIL_PERIOD_TODAY_DATA(user, date);
+  // const todaySymptomData = UTIL_SYMPTOM_TODAY_DATA(user, date);
   // console.log(todaySymptomData, 'today symptoms');
 
   const dispatch = useDispatch();
@@ -65,8 +65,8 @@ export default function FormContainer(props) {
     dispatch(updateUserThunk(update));
   };
   return (
-    <Container>
-      {todayPeriodData && (
+    <Container >
+      {/* {todayPeriodData && (
         <Typography variant="body2" gutterBottom>
           Today's Flow: {todayPeriodData[0].typeOfFlow}
         </Typography>
@@ -80,7 +80,7 @@ export default function FormContainer(props) {
             </p>
           ))}
         </Typography>
-      )}
+      )} */}
       <Button
         variant="outlined"
         color="primary"
@@ -178,5 +178,6 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    overflowX: 'hidden'
   },
 }));
