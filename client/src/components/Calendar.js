@@ -9,7 +9,8 @@ import {
   DialogContent,
   DialogContentText,
   Container,
-  Grid
+  Grid,
+  Typography
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import FormContainer from '../forms/FormContainer';
@@ -21,6 +22,9 @@ function CalendarView(props) {
   const period = user.period;
   const finance = user.financial;
   const symptoms = user.symptomTags;
+  const periodTracking = user.periodTracking
+  const symptomTracking = user.symptomTracking
+  const financeTracking = user.financialTracking
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
 
@@ -29,10 +33,12 @@ function CalendarView(props) {
   };
 
   const classes = useStyles();
+
+  //render dots on the calendar func
   const circlesFunc = ({ date, view }) => {
     return (
       <div>
-        {period &&
+        {periodTracking && period &&
         view === 'month' &&
         period.some(
           (el) =>
@@ -44,7 +50,7 @@ function CalendarView(props) {
           ''
         )}
 
-        {finance &&
+        {financeTracking && finance &&
         view === 'month' &&
         finance.some(
           (el) =>
@@ -56,7 +62,7 @@ function CalendarView(props) {
           ''
         )}
 
-        {symptoms &&
+        {symptomTracking && symptoms &&
         view === 'month' &&
         symptoms.some(
           (el) =>
@@ -71,9 +77,39 @@ function CalendarView(props) {
     );
   };
 
+  //renders key func
+  const keyRender = () => {
+    return (
+      <div className={classes.key}>
+        {periodTracking ?
+        <div>
+        Period:{' '}
+        <FiberManualRecordIcon style={{ fill: '#DEB88F' }} fontSize="small" />{' '}
+        </div> : " "
+        }
+
+        {financeTracking ?
+        <div>
+        Finance:{' '}
+        <FiberManualRecordIcon style={{ fill: '#9BB47A' }} fontSize="small" />
+        </div> : " "
+        }
+
+        {symptomTracking ?
+        <div>
+        {' '} Symptom:{' '}
+        <FiberManualRecordIcon style={{ fill: '#8FB5DE' }} fontSize="small" />
+        </div> : " "
+        }
+
+      </div>
+    )
+  }
+
+
   return (
     <div>
-      <h1>CALENDAR</h1>
+      <br/>
       <Container maxWidth="xs">
         <Calendar
           onChange={onChange}
@@ -83,24 +119,15 @@ function CalendarView(props) {
             setOpen(true);
           }}
           tileContent={circlesFunc}
-        ></Calendar>
+          alt={"Calendar"}
+        />
+
+        <Typography >
+          {keyRender()}
+        </Typography>
+
       </Container>
-      <br />
-      <p>
-        Key:
-        <p>
-          Period:{' '}
-          <FiberManualRecordIcon style={{ fill: '#DEB88F' }} fontSize="small" />{' '}
-        </p>
-        <p>
-          Finance:{' '}
-          <FiberManualRecordIcon style={{ fill: '#9BB47A' }} fontSize="small" />
-        </p>
-        <p>
-          Symptom:{' '}
-          <FiberManualRecordIcon style={{ fill: '#8FB5DE' }} fontSize="small" />
-        </p>
-      </p>
+
       <Dialog
         open={open}
         onClose={handleClose}
@@ -130,6 +157,10 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  key:{
+    display: "flex",
+    justifyContent: "space-between"
+  }
 }));
 
 const mapState = (state) => {
