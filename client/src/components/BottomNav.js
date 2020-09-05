@@ -25,7 +25,6 @@ function BottomNav(props) {
 
   return (
     <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-      <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} onClick={() => handleRedirect('')}/>
       <BottomNavigationAction label="Calendar" value="calendar" icon={<DateRangeIcon />} onClick={() => handleRedirect('calendar')}/>
       <BottomNavigationAction label="Charts" value="charts" icon={<AssessmentIcon />} onClick={() => handleRedirect('charts')}/>
       <BottomNavigationAction label="Profile" value="profile" icon={<PersonIcon />} onClick={() => handleRedirect('profile')} />

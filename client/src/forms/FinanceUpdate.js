@@ -74,10 +74,10 @@ export default function FinanceUpdate(props) {
 
   return (
     <div className={classes.root}>
-      <Typography id="discrete-slider-restrict" gutterBottom>
-        Finances
+      <Typography variant="body1" style={{color: '#9BB47A'}} gutterBottom>
+        FINANCES
       </Typography>
-      <Grid container xs={12}>
+      <Grid container xs={12} justify="center">
         {purchases.map((el, index) => {
           return (
             <Fragment>
@@ -119,25 +119,30 @@ export default function FinanceUpdate(props) {
                 </FormControl>
               </Grid>
               <Grid item xs={1}>
-                <Button name={index} onClick={handleDeleteRow}>
+                <Button name={index} onClick={handleDeleteRow} className={classes.deleteButton}>
                   x
                 </Button>
               </Grid>
             </Fragment>
           );
         })}
+        <Button xs={6} onClick={handleAddRow}>+</Button>
       </Grid>
-      <Button onClick={handleAddRow}>+</Button>
     </div>
   );
 }
 
 const useStyles = makeStyles({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
+    flexGrow: 1,
   },
   inputItem: {
     width: '95%',
   },
+  deleteButton: {
+    padding: '2px, 3px',
+    fontSize: '10px',
+    height: '100%',
+    width: '100%'
+  }
 });

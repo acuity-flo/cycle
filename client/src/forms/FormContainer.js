@@ -74,14 +74,23 @@ export default function FormContainer(props) {
       {!open &&
       <Fragment>
       <Typography variant="h6">CURRENTLY LOGGED</Typography>
-      <Typography variant="body2" gutterBottom>
-        {todayPeriodData[0] ? `Flow: ${todayPeriodData[0].typeOfFlow.slice(0, 1).toUpperCase() + todayPeriodData[0].typeOfFlow.slice(1)}` : 'Flow: Nothing logged'}
+      <Typography variant="body2" style={{color: '#DEB88F'}}>
+        Flow:
       </Typography>
       <Typography variant="body2" gutterBottom>
-        {todaySymptomData[0] ? `Symptoms: ${todaySymptomData[0].symptoms.map(el => el.symptomName.slice(0, 1).toUpperCase() + el.symptomName.slice(1)).join(' | ')}` : 'Symptoms: Nothing logged'}
+        {todayPeriodData[0] ? `${todayPeriodData[0].typeOfFlow.slice(0, 1).toUpperCase() + todayPeriodData[0].typeOfFlow.slice(1)}` : 'Nothing logged'}
+      </Typography>
+      <Typography variant="body2" style={{color: '#8FB5DE'}}>
+        Symptoms:
       </Typography>
       <Typography variant="body2" gutterBottom>
-        {todayFinanceData[0] ? `Purchases: ${todayFinanceData[0].purchases.map(el => `${el.typeOfPurchase.slice(0, 1).toUpperCase() + el.typeOfPurchase.slice(1)}: $${el.cost}`)}` : 'Purchases: Nothing logged'}
+        {todaySymptomData[0] ? `${todaySymptomData[0].symptoms.map(el => el.symptomName.slice(0, 1).toUpperCase() + el.symptomName.slice(1)).join(' | ')}` : 'Nothing logged'}
+      </Typography>
+      <Typography variant="body2" style={{color: '#9BB47A'}}>
+        Purchases:
+      </Typography>
+      <Typography variant="body2" gutterBottom>
+        {todayFinanceData[0] ? `${todayFinanceData[0].purchases.map(el => `${el.typeOfPurchase.slice(0, 1).toUpperCase() + el.typeOfPurchase.slice(1)}: $${el.cost}`).join('\n')}` : 'Nothing logged'}
       </Typography>
       <Button
         variant="outlined"
