@@ -1,39 +1,25 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import UserDataView from './UserDataView';
+import moment from 'moment';
 import {
-  Dialog,
-  DialogContent,
   Container,
-  Button,
   makeStyles,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  Typography,
 } from '@material-ui/core';
 
 const Overview = (props) => {
+  const now = moment().format('MMM');
   const user = props.user;
-  // const [open, setOpen] = useState(false);
-  const [month, setMonth] = useState('default month');
-  // const [scroll, setScroll] = React.useState('paper');
+  const [month, setMonth] = useState(now);
   const classes = useStyles();
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
   return (
     <Container>
       <h5>your monthly info</h5>
-
-      <form
-        onSubmit={() => {
-          console.log('clicked submit');
-        }}
-      >
+      <form>
         <FormControl name="months" className={classes.inputItem}>
           <InputLabel id="months">choose month</InputLabel>
           <Select
@@ -56,7 +42,6 @@ const Overview = (props) => {
     </Container>
   );
 };
-
 const useStyles = makeStyles((theme) => ({
   dialogBox: {
     padding: '2em',
@@ -75,12 +60,10 @@ const useStyles = makeStyles((theme) => ({
     width: '20vw',
   },
 }));
-
 const mapState = (state) => {
   return {
     user: state.authUser,
     isLoggedIn: !!state.authUser._id,
   };
 };
-
 export default connect(mapState)(Overview);
