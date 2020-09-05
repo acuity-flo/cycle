@@ -96,7 +96,7 @@ export default function FinanceUpdate(props) {
                   />
                 </FormControl>
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs={6}>
                 <FormControl className={classes.inputItem}>
                   <InputLabel id="financeType">Type</InputLabel>
                   <Select
@@ -118,7 +118,7 @@ export default function FinanceUpdate(props) {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={1}>
                 <Button name={index} onClick={handleDeleteRow}>
                   x
                 </Button>

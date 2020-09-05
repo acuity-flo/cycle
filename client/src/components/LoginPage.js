@@ -19,7 +19,19 @@ const useStyles = makeStyles((theme) => ({
     },
     image: {
       marginTop: "5vh",
-      width: "30vw",
+      width: "30%",
+      '@media(max-width: 1000px)': {
+        width: '40%'
+      },
+      '@media(max-width: 800px)': {
+        width: '50%'
+      },
+      '@media(max-width: 600px)': {
+        width: '60%'
+      },
+      '@media(max-width: 400px)': {
+        width: '70%'
+      },
       alignSelf: "center"
     },
     root: {

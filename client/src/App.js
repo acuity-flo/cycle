@@ -16,6 +16,8 @@ import ChartHome from './components/ChartHome';
 import NavBar from './components/NavBar';
 import ErrorComp from './components/404';
 import BottomNav from './components/BottomNav'
+import SimpleMobileTop from './components/SimpleMobileTop'
+
 function App(props) {
   const [loading, setLoading] = useState(true);
   const matches = useMediaQuery('@media only screen and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2)')
@@ -33,6 +35,7 @@ function App(props) {
     return (
       <Router>
         {!matches && <NavBar />}
+        {matches && <SimpleMobileTop />}
         <Switch>
           <Route exact path="/" component={Home} />
 
