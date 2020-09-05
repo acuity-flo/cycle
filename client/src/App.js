@@ -47,11 +47,7 @@ function App(props) {
           {/* Default component */}
           {!isLoggedIn && <Route component={LoginPage} />}
         </Switch>
-<<<<<<< HEAD
         {matches && <BottomNav />}
-=======
-        
->>>>>>> a683693c36f2aac34516edbee19401b76904cd25
       </Router>
     );
   } else {
