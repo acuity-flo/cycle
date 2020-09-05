@@ -1,22 +1,38 @@
 import React from 'react'
 import { ReactComponent as LogoSVG }  from '../images/Logo2.svg'
+import { withRouter } from 'react-router';
+import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 
 
-export default function SimpleMobileTop () {
+function SimpleMobileTop (props) {
   const classes = useStyles()
   return (
     <div className={classes.root}>
-      <LogoSVG height={30} width={30}/>
+      <AppBar position="sticky" className = {classes.nav}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick = {()=> {
+              props.history.push('/')
+            }}
+          >
+          <Typography variant="title">
+            <LogoSVG height={50} width={50}/>
+          </Typography>
+          </IconButton>
+        </Toolbar>
+      </AppBar>
     </div>
   )
 }
 
+export default withRouter(SimpleMobileTop)
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'inline-block',
-    backgroundColor: '#545454',
-    width: '100%',
-    padding: '1em'
+    flexGrow: 1
   }
 }))
