@@ -6,7 +6,7 @@ export default function LoginPage () {
     const classes = useStyles()
     return (
         <div className={classes.container}>
-            <img src={require('../images/Logo_Update.svg')} className={classes.image} />
+            <img src={require('../images/Logo_Update.svg')} className={classes.image} alt={"Cycle Logo"}/>
             <Auth />
         </div>
     )

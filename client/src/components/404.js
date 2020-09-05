@@ -5,7 +5,7 @@ export default function ErrorComp() {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <img src={require('../images/404.svg')} className={classes.image} />
+      <img src={require('../images/404.svg')} className={classes.image} alt={"404 - Page Doesn't Exist Image"}/>
     </div>
   );
 }
