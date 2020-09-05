@@ -118,6 +118,7 @@ function CalendarView(props) {
             setOpen(true);
           }}
           tileContent={circlesFunc}
+          alt={"Calendar"}
         />
 
         <Typography >

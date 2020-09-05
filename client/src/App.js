@@ -44,6 +44,7 @@ function App(props) {
           {/* Default component */}
           {!isLoggedIn && <Route component={LoginPage} />}
         </Switch>
+        
       </Router>
     );
   } else {
