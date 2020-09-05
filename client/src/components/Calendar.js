@@ -19,6 +19,7 @@ function CalendarView(props) {
   const [value, onChange] = useState(new Date());
   const [scroll, setScroll] = React.useState('paper');
   const user = props.authUser;
+  const message = props.message;
   const period = user.period;
   const finance = user.financial;
   const symptoms = user.symptomTags;
@@ -106,7 +107,7 @@ function CalendarView(props) {
         </DialogTitle>
         <DialogContent className={classes.paper}>
           <DialogContentText>
-            <FormContainer date={date} user={user} />
+            <FormContainer date={date} user={user} message={message} />
           </DialogContentText>
         </DialogContent>
       </Dialog>
@@ -169,6 +170,7 @@ const mapState = (state) => {
   return {
     authUser: state.authUser,
     isLoggedIn: !!state.authUser._id,
+    message: state.statusMessage
   };
 };
 

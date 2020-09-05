@@ -238,7 +238,7 @@ const reducer = (state = initialState, action) => {
     case LOGOUT_USER:
       return initialState;
     case UPDATE_USER:
-      return { ...state, statusMessage: null, authUser: action.user };
+      return { ...state, statusMessage: 'success', authUser: action.user };
     case SET_STATUS:
       return { ...state, statusMessage: action.message };
     default:

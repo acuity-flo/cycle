@@ -18,9 +18,10 @@ import {
 } from '../utilFcn';
 import { updateUserThunk } from '../store';
 
+
 export default function FormContainer(props) {
   const classes = useStyles();
-  const { date, user } = props;
+  const { date, user, message } = props;
   const period = user.periodTracking;
   const symptom = user.symptomTracking;
   const finance = user.financialTracking;
@@ -34,7 +35,6 @@ export default function FormContainer(props) {
   const [todayFinanceData, setTodayFinanceData] = useState([])
   const [todayPeriodData, setTodayPeriodData] = useState([])
   const [todaySymptomData, setTodaySymptomData] = useState([])
-
   const dispatch = useDispatch();
 
   const loadData = () => {
