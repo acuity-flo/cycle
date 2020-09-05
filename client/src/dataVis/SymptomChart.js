@@ -42,6 +42,10 @@ function SymptomChartBB(props) {
         fit: true,
       },
       type: 'timeseries',
+      padding: {
+        left : 1000*60*60*6, 
+        right: 1000*60*60*6, 
+      }
     },
     y: {
       tick: {

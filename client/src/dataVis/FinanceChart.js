@@ -28,8 +28,9 @@ function FinanceChartBB(props) {
 
   let CHART_AXIS = {
     x: {
-      min: {
-        fit: true
+      padding: {
+        left : 1000*60*60*6, 
+        right: 1000*60*60*6, 
       },
       type: 'timeseries',
       tick: {
