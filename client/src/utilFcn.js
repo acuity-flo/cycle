@@ -13,36 +13,42 @@ export function UTIL_FINANCE(financeData, start, end) {
               innerAcc.sanitaryProduct += innerEl.cost;
             if (innerEl.typeOfPurchase === 'doctor')
               innerAcc.doctor += innerEl.cost;
-            if (innerEl.typeOfPurchase === 'other')
-              innerAcc.other += innerEl.cost;
             return innerAcc;
           },
-          { prescription: 0, sanitaryProduct: 0, doctor: 0, other: 0 }
+          { prescription: 0, sanitaryProduct: 0, doctor: 0 }
         );
         acc.prescription.push(vals.prescription);
         acc.sanitaryProduct.push(vals.sanitaryProduct);
         acc.doctor.push(vals.doctor);
-        acc.other.push(vals.other);
         acc.x.push(moment(dateChange).format('MM-DD-YYYY'));
       }
       return acc;
     },
-    { prescription: [], sanitaryProduct: [], doctor: [], other: [], x: [] }
+    { prescription: [], sanitaryProduct: [], doctor: [], x: [] }
   );
   return financeObj;
 }
 
 export function UTIL_FINANCE_TOTALS(financeObj) {
-  const { doctor, other, prescription, sanitaryProduct } = financeObj;
-  const doctorTotal = doctor.reduce((acc, el) => {
-    return (acc += el);
-  });
-  const prescriptionTotal = prescription.reduce((acc, el) => {
-    return (acc += el);
-  });
-  const sanitaryProductTotal = sanitaryProduct.reduce((acc, el) => {
-    return (acc += el);
-  });
+  const { doctor, prescription, sanitaryProduct } = financeObj;
+  let doctorTotal = 0;
+  let prescriptionTotal = 0;
+  let sanitaryProductTotal = 0;
+  if (doctor[0]) {
+    doctorTotal = doctor.reduce((acc, el) => {
+      return (acc += el);
+    });
+  }
+  if (prescription[0]) {
+    prescriptionTotal = prescription.reduce((acc, el) => {
+      return (acc += el);
+    });
+  }
+  if (sanitaryProduct[0]) {
+    sanitaryProductTotal = sanitaryProduct.reduce((acc, el) => {
+      return (acc += el);
+    });
+  }
   const financialTotalsObj = {
     doctor: doctorTotal,
     prescription: prescriptionTotal,

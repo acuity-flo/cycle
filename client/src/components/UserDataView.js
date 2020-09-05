@@ -1,14 +1,19 @@
 import React from 'react';
 import moment from 'moment';
-import { UTIL_FINANCE, UTIL_FINANCE_TOTALS } from '../utilFcn';
+import FinanceOverview from '../overview/FinanceOverview';
 
 // add condition to util function for totals so doesn't calculate for empty array
 // fix default month view
 // make sure to grab year rather than default to 2020 -- add year selection to user profile view
 
 const UserDataView = (props) => {
+  const user = props.user;
+  const periodBool = user.periodTracking;
+  const symptomBool = user.symptomTracking;
+  const financeBool = user.financialTracking;
   const { financial, period, symptomTags } = props.user;
   const monthStr = props.month;
+
   // defaults to today if doesn't recognize the string passed in
   // sets the month correctly and assigned the current day as the day of the month
   const month = moment().month(monthStr);
@@ -23,18 +28,14 @@ const UserDataView = (props) => {
   // end is the first day of the chosen month + 1 month
   const end = moment(firstDayNext + '-01').format('YYYY-MM-DD');
 
-  const financeObj = UTIL_FINANCE(financial, start, end);
-  const financialTotalsObj = UTIL_FINANCE_TOTALS(financeObj);
-
   return (
     <div>
-      <h4>your financial data for {month.format('MMMM YYYY')}</h4>
-      <div>doctor expenses: {financialTotalsObj.doctor}</div>
-      <div>prescription expenses: {financialTotalsObj.prescription}</div>
-      <div>
-        sanitary products expenses: {financialTotalsObj.sanitaryProduct}
-      </div>
-      <div>costs total: {financialTotalsObj.total}</div>
+      <h5>your monthly overview for {month.format('MMMM YYYY')}</h5>
+      {financeBool ? (
+        <FinanceOverview start={start} end={end} financial={financial} />
+      ) : (
+        ''
+      )}
     </div>
   );
 };

@@ -19,7 +19,7 @@ import {
 const UserProfile = (props) => {
   const user = props.user;
   const [open, setOpen] = useState(false);
-  const [month, setMonth] = useState('default month');
+  // const [month, setMonth] = useState('default month');
   const [scroll, setScroll] = React.useState('paper');
   const classes = useStyles();
 
@@ -66,31 +66,6 @@ const UserProfile = (props) => {
           </Button>
         </DialogContent>
       </Dialog>
-
-      <form
-        onSubmit={() => {
-          console.log('clicked submit');
-        }}
-      >
-        <FormControl name="pronouns" className={classes.inputItem}>
-          <InputLabel id="months">choose month</InputLabel>
-          <Select
-            labelId="months"
-            name="months"
-            onChange={(evt) => {
-              setMonth(evt.target.value);
-            }}
-          >
-            <MenuItem value="june">june</MenuItem>
-            <MenuItem value="july">july</MenuItem>
-            <MenuItem value="august">august</MenuItem>
-            <MenuItem value="january">january</MenuItem>
-            <MenuItem value="february">february</MenuItem>
-            <MenuItem value="march">march</MenuItem>
-          </Select>
-        </FormControl>
-      </form>
-      <UserDataView user={user} month={month} />
     </Container>
   );
 };
