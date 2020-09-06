@@ -46,7 +46,9 @@ export default function FormContainer(props) {
     const flowStr = UTIL_PERIOD_STR(flow);
     let purchasesUpdated = purchases
       .filter((el) => el.typeOfPurchase !== '')
-      .map((el) => {return {...el, cost: el.cost * 100}});
+      .map((el) => {
+        return { ...el, cost: el.cost * 100 };
+      });
 
     const update = {
       date,
@@ -70,23 +72,112 @@ export default function FormContainer(props) {
     <Container>
       {!open && (
         <Fragment>
-          <Typography variant="body2" gutterBottom style={{ textAlign: "center", color: '#DEB88F' }}>FLOW</Typography>
-            {todayPeriodData[0]
-              ? <Typography variant="body2" style={{ textAlign: "center" }} gutterBottom>{todayPeriodData[0].typeOfFlow.slice(0, 1).toUpperCase() +
-                  todayPeriodData[0].typeOfFlow.slice(1)}</Typography>
-              : <Typography variant="body2" style={{ textAlign: "center" }} gutterBottom>Nothing logged</Typography>}
+          {period ? (
+            <Typography
+              variant="body2"
+              gutterBottom
+              style={{ textAlign: 'center', color: '#DEB88F' }}
+            >
+              FLOW
+            </Typography>
+          ) : (
+            ''
+          )}
+          {period ? (
+            todayPeriodData[0] ? (
+              <Typography
+                variant="body2"
+                style={{ textAlign: 'center' }}
+                gutterBottom
+              >
+                {todayPeriodData[0].typeOfFlow.slice(0, 1).toUpperCase() +
+                  todayPeriodData[0].typeOfFlow.slice(1)}
+              </Typography>
+            ) : (
+              <Typography
+                variant="body2"
+                style={{ textAlign: 'center' }}
+                gutterBottom
+              >
+                Nothing logged
+              </Typography>
+            )
+          ) : (
+            ''
+          )}
           <br />
-          <Typography variant="body2" style={{ textAlign: "center", color: '#8FB5DE' }} gutterBottom>SYMPTOMS</Typography>
-            {todaySymptomData[0] ?  todaySymptomData[0].symptoms.map(el =>
-                <Typography variant="body2" style={{ textAlign: "center" }} gutterBottom>{el.symptomName.slice(0, 1).toUpperCase() +
-                el.symptomName.slice(1)}</Typography>
-              ) : <Typography variant="body2" style={{ textAlign: "center" }} gutterBottom>Nothing logged</Typography>}
+          {symptom ? (
+            <Typography
+              variant="body2"
+              style={{ textAlign: 'center', color: '#8FB5DE' }}
+              gutterBottom
+            >
+              SYMPTOMS
+            </Typography>
+          ) : (
+            ''
+          )}
+          {symptom ? (
+            todaySymptomData[0] ? (
+              todaySymptomData[0].symptoms.map((el) => (
+                <Typography
+                  variant="body2"
+                  style={{ textAlign: 'center' }}
+                  gutterBottom
+                >
+                  {el.symptomName.slice(0, 1).toUpperCase() +
+                    el.symptomName.slice(1)}
+                </Typography>
+              ))
+            ) : (
+              <Typography
+                variant="body2"
+                style={{ textAlign: 'center' }}
+                gutterBottom
+              >
+                Nothing logged
+              </Typography>
+            )
+          ) : (
+            ''
+          )}
           <br />
-          <Typography variant="body2" style={{ textAlign: "center", color: '#9BB47A' }} gutterBottom>PURCHASES</Typography>
-            {todayFinanceData[0]
-              ? todayFinanceData[0].purchases.map(
-                  (el) =>
-                    <Typography variant="body2" style={{ textAlign: "center" }} gutterBottom>{el.typeOfPurchase.slice(0, 1).toUpperCase() + el.typeOfPurchase.slice(1)} : ${UTIL_COST(el.cost)}</Typography>) : <Typography variant="body2" style={{ textAlign: "center" }} gutterBottom>Nothing logged</Typography>}
+          {finance ? (
+            <Typography
+              variant="body2"
+              style={{ textAlign: 'center', color: '#9BB47A' }}
+              gutterBottom
+            >
+              PURCHASES
+            </Typography>
+          ) : (
+            ''
+          )}
+          {finance ? (
+            todayFinanceData[0] ? (
+              todayFinanceData[0].purchases.map((el) => (
+                <Typography
+                  variant="body2"
+                  style={{ textAlign: 'center' }}
+                  gutterBottom
+                >
+                  {el.typeOfPurchase.slice(0, 1).toUpperCase() +
+                    el.typeOfPurchase.slice(1)}{' '}
+                  : ${UTIL_COST(el.cost)}
+                </Typography>
+              ))
+            ) : (
+              <Typography
+                variant="body2"
+                style={{ textAlign: 'center' }}
+                gutterBottom
+              >
+                Nothing logged
+              </Typography>
+            )
+          ) : (
+            ''
+          )}
           <Container className={classes.buttonContainer}>
             <Button
               variant="outlined"
@@ -97,7 +188,6 @@ export default function FormContainer(props) {
               update
             </Button>
           </Container>
-
         </Fragment>
       )}
       {open && (
@@ -158,7 +248,7 @@ export default function FormContainer(props) {
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   button: {
     marginTop: '1em',
