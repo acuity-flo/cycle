@@ -46,10 +46,7 @@ export default function FormContainer(props) {
     const flowStr = UTIL_PERIOD_STR(flow);
     let purchasesUpdated = purchases
       .filter((el) => el.typeOfPurchase !== '')
-      .map((el) => el.cost * 100);
-    // let purchasesUpdated = purchases
-    // .filter((el) => el.typeOfPurchase !== '')
-    // .map((el) => el.cost * 100);
+      .map((el) => {return {...el, cost: el.cost * 100}});
 
     const update = {
       date,
@@ -73,45 +70,34 @@ export default function FormContainer(props) {
     <Container>
       {!open && (
         <Fragment>
-          <Typography variant="h6">CURRENTLY LOGGED</Typography>
-          <Typography variant="body2" gutterBottom>
+          <Typography variant="body2" gutterBottom style={{ textAlign: "center", color: '#DEB88F' }}>FLOW</Typography>
             {todayPeriodData[0]
-              ? `Flow: ${
-                  todayPeriodData[0].typeOfFlow.slice(0, 1).toUpperCase() +
-                  todayPeriodData[0].typeOfFlow.slice(1)
-                }`
-              : 'Flow: Nothing logged'}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {todaySymptomData[0]
-              ? `Symptoms: ${todaySymptomData[0].symptoms
-                  .map(
-                    (el) =>
-                      el.symptomName.slice(0, 1).toUpperCase() +
-                      el.symptomName.slice(1)
-                  )
-                  .join(' | ')}`
-              : 'Symptoms: Nothing logged'}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
+              ? <Typography variant="body2" style={{ textAlign: "center" }} gutterBottom>{todayPeriodData[0].typeOfFlow.slice(0, 1).toUpperCase() +
+                  todayPeriodData[0].typeOfFlow.slice(1)}</Typography>
+              : <Typography variant="body2" style={{ textAlign: "center" }} gutterBottom>Nothing logged</Typography>}
+          <br />
+          <Typography variant="body2" style={{ textAlign: "center", color: '#8FB5DE' }} gutterBottom>SYMPTOMS</Typography>
+            {todaySymptomData[0] ?  todaySymptomData[0].symptoms.map(el =>
+                <Typography variant="body2" style={{ textAlign: "center" }} gutterBottom>{el.symptomName.slice(0, 1).toUpperCase() +
+                el.symptomName.slice(1)}</Typography>
+              ) : <Typography variant="body2" style={{ textAlign: "center" }} gutterBottom>Nothing logged</Typography>}
+          <br />
+          <Typography variant="body2" style={{ textAlign: "center", color: '#9BB47A' }} gutterBottom>PURCHASES</Typography>
             {todayFinanceData[0]
-              ? `Purchases: ${todayFinanceData[0].purchases.map(
+              ? todayFinanceData[0].purchases.map(
                   (el) =>
-                    `${
-                      el.typeOfPurchase.slice(0, 1).toUpperCase() +
-                      el.typeOfPurchase.slice(1)
-                    }: $${UTIL_COST(el.cost)}`
-                )}`
-              : 'Purchases: Nothing logged'}
-          </Typography>
-          <Button
-            variant="outlined"
-            color="primary"
-            className={classes.button}
-            onClick={toggle}
-          >
-            update
-          </Button>
+                    <Typography variant="body2" style={{ textAlign: "center" }} gutterBottom>{el.typeOfPurchase.slice(0, 1).toUpperCase() + el.typeOfPurchase.slice(1)} : ${UTIL_COST(el.cost)}</Typography>) : <Typography variant="body2" style={{ textAlign: "center" }} gutterBottom>Nothing logged</Typography>}
+          <Container className={classes.buttonContainer}>
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={toggle}
+            >
+              update
+            </Button>
+          </Container>
+
         </Fragment>
       )}
       {open && (
@@ -170,8 +156,12 @@ export default function FormContainer(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
   button: {
-    margin: '0.5em',
+    marginTop: '1em',
     backgroundColor: 'white',
     color: '#545454',
   },
