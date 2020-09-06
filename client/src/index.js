@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import 'react-calendar/dist/Calendar.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "react-billboardjs/lib/billboard.css";
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'

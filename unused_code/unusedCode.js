@@ -257,3 +257,61 @@
 // };
 
 // export default DayModal;
+
+
+
+
+// indexedDB
+// console.log('I hit an error in redux auth me')
+// let request = indexedDB.open('CYCLE_EXAMPLE', 1), db, tx, store;
+
+// request.onsuccess = function(event) {
+//     console.log('redux, db open successful')
+//     console.log('[onsuccess]', request.result);
+//     db = request.result
+//     tx = db.transaction('CYCLE_STORE', 'readwrite')
+//     store = tx.objectStore('CYCLE_STORE')
+
+//     db.onerror = function(event) {
+//       console.log('CYCLE_STORE ERROR', event.target.errorCode)
+//     }
+//     let userDataRequest = store.get("cherisecycles")
+
+//     userDataRequest.onsuccess = function() {
+//       "I successfully got data from the indexdb in error statement"
+//       dispatch(authUserAction(userDataRequest.result));
+//     }
+//     tx.oncomplete = function() {
+//       db.close()
+//     }
+// };
+
+// if (data) {
+//   console.log('I am in the if in redux indexdb')
+//   let request = indexedDB.open('CYCLE_EXAMPLE', 1), db, tx, store;
+
+//   request.onupgradeneeded = function(event) {
+//     db = request.result
+//     store = db.createObjectStore("CYCLE_STORE", {keyPath: "username"})
+//   }
+//   request.onsuccess = function(event) {
+//       console.log('redux, db open successful')
+//       console.log('[onsuccess]', request.result);
+//       db = request.result
+//       tx = db.transaction('CYCLE_STORE', 'readwrite')
+//       store = tx.objectStore('CYCLE_STORE')
+
+//       db.onerror = function(event) {
+//         console.log('CYCLE_STORE ERROR', event.target.errorCode)
+//       }
+//       store.put(data)
+
+//       tx.oncomplete = function() {
+//         db.close()
+//       }
+//   };
+//   request.onerror = function(event) {
+//       console.log('[onerror]', request.error);
+//   };
+
+// }
