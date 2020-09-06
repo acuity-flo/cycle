@@ -37,11 +37,13 @@ export function UTIL_FINANCE_MONTH(financial, start, end) {
   return sortedMonth;
 }
 
+// todaySymptomData[0].symptoms.map((el) => el.symptomName.slice(0, 1).toUpperCase() + el.symptomName.slice(1)).join(' | ')
+
 export function UTIL_SYMPTOM_MONTH(symptoms, start, end) {
   const monthSymptom = symptoms.filter((el) =>
     moment(el.date).isBetween(start, end)
   );
-  const sortedMonth = monthSymptom.sort((a, b) => moment(a.date).diff(b.date));
+  let sortedMonth = monthSymptom.sort((a, b) => moment(a.date).diff(b.date));
   return sortedMonth;
 }
 
@@ -200,12 +202,6 @@ export function UTIL_SYMPTOMS_LABEL(y) {
     return UTIL_SYMPTOMS_LIST['physical'][index];
   }
 }
-
-// todaySymptomData[0].symptoms.map((el) => el.symptomName.slice(0, 1).toUpperCase() + el.symptomName.slice(1)).join(' | ')
-
-// export function UTIL_SYMPTOM_MONTH(symptom, start, end) {
-//   const monthView =
-// }
 
 export function UTIL_SYMPTOM(symptomData, start, end) {
   const symptomObj = symptomData.reduce(
