@@ -5,6 +5,7 @@ import BillboardChart from 'react-billboardjs';
 import * as d3 from 'd3';
 import { connect } from 'react-redux';
 import { UTIL_SYMPTOM, UTIL_SYMPTOMS_LABEL } from '../utilFcn';
+import {Typography} from "@material-ui/core"
 
 function SymptomChartBB(props) {
   let { start, end, user } = props;
@@ -66,11 +67,14 @@ function SymptomChartBB(props) {
   };
 
   return CHART_DATA && CHART_AXIS && CHART_TOOLTIP ? (
-    <BillboardChart
-      data={CHART_DATA}
-      axis={CHART_AXIS}
-      tooltip={CHART_TOOLTIP}
-    />
+    <div align='center'>
+      <Typography variant = "h6">Symptoms</Typography>
+      <BillboardChart
+        data={CHART_DATA}
+        axis={CHART_AXIS}
+        tooltip={CHART_TOOLTIP}
+      />
+    </div>
   ) : (
     <></>
   );
