@@ -4,6 +4,7 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
+
 //Thunks
 import { authMe } from './store';
 
@@ -17,6 +18,7 @@ import NavBar from './components/NavBar';
 import ErrorComp from './components/404';
 import BottomNav from './components/BottomNav'
 import SimpleMobileTop from './components/SimpleMobileTop'
+import Footer from './components/Footer'
 
 function App(props) {
   const [loading, setLoading] = useState(true);
@@ -51,6 +53,7 @@ function App(props) {
           {!isLoggedIn && <Route component={LoginPage} />}
         </Switch>
         {matches && <BottomNav />}
+        <Footer />
       </Router>
     );
   } else {
