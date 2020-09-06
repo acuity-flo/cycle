@@ -28,7 +28,25 @@ module.exports = {
       next(err);
     }
   },
-
+  updatePassword: async (req, res, next) => {
+    try {
+      const {
+        oldPassword,
+        newPassword
+      } = req.body;
+      const username = req.params.username;
+      const foundUser = await User.findOne({ username });
+      if (Bcrypt.compareSync(oldPassword, foundUser.password)) {
+        foundUser.password = Bcrypt.hashSync(newPassword, 10);
+        await foundUser.save();
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404)
+      }
+    } catch (e) {
+      next(e)
+    }
+  },
   updateUser: async (req, res, next) => {
     try {
       const {
@@ -119,19 +137,23 @@ module.exports = {
   },
 
   updateViews: async (req, res, next) => {
-    const { name, bool } = req.body;
-    const username = req.params.username;
-    const update = {};
-    if (name === 'period') update.periodTracking = bool;
-    if (name === 'symptom') update.symptomTracking = bool;
-    if (name === 'finance') update.financialTracking = bool;
-    const foundUser = await User.findOneAndUpdate({ username }, update, {
-      upsert: true,
-      runValidators: true,
-    });
-    await foundUser.save();
-    const updatedUser = await User.findOne({ username });
-    res.json(updatedUser);
+    try {
+      const { name, bool } = req.body;
+      const username = req.params.username;
+      const update = {};
+      if (name === 'period') update.periodTracking = bool;
+      if (name === 'symptom') update.symptomTracking = bool;
+      if (name === 'finance') update.financialTracking = bool;
+      const foundUser = await User.findOneAndUpdate({ username }, update, {
+        upsert: true,
+        runValidators: true,
+      });
+      await foundUser.save();
+      const updatedUser = await User.findOne({ username });
+      res.json(updatedUser);
+    } catch (e) {
+      next(e)
+    }
   },
 
   //login?
@@ -179,8 +201,6 @@ module.exports = {
 
         await newUser.save();
         res.json(newUser)
-
-
     } catch (err) {
       if(err.keyPattern.username){
         err.status = 435

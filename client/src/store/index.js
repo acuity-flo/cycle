@@ -120,6 +120,25 @@ export const updateProfileThunk = (update) => async (dispatch) => {
   }
 };
 
+export const updatePasswordThunk = (username, oldPassword, newPasswordOne, newPasswordTwo) => async (dispatch) => {
+  try {
+    if (newPasswordOne !== newPasswordTwo) {
+      dispatch(setStatus('New password inputs do not match'));
+    } else {
+      const res = await axios.put(`/api/${username}/password`, {
+        oldPassword,
+        newPassword: newPasswordOne
+      });
+      if (res.status === 200) {
+        dispatch(setStatus('Password successfully updated'));
+      }
+    }
+  } catch (e) {
+    console.log(e);
+    dispatch(setStatus('Password could not be updated'));
+  }
+}
+
 export const updateViewThunk = (username, name, bool) => async (dispatch) => {
   try {
     dispatch(updateView(name, bool));

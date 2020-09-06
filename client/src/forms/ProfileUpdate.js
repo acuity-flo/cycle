@@ -40,54 +40,46 @@ const ProfileUpdate = (props) => {
   };
 
   return (
-    <div className={classes.container}>
-      <form onSubmit={handleSubmit} className={classes.root}>
-        <FormControl name="fullName" className={classes.inputItem}>
-          <InputLabel htmlFor="fullName">update name</InputLabel>
-          <Input id="fullName" />
-        </FormControl>
-        <FormControl name="pronouns" className={classes.inputItem}>
-          <InputLabel id="pronouns">update pronouns</InputLabel>
-          <Select
-            labelId="pronouns"
-            value={pronouns}
-            name="pronouns"
-            onChange={handlePronounChange}
-          >
-            <MenuItem value="she/her/hers">she/her/hers</MenuItem>
-            <MenuItem value="he/him/his">he/him/his</MenuItem>
-            <MenuItem value="they/them/theirs">they/them/theirs</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl name="cyclelength" className={classes.inputItem}>
-          <InputLabel id="cyclelength">update cycle length (days)</InputLabel>
-          <Input id="cyclelength" />
-        </FormControl>
-        <Button
-          variant="outlined"
-          color="primary"
-          type="submit"
-          className={classes.button}
+    <form onSubmit={handleSubmit} className={classes.root}>
+      <FormControl name="fullName" className={classes.inputItem}>
+        <InputLabel htmlFor="fullName">update name</InputLabel>
+        <Input id="fullName" />
+      </FormControl>
+      <FormControl name="pronouns" className={classes.inputItem}>
+        <InputLabel id="pronouns">update pronouns</InputLabel>
+        <Select
+          labelId="pronouns"
+          value={pronouns}
+          name="pronouns"
+          onChange={handlePronounChange}
         >
-          Submit
-        </Button>
-      </form>
-    </div>
+          <MenuItem value="she/her/hers">she/her/hers</MenuItem>
+          <MenuItem value="he/him/his">he/him/his</MenuItem>
+          <MenuItem value="they/them/theirs">they/them/theirs</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl name="cyclelength" className={classes.inputItem}>
+        <InputLabel id="cyclelength">update cycle length (days)</InputLabel>
+        <Input id="cyclelength" />
+      </FormControl>
+      <Button
+        variant="outlined"
+        color="primary"
+        type="submit"
+        className={classes.button}
+      >
+        Submit
+      </Button>
+    </form>
   );
 };
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    display: 'flex',
-    justify: 'center',
-    paddingBottom: '5em',
-  },
   root: {
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'nowrap',
-    width: '40vw',
     alignItems: 'center',
   },
   pronouns: {
@@ -95,10 +87,7 @@ const useStyles = makeStyles((theme) => ({
   },
   inputItem: {
     margin: '0.5em',
-    width: '20vw',
-  },
-  inputLabel: {
-    width: '20vw',
+    minWidth: '240px'
   },
   button: {
     margin: '0.5em',
