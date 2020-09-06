@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import FormGroup from '@material-ui/core/FormGroup';
+import React, { useState, useEffect, Fragment } from 'react'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { updateViewThunk } from '../store'
@@ -18,7 +17,7 @@ export default function UserSwitch (props) {
   }
 
   return (
-    <FormGroup>
+    <Fragment>
       <FormControlLabel
         control={<Switch checked={period} onChange={handleChange} name="period" />}
         label="Period"
@@ -31,6 +30,6 @@ export default function UserSwitch (props) {
         control={<Switch checked={finance} onChange={handleChange} name="finance" />}
         label="Finance"
       />
-    </FormGroup>
+    </Fragment>
   )
 }
