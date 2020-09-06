@@ -1,4 +1,4 @@
-const User = require('../db/models/User');
+const User = require('../db/User');
 const Bcrypt = require('bcryptjs');
 
 module.exports = {
@@ -139,7 +139,7 @@ module.exports = {
     const authUser = await User.findOne({
       email: req.body.email,
     });
-    
+
     try {
       if(!authUser){
         res.sendStatus(403)
@@ -148,7 +148,7 @@ module.exports = {
       }else{
         req.login(authUser, (err) => (err ? next(err) : res.json(authUser)))
       }
-  
+
     } catch (err) {
       next(err);
     }
@@ -180,9 +180,9 @@ module.exports = {
         await newUser.save();
         res.json(newUser)
 
-   
+
     } catch (err) {
-      if(err.keyPattern.username){ 
+      if(err.keyPattern.username){
         err.status = 435
       } else if(err.keyPattern.email){
         err.status = 437
