@@ -4,7 +4,6 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-
 //Thunks
 import { authMe } from './store';
 
@@ -24,23 +23,17 @@ const SimpleMobileTop = React.lazy(() =>
 const Overview = React.lazy(() => import('./components/Overview'));
 const Footer = React.lazy(() => import('./components/Footer'));
 
-
 function App(props) {
-  // const [loading, setLoading] = useState(true);
   const matches = useMediaQuery(
     '@media only screen and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2)'
   );
-
   const user = props.user;
   const isLoggedIn = props.isLoggedIn;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(authMe());
-    // setLoading(false);
   }, [dispatch]);
 
-
-  // if (!loading) {
   return (
     <Fragment>
       <React.Suspense fallback={<Loading />}>
@@ -58,16 +51,14 @@ function App(props) {
                 <Route component={ErrorComp} />
               </Switch>
             )}
-            {/* Default component */}
             {!isLoggedIn && <Route component={LoginPage} />}
           </Switch>
           {matches && <BottomNav />}
+          {!matches && <Footer />}
         </Router>
-      {!matches && <Footer/>}
       </React.Suspense>
     </Fragment>
   );
-
 }
 
 const mapState = (state) => {
