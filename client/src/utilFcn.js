@@ -76,6 +76,16 @@ export function UTIL_FINANCE_TOTALS(financeObj) {
     });
     sanitaryProductTotal = UTIL_COST(Number(total));
   }
+
+  console.log(
+    'doctor total',
+    doctorTotal,
+    'prescription',
+    prescriptionTotal,
+    'sanitary',
+    sanitaryProductTotal
+  );
+
   const financialTotalsObj = {
     doctor: doctorTotal,
     prescription: prescriptionTotal,

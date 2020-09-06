@@ -18,7 +18,7 @@ const Overview = (props) => {
   const classes = useStyles();
   return (
     <Container>
-      <h5>your monthly info</h5>
+      <h5>your monthly overview</h5>
       <form>
         <FormControl name="months" className={classes.inputItem}>
           <InputLabel id="months">choose month</InputLabel>
@@ -29,12 +29,18 @@ const Overview = (props) => {
               setMonth(evt.target.value);
             }}
           >
-            <MenuItem value="june">june</MenuItem>
-            <MenuItem value="july">july</MenuItem>
-            <MenuItem value="august">august</MenuItem>
             <MenuItem value="january">january</MenuItem>
             <MenuItem value="february">february</MenuItem>
             <MenuItem value="march">march</MenuItem>
+            <MenuItem value="april">april</MenuItem>
+            <MenuItem value="may">may</MenuItem>
+            <MenuItem value="june">june</MenuItem>
+            <MenuItem value="july">july</MenuItem>
+            <MenuItem value="august">august</MenuItem>
+            <MenuItem value="september">september</MenuItem>
+            <MenuItem value="october">october</MenuItem>
+            <MenuItem value="november">november</MenuItem>
+            <MenuItem value="december">december</MenuItem>
           </Select>
         </FormControl>
       </form>

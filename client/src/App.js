@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import ReactLoading from 'react-loading';
@@ -8,19 +8,22 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { authMe } from './store';
 
 //Component Imports
-import Home from './components/Home';
-import CalendarView from './components/Calendar';
-import LoginPage from './components/LoginPage';
-import UserProfile from './components/UserProfile';
-import ChartHome from './components/ChartHome';
-import NavBar from './components/NavBar';
-import ErrorComp from './components/404';
-import BottomNav from './components/BottomNav';
-import SimpleMobileTop from './components/SimpleMobileTop';
-import Overview from './components/Overview';
+import Loading from './components/Loading';
+const Home = React.lazy(() => import('./components/Home'));
+const CalendarView = React.lazy(() => import('./components/Calendar'));
+const LoginPage = React.lazy(() => import('./components/LoginPage'));
+const UserProfile = React.lazy(() => import('./components/UserProfile'));
+const ChartHome = React.lazy(() => import('./components/ChartHome'));
+const NavBar = React.lazy(() => import('./components/NavBar'));
+const ErrorComp = React.lazy(() => import('./components/404'));
+const BottomNav = React.lazy(() => import('./components/BottomNav'));
+const SimpleMobileTop = React.lazy(() =>
+  import('./components/SimpleMobileTop')
+);
+const Overview = React.lazy(() => import('./components/Overview'));
 
 function App(props) {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const matches = useMediaQuery(
     '@media only screen and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2)'
   );
@@ -30,46 +33,49 @@ function App(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(authMe());
-    setLoading(false);
+    // setLoading(false);
   }, [dispatch]);
 
   //Need to figure out Auth form loads before route path
-  if (!loading) {
-    return (
-      <Router>
-        {!matches && <NavBar />}
-        {matches && <SimpleMobileTop />}
-        <Switch>
-          <Route exact path="/" component={Home} />
-
-          {isLoggedIn && (
-            <Switch>
-              <Route exact path="/calendar" component={CalendarView} />
-              <Route exact path="/overview" component={Overview} />
-              <Route exact path="/charts" component={ChartHome} />
-              <Route exact path="/profile" component={UserProfile} />
-              <Route component={ErrorComp} />
-            </Switch>
-          )}
-          {/* Default component */}
-          {!isLoggedIn && <Route component={LoginPage} />}
-        </Switch>
-        {matches && <BottomNav />}
-      </Router>
-    );
-  } else {
-    return (
-      <Router>
-        <NavBar />
-        <ReactLoading
-          type={'balls'}
-          color={'#545454'}
-          height={'20%'}
-          width={'20%'}
-        />
-      </Router>
-    );
-  }
+  // if (!loading) {
+  return (
+    <Fragment>
+      <React.Suspense fallback={<Loading />}>
+        <Router>
+          {!matches && <NavBar />}
+          {matches && <SimpleMobileTop />}
+          <Switch>
+            <Route exact path="/" component={Home} />
+            {isLoggedIn && (
+              <Switch>
+                <Route exact path="/calendar" component={CalendarView} />
+                <Route exact path="/overview" component={Overview} />
+                <Route exact path="/charts" component={ChartHome} />
+                <Route exact path="/profile" component={UserProfile} />
+                <Route component={ErrorComp} />
+              </Switch>
+            )}
+            {/* Default component */}
+            {!isLoggedIn && <Route component={LoginPage} />}
+          </Switch>
+          {matches && <BottomNav />}
+        </Router>
+      </React.Suspense>
+    </Fragment>
+  );
+  // } else {
+  //   return (
+  //     <Router>
+  //       <NavBar />
+  //       <ReactLoading
+  //         type={'balls'}
+  //         color={'#545454'}
+  //         height={'20%'}
+  //         width={'20%'}
+  //       />
+  //     </Router>
+  //   );
+  // }
 }
 
 const mapState = (state) => {
