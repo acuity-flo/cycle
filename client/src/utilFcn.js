@@ -29,31 +29,61 @@ export function UTIL_FINANCE(financeData, start, end) {
   return financeObj;
 }
 
+export function UTIL_FINANCE_MONTH(financial, start, end) {
+  const monthFinance = financial.filter((el) =>
+    moment(el.date).isBetween(start, end)
+  );
+  const sortedMonth = monthFinance.sort((a, b) => moment(a.date).diff(b.date));
+  return sortedMonth;
+}
+
+export function UTIL_SYMPTOM_MONTH(symptoms, start, end) {
+  const monthSymptom = symptoms.filter((el) =>
+    moment(el.date).isBetween(start, end)
+  );
+  const sortedMonth = monthSymptom.sort((a, b) => moment(a.date).diff(b.date));
+  return sortedMonth;
+}
+
+export function UTIL_PERIOD_MONTH(period, start, end) {
+  const monthPeriod = period.filter((el) =>
+    moment(el.date).isBetween(start, end)
+  );
+  const sortedMonth = monthPeriod.sort((a, b) => moment(a.date).diff(b.date));
+  return sortedMonth;
+}
+
 export function UTIL_FINANCE_TOTALS(financeObj) {
   const { doctor, prescription, sanitaryProduct } = financeObj;
   let doctorTotal = 0;
   let prescriptionTotal = 0;
   let sanitaryProductTotal = 0;
   if (doctor[0]) {
-    doctorTotal = doctor.reduce((acc, el) => {
+    const total = doctor.reduce((acc, el) => {
       return (acc += el);
     });
+    doctorTotal = UTIL_COST(Number(total));
   }
   if (prescription[0]) {
-    prescriptionTotal = prescription.reduce((acc, el) => {
+    const total = prescription.reduce((acc, el) => {
       return (acc += el);
     });
+    prescriptionTotal = UTIL_COST(Number(total));
   }
   if (sanitaryProduct[0]) {
-    sanitaryProductTotal = sanitaryProduct.reduce((acc, el) => {
+    const total = sanitaryProduct.reduce((acc, el) => {
       return (acc += el);
     });
+    sanitaryProductTotal = UTIL_COST(Number(total));
   }
   const financialTotalsObj = {
     doctor: doctorTotal,
     prescription: prescriptionTotal,
     sanitaryProduct: sanitaryProductTotal,
-    total: doctorTotal + prescriptionTotal + sanitaryProductTotal,
+    total:
+      Number(doctorTotal) +
+      Number(prescriptionTotal) +
+      Number(sanitaryProductTotal),
   };
   return financialTotalsObj;
 }
@@ -276,6 +306,6 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
   return data;
 }
 
-export function COST_UTIL(cost) {
+export function UTIL_COST(cost) {
   return (cost / 100).toFixed(2);
 }
