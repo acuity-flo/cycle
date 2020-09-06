@@ -63,23 +63,11 @@ function App(props) {
           </Switch>
           {matches && <BottomNav />}
         </Router>
-      <Footer/>
+      {!matches && <Footer/>}
       </React.Suspense>
     </Fragment>
   );
-  // } else {
-  //   return (
-  //     <Router>
-  //       <NavBar />
-  //       <ReactLoading
-  //         type={'balls'}
-  //         color={'#545454'}
-  //         height={'20%'}
-  //         width={'20%'}
-  //       />
-  //     </Router>
-  //   );
-  // }
+
 }
 
 const mapState = (state) => {
