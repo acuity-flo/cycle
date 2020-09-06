@@ -44,6 +44,12 @@ export function UTIL_SYMPTOM_MONTH(symptoms, start, end) {
     moment(el.date).isBetween(start, end)
   );
   let sortedMonth = monthSymptom.sort((a, b) => moment(a.date).diff(b.date));
+  sortedMonth = sortedMonth.map((el) => {
+    return {
+      ...el,
+      symptoms: el.symptoms.map((subEl) => subEl.symptomName).join(' | '),
+    };
+  });
   return sortedMonth;
 }
 

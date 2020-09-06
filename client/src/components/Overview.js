@@ -17,8 +17,7 @@ const Overview = (props) => {
   const [month, setMonth] = useState(now);
   const classes = useStyles();
   return (
-    <Container>
-      <h5>your monthly overview</h5>
+    <Container className={classes.container}>
       <form>
         <FormControl name="months" className={classes.inputItem}>
           <InputLabel id="months">choose month</InputLabel>
@@ -44,6 +43,7 @@ const Overview = (props) => {
           </Select>
         </FormControl>
       </form>
+      <br />
       <UserDataView user={user} month={month} />
     </Container>
   );

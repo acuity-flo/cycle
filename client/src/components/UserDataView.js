@@ -26,16 +26,19 @@ const UserDataView = (props) => {
     <Container>
       <Typography>
         <h5>your monthly overview for {month.format('MMMM YYYY')}</h5>
+        <br />
         {financeBool ? (
           <FinanceOverview start={start} end={end} financial={financial} />
         ) : (
           ''
         )}
+        <br />
         {periodBool ? (
           <PeriodOverview start={start} end={end} period={period} />
         ) : (
           ''
         )}
+        <br />
         {symptomBool ? (
           <SymptomOverview start={start} end={end} symptoms={symptomTags} />
         ) : (
