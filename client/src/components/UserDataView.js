@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import FinanceOverview from '../overview/FinanceOverview';
 import PeriodOverview from '../overview/PeriodOverview';
+import SymptomOverview from '../overview/SymptomOverview';
 import { Container, Typography } from '@material-ui/core';
 
 const UserDataView = (props) => {
@@ -32,6 +33,11 @@ const UserDataView = (props) => {
         )}
         {periodBool ? (
           <PeriodOverview start={start} end={end} period={period} />
+        ) : (
+          ''
+        )}
+        {symptomBool ? (
+          <SymptomOverview start={start} end={end} symptoms={symptomTags} />
         ) : (
           ''
         )}

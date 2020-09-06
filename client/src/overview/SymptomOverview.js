@@ -3,7 +3,9 @@ import { UTIL_SYMPTOM_MONTH} from '../utilFcn';
 import { Container, Typography } from '@material-ui/core';
 
 const SymptomOverview = (props) => {
-  const { start, end, symptom } = props;
+  const { start, end, symptoms } = props;
+  let sortedMonth = UTIL_SYMPTOM_MONTH(symptoms, start,end)
+  console.log(sortedMonth)
   return (
     <Container>
       <Typography>my symptoms</Typography>
@@ -11,4 +13,4 @@ const SymptomOverview = (props) => {
   );
 };
 
-export const SymptomOverview
+export default SymptomOverview
