@@ -13,41 +13,77 @@ export function UTIL_FINANCE(financeData, start, end) {
               innerAcc.sanitaryProduct += innerEl.cost;
             if (innerEl.typeOfPurchase === 'doctor')
               innerAcc.doctor += innerEl.cost;
-            if (innerEl.typeOfPurchase === 'other')
-              innerAcc.other += innerEl.cost;
             return innerAcc;
           },
-          { prescription: 0, sanitaryProduct: 0, doctor: 0, other: 0 }
+          { prescription: 0, sanitaryProduct: 0, doctor: 0 }
         );
         acc.prescription.push(vals.prescription);
         acc.sanitaryProduct.push(vals.sanitaryProduct);
         acc.doctor.push(vals.doctor);
-        acc.other.push(vals.other);
         acc.x.push(moment(dateChange).format('MM-DD-YYYY'));
       }
       return acc;
     },
-    { prescription: [], sanitaryProduct: [], doctor: [], other: [], x: [] }
+    { prescription: [], sanitaryProduct: [], doctor: [], x: [] }
   );
   return financeObj;
 }
 
+export function UTIL_FINANCE_MONTH(financial, start, end) {
+  const monthFinance = financial.filter((el) =>
+    moment(el.date).isBetween(start, end)
+  );
+  const sortedMonth = monthFinance.sort((a, b) => moment(a.date).diff(b.date));
+  return sortedMonth;
+}
+
+export function UTIL_SYMPTOM_MONTH(symptoms, start, end) {
+  const monthSymptom = symptoms.filter((el) =>
+    moment(el.date).isBetween(start, end)
+  );
+  const sortedMonth = monthSymptom.sort((a, b) => moment(a.date).diff(b.date));
+  return sortedMonth;
+}
+
+export function UTIL_PERIOD_MONTH(period, start, end) {
+  const monthPeriod = period.filter((el) =>
+    moment(el.date).isBetween(start, end)
+  );
+  const sortedMonth = monthPeriod.sort((a, b) => moment(a.date).diff(b.date));
+  return sortedMonth;
+}
+
 export function UTIL_FINANCE_TOTALS(financeObj) {
-  const { doctor, other, prescription, sanitaryProduct } = financeObj;
-  const doctorTotal = doctor.reduce((acc, el) => {
-    return (acc += el);
-  });
-  const prescriptionTotal = prescription.reduce((acc, el) => {
-    return (acc += el);
-  });
-  const sanitaryProductTotal = sanitaryProduct.reduce((acc, el) => {
-    return (acc += el);
-  });
+  const { doctor, prescription, sanitaryProduct } = financeObj;
+  let doctorTotal = 0;
+  let prescriptionTotal = 0;
+  let sanitaryProductTotal = 0;
+  if (doctor[0]) {
+    const total = doctor.reduce((acc, el) => {
+      return (acc += el);
+    });
+    doctorTotal = UTIL_COST(Number(total));
+  }
+  if (prescription[0]) {
+    const total = prescription.reduce((acc, el) => {
+      return (acc += el);
+    });
+    prescriptionTotal = UTIL_COST(Number(total));
+  }
+  if (sanitaryProduct[0]) {
+    const total = sanitaryProduct.reduce((acc, el) => {
+      return (acc += el);
+    });
+    sanitaryProductTotal = UTIL_COST(Number(total));
+  }
   const financialTotalsObj = {
     doctor: doctorTotal,
     prescription: prescriptionTotal,
     sanitaryProduct: sanitaryProductTotal,
-    total: doctorTotal + prescriptionTotal + sanitaryProductTotal,
+    total:
+      Number(doctorTotal) +
+      Number(prescriptionTotal) +
+      Number(sanitaryProductTotal),
   };
   return financialTotalsObj;
 }
@@ -270,6 +306,6 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
   return data;
 }
 
-export function COST_UTIL(cost) {
+export function UTIL_COST(cost) {
   return (cost / 100).toFixed(2);
 }

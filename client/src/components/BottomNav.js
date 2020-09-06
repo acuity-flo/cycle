@@ -10,6 +10,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import PersonIcon from '@material-ui/icons/Person';
+import ListIcon from '@material-ui/icons/List';
 
 function BottomNav(props) {
   const classes = useStyles();
@@ -24,12 +25,43 @@ function BottomNav(props) {
   };
 
   return (
-    <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-      <BottomNavigationAction label="Calendar" value="calendar" icon={<DateRangeIcon />} onClick={() => handleRedirect('calendar')}/>
-      <BottomNavigationAction label="Charts" value="charts" icon={<AssessmentIcon />} onClick={() => handleRedirect('charts')}/>
-      <BottomNavigationAction label="Profile" value="profile" icon={<PersonIcon />} onClick={() => handleRedirect('profile')} />
+    <BottomNavigation
+      value={value}
+      onChange={handleChange}
+      className={classes.root}
+    >
+      <BottomNavigationAction
+        label="Home"
+        value="home"
+        icon={<HomeIcon />}
+        onClick={() => handleRedirect('')}
+      />
+      <BottomNavigationAction
+        label="Calendar"
+        value="calendar"
+        icon={<DateRangeIcon />}
+        onClick={() => handleRedirect('calendar')}
+      />
+      <BottomNavigationAction
+        label="Charts"
+        value="charts"
+        icon={<AssessmentIcon />}
+        onClick={() => handleRedirect('charts')}
+      />
+      <BottomNavigationAction
+        label="Overview"
+        value="Overview"
+        icon={<ListIcon />}
+        onClick={() => handleRedirect('overview')}
+      />
+      <BottomNavigationAction
+        label="Profile"
+        value="profile"
+        icon={<PersonIcon />}
+        onClick={() => handleRedirect('profile')}
+      />
     </BottomNavigation>
-  )
+  );
 }
 
 const mapState = (state) => ({
@@ -39,7 +71,6 @@ const mapState = (state) => ({
 
 export default withRouter(connect(mapState)(BottomNav));
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -48,7 +79,3 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
   },
 }));
-
-
-
-
