@@ -34,7 +34,7 @@ export default function FinanceUpdate(props) {
       //spread purchases from todayData and then spread the objects within it
       const purchaseSet = [
         ...todayData[0].purchases.map((el) => {
-          return { ...el };
+          return { ...el, cost: UTIL_COST(el.cost) };
         }),
       ];
       setPurchases(purchaseSet);
