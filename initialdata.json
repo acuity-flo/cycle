@@ -206,39 +206,39 @@
       {
         "date": "2020-06-05",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 15 },
-          { "typeOfPurchase": "sanitary products", "cost": 26 },
-          { "typeOfPurchase": "doctor", "cost": 50 }
+          { "typeOfPurchase": "prescription", "cost": 1500 },
+          { "typeOfPurchase": "sanitary products", "cost": 2600 },
+          { "typeOfPurchase": "doctor", "cost": 5000 }
         ]
       },
       {
         "date": "2020-06-06",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 100 },
-          { "typeOfPurchase": "sanitary products", "cost": 56 }
+          { "typeOfPurchase": "prescription", "cost": 10000 },
+          { "typeOfPurchase": "sanitary products", "cost": 5600 }
         ]
       },
       {
         "date": "2020-06-07",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 59 },
-          { "typeOfPurchase": "sanitary products", "cost": 200 },
-          { "typeOfPurchase": "doctor", "cost": 150 }
+          { "typeOfPurchase": "prescription", "cost": 5900 },
+          { "typeOfPurchase": "sanitary products", "cost": 20000 },
+          { "typeOfPurchase": "doctor", "cost": 15000 }
         ]
       },
       {
         "date": "2020-06-08",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 89 },
-          { "typeOfPurchase": "sanitary products", "cost": 95 }
+          { "typeOfPurchase": "prescription", "cost": 8900 },
+          { "typeOfPurchase": "sanitary products", "cost": 9500 }
         ]
       },
       {
         "date": "2020-06-09",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 125 },
-          { "typeOfPurchase": "sanitary products", "cost": 95 },
-          { "typeOfPurchase": "doctor", "cost": 95 }
+          { "typeOfPurchase": "prescription", "cost": 12005 },
+          { "typeOfPurchase": "sanitary products", "cost": 9005 },
+          { "typeOfPurchase": "doctor", "cost": 9500 }
         ]
       },
       {
@@ -248,128 +248,128 @@
       {
         "date": "2020-07-05",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 15 },
-          { "typeOfPurchase": "sanitary products", "cost": 26 },
-          { "typeOfPurchase": "doctor", "cost": 50 }
+          { "typeOfPurchase": "prescription", "cost": 1005 },
+          { "typeOfPurchase": "sanitary products", "cost": 2600 },
+          { "typeOfPurchase": "doctor", "cost": 5000 }
         ]
       },
       {
         "date": "2020-07-06",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 100 },
-          { "typeOfPurchase": "sanitary products", "cost": 56 }
+          { "typeOfPurchase": "prescription", "cost": 10000 },
+          { "typeOfPurchase": "sanitary products", "cost": 5600 }
         ]
       },
       {
         "date": "2020-07-07",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 59 },
-          { "typeOfPurchase": "sanitary products", "cost": 200 },
-          { "typeOfPurchase": "doctor", "cost": 150 }
+          { "typeOfPurchase": "prescription", "cost": 5900 },
+          { "typeOfPurchase": "sanitary products", "cost": 20000 },
+          { "typeOfPurchase": "doctor", "cost": 15000 }
         ]
       },
       {
         "date": "2020-07-08",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 89 },
-          { "typeOfPurchase": "sanitary products", "cost": 95 }
+          { "typeOfPurchase": "prescription", "cost": 8900 },
+          { "typeOfPurchase": "sanitary products", "cost": 9500 }
         ]
       },
       {
         "date": "2020-07-09",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 125 },
-          { "typeOfPurchase": "sanitary products", "cost": 95 },
-          { "typeOfPurchase": "doctor", "cost": 95 }
+          { "typeOfPurchase": "prescription", "cost": 12005 },
+          { "typeOfPurchase": "sanitary products", "cost": 9005 },
+          { "typeOfPurchase": "doctor", "cost": 9005 }
         ]
       },
       {
         "date": "2020-07-010",
-        "purchases": { "typeOfPurchase": "prescription", "cost": "200" }
+        "purchases": { "typeOfPurchase": "prescription", "cost": 20000 }
       },
       {
         "date": "2020-08-05",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 15 },
-          { "typeOfPurchase": "sanitary products", "cost": 26 },
-          { "typeOfPurchase": "doctor", "cost": 50 }
+          { "typeOfPurchase": "prescription", "cost": 1500 },
+          { "typeOfPurchase": "sanitary products", "cost": 2600 },
+          { "typeOfPurchase": "doctor", "cost": 5000 }
         ]
       },
       {
         "date": "2020-08-06",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 100 },
-          { "typeOfPurchase": "sanitary products", "cost": 56 }
+          { "typeOfPurchase": "prescription", "cost": 10000 },
+          { "typeOfPurchase": "sanitary products", "cost": 5600 }
         ]
       },
       {
         "date": "2020-08-07",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 59 },
-          { "typeOfPurchase": "sanitary products", "cost": 200 },
-          { "typeOfPurchase": "doctor", "cost": 150 }
+          { "typeOfPurchase": "prescription", "cost": 5900 },
+          { "typeOfPurchase": "sanitary products", "cost": 20000 },
+          { "typeOfPurchase": "doctor", "cost": 15000 }
         ]
       },
       {
         "date": "2020-08-08",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 89 },
-          { "typeOfPurchase": "sanitary products", "cost": 95 }
+          { "typeOfPurchase": "prescription", "cost": 8900 },
+          { "typeOfPurchase": "sanitary products", "cost": 9500 }
         ]
       },
       {
         "date": "2020-08-09",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 125 },
-          { "typeOfPurchase": "sanitary products", "cost": 95 },
-          { "typeOfPurchase": "doctor", "cost": 95 }
+          { "typeOfPurchase": "prescription", "cost": 12500 },
+          { "typeOfPurchase": "sanitary products", "cost": 9500 },
+          { "typeOfPurchase": "doctor", "cost": 9500 }
         ]
       },
       {
         "date": "2020-08-010",
-        "purchases": { "typeOfPurchase": "prescription", "cost": "200" }
+        "purchases": { "typeOfPurchase": "prescription", "cost": 20000 }
       },
       {
         "date": "2020-09-05",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 15 },
-          { "typeOfPurchase": "sanitary products", "cost": 26 },
-          { "typeOfPurchase": "doctor", "cost": 50 }
+          { "typeOfPurchase": "prescription", "cost": 1500 },
+          { "typeOfPurchase": "sanitary products", "cost": 2600 },
+          { "typeOfPurchase": "doctor", "cost": 5000 }
         ]
       },
       {
         "date": "2020-09-06",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 100 },
-          { "typeOfPurchase": "sanitary products", "cost": 56 }
+          { "typeOfPurchase": "prescription", "cost": 10000 },
+          { "typeOfPurchase": "sanitary products", "cost": 5600 }
         ]
       },
       {
         "date": "2020-09-07",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 59 },
-          { "typeOfPurchase": "sanitary products", "cost": 200 },
-          { "typeOfPurchase": "doctor", "cost": 150 }
+          { "typeOfPurchase": "prescription", "cost": 5900 },
+          { "typeOfPurchase": "sanitary products", "cost": 20000 },
+          { "typeOfPurchase": "doctor", "cost": 15000 }
         ]
       },
       {
         "date": "2020-09-08",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 89 },
-          { "typeOfPurchase": "sanitary products", "cost": 95 }
+          { "typeOfPurchase": "prescription", "cost": 8900 },
+          { "typeOfPurchase": "sanitary products", "cost": 9500 }
         ]
       },
       {
         "date": "2020-09-09",
         "purchases": [
-          { "typeOfPurchase": "prescription", "cost": 125 },
-          { "typeOfPurchase": "sanitary products", "cost": 95 },
-          { "typeOfPurchase": "doctor", "cost": 95 }
+          { "typeOfPurchase": "prescription", "cost": 12500 },
+          { "typeOfPurchase": "sanitary products", "cost": 9500 },
+          { "typeOfPurchase": "doctor", "cost": 9500 }
         ]
       },
       {
         "date": "2020-09-010",
-        "purchases": { "typeOfPurchase": "prescription", "cost": "200" }
+        "purchases": { "typeOfPurchase": "prescription", "cost": 20000 }
       }
     ]
   },

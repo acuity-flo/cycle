@@ -1,8 +1,9 @@
-import ReactLoading from 'react-loading';
 import React from 'react';
+import { css } from '@emotion/core';
+import PacmanLoader from 'react-spinners/PacmanLoader';
 
-const Loading = () => (
-  <ReactLoading type={'balls'} color={'#545454'} height={'20%'} width={'20%'} />
-);
+const Loading = () => {
+  return <PacmanLoader css={css} size={50} color={'#8FB5DE'} />;
+};
 
 export default Loading;
