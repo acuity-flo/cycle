@@ -4,6 +4,7 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
+
 //Thunks
 import { authMe } from './store';
 
@@ -21,6 +22,8 @@ const SimpleMobileTop = React.lazy(() =>
   import('./components/SimpleMobileTop')
 );
 const Overview = React.lazy(() => import('./components/Overview'));
+const Footer = React.lazy(() => import('./components/Footer'));
+
 
 function App(props) {
   // const [loading, setLoading] = useState(true);
@@ -36,7 +39,7 @@ function App(props) {
     // setLoading(false);
   }, [dispatch]);
 
-  //Need to figure out Auth form loads before route path
+  
   // if (!loading) {
   return (
     <Fragment>

@@ -5,6 +5,7 @@ import BillboardChart from 'react-billboardjs';
 import * as d3 from 'd3';
 import { connect } from 'react-redux';
 import { UTIL_FINANCE } from '../utilFcn';
+import { Typography } from '@material-ui/core';
 
 function FinanceChartBB(props) {
   let { start, end, user } = props;
@@ -48,11 +49,14 @@ function FinanceChartBB(props) {
   };
 
   return CHART_DATA && CHART_AXIS && CHART_TOOLTIP ? (
+    <div align='center' >
+    <Typography variant = "h6">Finances</Typography>
     <BillboardChart
       data={CHART_DATA}
       axis={CHART_AXIS}
       tooltip={CHART_TOOLTIP}
     />
+    </div>
   ) : (
     <></>
   );
