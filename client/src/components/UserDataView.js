@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import FinanceOverview from '../overview/FinanceOverview';
+import PeriodOverview from '../overview/PeriodOverview';
 import { Container, Typography } from '@material-ui/core';
 
 const UserDataView = (props) => {
@@ -26,6 +27,11 @@ const UserDataView = (props) => {
         <h5>your monthly overview for {month.format('MMMM YYYY')}</h5>
         {financeBool ? (
           <FinanceOverview start={start} end={end} financial={financial} />
+        ) : (
+          ''
+        )}
+        {periodBool ? (
+          <PeriodOverview start={start} end={end} period={period} />
         ) : (
           ''
         )}

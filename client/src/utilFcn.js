@@ -29,6 +29,30 @@ export function UTIL_FINANCE(financeData, start, end) {
   return financeObj;
 }
 
+export function UTIL_FINANCE_MONTH(financial, start, end) {
+  const monthFinance = financial.filter((el) =>
+    moment(el.date).isBetween(start, end)
+  );
+  const sortedMonth = monthFinance.sort((a, b) => moment(a.date).diff(b.date));
+  return sortedMonth;
+}
+
+export function UTIL_SYMPTOM_MONTH(symptoms, start, end) {
+  const monthSymptom = symptoms.filter((el) =>
+    moment(el.date).isBetween(start, end)
+  );
+  const sortedMonth = monthSymptom.sort((a, b) => moment(a.date).diff(b.date));
+  return sortedMonth;
+}
+
+export function UTIL_PERIOD_MONTH(period, start, end) {
+  const monthPeriod = period.filter((el) =>
+    moment(el.date).isBetween(start, end)
+  );
+  const sortedMonth = monthPeriod.sort((a, b) => moment(a.date).diff(b.date));
+  return sortedMonth;
+}
+
 export function UTIL_FINANCE_TOTALS(financeObj) {
   const { doctor, prescription, sanitaryProduct } = financeObj;
   let doctorTotal = 0;

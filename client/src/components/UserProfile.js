@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ProfileUpdate from '../forms/ProfileUpdate';
+import PasswordUpdate from '../forms/PasswordUpdate';
 import UserDataView from './UserDataView';
 import UserSwitch from '../forms/UserSwitches';
 import {
@@ -19,6 +20,7 @@ import {
 const UserProfile = (props) => {
   const user = props.user;
   const [open, setOpen] = useState(false);
+  const [openPW, setOpenPW] = useState(false);
   // const [month, setMonth] = useState('default month');
   const [scroll, setScroll] = React.useState('paper');
   const classes = useStyles();
@@ -26,6 +28,11 @@ const UserProfile = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleClosePW = () => {
+    setOpenPW(false);
+  };
+
   return (
     <Container>
       <h5>Welcome, {user.name}</h5>
@@ -54,12 +61,48 @@ const UserProfile = (props) => {
       >
         <DialogContent className={classes.paper}>
           <ProfileUpdate user={user} />
+
           <Button
             variant="outlined"
             color="primary"
             className={classes.button}
             onClick={() => {
               setOpen(false);
+            }}
+          >
+            close
+          </Button>
+        </DialogContent>
+      </Dialog>
+
+      <Button
+        variant="outlined"
+        color="primary"
+        className={classes.button}
+        onClick={() => {
+          setOpenPW(true);
+        }}
+      >
+        update password
+      </Button>
+
+      <Dialog
+        open={openPW}
+        onClose={handleClosePW}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+        classes={classes.dialogBox}
+      >
+        <DialogContent className={classes.paper}>
+          <PasswordUpdate user={user} />
+
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.button}
+            onClick={() => {
+              setOpenPW(false);
             }}
           >
             close
