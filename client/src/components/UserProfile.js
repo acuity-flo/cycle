@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ProfileUpdate from '../forms/ProfileUpdate';
+import PasswordUpdate from '../forms/PasswordUpdate';
 import UserDataView from './UserDataView';
 import UserSwitch from '../forms/UserSwitches';
 import {
@@ -19,13 +20,19 @@ import {
 const UserProfile = (props) => {
   const user = props.user;
   const [open, setOpen] = useState(false);
-  const [month, setMonth] = useState('default month');
+  const [openPW, setOpenPW] = useState(false);
+  // const [month, setMonth] = useState('default month');
   const [scroll, setScroll] = React.useState('paper');
   const classes = useStyles();
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleClosePW = () => {
+    setOpenPW(false);
+  };
+
   return (
     <Container>
       <h5>Welcome, {user.name}</h5>
@@ -54,6 +61,7 @@ const UserProfile = (props) => {
       >
         <DialogContent className={classes.paper}>
           <ProfileUpdate user={user} />
+
           <Button
             variant="outlined"
             color="primary"
@@ -67,30 +75,40 @@ const UserProfile = (props) => {
         </DialogContent>
       </Dialog>
 
-      <form
-        onSubmit={() => {
-          console.log('clicked submit');
+      <Button
+        variant="outlined"
+        color="primary"
+        className={classes.button}
+        onClick={() => {
+          setOpenPW(true);
         }}
       >
-        <FormControl name="pronouns" className={classes.inputItem}>
-          <InputLabel id="months">choose month</InputLabel>
-          <Select
-            labelId="months"
-            name="months"
-            onChange={(evt) => {
-              setMonth(evt.target.value);
+        update password
+      </Button>
+
+      <Dialog
+        open={openPW}
+        onClose={handleClosePW}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+        classes={classes.dialogBox}
+      >
+        <DialogContent className={classes.paper}>
+          <PasswordUpdate user={user} />
+
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.button}
+            onClick={() => {
+              setOpenPW(false);
             }}
           >
-            <MenuItem value="june">june</MenuItem>
-            <MenuItem value="july">july</MenuItem>
-            <MenuItem value="august">august</MenuItem>
-            <MenuItem value="january">january</MenuItem>
-            <MenuItem value="february">february</MenuItem>
-            <MenuItem value="march">march</MenuItem>
-          </Select>
-        </FormControl>
-      </form>
-      <UserDataView user={user} month={month} />
+            close
+          </Button>
+        </DialogContent>
+      </Dialog>
     </Container>
   );
 };
