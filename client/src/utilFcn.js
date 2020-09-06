@@ -76,30 +76,22 @@ export function UTIL_FINANCE_TOTALS(financeObj) {
     });
     sanitaryProductTotal = UTIL_COST(Number(total));
   }
-
-  console.log(
-    'doctor total',
-    doctorTotal,
-    'prescription',
-    prescriptionTotal,
-    'sanitary',
-    sanitaryProductTotal
-  );
+let total = Number(doctorTotal) + Number(prescriptionTotal) + Number(sanitaryProductTotal)
+if (!!total) {
+  total = total.toFixed(2)
+}
 
   const financialTotalsObj = {
     doctor: doctorTotal,
     prescription: prescriptionTotal,
     sanitaryProduct: sanitaryProductTotal,
-    total:
-      Number(doctorTotal) +
-      Number(prescriptionTotal) +
-      Number(sanitaryProductTotal),
+    total
   };
   return financialTotalsObj;
 }
 
 export function UTIL_FINANCE_TODAY_DATA(user, date) {
-  const todayData = user.financial.filter((el, index) => {
+  const todayData = user.financial.filter((el) => {
     const newDate = el.date.slice(0, 10);
     if (moment(newDate).isSame(date)) {
       return el;
@@ -109,7 +101,7 @@ export function UTIL_FINANCE_TODAY_DATA(user, date) {
 }
 
 export function UTIL_PERIOD_TODAY_DATA(user, date) {
-  const todayData = user.period.filter((el, index) => {
+  const todayData = user.period.filter((el) => {
     const newDate = el.date.slice(0, 10);
     if (moment(newDate).isSame(date)) {
       return el;
@@ -119,7 +111,7 @@ export function UTIL_PERIOD_TODAY_DATA(user, date) {
 }
 
 export function UTIL_SYMPTOM_TODAY_DATA(user, date) {
-  const todayData = user.symptomTags.filter((el, index) => {
+  const todayData = user.symptomTags.filter((el) => {
     const newDate = el.date.slice(0, 10);
     if (moment(newDate).isSame(date)) {
       return el;
