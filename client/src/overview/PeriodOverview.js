@@ -10,7 +10,7 @@ const PeriodOverview = (props) => {
   return (
     <Fragment>
       {!!sortedMonth.length ? (
-        <div>
+        <Fragment>
           <Typography variant="body2" style={{ color: '#DEB88F' }} gutterBottom>
             FLOW
           </Typography>
@@ -21,7 +21,7 @@ const PeriodOverview = (props) => {
               </Typography>
             );
           })}
-        </div>
+        </Fragment>
       ) : (
         <Typography variant="body2" gutterBottom>
           no flow this month

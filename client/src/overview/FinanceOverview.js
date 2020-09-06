@@ -16,17 +16,23 @@ const FinanceOverview = (props) => {
   return (
     <Fragment>
       {financialTotalsObj.total ? (
-        <div>
+        <Fragment>
           <Typography variant="body2" gutterBottom style={{ color: '#9BB47A' }}>
             COSTS
           </Typography>
           <Typography variant="body2" gutterBottom>
-            <div>doctor: ${financialTotalsObj.doctor}</div>
-            <div>prescription: ${financialTotalsObj.prescription}</div>
-            <div>sanitary products: ${financialTotalsObj.sanitaryProduct}</div>
-            <div>total: ${financialTotalsObj.total}</div>
+            doctor: ${financialTotalsObj.doctor}
           </Typography>
-        </div>
+          <Typography variant="body2" gutterBottom>
+            prescription: ${financialTotalsObj.prescription}
+          </Typography>
+          <Typography variant="body2" gutterBottom>
+            sanitary products: ${financialTotalsObj.sanitaryProduct}
+          </Typography>
+          <Typography variant="body2" gutterBottom>
+            total: ${financialTotalsObj.total}
+          </Typography>
+        </Fragment>
       ) : (
         <Typography variant="body2" gutterBottom>
           no costs this month

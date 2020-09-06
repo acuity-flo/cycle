@@ -9,11 +9,10 @@ const SymptomOverview = (props) => {
   return (
     <Fragment>
       {!!sortedMonth.length ? (
-        <div>
+        <Fragment>
           <Typography variant="body2" style={{ color: '#8FB5DE' }} gutterBottom>
             SYMPTOMS
           </Typography>
-
           {sortedMonth.map((el) => {
             return (
               <Typography variant="body2" gutterBottom>
@@ -21,7 +20,7 @@ const SymptomOverview = (props) => {
               </Typography>
             );
           })}
-        </div>
+        </Fragment>
       ) : (
         <Typography variant="body2" gutterBottom>
           no symptoms this month
