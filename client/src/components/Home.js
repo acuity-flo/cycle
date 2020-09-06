@@ -20,8 +20,8 @@ export default function Home () {
            
             <Fade delay={100}><img src={require('../images/Logo_Update.svg')} className={classes.image} alt={"Cycle Logo"}/></Fade>
               <div classes={classes.fadeHome}>
-                <Typography align='center' > 
-                    <Typography variant='h4'><Fade  delay={300} > Introducing Cycle: </Fade> </Typography>
+              <Typography variant='h4' align='center'><Fade  delay={300} > Introducing Cycle: </Fade> </Typography>
+                <Typography variant="subtitle2" align='center' > 
                       <div className = {classes.fadeItem} >
                         <Fade  delay={700} > <FiberManualRecordIcon style={{ fill: '#DEB88F'}}/>Menstruation Tracking </Fade>
                         <Fade  delay={1100}>  <FiberManualRecordIcon style={{ fill: '#8FB5DE'}}/> Symptom Tracking </Fade> 
@@ -29,9 +29,12 @@ export default function Home () {
                       </div>
                   <br/>
                   <br/>   
-                  <Fade delay={1900} >*****MISSION STATEMENT GOES HERE******</Fade>
                 </Typography>
               </div> 
+
+              <Typography variant="body1" align='center' > 
+              <div><Fade delay={1900} >A cyclical health data tracking app for female-identifying, non-binary, and trans people {''} to record their monthly symptoms, menstruation, and/or related finances</Fade></div>
+              </Typography>
 
             <br/>  
               <Fade delay={1900}><Button onClick={handleClick} variant="outlined" color="primary" type="submit">Get Started</Button></Fade>
@@ -57,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "space-between",
     },
     fadeItem:{
-      display:'flex'
+      display:'flex',
     }
 
   }));

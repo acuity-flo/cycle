@@ -63,6 +63,7 @@ function App(props) {
           </Switch>
           {matches && <BottomNav />}
         </Router>
+      <Footer/>
       </React.Suspense>
     </Fragment>
   );
