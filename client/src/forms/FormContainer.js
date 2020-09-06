@@ -10,6 +10,7 @@ import {
   UTIL_FINANCE_TODAY_DATA,
   UTIL_PERIOD_TODAY_DATA,
   UTIL_SYMPTOM_TODAY_DATA,
+  UTIL_COST,
 } from '../utilFcn';
 import { updateUserThunk } from '../store';
 
@@ -43,7 +44,13 @@ export default function FormContainer(props) {
     evt.preventDefault();
     const symptomsReduce = UTIL_SYMPTOM_REDUCE(symptoms);
     const flowStr = UTIL_PERIOD_STR(flow);
-    const purchasesUpdated = purchases.filter((el) => el.typeOfPurchase !== '');
+    let purchasesUpdated = purchases
+      .filter((el) => el.typeOfPurchase !== '')
+      .map((el) => el.cost * 100);
+    // let purchasesUpdated = purchases
+    // .filter((el) => el.typeOfPurchase !== '')
+    // .map((el) => el.cost * 100);
+
     const update = {
       date,
       username: user.username,
@@ -93,7 +100,7 @@ export default function FormContainer(props) {
                     `${
                       el.typeOfPurchase.slice(0, 1).toUpperCase() +
                       el.typeOfPurchase.slice(1)
-                    }: $${el.cost}`
+                    }: $${UTIL_COST(el.cost)}`
                 )}`
               : 'Purchases: Nothing logged'}
           </Typography>

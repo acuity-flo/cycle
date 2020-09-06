@@ -76,16 +76,19 @@ export function UTIL_FINANCE_TOTALS(financeObj) {
     });
     sanitaryProductTotal = UTIL_COST(Number(total));
   }
-let total = Number(doctorTotal) + Number(prescriptionTotal) + Number(sanitaryProductTotal)
-if (!!total) {
-  total = total.toFixed(2)
-}
+  let total =
+    Number(doctorTotal) +
+    Number(prescriptionTotal) +
+    Number(sanitaryProductTotal);
+  if (!!total) {
+    total = total.toFixed(2);
+  }
 
   const financialTotalsObj = {
     doctor: doctorTotal,
     prescription: prescriptionTotal,
     sanitaryProduct: sanitaryProductTotal,
-    total
+    total,
   };
   return financialTotalsObj;
 }
@@ -198,6 +201,12 @@ export function UTIL_SYMPTOMS_LABEL(y) {
   }
 }
 
+// todaySymptomData[0].symptoms.map((el) => el.symptomName.slice(0, 1).toUpperCase() + el.symptomName.slice(1)).join(' | ')
+
+// export function UTIL_SYMPTOM_MONTH(symptom, start, end) {
+//   const monthView =
+// }
+
 export function UTIL_SYMPTOM(symptomData, start, end) {
   const symptomObj = symptomData.reduce(
     (acc, el) => {
@@ -220,10 +229,6 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
             acc.physical.push(innerEl.symptomName);
             acc.physical_x.push(moment(dateChange).format('MM-DD-YYYY'));
           }
-          if (innerEl.category === 'custom') {
-            acc.custom.push(innerEl.symptomName);
-            acc.custom_x.push(moment(dateChange).format('MM-DD-YYYY'));
-          }
         });
       }
       return acc;
@@ -237,8 +242,6 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
       pain_x: ['pain_x'],
       physical: ['physical'],
       physical_x: ['physical_x'],
-      custom: ['custom'],
-      custom_x: ['custom_x'],
     }
   );
 
@@ -247,7 +250,6 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
     symptomObj['emotion_x'],
     symptomObj['pain_x'],
     symptomObj['physical_x'],
-    symptomObj['custom_x'],
     symptomObj['mood'].map((el, idx) => {
       if (idx > 0) {
         const value = '1' + UTIL_SYMPTOMS_LIST['mood'].indexOf(el).toString();
@@ -282,14 +284,7 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
         return el;
       }
     }),
-    symptomObj['custom'].map((el, idx) => {
-      if (idx > 0) {
-        const value = '5' + UTIL_SYMPTOMS_LIST['custom'].indexOf(el).toString();
-        return Number(value);
-      } else {
-        return el;
-      }
-    }),
+    ,
   ];
 
   let labels = [
@@ -297,7 +292,6 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
     symptomObj['emotion'],
     symptomObj['pain'],
     symptomObj['physical'],
-    symptomObj['custom'],
   ];
 
   let data = {
