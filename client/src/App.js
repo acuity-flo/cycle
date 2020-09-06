@@ -39,7 +39,7 @@ function App(props) {
     // setLoading(false);
   }, [dispatch]);
 
-  
+
   // if (!loading) {
   return (
     <Fragment>
