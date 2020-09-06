@@ -33,15 +33,6 @@ const theme = createMuiTheme({
   },
 })
 
-theme.typography.body1 = {
-  fontFamily: 'Roboto, sans-serif',
-  fontSize: '1em',
-  '@media(max-width: 400px)': {
-    fontSize: '0.6em'
-  }
-}
-
-
 ReactDOM.render(
 
   <Provider store={store}>

@@ -6,12 +6,16 @@ import {
   FormControlLabel,
   Typography,
   CircularProgress,
+  Grid
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles'
 import moment from 'moment';
 
 export default function SymptomUpdate(props) {
   // user and symptom data for day opened by the calendar if anything for date
   const { user, date, setSymptoms, symptoms, setSymptomsIdx } = props;
+
+  const classes = useStyles()
 
   const todayData = user.symptomTags.filter((el, index) => {
     const newDate = el.date.slice(0, 10);
@@ -207,12 +211,12 @@ export default function SymptomUpdate(props) {
   if (loading) return <CircularProgress />;
 
   return (
-    <>
-      <Typography variant="body2" gutterBottom>
+    <div className={classes.root}>
+      <Typography variant="body1" style={{color: '#8FB5DE'}} gutterBottom>
         SYMPTOMS
       </Typography>
       <FormControl component="symptoms">
-        <FormGroup>
+        <Grid direction="row" justify="space-around">
           {symptoms.map((el, index) => (
             <FormControlLabel
               control={
@@ -221,13 +225,27 @@ export default function SymptomUpdate(props) {
                   value={el.name}
                   name={index}
                   checked={el.bool}
+
                 />
               }
+              // className={classes.checkbox}
               label={el.name}
             />
           ))}
-        </FormGroup>
+        </Grid>
       </FormControl>
-    </>
+    </div>
   );
 }
+
+const useStyles = makeStyles(({
+  root: {
+    flexGrow: 1
+  }
+  // checkbox: {
+  //   width: '25%',
+  //   'media(max-width: 400px)': {
+  //     width: '50%'
+  //   }
+  // }
+}))

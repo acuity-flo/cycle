@@ -63,7 +63,7 @@ export default function PeriodForm(props) {
 
   return (
     <div className={classes.root}>
-      <Typography id="discrete-slider-restrict" gutterBottom>
+      <Typography variant="body1" style={{color: '#DEB88F'}}gutterBottom>
         FLOW
       </Typography>
       {todayData[0] && (
@@ -93,7 +93,7 @@ export default function PeriodForm(props) {
 
 const useStyles = makeStyles({
   root: {
-    width: 400,
+    flexGrow: 1
   },
   slider: {
     color: '#DEB88F',

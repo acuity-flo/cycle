@@ -80,9 +80,11 @@ function ChartHome(props) {
 
          <br />
 
-        <Container>
+        <Container >
           <br />
-          {choseDate && period? <PeriodChartBB start={startProp} end={endProp} /> : ''}
+          <div>
+          {choseDate && period? <PeriodChartBB start={startProp} end={endProp} t={5}/> : ''}
+          </div>
           <br />
           <br />
           {choseDate && finance ? <FinanceChartBB start={startProp} end={endProp} /> : ''}
@@ -113,5 +115,8 @@ const useStyles = makeStyles((theme) => ({
   imageHome:{
     display: 'flex',
     justifyContent: "center"
+  }, 
+  chartContainer:{
+    padding: "10%"
   }
 }));
