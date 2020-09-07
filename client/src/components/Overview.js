@@ -47,7 +47,9 @@ const Overview = (props) => {
 };
 const useStyles = makeStyles((theme) => ({
   container: {
-    paddingBottom: '6em'
+    paddingBottom: '6em',
+    flexDirection:"column",
+    alignItems: "center",
   },
   inputItem: {
     margin: '0.5em',

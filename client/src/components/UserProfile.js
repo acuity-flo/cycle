@@ -35,7 +35,7 @@ const UserProfile = (props) => {
       direction="column"
       className={classes.root}
     >
-      <Typography variant="h4">Hello, {user.name}</Typography>
+      <Typography variant="h4">Hi, {user.name[0].toUpperCase()}{user.name.slice(1)}</Typography>
       <br />
       <Typography variant="h6">Currently Tracking</Typography>
       <Grid container direction="row" justify="center">
@@ -114,7 +114,7 @@ const UserProfile = (props) => {
               setOpenPW(false);
             }}
           >
-            <CloseIcon fontSize={'small'} />
+            <CloseIcon fontSize={'small'} align={"right"}/>
           </Button>
           <PasswordUpdate user={user} message={message} />
         </DialogContent>
@@ -136,7 +136,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
   buttonContainer: {
-    margin: '0.5em',
+    margin: '0.5em'
   },
   button: {
     margin: '0.5em',
