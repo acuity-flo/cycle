@@ -32,7 +32,7 @@ const PasswordUpdate = (props) => {
   useEffect(() => {
     setStatusMessage(message);
   }, [message]);
-  console.log(message);
+
   return (
     <form onSubmit={handleSubmit} className={classes.root}>
       <FormControl name="oldPassword" className={classes.inputItem}>

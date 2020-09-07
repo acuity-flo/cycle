@@ -251,10 +251,10 @@ export default function FormContainer(props) {
               </Button>
             </Container>
           ) : (
-            <p>
+            <Typography variant="body2">
               You're not currently tracking anything. Please update your
               settings in your Profile!
-            </p>
+            </Typography>
           )}
         </form>
       )}

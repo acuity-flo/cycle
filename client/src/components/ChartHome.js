@@ -6,7 +6,6 @@ import 'react-dates/lib/css/_datepicker.css';
 import { Button, Container, makeStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
 
-
 import PeriodChartBB from '../dataVis/PeriodChartBB';
 import FinanceChartBB from '../dataVis/FinanceChart';
 import SymptomChartBB from '../dataVis/SymptomChart';
@@ -127,8 +126,5 @@ const useStyles = makeStyles((theme) => ({
   imageHome:{
     display: 'flex',
     justifyContent: "center"
-  },
-  chartContainer:{
-    padding: "10%"
   }
 }));

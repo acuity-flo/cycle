@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'react-calendar/dist/Calendar.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
 import "react-billboardjs/lib/billboard.css";
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -33,7 +32,6 @@ const theme = createMuiTheme({
 })
 
 ReactDOM.render(
-
   <Provider store={store}>
     <React.StrictMode>
       <ThemeProvider theme={theme}>

@@ -69,10 +69,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 const mapState = (state) => {
   return {
     user: state.authUser,
     isLoggedIn: !!state.authUser._id,
   };
 };
+
 export default connect(mapState)(Overview);

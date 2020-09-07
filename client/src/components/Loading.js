@@ -13,16 +13,11 @@ export default function Loading () {
   )
 };
 
-
-
-
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center", 
-    marginTop: "100px", 
-    // marginLeft: "-10%",
-    // marginRight: "auto",
+    alignItems: "center",
+    marginTop: "100px"
   }
 }));

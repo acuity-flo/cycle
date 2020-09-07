@@ -44,8 +44,8 @@ function SymptomChartBB(props) {
       },
       type: 'timeseries',
       padding: {
-        left : 1000*60*60*6, 
-        right: 1000*60*60*6, 
+        left : 1000*60*60*6,
+        right: 1000*60*60*6,
       }
     },
     y: {
@@ -82,8 +82,7 @@ function SymptomChartBB(props) {
 
 const mapState = (state) => {
   return {
-    user: state.authUser,
-    isLoggedIn: !!state.authUser._id,
+    user: state.authUser
   };
 };
 

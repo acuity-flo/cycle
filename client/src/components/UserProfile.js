@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import ProfileUpdate from '../forms/ProfileUpdate';
 import PasswordUpdate from '../forms/PasswordUpdate';
 import UserSwitch from '../forms/UserSwitches';
+import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router';
 import {
   Dialog,
   DialogContent,
@@ -13,6 +15,8 @@ import {
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
+import { logout } from '../store';
+
 const UserProfile = (props) => {
   const { user, message } = props;
   const [open, setOpen] = useState(false);
@@ -20,12 +24,20 @@ const UserProfile = (props) => {
   const [scroll, setScroll] = React.useState('paper');
   const classes = useStyles();
 
+  const dispatch = useDispatch()
+
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleClosePW = () => {
     setOpenPW(false);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    props.history.push('/');
+    handleClose();
   };
 
   return (
@@ -54,7 +66,7 @@ const UserProfile = (props) => {
       </Typography>
       <Grid
         container
-        direction="row"
+        direction="column"
         justify="center"
         className={classes.buttonContainer}
       >
@@ -78,6 +90,7 @@ const UserProfile = (props) => {
         >
           update password
         </Button>
+        <Button variant="outlined" color="primary" className={classes.button} onClick={handleLogout}>Logout</Button>
       </Grid>
       <Dialog
         open={open}
@@ -140,12 +153,27 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonContainer: {
     margin: '0.5em',
+    alignItems: 'center',
+    padding: '0.5em'
   },
   button: {
     margin: '0.5em',
     backgroundColor: 'white',
     color: '#545454',
     flexShrink: 3,
+    width: '20%',
+    '@media(max-width: 1000px)': {
+      width: '30%'
+    },
+    '@media(max-width: 800px)': {
+      width: '40%'
+    },
+    '@media(max-width: 600px)': {
+      width: '50%'
+    },
+    '@media(max-width: 400px)': {
+      width: '60%'
+    },
   },
 }));
 
@@ -157,4 +185,4 @@ const mapState = (state) => {
   };
 };
 
-export default connect(mapState)(UserProfile);
+export default withRouter(connect(mapState)(UserProfile));

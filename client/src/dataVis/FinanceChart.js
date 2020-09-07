@@ -76,8 +76,7 @@ function FinanceChartBB(props) {
 
 const mapState = (state) => {
   return {
-    user: state.authUser,
-    isLoggedIn: !!state.authUser._id,
+    user: state.authUser
   };
 };
 

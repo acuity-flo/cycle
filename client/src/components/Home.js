@@ -21,14 +21,15 @@ function Home(props) {
       <Fade delay={100}>
         <img
           src={require('../images/Logo_Update.svg')}
-          className={classes.image}
           alt={'Cycle Logo'}
+          className={classes.image}
         />
       </Fade>
       <div classes={classes.fadeHome}>
         <Typography variant="h4" align="center">
           <Fade delay={300}> Introducing Cycle: </Fade>{' '}
         </Typography>
+        <br />
         <Typography variant="subtitle2" align="center">
           <div className={classes.fadeItem}>
             <Fade delay={700}>
@@ -73,8 +74,6 @@ function Home(props) {
           Get Started
         </Button>
       </Fade>
-      <br />
-      <br />
     </div>
   );
 }
@@ -90,6 +89,15 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    paddingBottom: '6em'
+  },
+  image: {
+    '@media(max-width:600px)': {
+      width: '65%'
+    },
+    '@media(max-width:400px)': {
+      width: '75%'
+    }
   },
   button: {
     margin: '0.5em',

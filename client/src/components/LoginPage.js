@@ -5,10 +5,10 @@ import { makeStyles } from '@material-ui/core/styles'
 export default function LoginPage () {
     const classes = useStyles()
     return (
-        <div className={classes.container}>
-            <img src={require('../images/Logo_Update.svg')} className={classes.image} alt={"Cycle Logo"}/>
-            <Auth />
-        </div>
+      <div className={classes.container}>
+          <img src={require('../images/Logo_Update.svg')} className={classes.image} alt={"Cycle Logo"}/>
+          <Auth />
+      </div>
     )
 }
 
@@ -18,8 +18,7 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column",
     },
     image: {
-      marginTop: "5vh",
-      width: "30%",
+      width: "25%",
       '@media(max-width: 1000px)': {
         width: '40%'
       },

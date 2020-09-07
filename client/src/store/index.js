@@ -78,7 +78,6 @@ export const authUserThunk = (user, type) => async (dispatch) => {
   }
   try {
     const res = await axios.post(`/auth/${type}`, post);
-
     if (res.data) {
       const action = authUserAction(res.data);
       dispatch(action);

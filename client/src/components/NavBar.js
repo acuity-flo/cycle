@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { withRouter } from 'react-router';
+
 //material UI imports
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -126,8 +127,5 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     alignContent: 'center',
     fontSize: '100%',
-  },
-  title: {
-    flexGrow: 1,
-  },
+  }
 }));
