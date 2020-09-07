@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import ReactLoading from 'react-loading';
-import useMediaQuery from '@material-ui/core/useMediaQuery'
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
 //Thunks
@@ -19,10 +19,13 @@ import ErrorComp from './components/404';
 import BottomNav from './components/BottomNav'
 import SimpleMobileTop from './components/SimpleMobileTop'
 import Footer from './components/Footer'
+import Overview from './components/Overview';
 
 function App(props) {
   const [loading, setLoading] = useState(true);
-  const matches = useMediaQuery('@media only screen and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2)')
+  const matches = useMediaQuery(
+    '@media only screen and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2)'
+  );
 
   const user = props.user;
   const isLoggedIn = props.isLoggedIn;
@@ -44,6 +47,7 @@ function App(props) {
           {isLoggedIn && (
             <Switch>
               <Route exact path="/calendar" component={CalendarView} />
+              <Route exact path="/overview" component={Overview} />
               <Route exact path="/charts" component={ChartHome} />
               <Route exact path="/profile" component={UserProfile} />
               <Route component={ErrorComp} />
