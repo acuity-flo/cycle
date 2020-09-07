@@ -23,15 +23,15 @@ function FinanceChartBB(props) {
       prescription: '#DEB88F',
       sanitaryProduct: '#9BB47A',
       doctor: '#8FB5DE',
-      other: '#A17AB4'
-    }
+      other: '#A17AB4',
+    },
   };
 
   let CHART_AXIS = {
     x: {
       padding: {
-        left : 1000*60*60*6, 
-        right: 1000*60*60*6, 
+        left: 1000 * 60 * 60 * 6,
+        right: 1000 * 60 * 60 * 6,
       },
       type: 'timeseries',
       tick: {
@@ -49,13 +49,13 @@ function FinanceChartBB(props) {
   };
 
   return CHART_DATA && CHART_AXIS && CHART_TOOLTIP ? (
-    <div align='center' >
-    <Typography variant = "h6">Finances</Typography>
-    <BillboardChart
-      data={CHART_DATA}
-      axis={CHART_AXIS}
-      tooltip={CHART_TOOLTIP}
-    />
+    <div align="center">
+      <Typography variant="h6">Finances</Typography>
+      <BillboardChart
+        data={CHART_DATA}
+        axis={CHART_AXIS}
+        tooltip={CHART_TOOLTIP}
+      />
     </div>
   ) : (
     <></>

@@ -8,11 +8,11 @@ export function UTIL_FINANCE(financeData, start, end) {
         let vals = el.purchases.reduce(
           (innerAcc, innerEl) => {
             if (innerEl.typeOfPurchase === 'prescription')
-              innerAcc.prescription += innerEl.cost;
+              innerAcc.prescription += UTIL_COST(innerEl.cost);
             if (innerEl.typeOfPurchase === 'sanitary products')
-              innerAcc.sanitaryProduct += innerEl.cost;
+              innerAcc.sanitaryProduct += UTIL_COST(innerEl.cost);
             if (innerEl.typeOfPurchase === 'doctor')
-              innerAcc.doctor += innerEl.cost;
+              innerAcc.doctor += UTIL_COST(innerEl.cost);
             return innerAcc;
           },
           { prescription: 0, sanitaryProduct: 0, doctor: 0 }
@@ -36,8 +36,6 @@ export function UTIL_FINANCE_MONTH(financial, start, end) {
   const sortedMonth = monthFinance.sort((a, b) => moment(a.date).diff(b.date));
   return sortedMonth;
 }
-
-// todaySymptomData[0].symptoms.map((el) => el.symptomName.slice(0, 1).toUpperCase() + el.symptomName.slice(1)).join(' | ')
 
 export function UTIL_SYMPTOM_MONTH(symptoms, start, end) {
   const monthSymptom = symptoms.filter((el) =>
