@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
 import moment from 'moment';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-dates/lib/css/_datepicker.css';
 import { Button, Container, makeStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
