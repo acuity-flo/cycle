@@ -4,14 +4,26 @@ import React from 'react';
 import BillboardChart from 'react-billboardjs';
 import * as d3 from 'd3';
 import { connect } from 'react-redux';
-import { UTIL_FINANCE } from '../utilFcn';
+import { UTIL_FINANCE, UTIL_COST } from '../utilFcn';
 import { Typography } from '@material-ui/core';
 
 function FinanceChartBB(props) {
   let { start, end, user } = props;
   const financeData = user.financial;
 
-  const financeObj = UTIL_FINANCE(financeData, start, end);
+  let financeObj = UTIL_FINANCE(financeData, start, end);
+  const financeDoctorArr = financeObj.doctor.map((el) => {
+    return UTIL_COST(el);
+  });
+  const financePrescriptionArr = financeObj.prescription.map((el) => {
+    return UTIL_COST(el);
+  });
+  const financesanitaryProductArr = financeObj.sanitaryProduct.map((el) => {
+    return UTIL_COST(el);
+  });
+  financeObj.doctor = financeDoctorArr;
+  financeObj.prescription = financePrescriptionArr;
+  financeObj.sanitaryProduct = financesanitaryProductArr;
 
   let CHART_DATA = {
     x: 'x',

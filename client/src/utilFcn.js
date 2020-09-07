@@ -8,11 +8,11 @@ export function UTIL_FINANCE(financeData, start, end) {
         let vals = el.purchases.reduce(
           (innerAcc, innerEl) => {
             if (innerEl.typeOfPurchase === 'prescription')
-              innerAcc.prescription += UTIL_COST(innerEl.cost);
+              innerAcc.prescription += innerEl.cost;
             if (innerEl.typeOfPurchase === 'sanitary products')
-              innerAcc.sanitaryProduct += UTIL_COST(innerEl.cost);
+              innerAcc.sanitaryProduct += innerEl.cost;
             if (innerEl.typeOfPurchase === 'doctor')
-              innerAcc.doctor += UTIL_COST(innerEl.cost);
+              innerAcc.doctor += innerEl.cost;
             return innerAcc;
           },
           { prescription: 0, sanitaryProduct: 0, doctor: 0 }
@@ -66,19 +66,19 @@ export function UTIL_FINANCE_TOTALS(financeObj) {
   let sanitaryProductTotal = 0;
   if (doctor[0]) {
     const total = doctor.reduce((acc, el) => {
-      return (acc += el);
+      return (acc += Number(el));
     });
     doctorTotal = UTIL_COST(Number(total));
   }
   if (prescription[0]) {
     const total = prescription.reduce((acc, el) => {
-      return (acc += el);
+      return (acc += Number(el));
     });
     prescriptionTotal = UTIL_COST(Number(total));
   }
   if (sanitaryProduct[0]) {
     const total = sanitaryProduct.reduce((acc, el) => {
-      return (acc += el);
+      return (acc += Number(el));
     });
     sanitaryProductTotal = UTIL_COST(Number(total));
   }
