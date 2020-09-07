@@ -1,7 +1,6 @@
 
 # Cycle
 A cyclical health data tracking app for female-identifying, non-binary, and trans people to record their monthly symptoms, menstruation, and/or related finances
-<img src="client/src/images/Logo.png" width=500>
 Check out the deployed version here:
 https://cycle-health.herokuapp.com/
 
