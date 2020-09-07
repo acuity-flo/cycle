@@ -96,7 +96,7 @@ function CalendarView(props) {
               style={{ fill: '#DEB88F' }}
               fontSize="inherit"
             />
-            <Typography>Period</Typography>
+            <Typography variant="body2">Period</Typography>
           </div>
         ) : (
           ''
@@ -107,7 +107,7 @@ function CalendarView(props) {
               style={{ fill: '#9BB47A' }}
               fontSize="inherit"
             />
-            <Typography>Finance</Typography>
+            <Typography variant="body2">Finance</Typography>
           </div>
         ) : (
           ''
@@ -118,7 +118,7 @@ function CalendarView(props) {
               style={{ fill: '#8FB5DE' }}
               fontSize="inherit"
             />
-            <Typography>Symptom</Typography>
+            <Typography variant="body2">Symptom</Typography>
           </div>
         ) : (
           ''
@@ -201,15 +201,29 @@ const useStyles = makeStyles((theme) => ({
     color: 'black',
     fontSize: '0.8em',
     height: '100%',
+    fontFamily: 'Roboto',
   },
   calendar: {
     border: 'none',
-    fontFamily: 'Roboto',
+    fontFamily: 'Roboto'
   },
   key: {
     marginTop: '1em',
     display: 'flex',
-    justifyContent: 'space-between',
+    width: '40%',
+    '@media(max-width: 1000px)': {
+      width: '55%',
+    },
+    '@media(max-width: 800px)': {
+      width: '65%',
+    },
+    '@media(max-width: 600px)': {
+      width: '80%',
+    },
+    '@media(max-width: 400px)': {
+      width: '95%',
+    },
+    justifyContent: 'space-around',
   },
   keyItem: {
     display: 'flex',
