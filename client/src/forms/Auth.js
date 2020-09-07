@@ -9,12 +9,11 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router';
-import {connect} from 'react-redux'
-import ReactLoading from 'react-loading'
+import { connect } from 'react-redux';
 
 const AuthForm = (props) => {
   const [type, setType] = useState('login');
@@ -88,7 +87,9 @@ const AuthForm = (props) => {
             </FormLabel>
           </Fragment>
         )}
-        {props.message && <Typography variant="body2">{props.message}</Typography>}
+        {props.message && (
+          <Typography variant="body2">{props.message}</Typography>
+        )}
         <Button
           variant="outlined"
           color="primary"
@@ -133,31 +134,31 @@ const useStyles = makeStyles((theme) => ({
     margin: '0.5em',
     width: '20%',
     '@media(max-width: 1000px)': {
-      width: '35%'
+      width: '35%',
     },
     '@media(max-width: 800px)': {
-      width: '50%'
+      width: '50%',
     },
     '@media(max-width: 600px)': {
-      width: '65%'
+      width: '65%',
     },
     '@media(max-width: 400px)': {
-      width: '80%'
+      width: '80%',
     },
   },
   inputLabel: {
     width: '20%',
     '@media(max-width: 1000px)': {
-      width: '35%'
+      width: '35%',
     },
     '@media(max-width: 800px)': {
-      width: '50%'
+      width: '50%',
     },
     '@media(max-width: 600px)': {
-      width: '65%'
+      width: '65%',
     },
     '@media(max-width: 400px)': {
-      width: '80%'
+      width: '80%',
     },
   },
 
@@ -172,8 +173,8 @@ const mapState = (state) => {
   return {
     user: state.authUser,
     isLoggedIn: !!state.authUser._id,
-    message: state.statusMessage
+    message: state.statusMessage,
   };
 };
 
-export default connect(mapState)(withRouter(AuthForm))
+export default connect(mapState)(withRouter(AuthForm));
