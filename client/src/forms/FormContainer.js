@@ -13,14 +13,15 @@ import {
   UTIL_COST,
 } from '../utilFcn';
 import { updateUserThunk } from '../store';
+import CloseIcon from '@material-ui/icons/Close';
 
 export default function FormContainer(props) {
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
   const { date, user, message } = props;
   const period = user.periodTracking;
   const symptom = user.symptomTracking;
   const finance = user.financialTracking;
-  const [open, setOpen] = useState(false);
   const [symptoms, setSymptoms] = useState([]);
   const [flow, setFlow] = useState(0);
   const [purchases, setPurchases] = useState([]);
@@ -192,6 +193,9 @@ export default function FormContainer(props) {
       )}
       {open && (
         <form onSubmit={handleSubmit}>
+          <Button color="primary" className={classes.button} onClick={toggle}>
+            <CloseIcon fontSize={'small'} />
+          </Button>
           {period ? (
             <PeriodUpdate
               date={date}

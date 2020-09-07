@@ -10,7 +10,7 @@ import {
   DialogContentText,
   Container,
   Grid,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import FormContainer from '../forms/FormContainer';
@@ -23,9 +23,9 @@ function CalendarView(props) {
   const period = user.period;
   const finance = user.financial;
   const symptoms = user.symptomTags;
-  const periodTracking = user.periodTracking
-  const symptomTracking = user.symptomTracking
-  const financeTracking = user.financialTracking
+  const periodTracking = user.periodTracking;
+  const symptomTracking = user.symptomTracking;
+  const financeTracking = user.financialTracking;
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
 
@@ -39,29 +39,53 @@ function CalendarView(props) {
   const circlesFunc = ({ date, view }) => {
     return (
       <div className={classes.dots}>
-        {(periodTracking && period &&
+        {periodTracking &&
+        period &&
         view === 'month' &&
         period.some(
           (el) =>
             moment(el.date).format('MM DD YYYY') ===
             moment(date).format('MM DD YYYY')
-        )) ? <FiberManualRecordIcon style={{ fill: '#DEB88F' }} fontSize="inherit" /> : ''}
+        ) ? (
+          <FiberManualRecordIcon
+            style={{ fill: '#DEB88F' }}
+            fontSize="inherit"
+          />
+        ) : (
+          ''
+        )}
 
-        {(financeTracking && finance &&
+        {financeTracking &&
+        finance &&
         view === 'month' &&
         finance.some(
           (el) =>
             moment(el.date).format('MM DD YYYY') ===
             moment(date).format('MM DD YYYY')
-        )) ? <FiberManualRecordIcon style={{ fill: '#9BB47A' }} fontSize="inherit" /> : ''}
+        ) ? (
+          <FiberManualRecordIcon
+            style={{ fill: '#9BB47A' }}
+            fontSize="inherit"
+          />
+        ) : (
+          ''
+        )}
 
-        {(symptomTracking && symptoms &&
+        {symptomTracking &&
+        symptoms &&
         view === 'month' &&
         symptoms.some(
           (el) =>
             moment(el.date).format('MM DD YYYY') ===
             moment(date).format('MM DD YYYY')
-        )) ? <FiberManualRecordIcon style={{ fill: '#8FB5DE' }} fontSize="inherit" /> : ''}
+        ) ? (
+          <FiberManualRecordIcon
+            style={{ fill: '#8FB5DE' }}
+            fontSize="inherit"
+          />
+        ) : (
+          ''
+        )}
       </div>
     );
   };
@@ -70,13 +94,42 @@ function CalendarView(props) {
   const keyRender = () => {
     return (
       <div className={classes.key}>
-        {periodTracking ? <div className={classes.keyItem}><FiberManualRecordIcon style={{ fill: '#DEB88F'}} fontSize="inherit" /><Typography>Period</Typography></div> : ''}
-        {financeTracking ? <div className={classes.keyItem}><FiberManualRecordIcon style={{ fill: '#9BB47A' }} fontSize="inherit" /><Typography>Finance</Typography></div> : ''}
-        {symptomTracking ? <div className={classes.keyItem}><FiberManualRecordIcon style={{ fill: '#8FB5DE' }} fontSize="inherit" /><Typography>Symptom</Typography></div> : ''}
+        {periodTracking ? (
+          <div className={classes.keyItem}>
+            <FiberManualRecordIcon
+              style={{ fill: '#DEB88F' }}
+              fontSize="inherit"
+            />
+            <Typography>Period</Typography>
+          </div>
+        ) : (
+          ''
+        )}
+        {financeTracking ? (
+          <div className={classes.keyItem}>
+            <FiberManualRecordIcon
+              style={{ fill: '#9BB47A' }}
+              fontSize="inherit"
+            />
+            <Typography>Finance</Typography>
+          </div>
+        ) : (
+          ''
+        )}
+        {symptomTracking ? (
+          <div className={classes.keyItem}>
+            <FiberManualRecordIcon
+              style={{ fill: '#8FB5DE' }}
+              fontSize="inherit"
+            />
+            <Typography>Symptom</Typography>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
-    )
-  }
-
+    );
+  };
 
   return (
     <Fragment>
@@ -89,7 +142,7 @@ function CalendarView(props) {
             setOpen(true);
           }}
           tileContent={circlesFunc}
-          alt={"Calendar"}
+          alt={'Calendar'}
           className={classes.calendar}
           tileClassName={classes.tiles}
         />
@@ -118,35 +171,35 @@ function CalendarView(props) {
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
-    flexDirection:'column',
+    flexDirection: 'column',
     flexWrap: 'nowrap',
     marginTop: '2em',
     alignItems: 'center',
     width: '40%',
     '@media(max-width: 1000px)': {
-      width: '55%'
+      width: '55%',
     },
     '@media(max-width: 800px)': {
-      width: '65%'
+      width: '65%',
     },
     '@media(max-width: 600px)': {
-      width: '80%'
+      width: '80%',
     },
     '@media(max-width: 400px)': {
-      width: '95%'
-    }
+      width: '95%',
+    },
   },
   dots: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   paper: {
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     '@media(max-width: 400px)': {
-      padding: theme.spacing(2, 1, 2)
+      padding: theme.spacing(2, 1, 2),
     },
-    overflowX: 'hidden'
+    overflowX: 'hidden',
   },
   tiles: {
     color: 'black',
@@ -156,21 +209,21 @@ const useStyles = makeStyles((theme) => ({
     border: 'none',
     fontFamily: 'Roboto',
   },
-  key:{
+  key: {
     marginTop: '1em',
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   keyItem: {
     display: 'flex',
-  }
+  },
 }));
 
 const mapState = (state) => {
   return {
     authUser: state.authUser,
     isLoggedIn: !!state.authUser._id,
-    message: state.statusMessage
+    message: state.statusMessage,
   };
 };
 

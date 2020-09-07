@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ProfileUpdate from '../forms/ProfileUpdate';
 import PasswordUpdate from '../forms/PasswordUpdate';
-import UserDataView from './UserDataView';
 import UserSwitch from '../forms/UserSwitches';
 import {
   Dialog,
@@ -12,12 +11,12 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 
 const UserProfile = (props) => {
   const { user, message } = props;
   const [open, setOpen] = useState(false);
   const [openPW, setOpenPW] = useState(false);
-  // const [month, setMonth] = useState('default month');
   const [scroll, setScroll] = React.useState('paper');
   const classes = useStyles();
 
@@ -30,7 +29,12 @@ const UserProfile = (props) => {
   };
 
   return (
-    <Grid container alignItems="center" direction="column" className={classes.root}>
+    <Grid
+      container
+      alignItems="center"
+      direction="column"
+      className={classes.root}
+    >
       <Typography variant="h4">Hello, {user.name}</Typography>
       <br />
       <Typography variant="h6">Currently Tracking</Typography>
@@ -42,8 +46,15 @@ const UserProfile = (props) => {
       <Typography variant="body2">Email: {user.email}</Typography>
       <Typography variant="body2">Username: {user.username}</Typography>
       <Typography variant="body2">Pronouns: {user.pronouns}</Typography>
-      <Typography variant="body2">Average Cycle Length: {user.avgLengthOfCycle} days</Typography>
-      <Grid container direction="row" justify="center" className={classes.buttonContainer}>
+      <Typography variant="body2">
+        Average Cycle Length: {user.avgLengthOfCycle} days
+      </Typography>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        className={classes.buttonContainer}
+      >
         <Button
           variant="outlined"
           color="primary"
@@ -65,7 +76,6 @@ const UserProfile = (props) => {
           update password
         </Button>
       </Grid>
-      {/* dialog for update profile info */}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -75,18 +85,16 @@ const UserProfile = (props) => {
         classes={classes.dialogBox}
       >
         <DialogContent className={classes.paper}>
-          <ProfileUpdate user={user} message={message} />
-
           <Button
-            variant="outlined"
             color="primary"
             className={classes.button}
             onClick={() => {
               setOpen(false);
             }}
           >
-            close
+            <CloseIcon fontSize={'small'} />
           </Button>
+          <ProfileUpdate user={user} message={message} />
         </DialogContent>
       </Dialog>
       {/* dialog for update password */}
@@ -99,18 +107,16 @@ const UserProfile = (props) => {
         classes={classes.dialogBox}
       >
         <DialogContent className={classes.paper}>
-          <PasswordUpdate user={user} message={message} />
-
           <Button
-            variant="outlined"
             color="primary"
             className={classes.button}
             onClick={() => {
               setOpenPW(false);
             }}
           >
-            close
+            <CloseIcon fontSize={'small'} />
           </Button>
+          <PasswordUpdate user={user} message={message} />
         </DialogContent>
       </Dialog>
     </Grid>
@@ -120,7 +126,7 @@ const UserProfile = (props) => {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    padding: '2em'
+    padding: '2em',
   },
   dialogBox: {
     padding: '2em',
@@ -130,13 +136,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
   buttonContainer: {
-    margin: '0.5em'
+    margin: '0.5em',
   },
   button: {
     margin: '0.5em',
     backgroundColor: 'white',
     color: '#545454',
-    flexShrink: 1
+    flexShrink: 3,
   },
 }));
 
@@ -144,7 +150,7 @@ const mapState = (state) => {
   return {
     user: state.authUser,
     isLoggedIn: !!state.authUser._id,
-    message: state.statusMessage
+    message: state.statusMessage,
   };
 };
 
