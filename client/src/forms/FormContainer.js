@@ -193,9 +193,6 @@ export default function FormContainer(props) {
       )}
       {open && (
         <form onSubmit={handleSubmit}>
-          <Button color="primary" className={classes.button} onClick={toggle}>
-            <CloseIcon fontSize={'small'} />
-          </Button>
           {period ? (
             <PeriodUpdate
               date={date}
@@ -236,7 +233,24 @@ export default function FormContainer(props) {
           )}
 
           {period || symptom || finance ? (
-            <Button type="submit">Submit</Button>
+            <Container className={classes.buttonContainer}>
+              <Button
+                color="primary"
+                variant="outlined"
+                className={classes.button}
+                type="submit"
+              >
+                Submit
+              </Button>
+              <Button
+                color="primary"
+                variant="outlined"
+                className={classes.button}
+                onClick={toggle}
+              >
+                Cancel
+              </Button>
+            </Container>
           ) : (
             <p>
               You're not currently tracking anything. Please update your
@@ -253,8 +267,10 @@ const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'space-between',
   },
   button: {
+    margin: '1em',
     marginTop: '1em',
     backgroundColor: 'white',
     color: '#545454',
