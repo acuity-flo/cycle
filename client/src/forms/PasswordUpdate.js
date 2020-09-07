@@ -5,7 +5,7 @@ import {
   FormControl,
   Input,
   InputLabel,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { updatePasswordThunk } from '../store';
@@ -15,17 +15,24 @@ const PasswordUpdate = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [statusMessage, setStatusMessage] = useState(null)
+  const [statusMessage, setStatusMessage] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(updatePasswordThunk(user.username, event.currentTarget.oldPassword.value, event.currentTarget.passwordNewOne.value, event.currentTarget.passwordNewTwo.value))
+    dispatch(
+      updatePasswordThunk(
+        user.username,
+        event.currentTarget.oldPassword.value,
+        event.currentTarget.passwordNewOne.value,
+        event.currentTarget.passwordNewTwo.value
+      )
+    );
   };
 
   useEffect(() => {
-    setStatusMessage(message)
-  }, [message])
-  console.log(message)
+    setStatusMessage(message);
+  }, [message]);
+  console.log(message);
   return (
     <form onSubmit={handleSubmit} className={classes.root}>
       <FormControl name="oldPassword" className={classes.inputItem}>
@@ -40,7 +47,9 @@ const PasswordUpdate = (props) => {
         <InputLabel htmlFor="passwordNewTwo">Confirm New Password</InputLabel>
         <Input type="password" id="passwordNewTwo" />
       </FormControl>
-      {statusMessage && <Typography variant="body2">{statusMessage}</Typography>}
+      {statusMessage && (
+        <Typography variant="body2">{statusMessage}</Typography>
+      )}
       <Button
         variant="outlined"
         color="primary"
@@ -63,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   },
   inputItem: {
     margin: '0.5em',
-    minWidth: '240px'
+    minWidth: '240px',
   },
   button: {
     margin: '0.5em',
