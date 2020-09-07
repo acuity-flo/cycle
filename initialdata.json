@@ -30,7 +30,11 @@
       { "date": "2020-05-07", "typeOfFlow": "heavy" },
       { "date": "2020-05-08", "typeOfFlow": "medium" },
       { "date": "2020-05-09", "typeOfFlow": "light" },
-      { "date": "2020-05-010", "typeOfFlow": "spotting" }
+      { "date": "2020-05-010", "typeOfFlow": "spotting" },
+      { "date": "2020-09-05", "typeOfFlow": "light" },
+      { "date": "2020-09-06", "typeOfFlow": "medium" },
+      { "date": "2020-09-07", "typeOfFlow": "heavy" },
+      { "date": "2020-09-04", "typeOfFlow": "medium" }
     ],
     "symptomTags": [
       {
@@ -197,8 +201,23 @@
         ]
       },
       {
+        "date": "2020-09-05",
+        "symptoms": [
+          { "symptomName": "stressed", "category": "mood" },
+          { "symptomName": "snacky", "category": "physical" }
+        ]
+      },
+      {
         "date": "2020-05-010",
         "symptoms": { "symptomName": "snacky", "category": "physical" }
+      },
+      {
+        "date": "2020-09-05",
+        "symptoms": [
+          { "symptomName": "indigestion", "category": "physical" },
+          { "symptomName": "cramps", "category": "pain" },
+          { "symptomName": "anxious", "category": "emotion" }
+        ]
       }
     ],
     "financial": [
@@ -268,7 +287,29 @@
         ]
       },
       {
+        "date": "2020-07-20",
+        "purchases": [{ "typeOfPurchase": "prescription", "cost": 50000 }]
+      },
+      {
+        "date": "2020-08-15",
+        "purchases": [
+          { "typeOfPurchase": "doctor", "cost": 500000 },
+          { "typeOfPurchase": "prescription", "cost": 2000 }
+        ]
+      },
+      {
         "date": "2020-07-08",
+        "purchases": [
+          { "typeOfPurchase": "prescription", "cost": 8900 },
+          { "typeOfPurchase": "sanitary products", "cost": 9500 }
+        ]
+      },
+      {
+        "date": "2020-07-15",
+        "purchases": [{ "typeOfPurchase": "prescription", "cost": 8900 }]
+      },
+      {
+        "date": "2020-09-02",
         "purchases": [
           { "typeOfPurchase": "prescription", "cost": 8900 },
           { "typeOfPurchase": "sanitary products", "cost": 9500 }

@@ -37,8 +37,6 @@ export function UTIL_FINANCE_MONTH(financial, start, end) {
   return sortedMonth;
 }
 
-// todaySymptomData[0].symptoms.map((el) => el.symptomName.slice(0, 1).toUpperCase() + el.symptomName.slice(1)).join(' | ')
-
 export function UTIL_SYMPTOM_MONTH(symptoms, start, end) {
   const monthSymptom = symptoms.filter((el) =>
     moment(el.date).isBetween(start, end)
@@ -68,19 +66,19 @@ export function UTIL_FINANCE_TOTALS(financeObj) {
   let sanitaryProductTotal = 0;
   if (doctor[0]) {
     const total = doctor.reduce((acc, el) => {
-      return (acc += el);
+      return (acc += Number(el));
     });
     doctorTotal = UTIL_COST(Number(total));
   }
   if (prescription[0]) {
     const total = prescription.reduce((acc, el) => {
-      return (acc += el);
+      return (acc += Number(el));
     });
     prescriptionTotal = UTIL_COST(Number(total));
   }
   if (sanitaryProduct[0]) {
     const total = sanitaryProduct.reduce((acc, el) => {
-      return (acc += el);
+      return (acc += Number(el));
     });
     sanitaryProductTotal = UTIL_COST(Number(total));
   }

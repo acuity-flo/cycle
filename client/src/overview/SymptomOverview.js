@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { UTIL_SYMPTOM_MONTH } from '../utilFcn';
-import { Container, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import moment from 'moment';
 
 const SymptomOverview = (props) => {

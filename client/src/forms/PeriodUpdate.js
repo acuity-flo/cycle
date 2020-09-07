@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Slider, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
@@ -63,7 +63,7 @@ export default function PeriodForm(props) {
 
   return (
     <div className={classes.root}>
-      <Typography variant="body1" style={{color: '#DEB88F'}}gutterBottom>
+      <Typography variant="body1" style={{ color: '#DEB88F' }} gutterBottom>
         FLOW
       </Typography>
       {todayData[0] && (
@@ -93,7 +93,7 @@ export default function PeriodForm(props) {
 
 const useStyles = makeStyles({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   slider: {
     color: '#DEB88F',

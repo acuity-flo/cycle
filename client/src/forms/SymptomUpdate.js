@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import {
-  FormGroup,
   Checkbox,
   FormControl,
   FormControlLabel,
   Typography,
   CircularProgress,
-  Grid
+  Grid,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 
 export default function SymptomUpdate(props) {
   // user and symptom data for day opened by the calendar if anything for date
   const { user, date, setSymptoms, symptoms, setSymptomsIdx } = props;
 
-  const classes = useStyles()
+  const classes = useStyles();
 
   const todayData = user.symptomTags.filter((el, index) => {
     const newDate = el.date.slice(0, 10);
@@ -212,7 +211,7 @@ export default function SymptomUpdate(props) {
 
   return (
     <div className={classes.root}>
-      <Typography variant="body1" style={{color: '#8FB5DE'}} gutterBottom>
+      <Typography variant="body1" style={{ color: '#8FB5DE' }} gutterBottom>
         SYMPTOMS
       </Typography>
       <FormControl component="symptoms">
@@ -225,7 +224,6 @@ export default function SymptomUpdate(props) {
                   value={el.name}
                   name={index}
                   checked={el.bool}
-
                 />
               }
               label={el.name}
@@ -237,8 +235,8 @@ export default function SymptomUpdate(props) {
   );
 }
 
-const useStyles = makeStyles(({
+const useStyles = makeStyles({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   }
-}))
+});
