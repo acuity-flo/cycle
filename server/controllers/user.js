@@ -13,6 +13,16 @@ module.exports = {
     }
   },
 
+  bulkUpdateUser: async (req, res, next) => {
+    try {
+      await User.findOneAndUpdate({ username: req.params.username }, req.body);
+      const updated = await User.findOne({ username: req.params.username });
+      res.json(updated);
+    } catch (err) {
+      next(err);
+    }
+  },
+
   updateProfile: async (req, res, next) => {
     try {
       const update = req.body;
@@ -30,10 +40,7 @@ module.exports = {
   },
   updatePassword: async (req, res, next) => {
     try {
-      const {
-        oldPassword,
-        newPassword
-      } = req.body;
+      const { oldPassword, newPassword } = req.body;
       const username = req.params.username;
       const foundUser = await User.findOne({ username });
       if (Bcrypt.compareSync(oldPassword, foundUser.password)) {
@@ -41,10 +48,10 @@ module.exports = {
         await foundUser.save();
         res.sendStatus(200);
       } else {
-        res.sendStatus(404)
+        res.sendStatus(404);
       }
     } catch (e) {
-      next(e)
+      next(e);
     }
   },
   updateUser: async (req, res, next) => {
@@ -152,7 +159,7 @@ module.exports = {
       const updatedUser = await User.findOne({ username });
       res.json(updatedUser);
     } catch (e) {
-      next(e)
+      next(e);
     }
   },
 
@@ -163,14 +170,13 @@ module.exports = {
     });
 
     try {
-      if(!authUser){
-        res.sendStatus(403)
-      } else if (!Bcrypt.compareSync(req.body.password, authUser.password)){
-        res.sendStatus(400)
-      }else{
-        req.login(authUser, (err) => (err ? next(err) : res.json(authUser)))
+      if (!authUser) {
+        res.sendStatus(403);
+      } else if (!Bcrypt.compareSync(req.body.password, authUser.password)) {
+        res.sendStatus(400);
+      } else {
+        req.login(authUser, (err) => (err ? next(err) : res.json(authUser)));
       }
-
     } catch (err) {
       next(err);
     }
@@ -188,24 +194,23 @@ module.exports = {
     } = req.body;
 
     try {
-
       password = Bcrypt.hashSync(password, 10);
-        const newUser = new User({
-          name,
-          email,
-          username,
-          password,
-          pronouns,
-          avgLengthOfCycle,
-        });
+      const newUser = new User({
+        name,
+        email,
+        username,
+        password,
+        pronouns,
+        avgLengthOfCycle,
+      });
 
-        await newUser.save();
-        res.json(newUser)
+      await newUser.save();
+      res.json(newUser);
     } catch (err) {
-      if(err.keyPattern.username){
-        err.status = 435
-      } else if(err.keyPattern.email){
-        err.status = 437
+      if (err.keyPattern.username) {
+        err.status = 435;
+      } else if (err.keyPattern.email) {
+        err.status = 437;
       }
       next(err);
     }

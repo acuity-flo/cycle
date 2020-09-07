@@ -25,19 +25,19 @@
       { "date": "2020-08-08", "typeOfFlow": "medium" },
       { "date": "2020-08-09", "typeOfFlow": "heavy" },
       { "date": "2020-08-010", "typeOfFlow": "spotting" },
-      { "date": "2020-09-05", "typeOfFlow": "light" },
-      { "date": "2020-09-06", "typeOfFlow": "light" },
-      { "date": "2020-09-07", "typeOfFlow": "heavy" },
-      { "date": "2020-09-08", "typeOfFlow": "medium" },
-      { "date": "2020-09-09", "typeOfFlow": "heavy" },
-      { "date": "2020-09-010", "typeOfFlow": "spotting" }
+      { "date": "2020-05-05", "typeOfFlow": "light" },
+      { "date": "2020-05-06", "typeOfFlow": "medium" },
+      { "date": "2020-05-07", "typeOfFlow": "heavy" },
+      { "date": "2020-05-08", "typeOfFlow": "medium" },
+      { "date": "2020-05-09", "typeOfFlow": "light" },
+      { "date": "2020-05-010", "typeOfFlow": "spotting" }
     ],
     "symptomTags": [
       {
         "date": "2020-06-05",
         "symptoms": [
           { "symptomName": "calm", "category": "mood" },
-          { "symptomName": "stressed", "category": "mood" },
+          { "symptomName": "cramps", "category": "pain" },
           { "symptomName": "anxious", "category": "emotion" }
         ]
       },
@@ -52,7 +52,7 @@
         "date": "2020-06-07",
         "symptoms": [
           { "symptomName": "cramps", "category": "pain" },
-          { "symptomName": "back pain", "category": "pain" },
+
           { "symptomName": "anxious", "category": "emotion" }
         ]
       },
@@ -68,7 +68,7 @@
         "symptoms": [
           { "symptomName": "indigestion", "category": "physical" },
           { "symptomName": "stressed", "category": "mood" },
-          { "symptomName": "snacky", "category": "physical" }
+          { "symptomName": "anxious", "category": "emotion" }
         ]
       },
       {
@@ -79,7 +79,6 @@
         "date": "2020-07-05",
         "symptoms": [
           { "symptomName": "calm", "category": "mood" },
-          { "symptomName": "stressed", "category": "mood" },
           { "symptomName": "anxious", "category": "emotion" }
         ]
       },
@@ -110,7 +109,7 @@
         "symptoms": [
           { "symptomName": "indigestion", "category": "physical" },
           { "symptomName": "stressed", "category": "mood" },
-          { "symptomName": "snacky", "category": "physical" }
+          { "symptomName": "anxious", "category": "emotion" }
         ]
       },
       {
@@ -136,7 +135,7 @@
         "date": "2020-08-07",
         "symptoms": [
           { "symptomName": "cramps", "category": "pain" },
-          { "symptomName": "back pain", "category": "pain" },
+          { "symptomName": "calm", "category": "mood" },
           { "symptomName": "anxious", "category": "emotion" }
         ]
       },
@@ -160,22 +159,22 @@
         "symptoms": { "symptomName": "snacky", "category": "physical" }
       },
       {
-        "date": "2020-09-05",
+        "date": "2020-05-05",
         "symptoms": [
-          { "symptomName": "calm", "category": "mood" },
+          { "symptomName": "snacky", "category": "physical" },
           { "symptomName": "stressed", "category": "mood" },
           { "symptomName": "anxious", "category": "emotion" }
         ]
       },
       {
-        "date": "2020-09-06",
+        "date": "2020-05-06",
         "symptoms": [
           { "symptomName": "calm", "category": "mood" },
           { "symptomName": "anxious", "category": "emotion" }
         ]
       },
       {
-        "date": "2020-09-07",
+        "date": "2020-05-07",
         "symptoms": [
           { "symptomName": "cramps", "category": "pain" },
           { "symptomName": "back pain", "category": "pain" },
@@ -183,14 +182,14 @@
         ]
       },
       {
-        "date": "2020-09-08",
+        "date": "2020-05-08",
         "symptoms": [
           { "symptomName": "cramps", "category": "pain" },
           { "symptomName": "anxious", "category": "emotion" }
         ]
       },
       {
-        "date": "2020-09-09",
+        "date": "2020-05-09",
         "symptoms": [
           { "symptomName": "indigestion", "category": "physical" },
           { "symptomName": "stressed", "category": "mood" },
@@ -198,7 +197,7 @@
         ]
       },
       {
-        "date": "2020-09-010",
+        "date": "2020-05-010",
         "symptoms": { "symptomName": "snacky", "category": "physical" }
       }
     ],
@@ -330,7 +329,7 @@
         "purchases": { "typeOfPurchase": "prescription", "cost": 20000 }
       },
       {
-        "date": "2020-09-05",
+        "date": "2020-05-05",
         "purchases": [
           { "typeOfPurchase": "prescription", "cost": 1500 },
           { "typeOfPurchase": "sanitary products", "cost": 2600 },
@@ -338,14 +337,14 @@
         ]
       },
       {
-        "date": "2020-09-06",
+        "date": "2020-05-06",
         "purchases": [
           { "typeOfPurchase": "prescription", "cost": 10000 },
           { "typeOfPurchase": "sanitary products", "cost": 5600 }
         ]
       },
       {
-        "date": "2020-09-07",
+        "date": "2020-05-07",
         "purchases": [
           { "typeOfPurchase": "prescription", "cost": 5900 },
           { "typeOfPurchase": "sanitary products", "cost": 20000 },
@@ -353,14 +352,14 @@
         ]
       },
       {
-        "date": "2020-09-08",
+        "date": "2020-05-08",
         "purchases": [
           { "typeOfPurchase": "prescription", "cost": 8900 },
           { "typeOfPurchase": "sanitary products", "cost": 9500 }
         ]
       },
       {
-        "date": "2020-09-09",
+        "date": "2020-05-09",
         "purchases": [
           { "typeOfPurchase": "prescription", "cost": 12500 },
           { "typeOfPurchase": "sanitary products", "cost": 9500 },
@@ -368,7 +367,7 @@
         ]
       },
       {
-        "date": "2020-09-010",
+        "date": "2020-05-010",
         "purchases": { "typeOfPurchase": "prescription", "cost": 20000 }
       }
     ]

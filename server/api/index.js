@@ -9,5 +9,6 @@ router
 router.route('/:username/views/').put(userController.updateViews);
 router.route('/:username/profile/').put(userController.updateProfile);
 router.route('/:username/password/').put(userController.updatePassword);
+router.route('/:username/bulkUpdate/').put(userController.bulkUpdateUser);
 
 module.exports = router;
