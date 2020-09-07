@@ -47,6 +47,7 @@ const Overview = (props) => {
 };
 const useStyles = makeStyles((theme) => ({
   container: {
+    display: 'flex',
     paddingBottom: '6em',
     flexDirection:"column",
     alignItems: "center",
