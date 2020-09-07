@@ -37,11 +37,19 @@ export function UTIL_FINANCE_MONTH(financial, start, end) {
   return sortedMonth;
 }
 
+// todaySymptomData[0].symptoms.map((el) => el.symptomName.slice(0, 1).toUpperCase() + el.symptomName.slice(1)).join(' | ')
+
 export function UTIL_SYMPTOM_MONTH(symptoms, start, end) {
   const monthSymptom = symptoms.filter((el) =>
     moment(el.date).isBetween(start, end)
   );
-  const sortedMonth = monthSymptom.sort((a, b) => moment(a.date).diff(b.date));
+  let sortedMonth = monthSymptom.sort((a, b) => moment(a.date).diff(b.date));
+  sortedMonth = sortedMonth.map((el) => {
+    return {
+      ...el,
+      symptoms: el.symptoms.map((subEl) => subEl.symptomName).join(' | '),
+    };
+  });
   return sortedMonth;
 }
 
@@ -76,20 +84,25 @@ export function UTIL_FINANCE_TOTALS(financeObj) {
     });
     sanitaryProductTotal = UTIL_COST(Number(total));
   }
+  let total =
+    Number(doctorTotal) +
+    Number(prescriptionTotal) +
+    Number(sanitaryProductTotal);
+  if (!!total) {
+    total = total.toFixed(2);
+  }
+
   const financialTotalsObj = {
     doctor: doctorTotal,
     prescription: prescriptionTotal,
     sanitaryProduct: sanitaryProductTotal,
-    total:
-      Number(doctorTotal) +
-      Number(prescriptionTotal) +
-      Number(sanitaryProductTotal),
+    total,
   };
   return financialTotalsObj;
 }
 
 export function UTIL_FINANCE_TODAY_DATA(user, date) {
-  const todayData = user.financial.filter((el, index) => {
+  const todayData = user.financial.filter((el) => {
     const newDate = el.date.slice(0, 10);
     if (moment(newDate).isSame(date)) {
       return el;
@@ -99,7 +112,7 @@ export function UTIL_FINANCE_TODAY_DATA(user, date) {
 }
 
 export function UTIL_PERIOD_TODAY_DATA(user, date) {
-  const todayData = user.period.filter((el, index) => {
+  const todayData = user.period.filter((el) => {
     const newDate = el.date.slice(0, 10);
     if (moment(newDate).isSame(date)) {
       return el;
@@ -109,7 +122,7 @@ export function UTIL_PERIOD_TODAY_DATA(user, date) {
 }
 
 export function UTIL_SYMPTOM_TODAY_DATA(user, date) {
-  const todayData = user.symptomTags.filter((el, index) => {
+  const todayData = user.symptomTags.filter((el) => {
     const newDate = el.date.slice(0, 10);
     if (moment(newDate).isSame(date)) {
       return el;
@@ -218,10 +231,6 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
             acc.physical.push(innerEl.symptomName);
             acc.physical_x.push(moment(dateChange).format('MM-DD-YYYY'));
           }
-          if (innerEl.category === 'custom') {
-            acc.custom.push(innerEl.symptomName);
-            acc.custom_x.push(moment(dateChange).format('MM-DD-YYYY'));
-          }
         });
       }
       return acc;
@@ -235,8 +244,6 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
       pain_x: ['pain_x'],
       physical: ['physical'],
       physical_x: ['physical_x'],
-      custom: ['custom'],
-      custom_x: ['custom_x'],
     }
   );
 
@@ -245,7 +252,6 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
     symptomObj['emotion_x'],
     symptomObj['pain_x'],
     symptomObj['physical_x'],
-    symptomObj['custom_x'],
     symptomObj['mood'].map((el, idx) => {
       if (idx > 0) {
         const value = '1' + UTIL_SYMPTOMS_LIST['mood'].indexOf(el).toString();
@@ -280,14 +286,7 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
         return el;
       }
     }),
-    symptomObj['custom'].map((el, idx) => {
-      if (idx > 0) {
-        const value = '5' + UTIL_SYMPTOMS_LIST['custom'].indexOf(el).toString();
-        return Number(value);
-      } else {
-        return el;
-      }
-    }),
+    ,
   ];
 
   let labels = [
@@ -295,7 +294,6 @@ export function UTIL_SYMPTOM(symptomData, start, end) {
     symptomObj['emotion'],
     symptomObj['pain'],
     symptomObj['physical'],
-    symptomObj['custom'],
   ];
 
   let data = {

@@ -10,16 +10,18 @@ import {
   UTIL_FINANCE_TODAY_DATA,
   UTIL_PERIOD_TODAY_DATA,
   UTIL_SYMPTOM_TODAY_DATA,
+  UTIL_COST,
 } from '../utilFcn';
 import { updateUserThunk } from '../store';
+import CloseIcon from '@material-ui/icons/Close';
 
 export default function FormContainer(props) {
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
   const { date, user, message } = props;
   const period = user.periodTracking;
   const symptom = user.symptomTracking;
   const finance = user.financialTracking;
-  const [open, setOpen] = useState(false);
   const [symptoms, setSymptoms] = useState([]);
   const [flow, setFlow] = useState(0);
   const [purchases, setPurchases] = useState([]);
@@ -43,7 +45,12 @@ export default function FormContainer(props) {
     evt.preventDefault();
     const symptomsReduce = UTIL_SYMPTOM_REDUCE(symptoms);
     const flowStr = UTIL_PERIOD_STR(flow);
-    const purchasesUpdated = purchases.filter((el) => el.typeOfPurchase !== '');
+    let purchasesUpdated = purchases
+      .filter((el) => el.typeOfPurchase !== '')
+      .map((el) => {
+        return { ...el, cost: el.cost * 100 };
+      });
+
     const update = {
       date,
       username: user.username,
@@ -66,49 +73,129 @@ export default function FormContainer(props) {
     <Container>
       {!open && (
         <Fragment>
-          <Typography variant="h6">CURRENTLY LOGGED</Typography>
-          <Typography variant="body2" gutterBottom>
-            {todayPeriodData[0]
-              ? `Flow: ${
-                  todayPeriodData[0].typeOfFlow.slice(0, 1).toUpperCase() +
-                  todayPeriodData[0].typeOfFlow.slice(1)
-                }`
-              : 'Flow: Nothing logged'}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {todaySymptomData[0]
-              ? `Symptoms: ${todaySymptomData[0].symptoms
-                  .map(
-                    (el) =>
-                      el.symptomName.slice(0, 1).toUpperCase() +
-                      el.symptomName.slice(1)
-                  )
-                  .join(' | ')}`
-              : 'Symptoms: Nothing logged'}
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {todayFinanceData[0]
-              ? `Purchases: ${todayFinanceData[0].purchases.map(
-                  (el) =>
-                    `${
-                      el.typeOfPurchase.slice(0, 1).toUpperCase() +
-                      el.typeOfPurchase.slice(1)
-                    }: $${el.cost}`
-                )}`
-              : 'Purchases: Nothing logged'}
-          </Typography>
-          <Button
-            variant="outlined"
-            color="primary"
-            className={classes.button}
-            onClick={toggle}
-          >
-            update
-          </Button>
+          {period ? (
+            <Typography
+              variant="body2"
+              gutterBottom
+              style={{ textAlign: 'center', color: '#DEB88F' }}
+            >
+              FLOW
+            </Typography>
+          ) : (
+            ''
+          )}
+          {period ? (
+            todayPeriodData[0] ? (
+              <Typography
+                variant="body2"
+                style={{ textAlign: 'center' }}
+                gutterBottom
+              >
+                {todayPeriodData[0].typeOfFlow.slice(0, 1).toUpperCase() +
+                  todayPeriodData[0].typeOfFlow.slice(1)}
+              </Typography>
+            ) : (
+              <Typography
+                variant="body2"
+                style={{ textAlign: 'center' }}
+                gutterBottom
+              >
+                Nothing logged
+              </Typography>
+            )
+          ) : (
+            ''
+          )}
+          <br />
+          {symptom ? (
+            <Typography
+              variant="body2"
+              style={{ textAlign: 'center', color: '#8FB5DE' }}
+              gutterBottom
+            >
+              SYMPTOMS
+            </Typography>
+          ) : (
+            ''
+          )}
+          {symptom ? (
+            todaySymptomData[0] ? (
+              todaySymptomData[0].symptoms.map((el) => (
+                <Typography
+                  variant="body2"
+                  style={{ textAlign: 'center' }}
+                  gutterBottom
+                >
+                  {el.symptomName.slice(0, 1).toUpperCase() +
+                    el.symptomName.slice(1)}
+                </Typography>
+              ))
+            ) : (
+              <Typography
+                variant="body2"
+                style={{ textAlign: 'center' }}
+                gutterBottom
+              >
+                Nothing logged
+              </Typography>
+            )
+          ) : (
+            ''
+          )}
+          <br />
+          {finance ? (
+            <Typography
+              variant="body2"
+              style={{ textAlign: 'center', color: '#9BB47A' }}
+              gutterBottom
+            >
+              PURCHASES
+            </Typography>
+          ) : (
+            ''
+          )}
+          {finance ? (
+            todayFinanceData[0] ? (
+              todayFinanceData[0].purchases.map((el) => (
+                <Typography
+                  variant="body2"
+                  style={{ textAlign: 'center' }}
+                  gutterBottom
+                >
+                  {el.typeOfPurchase.slice(0, 1).toUpperCase() +
+                    el.typeOfPurchase.slice(1)}{' '}
+                  : ${UTIL_COST(el.cost)}
+                </Typography>
+              ))
+            ) : (
+              <Typography
+                variant="body2"
+                style={{ textAlign: 'center' }}
+                gutterBottom
+              >
+                Nothing logged
+              </Typography>
+            )
+          ) : (
+            ''
+          )}
+          <Container className={classes.buttonContainer}>
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={toggle}
+            >
+              update
+            </Button>
+          </Container>
         </Fragment>
       )}
       {open && (
         <form onSubmit={handleSubmit}>
+          <Button color="primary" className={classes.button} onClick={toggle}>
+            <CloseIcon fontSize={'small'} />
+          </Button>
           {period ? (
             <PeriodUpdate
               date={date}
@@ -163,8 +250,12 @@ export default function FormContainer(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   button: {
-    margin: '0.5em',
+    marginTop: '1em',
     backgroundColor: 'white',
     color: '#545454',
   },

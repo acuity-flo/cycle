@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   UTIL_FINANCE,
   UTIL_FINANCE_TOTALS,
@@ -14,26 +14,31 @@ const FinanceOverview = (props) => {
   const sortedMonth = UTIL_FINANCE_MONTH(financial, start, end);
 
   return (
-    <Container>
-      <Typography>
-        {financialTotalsObj.total ? (
-          <div>
-            <div>your total costs</div>
-            <ul>
-              <div>doctor: ${financialTotalsObj.doctor}</div>
-              <div>prescription: ${financialTotalsObj.prescription}</div>
-              <div>
-                sanitary products: ${financialTotalsObj.sanitaryProduct}
-              </div>
-              <div>total: ${financialTotalsObj.total}</div>
-            </ul>
-          </div>
-        ) : (
-          <p>no costs this month</p>
-        )}
-      </Typography>
-      <Typography></Typography>
-    </Container>
+    <Fragment>
+      {financialTotalsObj.total ? (
+        <Fragment>
+          <Typography variant="body2" gutterBottom style={{ color: '#9BB47A' }}>
+            COSTS
+          </Typography>
+          <Typography variant="body2" gutterBottom>
+            doctor: ${financialTotalsObj.doctor}
+          </Typography>
+          <Typography variant="body2" gutterBottom>
+            prescription: ${financialTotalsObj.prescription}
+          </Typography>
+          <Typography variant="body2" gutterBottom>
+            sanitary products: ${financialTotalsObj.sanitaryProduct}
+          </Typography>
+          <Typography variant="body2" gutterBottom>
+            total: ${financialTotalsObj.total}
+          </Typography>
+        </Fragment>
+      ) : (
+        <Typography variant="body2" gutterBottom>
+          no costs this month
+        </Typography>
+      )}
+    </Fragment>
   );
 };
 

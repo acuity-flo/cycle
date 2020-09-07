@@ -31,8 +31,8 @@ function SimpleMobileTop (props) {
 
 export default withRouter(SimpleMobileTop)
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
     flexGrow: 1
   }
-}))
+})

@@ -7,7 +7,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser')
 const MongoStore = require('connect-mongo')(session)
 const PORT = process.env.PORT || 4000;
-const User = require('./db/models/User')
+const User = require('./db/User')
 
 const mongoose = require('mongoose');
 if (process.env.NODE_ENV !== 'production') require('../secrets.js');

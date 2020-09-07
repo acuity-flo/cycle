@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
+import { UTIL_COST } from '../utilFcn';
 
 export default function FinanceUpdate(props) {
   //user and finance data for day opened by the calendar, if anything for that date
@@ -33,7 +34,7 @@ export default function FinanceUpdate(props) {
       //spread purchases from todayData and then spread the objects within it
       const purchaseSet = [
         ...todayData[0].purchases.map((el) => {
-          return { ...el };
+          return { ...el, cost: UTIL_COST(el.cost) };
         }),
       ];
       setPurchases(purchaseSet);
@@ -74,7 +75,7 @@ export default function FinanceUpdate(props) {
 
   return (
     <div className={classes.root}>
-      <Typography variant="body1" style={{color: '#9BB47A'}} gutterBottom>
+      <Typography variant="body1" style={{ color: '#9BB47A' }} gutterBottom>
         FINANCES
       </Typography>
       <Grid container xs={12} justify="center">
@@ -119,14 +120,20 @@ export default function FinanceUpdate(props) {
                 </FormControl>
               </Grid>
               <Grid item xs={1}>
-                <Button name={index} onClick={handleDeleteRow} className={classes.deleteButton}>
+                <Button
+                  name={index}
+                  onClick={handleDeleteRow}
+                  className={classes.deleteButton}
+                >
                   x
                 </Button>
               </Grid>
             </Fragment>
           );
         })}
-        <Button xs={6} onClick={handleAddRow}>+</Button>
+        <Button xs={6} onClick={handleAddRow}>
+          +
+        </Button>
       </Grid>
     </div>
   );
@@ -143,6 +150,6 @@ const useStyles = makeStyles({
     padding: '2px, 3px',
     fontSize: '10px',
     height: '100%',
-    width: '100%'
-  }
+    width: '100%',
+  },
 });

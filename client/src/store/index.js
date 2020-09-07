@@ -2,7 +2,6 @@ import axios from 'axios';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
-import { Store } from 'express-session';
 
 //initial state will be an empty object, state will always be a user
 const initialState = {
@@ -16,7 +15,6 @@ const LOGOUT_USER = 'LOGOUT_USER';
 const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_VIEW = 'UPDATE_VIEW';
 const SET_STATUS = 'SET_STATUS';
-const GET_STATUS = 'GET_STATUS';
 const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
 //action creator
@@ -80,7 +78,6 @@ export const authUserThunk = (user, type) => async (dispatch) => {
   }
   try {
     const res = await axios.post(`/auth/${type}`, post);
-    console.log('res', res);
 
     if (res.data) {
       const action = authUserAction(res.data);
@@ -115,7 +112,6 @@ export const updateUserThunk = (update) => async (dispatch) => {
 
 export const updateProfileThunk = (update) => async (dispatch) => {
   try {
-    console.log('update in thunk', update);
     const { data } = await axios.put(`/api/${update.username}/profile`, update);
     dispatch(updateProfile(data));
     return '';
@@ -123,6 +119,25 @@ export const updateProfileThunk = (update) => async (dispatch) => {
     console.log(e);
   }
 };
+
+export const updatePasswordThunk = (username, oldPassword, newPasswordOne, newPasswordTwo) => async (dispatch) => {
+  try {
+    if (newPasswordOne !== newPasswordTwo) {
+      dispatch(setStatus('New password inputs do not match'));
+    } else {
+      const res = await axios.put(`/api/${username}/password`, {
+        oldPassword,
+        newPassword: newPasswordOne
+      });
+      if (res.status === 200) {
+        dispatch(setStatus('Password successfully updated'));
+      }
+    }
+  } catch (e) {
+    console.log(e);
+    dispatch(setStatus('Password could not be updated'));
+  }
+}
 
 export const updateViewThunk = (username, name, bool) => async (dispatch) => {
   try {
@@ -142,60 +157,8 @@ export const authMe = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/auth/me');
     const action = authUserAction(data || initialState.authUser);
-
-    if (data) {
-      console.log('I am in the if in redux indexdb')
-      let request = indexedDB.open('CYCLE_EXAMPLE', 1), db, tx, store;
-
-      request.onupgradeneeded = function(event) {
-        db = request.result
-        store = db.createObjectStore("CYCLE_STORE", {keyPath: "username"})
-      }
-      request.onsuccess = function(event) {
-          console.log('redux, db open successful')
-          console.log('[onsuccess]', request.result);
-          db = request.result
-          tx = db.transaction('CYCLE_STORE', 'readwrite')
-          store = tx.objectStore('CYCLE_STORE')
-
-          db.onerror = function(event) {
-            console.log('CYCLE_STORE ERROR', event.target.errorCode)
-          }
-          store.put(data)
-
-          tx.oncomplete = function() {
-            db.close()
-          }
-      };
-      request.onerror = function(event) {
-          console.log('[onerror]', request.error);
-      };
-      dispatch(action);
-    }
+    dispatch(action);
   } catch (e) {
-    console.log('I hit an error in redux auth me')
-    let request = indexedDB.open('CYCLE_EXAMPLE', 1), db, tx, store;
-
-    request.onsuccess = function(event) {
-        console.log('redux, db open successful')
-        console.log('[onsuccess]', request.result);
-        db = request.result
-        tx = db.transaction('CYCLE_STORE', 'readwrite')
-        store = tx.objectStore('CYCLE_STORE')
-
-        db.onerror = function(event) {
-          console.log('CYCLE_STORE ERROR', event.target.errorCode)
-        }
-        let userDataRequest = store.get("cherisecycles")
-
-        userDataRequest.onsuccess = function() {
-          "I successfully got data from the indexdb in error statement"
-          dispatch(authUserAction(userDataRequest.result));
-        }
-        tx.oncomplete = function() {
-          db.close()
-        }
-    };
     console.log(e);
   }
 };

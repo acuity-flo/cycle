@@ -2,26 +2,21 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import ProfileUpdate from '../forms/ProfileUpdate';
 import PasswordUpdate from '../forms/PasswordUpdate';
-import UserDataView from './UserDataView';
 import UserSwitch from '../forms/UserSwitches';
 import {
   Dialog,
   DialogContent,
-  Container,
+  Grid,
   Button,
   makeStyles,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   Typography,
 } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 
 const UserProfile = (props) => {
-  const user = props.user;
+  const { user, message } = props;
   const [open, setOpen] = useState(false);
   const [openPW, setOpenPW] = useState(false);
-  // const [month, setMonth] = useState('default month');
   const [scroll, setScroll] = React.useState('paper');
   const classes = useStyles();
 
@@ -34,23 +29,53 @@ const UserProfile = (props) => {
   };
 
   return (
-    <Container>
-      <h5>Welcome, {user.name}</h5>
-      <p>Email: {user.email}</p>
-      <p>Username: {user.username}</p>
-      <p>Pronouns: {user.pronouns}</p>
-      <p>Average Cycle Length: {user.avgLengthOfCycle}</p>
-      <UserSwitch user={user} />
-      <Button
-        variant="outlined"
-        color="primary"
-        className={classes.button}
-        onClick={() => {
-          setOpen(true);
-        }}
+    <Grid
+      container
+      alignItems="center"
+      direction="column"
+      className={classes.root}
+    >
+      <Typography variant="h4">Hello, {user.name}</Typography>
+      <br />
+      <Typography variant="h6">Currently Tracking</Typography>
+      <Grid container direction="row" justify="center">
+        <UserSwitch user={user} />
+      </Grid>
+      <br />
+      <Typography variant="h6">Profile Information</Typography>
+      <Typography variant="body2">Email: {user.email}</Typography>
+      <Typography variant="body2">Username: {user.username}</Typography>
+      <Typography variant="body2">Pronouns: {user.pronouns}</Typography>
+      <Typography variant="body2">
+        Average Cycle Length: {user.avgLengthOfCycle} days
+      </Typography>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        className={classes.buttonContainer}
       >
-        update profile info
-      </Button>
+        <Button
+          variant="outlined"
+          color="primary"
+          className={classes.button}
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          update profile info
+        </Button>
+        <Button
+          variant="outlined"
+          color="primary"
+          className={classes.button}
+          onClick={() => {
+            setOpenPW(true);
+          }}
+        >
+          update password
+        </Button>
+      </Grid>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -60,32 +85,19 @@ const UserProfile = (props) => {
         classes={classes.dialogBox}
       >
         <DialogContent className={classes.paper}>
-          <ProfileUpdate user={user} />
-
           <Button
-            variant="outlined"
             color="primary"
             className={classes.button}
             onClick={() => {
               setOpen(false);
             }}
           >
-            close
+            <CloseIcon fontSize={'small'} />
           </Button>
+          <ProfileUpdate user={user} message={message} />
         </DialogContent>
       </Dialog>
-
-      <Button
-        variant="outlined"
-        color="primary"
-        className={classes.button}
-        onClick={() => {
-          setOpenPW(true);
-        }}
-      >
-        update password
-      </Button>
-
+      {/* dialog for update password */}
       <Dialog
         open={openPW}
         onClose={handleClosePW}
@@ -95,25 +107,27 @@ const UserProfile = (props) => {
         classes={classes.dialogBox}
       >
         <DialogContent className={classes.paper}>
-          <PasswordUpdate user={user} />
-
           <Button
-            variant="outlined"
             color="primary"
             className={classes.button}
             onClick={() => {
               setOpenPW(false);
             }}
           >
-            close
+            <CloseIcon fontSize={'small'} />
           </Button>
+          <PasswordUpdate user={user} message={message} />
         </DialogContent>
       </Dialog>
-    </Container>
+    </Grid>
   );
 };
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    padding: '2em',
+  },
   dialogBox: {
     padding: '2em',
   },
@@ -121,14 +135,14 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  buttonContainer: {
+    margin: '0.5em',
+  },
   button: {
     margin: '0.5em',
     backgroundColor: 'white',
     color: '#545454',
-  },
-  inputItem: {
-    margin: '0.5em',
-    width: '20vw',
+    flexShrink: 3,
   },
 }));
 
@@ -136,6 +150,7 @@ const mapState = (state) => {
   return {
     user: state.authUser,
     isLoggedIn: !!state.authUser._id,
+    message: state.statusMessage,
   };
 };
 

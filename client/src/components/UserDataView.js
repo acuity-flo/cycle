@@ -2,7 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import FinanceOverview from '../overview/FinanceOverview';
 import PeriodOverview from '../overview/PeriodOverview';
-import { Container, Typography } from '@material-ui/core';
+import SymptomOverview from '../overview/SymptomOverview';
+import { Typography } from '@material-ui/core';
 
 const UserDataView = (props) => {
   const user = props.user;
@@ -22,21 +23,27 @@ const UserDataView = (props) => {
   const end = moment(firstDayNext + '-01').format('YYYY-MM-DD');
 
   return (
-    <Container>
-      <Typography>
-        <h5>your monthly overview for {month.format('MMMM YYYY')}</h5>
-        {financeBool ? (
-          <FinanceOverview start={start} end={end} financial={financial} />
-        ) : (
-          ''
-        )}
-        {periodBool ? (
-          <PeriodOverview start={start} end={end} period={period} />
-        ) : (
-          ''
-        )}
-      </Typography>
-    </Container>
+    <Typography>
+      <br />
+      <h5>your monthly overview for {month.format('MMMM YYYY')}</h5>
+      {financeBool ? (
+        <FinanceOverview start={start} end={end} financial={financial} />
+      ) : (
+        ''
+      )}
+      <br />
+      {periodBool ? (
+        <PeriodOverview start={start} end={end} period={period} />
+      ) : (
+        ''
+      )}
+      <br />
+      {symptomBool ? (
+        <SymptomOverview start={start} end={end} symptoms={symptomTags} />
+      ) : (
+        ''
+      )}
+    </Typography>
   );
 };
 
