@@ -41,11 +41,10 @@ function CalendarView(props) {
         {periodTracking &&
         period &&
         view === 'month' &&
-        period.some(
-          (el) =>
-            moment(el.date).format('MM DD YYYY') ===
-            moment(date).format('MM DD YYYY')
-        ) ? (
+        period.some((el) => {
+          const elDate = el.date.slice(0, 10);
+          return moment(elDate).isSame(moment(date));
+        }) ? (
           <FiberManualRecordIcon
             style={{ fill: '#DEB88F' }}
             fontSize="inherit"
@@ -57,11 +56,10 @@ function CalendarView(props) {
         {financeTracking &&
         finance &&
         view === 'month' &&
-        finance.some(
-          (el) =>
-            moment(el.date).format('MM DD YYYY') ===
-            moment(date).format('MM DD YYYY')
-        ) ? (
+        finance.some((el) => {
+          const elDate = el.date.slice(0, 10);
+          return moment(elDate).isSame(moment(date));
+        }) ? (
           <FiberManualRecordIcon
             style={{ fill: '#9BB47A' }}
             fontSize="inherit"
@@ -73,11 +71,10 @@ function CalendarView(props) {
         {symptomTracking &&
         symptoms &&
         view === 'month' &&
-        symptoms.some(
-          (el) =>
-            moment(el.date).format('MM DD YYYY') ===
-            moment(date).format('MM DD YYYY')
-        ) ? (
+        symptoms.some((el) => {
+          const elDate = el.date.slice(0, 10);
+          return moment(elDate).isSame(moment(date));
+        }) ? (
           <FiberManualRecordIcon
             style={{ fill: '#8FB5DE' }}
             fontSize="inherit"
