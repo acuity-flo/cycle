@@ -39,13 +39,25 @@ export default function PeriodForm(props) {
     }
   });
 
-  //set default value for the slider
+  //set default value for the slider and setFlow
   let defaultValue = 0;
   if (todayData[0]) {
-    if (todayData[0].typeOfFlow === 'spotting') defaultValue = 1;
-    if (todayData[0].typeOfFlow === 'light') defaultValue = 2;
-    if (todayData[0].typeOfFlow === 'medium') defaultValue = 3;
-    if (todayData[0].typeOfFlow === 'heavy') defaultValue = 4;
+    if (todayData[0].typeOfFlow === 'spotting') {
+      defaultValue = 1
+      setFlow(1)
+    };
+    if (todayData[0].typeOfFlow === 'light') {
+      defaultValue = 2
+      setFlow(2)
+    };
+    if (todayData[0].typeOfFlow === 'medium') {
+      defaultValue = 3
+      setFlow(3)
+    };
+    if (todayData[0].typeOfFlow === 'heavy') {
+      defaultValue = 4
+      setFlow(4)
+    };
   }
 
   //set classes for styles
