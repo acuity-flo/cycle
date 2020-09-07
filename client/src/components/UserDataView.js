@@ -25,7 +25,7 @@ const UserDataView = (props) => {
   return (
     <Typography>
       <br />
-      <h5>your monthly overview for {month.format('MMMM YYYY')}</h5>
+      <h5>Your month at a glance: {month.format('MMMM YYYY')}</h5>
       {financeBool ? (
         <FinanceOverview start={start} end={end} financial={financial} />
       ) : (

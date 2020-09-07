@@ -204,6 +204,7 @@ const useStyles = makeStyles((theme) => ({
   tiles: {
     color: 'black',
     fontSize: '0.8em',
+    height: '100%'
   },
   calendar: {
     border: 'none',

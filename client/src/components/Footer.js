@@ -12,10 +12,10 @@ export default function Footer() {
         <a href="https://github.com/acuity-flo/cycle">
           <GrGithub color="#545454" />
         </a>{' '}
-        <Typography className={classes.text}>Cycle Github Repo</Typography>
+        <Typography variant="subtitle2" className={classes.text}>Cycle Github Repo</Typography>
       </div>
       <div className={classes.names}>
-        <Typography>Developed by:</Typography>
+        <Typography  variant="subtitle2" >Developed by:</Typography>
         <div className={classes.singleName}>
           <a href="https://github.com/arng0123">
             <GrGithub color="#545454" />
@@ -23,7 +23,7 @@ export default function Footer() {
           <a href="https://www.linkedin.com/in/arielng/">
             <IoLogoLinkedin color="#545454" />
           </a>{' '}
-          <Typography className={classes.text}>Ariel Ng</Typography>
+          <Typography  variant="subtitle2" className={classes.text}>Ariel Ng</Typography>
         </div>
         <div className={classes.singleName}>
           <a href="https://github.com/laurenpitruz">
@@ -32,7 +32,7 @@ export default function Footer() {
           <a href="https://www.linkedin.com/in/laurenpitruzzello/">
             <IoLogoLinkedin color="#545454" />
           </a>
-          <Typography className={classes.text}>Lauren Pitruzzello</Typography>
+          <Typography  variant="subtitle2" className={classes.text}>Lauren Pitruzzello</Typography>
         </div>
         <div className={classes.singleName}>
           <a href="https://github.com/oliviakasmin">
@@ -41,7 +41,7 @@ export default function Footer() {
           <a href="https://www.linkedin.com/in/olivia-kasmin/">
             <IoLogoLinkedin color="#545454" />
           </a>
-          <Typography className={classes.text}>Olivia Kasmin</Typography>
+          <Typography  variant="subtitle2" className={classes.text}>Olivia Kasmin</Typography>
         </div>
       </div>
     </div>
@@ -54,6 +54,7 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     flexGrow: 1,
     width: '100%',
+    height: '-10%',
     position: 'fixed',
     bottom: 0,
     backgroundColor: '#C1C1C2',
