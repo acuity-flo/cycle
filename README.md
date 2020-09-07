@@ -7,9 +7,10 @@ https://cycle-health.herokuapp.com/
 
 ---
 ## Team
-* [Ariel Ng] (https://github.com/arng0123)
-* [Lauren Pitruzzello] (https://github.com/laurenpitruz)
-* [Olivia Kasmin] (https://github.com/oliviakasmin)
+* [Ariel Ng](https://github.com/arng0123)
+* [Lauren Pitruzzello](https://github.com/laurenpitruz)
+* [Olivia Kasmin](https://github.com/oliviakasmin)
+
 
 ---
 ## Tech Stack
