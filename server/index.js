@@ -4,10 +4,14 @@ const app = express();
 const morgan = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
+const compression = require('compression')
 const bodyParser = require('body-parser')
 const MongoStore = require('connect-mongo')(session)
 const PORT = process.env.PORT || 4000;
 const User = require('./db/User')
+
+// compress all responses
+app.use(compression())
 
 const mongoose = require('mongoose');
 if (process.env.NODE_ENV !== 'production') require('../secrets.js');

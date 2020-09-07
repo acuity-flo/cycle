@@ -57,6 +57,7 @@ const useStyles = makeStyles({
     height: '-10%',
     position: 'fixed',
     bottom: 0,
+    left: 0,
     backgroundColor: '#C1C1C2',
   },
   names: {
