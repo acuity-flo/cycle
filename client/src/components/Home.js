@@ -3,7 +3,6 @@ import Fade from 'react-reveal/Fade';
 import { makeStyles, Button, Typography } from '@material-ui/core/';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { withRouter } from 'react-router-dom';
-import { useState } from 'react';
 import { connect } from 'react-redux';
 
 function Home(props) {

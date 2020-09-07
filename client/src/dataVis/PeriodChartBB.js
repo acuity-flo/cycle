@@ -5,7 +5,7 @@ import BillboardChart from 'react-billboardjs';
 import * as d3 from 'd3';
 import { connect } from 'react-redux';
 import { UTIL_PERIOD_FLOW, UTIL_PERIOD_STR } from '../utilFcn';
-import { BottomNavigation,Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 function PeriodChartBB(props) {
   let { start, end, user } = props;
@@ -22,8 +22,8 @@ function PeriodChartBB(props) {
     labels: false,
     xFormat: '%m-%d-%Y',
     colors: {
-      flow: '#DEB88F'
-    }, 
+      flow: '#DEB88F',
+    },
   };
 
   CHART_AXIS = {
@@ -43,9 +43,9 @@ function PeriodChartBB(props) {
       },
       type: 'timeseries',
       padding: {
-        left : 1000*60*60*6, 
-        right: 1000*60*60*6, 
-      }
+        left: 1000 * 60 * 60 * 6,
+        right: 1000 * 60 * 60 * 6,
+      },
     },
     y: {
       tick: {
@@ -56,8 +56,8 @@ function PeriodChartBB(props) {
       },
       padding: {
         top: 75,
-        bottom: 75
-      }
+        bottom: 75,
+      },
     },
   };
 
@@ -68,11 +68,10 @@ function PeriodChartBB(props) {
       },
     },
   };
-  
 
   return CHART_DATA && CHART_AXIS && CHART_TOOLTIP ? (
-    <div align='center' >
-      <Typography variant = "h6">Menstruation</Typography>
+    <div align="center">
+      <Typography variant="h6">Menstruation</Typography>
       <BillboardChart
         data={CHART_DATA}
         axis={CHART_AXIS}

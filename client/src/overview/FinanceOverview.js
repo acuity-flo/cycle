@@ -1,19 +1,11 @@
 import React, { Fragment } from 'react';
-import {
-  UTIL_FINANCE,
-  UTIL_FINANCE_TOTALS,
-  UTIL_FINANCE_MONTH,
-} from '../utilFcn';
-import { Container, Typography } from '@material-ui/core';
-import moment from 'moment';
+import { UTIL_FINANCE, UTIL_FINANCE_TOTALS } from '../utilFcn';
+import { Typography } from '@material-ui/core';
 
 const FinanceOverview = (props) => {
   const { start, end, financial } = props;
   const financeObj = UTIL_FINANCE(financial, start, end);
-  console.log(financeObj);
   const financialTotalsObj = UTIL_FINANCE_TOTALS(financeObj);
-  console.log(financialTotalsObj);
-  const sortedMonth = UTIL_FINANCE_MONTH(financial, start, end);
 
   return (
     <Fragment>

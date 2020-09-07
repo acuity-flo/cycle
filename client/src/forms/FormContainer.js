@@ -13,12 +13,11 @@ import {
   UTIL_COST,
 } from '../utilFcn';
 import { updateUserThunk } from '../store';
-import CloseIcon from '@material-ui/icons/Close';
 
 export default function FormContainer(props) {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
-  const { date, user, message } = props;
+  const { date, user } = props;
   const period = user.periodTracking;
   const symptom = user.symptomTracking;
   const finance = user.financialTracking;
