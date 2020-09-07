@@ -228,7 +228,6 @@ export default function SymptomUpdate(props) {
 
                 />
               }
-              // className={classes.checkbox}
               label={el.name}
             />
           ))}
@@ -242,10 +241,4 @@ const useStyles = makeStyles(({
   root: {
     flexGrow: 1
   }
-  // checkbox: {
-  //   width: '25%',
-  //   'media(max-width: 400px)': {
-  //     width: '50%'
-  //   }
-  // }
 }))

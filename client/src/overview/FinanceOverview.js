@@ -4,8 +4,7 @@ import {
   UTIL_FINANCE_TOTALS,
   UTIL_FINANCE_MONTH,
 } from '../utilFcn';
-import { Container, Typography } from '@material-ui/core';
-import moment from 'moment';
+import { Typography } from '@material-ui/core';
 
 const FinanceOverview = (props) => {
   const { start, end, financial } = props;

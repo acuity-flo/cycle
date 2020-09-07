@@ -1,7 +1,6 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import ReactLoading from 'react-loading';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 //Thunks
@@ -27,7 +26,6 @@ function App(props) {
   const matches = useMediaQuery(
     '@media only screen and (max-device-width: 480px)and (-webkit-min-device-pixel-ratio: 2)'
   );
-  const user = props.user;
   const isLoggedIn = props.isLoggedIn;
   const dispatch = useDispatch();
   useEffect(() => {
@@ -63,7 +61,6 @@ function App(props) {
 
 const mapState = (state) => {
   return {
-    user: state.authUser,
     isLoggedIn: !!state.authUser._id,
   };
 };
