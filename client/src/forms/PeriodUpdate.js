@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Slider, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
@@ -31,6 +31,8 @@ export default function PeriodForm(props) {
   // user and period data for day opened by the calendar if anything for date
   const { user, date, setFlow, setFlowIdx } = props;
 
+  //set default value for the slider and setFlow
+  let defaultValue = 0;
   const todayData = user.period.filter((el, index) => {
     const newDate = el.date.slice(0, 10);
     if (moment(newDate).isSame(date)) {
@@ -38,40 +40,44 @@ export default function PeriodForm(props) {
       return el;
     }
   });
-
-  //set default value for the slider and setFlow
-  let defaultValue = 0;
   if (todayData[0]) {
     if (todayData[0].typeOfFlow === 'spotting') {
       defaultValue = 1
-      setFlow(1)
     };
     if (todayData[0].typeOfFlow === 'light') {
       defaultValue = 2
-      setFlow(2)
     };
     if (todayData[0].typeOfFlow === 'medium') {
       defaultValue = 3
-      setFlow(3)
     };
     if (todayData[0].typeOfFlow === 'heavy') {
       defaultValue = 4
-      setFlow(4)
     };
   }
-
   //set classes for styles
   const classes = useStyles();
-
-  //loading, error, success messages
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(false);
-  // const [success, setSuccess] = useState(false);
 
   // handle changing the flow value selected
   const handleChange = (evt, newValue) => {
     setFlow(newValue);
   };
+
+  useEffect(() => {
+    if (todayData[0]) {
+      if (todayData[0].typeOfFlow === 'spotting') {
+        setFlow(1)
+      };
+      if (todayData[0].typeOfFlow === 'light') {
+        setFlow(2)
+      };
+      if (todayData[0].typeOfFlow === 'medium') {
+        setFlow(3)
+      };
+      if (todayData[0].typeOfFlow === 'heavy') {
+        setFlow(4)
+      };
+    }
+  }, [user])
 
   return (
     <div className={classes.root}>
